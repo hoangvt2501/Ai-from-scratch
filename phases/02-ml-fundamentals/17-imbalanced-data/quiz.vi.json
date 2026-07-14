@@ -1,0 +1,67 @@
+[
+  {
+    "id": "imbalanced-pre-1",
+    "stage": "pre",
+    "question": "Một dataset phát hiện gian lận có 99,9% giao dịch hợp pháp và 0,1% gian lận. Một model dự đoán 'hợp pháp' cho mọi giao dịch. accuracy của nó là gì?",
+    "options": [
+      "50%",
+      "0.1%",
+      "99.9%",
+      "100%"
+    ],
+    "correct": 2,
+    "explanation": "Accuracy = 999/1000 = 99,9%. model không bắt được gian lận nhưng trông tuyệt vời theo accuracy. Đây chính xác là lý do tại sao accuracy nguy hiểm đối với datasets mất cân bằng."
+  },
+  {
+    "id": "imbalanced-pre-2",
+    "stage": "pre",
+    "question": "Số liệu nào sẽ xác định chính xác model luôn dự đoán tiêu cực là vô dụng?",
+    "options": [
+      "Accuracy (99,9%)",
+      "Recall (0%) hoặc F1 score (0%)",
+      "Độ đặc hiệu (100%)",
+      "Tỷ lệ âm tính thực sự (100%)"
+    ],
+    "correct": 1,
+    "explanation": "Recall = TP / (TP + FN) = 0/total_positives = 0%. F1 = 2 * 0 * 0 / (0 + 0) = 0. Cả hai đều cho thấy chính xác model không bắt được gì trong class tích cực. Accuracy che giấu thất bại này."
+  },
+  {
+    "id": "imbalanced-post-1",
+    "stage": "post",
+    "question": "Làm thế nào để SMOTE tạo ra các mẫu thiểu số tổng hợp?",
+    "options": [
+      "Bằng cách sao chép chính xác các mẫu thiểu số hiện có",
+      "Bằng cách tạo điểm ngẫu nhiên ở bất kỳ đâu trong không gian feature",
+      "Bằng cách nội suy giữa một mẫu thiểu số và một trong những người hàng xóm thiểu số K gần nhất của nó",
+      "Bằng cách lật nhãn của đa số class mẫu"
+    ],
+    "correct": 2,
+    "explanation": "SMOTE chọn một điểm thiểu số, chọn một trong những hàng xóm thiểu số K gần nhất của nó và tạo một điểm mới trên đoạn thẳng giữa chúng: new = x + rand(0,1) * (hàng xóm - x). Điều này tạo ra các mẫu hợp lý, không trùng lặp."
+  },
+  {
+    "id": "imbalanced-post-2",
+    "stage": "post",
+    "question": "Bạn hạ ngưỡng phân loại từ 0,5 xuống 0,3 trên dataset mất cân bằng. Điều gì xảy ra với precision và recall?",
+    "options": [
+      "Cả precision và recall đều tăng",
+      "Recall tăng (phát hiện nhiều dương tính hơn) nhưng precision giảm (dương tính giả nhiều hơn)",
+      "Precision tăng nhưng recall giảm",
+      "Cả hai đều không thay đổi - ngưỡng chỉ ảnh hưởng đến tốc độ"
+    ],
+    "correct": 1,
+    "explanation": "Giảm ngưỡng có nghĩa là nhiều mẫu được dự đoán dương tính hơn. Điều này bắt được nhiều kết quả dương tính thực sự hơn (recall lên) nhưng cũng thêm nhiều dương tính giả hơn (precision xuống). Giao dịch điều chỉnh ngưỡng precision cho recall."
+  },
+  {
+    "id": "imbalanced-post-3",
+    "stage": "post",
+    "question": "Tại sao AUPRC (Khu vực dưới đường cong Precision-Recall) nhiều thông tin hơn AUC-ROC đối với datasets mất cân bằng cao?",
+    "options": [
+      "AUPRC luôn cao hơn AUC-ROC",
+      "Một bộ phân loại ngẫu nhiên có AUPRC bằng tỷ lệ class dương (ví dụ: 0,001), làm cho các cải thiện có thể nhìn thấy được, trong khi AUC-ROC bắt đầu ở 0,5 bất kể sự mất cân bằng",
+      "AUPRC không yêu cầu ngưỡng",
+      "Không thể tính toán AUC-ROC cho dữ liệu mất cân bằng"
+    ],
+    "correct": 1,
+    "explanation": "Đối với dữ liệu mất cân bằng, AUC-ROC có thể trông tốt một cách lừa dối vì số lượng lớn các tiêu cực thực sự làm tăng tỷ lệ âm thực sự. Đường cơ sở của AUPRC bằng với tỷ lệ dương tính, làm cho những cải thiện thực sự trong việc phát hiện thiểu số class rõ ràng hơn nhiều."
+  }
+]
