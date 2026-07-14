@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Quy tắc chuỗi trong trạng thái giải tích là gì?",
+      "options": [
+        "Đạo hàm của một tổng là tổng của các đạo hàm",
+        "Đạo hàm của các hàm tổng hợp là tích của các đạo hàm riêng lẻ của chúng",
+        "Tích phân của một sản phẩm là tích của tích phân",
+        "Các hàm chỉ có thể được phân biệt nếu chúng là tuyến tính"
+      ],
+      "correct": 1,
+      "explanation": "Đối với y = f(g(x)), quy tắc chuỗi cho biết dy/dx = f'(g(x)) * g'(x). Bạn nhân các đạo hàm tại mỗi liên kết trong chuỗi. Đây là cơ sở toán học của backpropagation."
+    },
+    {
+      "stage": "pre",
+      "question": "Đồ thị tính toán là gì?",
+      "options": [
+        "Cốt truyện loss vs training bước",
+        "Một biểu đồ có hướng trong đó các nút là các hoạt động và các cạnh mang các giá trị về phía trước hoặc gradients lùi",
+        "Sơ đồ thể hiện kiến trúc của mạng nơ-ron",
+        "Cơ sở dữ liệu đồ thị được sử dụng để lưu trữ dữ liệu training"
+      ],
+      "correct": 1,
+      "explanation": "Đồ thị tính toán đại diện cho trình tự các phép toán trong một phép tính. Dữ liệu chuyển tiếp qua biểu đồ và gradients ngược lại trong quá trình backpropagation."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao PyTorch sử dụng chế độ đảo ngược tự động (backpropagation) thay vì chế độ chuyển tiếp?",
+      "options": [
+        "Chế độ đảo ngược chính xác hơn về mặt số",
+        "Chế độ đảo ngược tính toán tất cả gradients trong một backward pass, trong khi chế độ chuyển tiếp cần một lần truyền cho mỗi biến đầu vào - mạng nơ-ron có hàng triệu đầu vào nhưng một đầu ra loss",
+        "Chế độ đảo ngược sử dụng ít bộ nhớ hơn",
+        "Chế độ chuyển tiếp không thể xử lý các chức năng phi tuyến tính"
+      ],
+      "correct": 1,
+      "explanation": "Mạng nơ-ron có hàng triệu đầu vào trọng lượng nhưng tạo ra một loss vô hướng duy nhất. Chế độ đảo ngược cần tổng cộng một backward pass. Chế độ chuyển tiếp sẽ cần một đường chuyền cho mỗi trọng lượng - hàng triệu đường chuyền - khiến nó không thực tế."
+    },
+    {
+      "stage": "post",
+      "question": "Trong công cụ Value class autograd, tại sao hàm lùi lại sử dụng '+=' thay vì '=' để tích lũy gradients?",
+      "options": [
+        "Để tính trung bình gradients trên nhiều mẫu",
+        "Bởi vì một giá trị được sử dụng trong nhiều hoạt động nhận được gradient đóng góp từ mỗi hoạt động, giá trị này phải được tổng hợp",
+        "Để ngăn chặn tràn số trong gradients",
+        "Bởi vì Python không hỗ trợ toán tử '=' trong closure"
+      ],
+      "correct": 1,
+      "explanation": "Khi một giá trị được đưa vào nhiều phép toán (ví dụ: x được sử dụng trong cả x*y và x+z), tổng gradient của nó là tổng của tất cả các đóng góp gradient đến. Sử dụng '=' sẽ ghi đè lên các đóng góp trước đó."
+    },
+    {
+      "stage": "post",
+      "question": "Kiểm tra gradient là gì và khi nào bạn nên sử dụng nó?",
+      "options": [
+        "Kiểm tra xem gradients có dưới ngưỡng để tránh phát nổ gradients",
+        "So sánh gradients tự động với gradients chênh lệch hữu hạn số để xác minh tính đúng đắn của backward pass",
+        "Kiểm tra xem tất cả parameters đều nhận được gradients không trong quá trình training",
+        "Giám sát cường độ gradient trong quá trình training để phát hiện gradients biến mất"
+      ],
+      "correct": 1,
+      "explanation": "Kiểm tra Gradient tính toán đạo hàm số thông qua (f(x+h) - f(xh)) / 2h và so sánh chúng với gradients tự động khác biệt. Sử dụng nó khi thêm các hoạt động mới vào công cụ autograd của bạn hoặc gỡ lỗi training lỗi."
+    }
+  ]
+}
