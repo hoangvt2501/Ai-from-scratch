@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Tại sao việc có cấu trúc JSON đầu ra từ LLMs lại là một thách thức?",
+    "options": [
+      "LLMs không thể tạo JSON",
+      "LLMs tạo token văn bản dạng tự do theo token và có thể tạo ra JSON không hợp lệ (thiếu dấu ngoặc, sai loại, văn bản thừa) tại bất kỳ thời điểm nào",
+      "JSON quá phức tạp đối với LLMs",
+      "LLMs chỉ xuất văn bản thuần túy"
+    ],
+    "correct": 1,
+    "explanation": "LLMs tạo tokens tự hồi quy. Họ có thể thêm dấu phẩy đuôi, quên dấu ngoặc đóng, bao gồm định dạng đánh dấu xung quanh JSON hoặc ảo giác các trường phụ. Mỗi token là độc lập, vì vậy tính hợp lệ của cấu trúc không được đảm bảo.",
+    "stage": "pre"
+  },
+  {
+    "question": "Giải mã ràng buộc là gì?",
+    "options": [
+      "Giới hạn quy mô từ vựng của model",
+      "Hạn chế tokens model có thể tạo ở mỗi bước để đảm bảo đầu ra phù hợp với ngữ pháp hoặc schema",
+      "Sử dụng model nhỏ hơn",
+      "Nén đầu ra"
+    ],
+    "correct": 1,
+    "explanation": "Giải mã hạn chế che giấu các tokens không hợp lệ ở mỗi bước tạo. Sau dấu ngoặc nhọn mở, chỉ cho phép các phím JSON hợp lệ. Sau dấu hai chấm, chỉ tokens giá trị hợp lệ. Điều này đảm bảo tính hợp lệ cấu trúc ở cấp độ token.",
+    "stage": "pre"
+  },
+  {
+    "question": "Lợi ích của việc sử dụng Pydantic models để xác thực đầu ra LLM là gì?",
+    "options": [
+      "Họ thực hiện các cuộc gọi API nhanh hơn",
+      "Chúng xác định schemas được nhập tự động xác thực, phân tích cú pháp và từ chối đầu ra LLM sai định dạng với thông báo lỗi rõ ràng",
+      "Chúng làm giảm việc sử dụng token",
+      "Họ cải thiện model accuracy"
+    ],
+    "correct": 1,
+    "explanation": "Pydantic thực thi các loại, trường bắt buộc, ràng buộc giá trị và cấu trúc lồng nhau. Khi LLM tạo ra đầu ra không hợp lệ, Pydantic đưa ra các thông báo lỗi cụ thể có thể được đưa trở lại model để tự sửa.",
+    "stage": "post"
+  },
+  {
+    "question": "Bạn nên làm gì khi LLM trả về JSON không hợp lệ bất chấp hướng dẫn?",
+    "options": [
+      "Chuyển sang model khác",
+      "Triển khai vòng lặp thử lại gửi lỗi xác thực trở lại model dưới dạng ngữ cảnh cho lần thử đã sửa",
+      "Sửa JSON theo cách thủ công",
+      "Tăng temperature"
+    ],
+    "correct": 1,
+    "explanation": "Vòng lặp thử lại với phản hồi lỗi hoạt động tốt: phân tích cú pháp đầu ra, bắt lỗi xác thực, gửi lại thông báo lỗi dưới dạng ngữ cảnh ('Đầu ra của bạn có lỗi này:... Xin hãy sửa nó'). Hầu hết models tự sửa chữa trong lần thử thứ hai.",
+    "stage": "post"
+  },
+  {
+    "question": "Khi nào bạn nên sử dụng chế độ JSON gốc của API so với trích xuất JSON dựa trên prompt?",
+    "options": [
+      "Luôn sử dụng chế độ JSON gốc",
+      "Sử dụng chế độ gốc cho cấu trúc được đảm bảo; Sử dụng dựa trên prompt để trích xuất phức tạp, nơi bạn cần model lý luận về những gì cần trích xuất",
+      "Luôn sử dụng trích xuất dựa trên prompt",
+      "Chúng tạo ra kết quả giống hệt nhau"
+    ],
+    "correct": 1,
+    "explanation": "Chế độ JSON gốc (response_format của OpenAI, tool_use của Anthropic) đảm bảo cấu trúc JSON hợp lệ. Trích xuất dựa trên Prompt linh hoạt hơn để suy luận phức tạp về trường nào cần điền. Sử dụng chế độ gốc khi cấu trúc quan trọng nhất.",
+    "stage": "post"
+  }
+]
