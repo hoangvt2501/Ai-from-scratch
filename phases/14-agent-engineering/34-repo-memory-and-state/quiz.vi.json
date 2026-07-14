@@ -1,0 +1,90 @@
+{
+  "lesson": "34-repo-memory-and-state",
+  "title": "Bộ nhớ Repo và trạng thái bền bỉ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài kiểm tra độ bền quyết định liệu một phần thông tin có thuộc về bộ nhớ repo hay không là gì?",
+      "options": [
+        "Cho dù nó là JSON",
+        "Liệu nó có hữu ích trong ba tháng kể từ bây giờ trong một lần chạy lại CI hay không; nếu có, repo; nếu không, telemetry",
+        "Người dùng có đánh dấu nó là quan trọng hay không",
+        "Cho dù nó phù hợp với 4 kB"
+      ],
+      "correct": 1,
+      "explanation": "Bộ nhớ Repo dành cho trạng thái hữu ích, ba tháng kể từ bây giờ; dữ liệu thoáng qua là telemetry."
+    },
+    {
+      "stage": "pre",
+      "question": "Field nào schema mang phiên bản the agent's contract?",
+      "options": [
+        "schema_version",
+        "build_hash",
+        "model_id",
+        "session_uuid"
+      ],
+      "correct": 0,
+      "explanation": "schema_version là hợp đồng số nguyên; Người quản lý từ chối tải từ một phiên bản không xác định."
+    },
+    {
+      "stage": "check",
+      "question": "Ghi nguyên tử hoạt động như thế nào?",
+      "options": [
+        "tempfile.mkstemp trong cùng một thư mục, write, fsync, os.replace (đổi tên nguyên tử) trên mục tiêu",
+        "Cắt bớt sau đó ghi vào mục tiêu",
+        "Chỉ thêm với CRC",
+        "Mã hóa và ghi đè"
+      ],
+      "correct": 0,
+      "explanation": "Đổi tên nguyên tử trên POSIX và Windows là thứ ngăn chặn hỏng ghi một phần."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao các khóa idempotency được yêu cầu cho các lệnh gọi công cụ không phải idempotent?",
+      "options": [
+        "Để thanh toán",
+        "Nếu agent gặp sự cố sau khi gọi công cụ nhưng trước khi kiểm tra kết quả, hãy thử lại một cách an toàn; ghi nhật ký ID cuộc gọi trước khi thực hiện và bỏ qua cuộc gọi khi thử lại",
+        "Để loại bỏ nhật ký trùng lặp",
+        "Để rút ngắn đầu ra"
+      ],
+      "correct": 1,
+      "explanation": "pending_calls. jsonl mang ID cuộc gọi; kiểm tra khôi phục và bỏ qua công việc đã được thực hiện."
+    },
+    {
+      "stage": "check",
+      "question": "Các artifacts lớn (CSV, bản chép lời dài, tệp được tạo) nên ở đâu so với tiểu bang?",
+      "options": [
+        "Nội tuyến trong agent_state. json",
+        "Là các tệp riêng biệt (hoặc lưu trữ đối tượng) chỉ có đường dẫn được giữ ở trạng thái, vì vậy checkpoints vẫn nhỏ và nhanh",
+        "Trong các biến môi trường",
+        "Nối thành một khúc gỗ khổng lồ"
+      ],
+      "correct": 1,
+      "explanation": "artifacts riêng biệt phát triển độc lập với nhà nước; checkpoints rẻ để đọc và viết."
+    },
+    {
+      "stage": "post",
+      "question": "Tìm nguồn cung ứng sự kiện để kiểm toán + ảnh chụp nhanh cho sơ yếu lý lịch mua cho bạn điều gì?",
+      "options": [
+        "Sử dụng đĩa thấp hơn",
+        "Phát lại nguyên văn các quyết định agent bằng cách đọc ảnh chụp nhanh sau đó phát lại các sự kiện sau đó; hình dạng tương tự như Postgres WAL",
+        "inference nhanh hơn",
+        "Hỗ trợ giọng nói gốc"
+      ],
+      "correct": 1,
+      "explanation": "Thêm vào state.events.jsonl trên mọi đột biến; ảnh chụp nhanh định kỳ vào trạng thái. json; Phát lại các sự kiện sau dấu thời gian của ảnh chụp nhanh."
+    },
+    {
+      "stage": "post",
+      "question": "Bài học nói gì xảy ra khi schema_version không khớp?",
+      "options": [
+        "Người quản lý âm thầm nâng cấp",
+        "Trình quản lý từ chối tải cho đến khi script di chuyển trong tools/migrate_state.py chạy",
+        "Trạng thái bị xóa",
+        "Thử lại agent"
+      ],
+      "correct": 1,
+      "explanation": "Schema di chuyển hoặc từ chối tải; không bao giờ im lặng nâng cấp."
+    }
+  ]
+}
