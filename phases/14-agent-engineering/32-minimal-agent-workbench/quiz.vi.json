@@ -1,0 +1,90 @@
+{
+  "lesson": "32-minimal-agent-workbench",
+  "title": "Bàn làm việc Agent tối thiểu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ba tệp nào tạo thành bàn làm việc hữu ích nhỏ nhất?",
+      "options": [
+        "AGENTS.md (bộ định tuyến), agent_state. json (tiểu bang), task_board. json (hàng đợi)",
+        "README.md, CHANGELOG.md, GIẤY PHÉP",
+        "model.py, prompts.py, tools.py",
+        "Dockerfile, Makefile, .gitignore"
+      ],
+      "correct": 0,
+      "explanation": "Một bộ định tuyến ngắn, trạng thái bền và hàng đợi tác vụ là sàn."
+    },
+    {
+      "stage": "pre",
+      "question": "Khung bài học về AGENTS.md là gì?",
+      "options": [
+        "Hướng dẫn giới thiệu 3000 dòng",
+        "Một bộ định tuyến ngắn trỏ vào các tài liệu sâu hơn, tiểu bang và hội đồng quản trị",
+        "Khóa bộ nhớ đệm prompt thuần túy",
+        "Một bí mật được giữ kín trong repo"
+      ],
+      "correct": 1,
+      "explanation": "AGENTS.md là một bộ định tuyến, không phải là một hướng dẫn sử dụng; hướng dẫn sử dụng dài bị bỏ qua."
+    },
+    {
+      "stage": "check",
+      "question": "Dữ liệu của Mã Nâng Rút nói gì về một AGENTS.md tốt?",
+      "options": [
+        "Nó không có tác dụng đo lường được",
+        "Một AGENTS.md tốt cho một bước nhảy chất lượng tương đương với việc nâng cấp từ Haiku lên Opus; một cái xấu còn tệ hơn là không có tệp",
+        "Chiều dài luôn giúp",
+        "Chỉ Claude đọc nó"
+      ],
+      "correct": 1,
+      "explanation": "Phép đo của Augment Code: các tệp tốt nhất có hình dạng nâng cấp model, tệ nhất còn tệ hơn là không có gì."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bài học đề xuất trạng thái được hỗ trợ tệp thay vì trạng thái lịch sử trò chuyện?",
+      "options": [
+        "Đĩa rẻ hơn",
+        "Lịch sử trò chuyện không ổn định; Tệp tồn tại session chết, cắt cuộc trò chuyện và đặt lại công cụ",
+        "Tệp nhỏ hơn",
+        "Nó được yêu cầu bởi SOC 2"
+      ],
+      "correct": 1,
+      "explanation": "Sessions chết và trò chuyện bị cắt bớt; Tệp là hệ thống hồ sơ bền vững."
+    },
+    {
+      "stage": "check",
+      "question": "Bài học nói gì xảy ra khi các hướng dẫn mâu thuẫn xuất hiện trong AGENTS.md?",
+      "options": [
+        "Độ trễ giảm",
+        "Các hướng dẫn mâu thuẫn sẽ âm thầm giảm agent từ chế độ tương tác sang chế độ tham lam (AMBIG-SWE: tỷ lệ phân giải 48,8% đến 28%)",
+        "Chi phí tăng nhẹ",
+        "Không có gì"
+      ],
+      "correct": 1,
+      "explanation": "AMBIG-SWE đã đo được sự sụt giảm tốc độ phân giải lớn khi mâu thuẫn xuất hiện; thay vào đó."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học đề xuất các liên kết tượng trưng công cụ chéo như CLAUDE.md -> AGENTS.md?",
+      "options": [
+        "Để lưu byte",
+        "Vì vậy, một nguồn tin cậy duy nhất sẽ lan tỏa đến mọi agent mã hóa mà không cần phân nhánh",
+        "Để vượt qua kiểm toán",
+        "Để đáp ứng MIT"
+      ],
+      "correct": 1,
+      "explanation": "Các liên kết tượng trưng (hoặc trình tạo kiểu Nx) giữ một nguồn chuẩn trên Claude Code, Codex, Cursor, Copilot, v.v."
+    },
+    {
+      "stage": "post",
+      "question": "Các tệp AGENTS.md lồng nhau tuân theo mẫu nào?",
+      "options": [
+        "Chỉ tệp gốc được đọc",
+        "Đi từ tệp làm việc về phía gốc repo, nối mọi AGENTS.md được tìm thấy trên đường đi (thắng gần nhất; thư mục con mở rộng gốc)",
+        "Lựa chọn ngẫu nhiên",
+        "merge theo thứ tự bảng chữ cái"
+      ],
+      "correct": 1,
+      "explanation": "OpenAI ships 88 tệp AGENTS.md trên repo chính của nó; các công cụ nối cây gần nhất."
+    }
+  ]
+}
