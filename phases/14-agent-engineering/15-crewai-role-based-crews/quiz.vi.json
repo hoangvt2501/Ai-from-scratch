@@ -1,0 +1,90 @@
+{
+  "lesson": "15-crewai-role-based-crews",
+  "title": "CrewAI: Phi hành đoàn và luồng dựa trên vai trò",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bốn primitives của CrewAI là gì?",
+      "options": [
+        "Agent, Nhiệm vụ, Phi hành đoàn, Process",
+        "Nút, Cạnh, Giảm tốc, Kiểm tra",
+        "Diễn viên, Tin nhắn, Hộp thư đến, Runtime",
+        "Công cụ, Prompt, Model, Bộ nhớ"
+      ],
+      "correct": 0,
+      "explanation": "Agent, Nhiệm vụ, Phi hành đoàn và Process là bốn primitives."
+    },
+    {
+      "stage": "pre",
+      "question": "Điểm bắt đầu production được đề xuất theo tài liệu CrewAI là gì?",
+      "options": [
+        "Phi hành đoàn",
+        "Dòng chảy",
+        "process tuần tự",
+        "process phân cấp"
+      ],
+      "correct": 1,
+      "explanation": "Các tài liệu cho biết khởi động production ứng dụng bằng Flows; gộp Phi hành đoàn thành các bước phụ khi quyền tự chủ kiếm được chi phí."
+    },
+    {
+      "stage": "check",
+      "question": "Sự khác biệt giữa Phi hành đoàn và Dòng chảy là gì?",
+      "options": [
+        "Phi hành đoàn được trả tiền, Flow miễn phí",
+        "Phi hành đoàn tự chủ và điều khiển LLM; Flow dựa trên sự kiện, sở hữu mã, xác định và có thể kiểm tra",
+        "Phi hành đoàn chỉ chạy trên GPUs",
+        "Dòng chảy không có agents"
+      ],
+      "correct": 1,
+      "explanation": "Phi hành đoàn là quyền tự chủ đầu tiên; Dòng chảy là quyết định luận đầu tiên."
+    },
+    {
+      "stage": "check",
+      "question": "Loại nào trong số này KHÔNG phải là một trong bốn loại bộ nhớ mà CrewAI ships?",
+      "options": [
+        "Ngắn hạn",
+        "Dài hạn",
+        "Thực thể",
+        "Lượng tử hóa"
+      ],
+      "correct": 3,
+      "explanation": "Ngắn hạn, dài hạn, thực thể và ngữ cảnh là bốn. Bộ nhớ lượng tử không phải là khái niệm của CrewAI."
+    },
+    {
+      "stage": "check",
+      "question": "Cốt truyện phình to là gì và bài học khuyên bạn nên xử lý nó như thế nào?",
+      "options": [
+        "Lưu trữ quá nhiều phi hành đoàn; Lưu trữ những cái cũ",
+        "Cốt truyện agent 2000 từ đẩy ngân sách ngữ cảnh; Giữ chúng chặt chẽ",
+        "Quá nhiều công cụ; xóa một số",
+        "Cuộc gọi Bedrock chậm; Chuyển đổi khu vực"
+      ],
+      "correct": 1,
+      "explanation": "Cốt truyện định hình giọng điệu và phán đoán nhưng ăn ngữ cảnh nếu quá khổ."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào Hierarchical process đáng để chọn hơn Sequential?",
+      "options": [
+        "Luôn luôn",
+        "Khi bạn có 4+ chuyên gia cần người quản lý Agent định tuyến giữa họ",
+        "Khi bạn có một nhiệm vụ",
+        "Khi bạn không có bất kỳ công cụ nào"
+      ],
+      "correct": 1,
+      "explanation": "Phân cấp thêm một người quản lý Agent; Chỉ đáng giá khi một số chuyên gia cần định tuyến động."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học cảnh báo không nên sử dụng Phi hành đoàn dạng tự do trong production?",
+      "options": [
+        "Phi hành đoàn không được hỗ trợ",
+        "Sự thay đổi đầu ra cao và việc gỡ lỗi rất khó khăn nếu không có trình bao bọc Flow",
+        "Phi hành đoàn tốn kém hơn Flows",
+        "Phi hành đoàn thiếu trí nhớ"
+      ],
+      "correct": 1,
+      "explanation": "Quyền tự chủ của phi hành đoàn làm cho việc phát lại và kiểm tra sản phẩm trở nên đau đớn; bọc bằng Flow khi shipping."
+    }
+  ]
+}
