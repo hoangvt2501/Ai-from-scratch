@@ -1,0 +1,78 @@
+{
+  "lesson": "30-bpe-tokenizer-from-scratch",
+  "title": "BPE Tokenizer từ đầu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao BPE tokenizer cấp byte bắt đầu từ bảng chữ cái 256 ký hiệu?",
+      "options": [
+        "Nó đảm bảo mọi đầu vào UTF-8 đều có thể được biểu diễn trước khi học bất kỳ merge nào",
+        "Đây là bảng chữ cái nhỏ nhất hỗ trợ ngôn ngữ tiếng Anh",
+        "Nó phù hợp với kích thước dọc GPU trên hầu hết các máy gia tốc",
+        "Nó loại bỏ nhu cầu lưu trữ một bàn merge"
+      ],
+      "correct": 0,
+      "explanation": "256 id byte thô bao gồm mọi đầu vào UTF-8 có thể. Không cần token xác định vì bất kỳ đầu vào nào cũng có thể được biểu thị dưới dạng một chuỗi byte."
+    },
+    {
+      "stage": "check",
+      "question": "Mỗi bước BPE training làm gì?",
+      "options": [
+        "Tách một từ ngẫu nhiên và gán cho nó một id mới",
+        "Đếm các cặp biểu tượng liền kề trên kho dữ liệu và merges cặp biểu tượng thường xuyên nhất",
+        "Giảm từ vựng bằng cách loại bỏ id ít phổ biến nhất",
+        "Huấn luyện một mạng nơ-ron nhỏ để chấm điểm các từ phụ"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi bước tìm cặp liền kề có tần số cao nhất trên kho dữ liệu, merges nó thành một ký hiệu mới và ghi lại merge."
+    },
+    {
+      "stage": "check",
+      "question": "Khi mã hóa văn bản mới, merges được áp dụng theo thứ tự nào?",
+      "options": [
+        "Theo thứ tự ngẫu nhiên cho đến khi không áp dụng",
+        "Theo vị trí trong đầu vào, từ trái sang phải, bất kể thứ hạng training",
+        "Theo thứ hạng mà merge nhận được trong training, xếp hạng thấp nhất đầu tiên",
+        "Theo byte của cặp, được sắp xếp theo thứ tự bảng chữ cái"
+      ],
+      "correct": 2,
+      "explanation": "Inference áp dụng merges theo thứ tự chúng đã học. merge sớm nhất trong bảng sẽ thắng khi có thể áp dụng nhiều merges."
+    },
+    {
+      "stage": "check",
+      "question": "Hành vi của encoder trên chuỗi token đặc biệt khi allow_special là False là gì?",
+      "options": [
+        "Nó gây ra lỗi",
+        "Nó ánh xạ chuỗi với id dành riêng của nó",
+        "Nó mã hóa các byte theo nghĩa đen của chuỗi",
+        "Nó lặng lẽ bỏ qua dây"
+      ],
+      "correct": 2,
+      "explanation": "Khi tắt allow_special, một chuỗi như <|endoftext|> được coi là byte thô và đi qua vòng lặp merge giống như bất kỳ đầu vào nào khác."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao decoder không bao giờ cần id token không xác định?",
+      "options": [
+        "Mỗi token đã học là sự nối của hai tokens đã biết, đệ quy xuống các byte đơn lẻ",
+        "Các dải encoder không xác định tokens trước khi giải mã",
+        "model từ chối các id không xác định trong quá trình sampling",
+        "decoder luôn trả về chuỗi trống cho các id không xác định"
+      ],
+      "correct": 0,
+      "explanation": "Mỗi id phân giải thành một byte thô hoặc hai id đã biết trước đó. Mở rộng đệ quy luôn kết thúc bằng byte, giải mã thành UTF-8."
+    },
+    {
+      "stage": "post",
+      "question": "Điều gì xảy ra với độ dài được mã hóa của một câu cố định khi từ vựng mục tiêu tăng lên?",
+      "options": [
+        "Nó tăng tuyến tính theo kích thước từ vựng",
+        "Nó không đổi vì mỗi id mã hóa một byte duy nhất",
+        "Nó có xu hướng giảm vì từ vựng lớn hơn bao gồm nhiều từ phụ hơn",
+        "Nó dao động ngẫu nhiên vì BPE là không xác định"
+      ],
+      "correct": 2,
+      "explanation": "Từ vựng lớn hơn học được nhiều merges hơn, vì vậy các từ phụ phổ biến sẽ thu gọn thành các id đơn lẻ và trình tự được mã hóa ngắn hơn."
+    }
+  ]
+}
