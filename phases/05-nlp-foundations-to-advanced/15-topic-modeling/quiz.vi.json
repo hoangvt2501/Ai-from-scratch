@@ -1,0 +1,102 @@
+{
+  "lesson": "15-topic-modeling",
+  "title": "Mô hình hóa chủ đề - LDA và BERTopic",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "LDA giả định gì về mỗi tài liệu?",
+      "options": [
+        "Mỗi tài liệu thuộc chính xác một chủ đề",
+        "Tài liệu là câu",
+        "Mỗi tài liệu là một hỗn hợp của các chủ đề; Mỗi chủ đề là một sự phân phối trên các từ",
+        "Tài liệu độc lập với chủ đề"
+      ],
+      "correct": 2,
+      "explanation": "Câu chuyện tổng quát của LDA là thành viên hỗn hợp: mỗi tài liệu có một phân phối chủ đề, mỗi chủ đề có một phân phối từ."
+    },
+    {
+      "stage": "pre",
+      "question": "BERTopic sử dụng gì để tạo thành các cụm chủ đề?",
+      "options": [
+        "softmax trực tiếp qua từ vựng",
+        "Mã hóa tài liệu bằng transformer câu, giảm chiều bằng UMAP, sau đó phân cụm bằng HDBSCAN",
+        "Chạy BM25, sau đó là k-means",
+        "Huấn luyện LSTM từ đầu đến cuối"
+      ],
+      "correct": 1,
+      "explanation": "BERTopic = embeddings + UMAP + HDBSCAN, với TF-IDF dựa trên class cho các từ chủ đề."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao LDA của scikit-learn mong đợi số lượng thô (CountVectorizer), không phải TF-IDF?",
+      "options": [
+        "TF-IDF quá chậm",
+        "model xác suất của LDA được xác định trên số hạng số nguyên; TF-IDF bóp méo phân phối cơ bản",
+        "LDA không thể xử lý phao",
+        "Giới hạn bộ nhớ"
+      ],
+      "correct": 1,
+      "explanation": "likelihood LDA đảm nhận số lượng; cho ăn các giá trị TF-IDF vi phạm giả định model."
+    },
+    {
+      "stage": "check",
+      "question": "Nhãn -1 của HDBSCAN có nghĩa là gì trong đầu ra BERTopic?",
+      "options": [
+        "Danh mục dành riêng",
+        "Một cụm tài liệu ngoại lệ mà thuật toán dựa trên mật độ không thể gán một cách tự tin",
+        "Cụm stopword",
+        "Chủ đề hàng đầu"
+      ],
+      "correct": 1,
+      "explanation": "HDBSCAN đánh dấu các điểm không phân cụm với -1; trong BERTopic đây là những tài liệu không phù hợp với bất kỳ chủ đề nào."
+    },
+    {
+      "stage": "check",
+      "question": "Chỉ số mạch lạc nào là mặc định phổ biến để đánh giá model chủ đề?",
+      "options": [
+        "BLEU",
+        "Accuracy",
+        "Chỉ Perplexity",
+        "c_v mạch lạc thông qua NPMI qua windows trượt các từ chủ đề hàng đầu"
+      ],
+      "correct": 3,
+      "explanation": "c_v mạch lạc (Roder et al., 2015) là thước đo mạch lạc chủ đề tự động chuẩn"
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào LDA thường phù hợp hơn BERTopic?",
+      "options": [
+        "Trên các tweet ngắn",
+        "Các tài liệu dài trong đó phân phối chủ đề thành viên hỗn hợp rất hữu ích và embeddings sẽ cắt bớt đầu vào",
+        "Khi embeddings ồn ào",
+        "Khi bạn cần một chủ đề duy nhất cho mỗi tài liệu"
+      ],
+      "correct": 1,
+      "explanation": "Các tài liệu dài được hưởng lợi từ model thành viên hỗn hợp của LDA; BERT encoders cắt bớt đầu vào."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao BERTopic thường giành chiến thắng trên văn bản ngắn (tweet, tiêu đề)?",
+      "options": [
+        "Văn bản ngắn có ít chủ đề hơn",
+        "Nó nhanh hơn",
+        "Sự tương đồng về ngữ nghĩa trong không gian embedding nắm bắt được ý nghĩa khi số lượng túi từ quá thưa thớt",
+        "Nó hỗ trợ nhiều ngôn ngữ hơn"
+      ],
+      "correct": 2,
+      "explanation": "BERT embeddings cung cấp sự tương đồng về ngữ nghĩa cho văn bản ngắn trong đó số liệu thống kê chồng chéo từ không thành công."
+    },
+    {
+      "stage": "post",
+      "question": "Chế độ lỗi LDA phổ biến mà bạn nên theo dõi các chủ đề là gì?",
+      "options": [
+        "Tài liệu hỗn hợp có tổng bằng 1",
+        "Chủ đề khớp hoàn hảo với danh mục được gắn nhãn",
+        "Các chủ đề rác hấp thụ từ dừng hoặc các thuật ngữ cực kỳ thường xuyên",
+        "Chủ đề có quá ít tài liệu"
+      ],
+      "correct": 2,
+      "explanation": "LDA có thể tạo các chủ đề rác hấp thụ từ dừng; Giảm thiểu min_df/max_df chặt chẽ hơn và lọc từ dừng."
+    }
+  ]
+}
