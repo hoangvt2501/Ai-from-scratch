@@ -1,0 +1,90 @@
+{
+  "lesson": "08-production-rag-chatbot",
+  "title": "Capstone 08 — Production RAG Chatbot cho một ngành dọc được quản lý",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao bộ nhớ đệm prompt lại quan trọng như vậy trong một chatbot RAG miền được quản lý?",
+      "options": [
+        "Nó loại bỏ nhu cầu về cơ sở dữ liệu vector",
+        "Với tỷ lệ truy cập 60-80%, nó cắt giảm chi phí cho mỗi truy vấn gấp 3-5 lần bằng cách giảm giá tokens tiền tố ổn định",
+        "Nó loại bỏ ảo giác",
+        "Nó cải thiện recall trên giai đoạn xếp hạng lại"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Tiêu đề bộ nhớ đệm so với hậu tố không được lưu trong bộ nhớ đệm của mỗi yêu cầu?",
+      "options": [
+        "Khoảng đệm văn bản ngẫu nhiên để đạt kích thước bộ nhớ cache",
+        "Chỉ các tài liệu được truy xuất",
+        "Câu hỏi của người dùng trước, system prompt cuối cùng",
+        "System prompt và policies tĩnh trong tiêu đề bộ nhớ đệm, ngữ cảnh được xếp hạng lại là phần mở rộng bộ nhớ đệm, câu hỏi của người dùng là hậu tố không được lưu trong bộ nhớ cache"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Lớp truy xuất tôn trọng các thẻ khu vực pháp lý như GDPR hoặc HIPAA như thế nào?",
+      "options": [
+        "Nó chạy một chỉ số riêng cho mỗi quốc gia",
+        "Nó chỉ chặn phản hồi sau khi tạo",
+        "Nó viết lại câu hỏi của người dùng cho mỗi khu vực",
+        "Bộ lọc vai trò và khu vực pháp lý được áp dụng trước merge tìm kiếm kết hợp, vì vậy các phần nằm ngoài phạm vi của người dùng không bao giờ được xếp hạng lại"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Sự kết hợp guardrail lớp nào mà giai đoạn tổng hợp truyền đầu ra?",
+      "options": [
+        "Chỉ Llama Guard 4 trên đầu vào",
+        "Llama Guard 4, đường ray Guardrails policy NeMo và Presidio PII, cộng với việc thực thi trích dẫn",
+        "Chỉ là một biểu thức chính quy PII đầu ra",
+        "Một kiểm tra độ trung thực của LLM đánh giá duy nhất"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bảng điều khiển drift cảnh báo về điều gì?",
+      "options": [
+        "Thay đổi nhà cung cấp LLM cơ bản",
+        "Độ trễ trên 200ms",
+        "Chất lượng truy xuất giảm, ví dụ như nDCG hoặc điểm trích dẫn giảm 5% so với tuần trước",
+        "Bất kỳ tài liệu mới nào được thêm vào chỉ mục"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bộ vàng lớn như thế nào được sử dụng để đánh giá tính đúng đắn của sản phẩm?",
+      "options": [
+        "5 truy vấn demo",
+        "200 cặp question/answer được chuyên gia dán nhãn với trích dẫn",
+        "20 câu hỏi",
+        "2000 câu hỏi tổng hợp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Điểm RAGAS nào được theo dõi trực tuyến mỗi lượt?",
+      "options": [
+        "Thông lượng, mức sử dụng GPU và độ sâu hàng đợi",
+        "BLEU, ROUGE và METEOR",
+        "Sự trung thực, mức độ liên quan của câu trả lời và ngữ cảnh precision",
+        "Số lượng Token và chi phí đô la"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
