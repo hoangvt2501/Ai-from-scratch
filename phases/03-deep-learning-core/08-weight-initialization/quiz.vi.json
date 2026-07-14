@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Điều gì xảy ra nếu bạn khởi tạo tất cả các trọng số trong mạng nơ-ron về không?",
+    "options": [
+      "Mạng lưới huấn luyện bình thường nhưng chậm",
+      "Tất cả các tế bào thần kinh tính toán đầu ra giống hệt nhau và nhận gradients giống hệt nhau, vì vậy mạng chỉ có 1 tế bào thần kinh hiệu quả trên mỗi lớp",
+      "Mạng lưới phân kỳ",
+      "Zero init là mặc định được khuyến nghị"
+    ],
+    "correct": 1,
+    "explanation": "Với trọng số bằng không, mọi tế bào thần kinh trong một lớp tính toán cùng một chức năng, nhận cùng một gradient và cập nhật giống hệt nhau. 'Đối xứng' này có nghĩa là hàng trăm parameters cư xử như một.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao thang đo khởi tạo trọng lượng ngẫu nhiên lại quan trọng?",
+    "options": [
+      "Trọng lượng lớn hơn tập luyện nhanh hơn",
+      "Nếu variance quá cao, kích hoạt sẽ phát nổ; Nếu quá thấp, các kích hoạt sẽ biến mất - cả hai đều ngăn cản training",
+      "Tỷ lệ chỉ quan trọng đối với lớp đầu ra",
+      "Không quan trọng miễn là trọng lượng không bằng không"
+    ],
+    "correct": 1,
+    "explanation": "Mỗi lớp nhân variance với fan_in * Var(w). Nếu sản phẩm này là > 1, tín hiệu sẽ phát nổ theo cấp số nhân qua các lớp. Nếu < 1, nó sẽ biến mất. Khởi tạo thích hợp giữ cho sản phẩm này chính xác là 1.",
+    "stage": "pre"
+  },
+  {
+    "question": "Công thức cho variance khởi tạo Kaiming/He là gì?",
+    "options": [
+      "Var (w) = 1/fan_in",
+      "Var (w) = 2/fan_in",
+      "Var (w) = 2 / (fan_in + fan_out)",
+      "Var (w) = 1 / (fan_in + fan_out)"
+    ],
+    "correct": 1,
+    "explanation": "Kaiming init sử dụng Var (w) = 2/fan_in. Hệ số 2 bù cho việc ReLU zero một nửa số kích hoạt (giá trị âm trở thành 0), điều này làm giảm một nửa fan_in một cách hiệu quả.",
+    "stage": "post"
+  },
+  {
+    "question": "Khi nào bạn nên sử dụng Xavier/Glorot khởi tạo thay vì Kaiming/He?",
+    "options": [
+      "Luôn luôn - Xavier tốt hơn trên toàn thế giới",
+      "Khi sử dụng kích hoạt sigmoid hoặc tanh, không làm giảm một nửa đầu ra như ReLU",
+      "Khi training trên datasets nhỏ",
+      "Khi sử dụng Adam optimizer"
+    ],
+    "correct": 1,
+    "explanation": "Xavier init sử dụng Var(w) = 2/(fan_in + fan_out), được thiết kế cho các hoạt hóa gần tuyến tính gần không (sigmoid, tanh). Hệ số phụ 2 của Kaiming bù đắp cho việc giảm một nửa số không của ReLU, điều mà Xavier không cần.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao GPT-2 chia tỷ lệ trọng lượng lớp còn lại theo 1/sqrt(2N)?",
+    "options": [
+      "Để tăng tốc độ training",
+      "Mỗi phần bổ sung còn lại tăng variance, vì vậy việc mở rộng quy mô ngăn tín hiệu tích lũy phát triển không giới hạn thông qua N lớp",
+      "Để giảm số lượng parameters",
+      "Để cải thiện tokenization"
+    ],
+    "correct": 1,
+    "explanation": "Các kết nối còn lại thêm đầu ra lớp con vào đầu vào: x = x + lớp con (x). Mỗi lần bổ sung tăng variance. Với N lớp dư, variance phát triển tỷ lệ thuận với N. Tỷ lệ 1/sqrt(2N) giữ cho tín hiệu ổn định.",
+    "stage": "post"
+  }
+]
