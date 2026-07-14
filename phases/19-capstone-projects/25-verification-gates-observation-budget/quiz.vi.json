@@ -1,0 +1,78 @@
+{
+  "lesson": "phase-19/25-verification-gates-observation-budget",
+  "title": "Cổng xác minh và ngân sách quan sát",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trước khi đọc bài học: lý do nào trong số này là lý do mạnh mẽ nhất mà một harness cần một chuỗi cổng xác định hơn là một model với tư cách là người phán xét?",
+      "options": [
+        "Models quá chậm để đóng vai trò là thẩm phán trong production.",
+        "Quyết định luận làm cho lý do phủ nhận có thể kiểm tra được và chuỗi có thể phát lại.",
+        "Một model với tư cách là thẩm phán luôn đưa ra các quyết định cho phép ảo giác.",
+        "Chuỗi cổng cho phép model viết policy của riêng mình."
+      ],
+      "correct": 1,
+      "explanation": "Dấu vết kiểm toán và khả năng tái tạo là những chiến thắng thực tế. Một model thẩm phán cũng có thể được kết nối, nhưng cổng cấu trúc cần phải xác định để quyết định có thể được tái tạo và xem xét."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bài học chạy WhitelistGate trước BudgetGate trong chuỗi?",
+      "options": [
+        "Từ chối danh sách trắng rẻ hơn, vì vậy việc rút ngắn chúng sẽ tránh được số tiền sổ cái đắt đỏ.",
+        "BudgetGate không thể chạy cho đến khi ít nhất một công cụ được gọi.",
+        "Danh sách trắng phải luôn là cổng cuối cùng theo quy ước.",
+        "Thứ tự không quan trọng vì GateChain ngẫu nhiên hóa thứ tự đánh giá."
+      ],
+      "correct": 0,
+      "explanation": "Từ chối rẻ tiền chạy trước. WhitelistGate là tra cứu băm O(1). BudgetGate phải tính tổng sổ cái. Rút ngắn trong danh sách trắng tránh công việc đó khi cuộc gọi là bất hợp pháp về mặt cấu trúc."
+    },
+    {
+      "stage": "check",
+      "question": "Một ObservationLedger đã ghi lại một quan sát 60 token từ read_file. Sau đó, harness từ chối cuộc gọi tiếp theo. Sổ cái ghi lại gì về việc từ chối?",
+      "options": [
+        "Một hàng Quan sát không token được gắn thẻ từ chối.",
+        "Không sao. Sổ cái chỉ ghi lại các quan sát thành công.",
+        "Hàng Quan sát token âm đại diện cho chi phí từ chối.",
+        "Sự từ chối được thêm vào dưới dạng một Quan sát tổng hợp với tên của người từ chối."
+      ],
+      "correct": 1,
+      "explanation": "Sổ cái ghi lại các quan sát mà model đã thấy. Một từ chối tạo ra một GateDecision, không phải một Quan sát. Số lượng từ chối sống cùng với sổ cái, không phải bên trong nó."
+    },
+    {
+      "stage": "check",
+      "question": "RecencyGate.window được đặt thành 3. latest_turn của sổ cái là 5. Một ToolCall mới đến ở lượt 10. Điều gì xảy ra?",
+      "options": [
+        "Cổng cho phép: cuộc gọi đang ở lượt gần nhất.",
+        "Cổng phủ nhận: khoảng cách 5 vượt quá cửa sổ 3.",
+        "Cổng cho phép: cửa sổ áp dụng cho kích thước sổ cái, không phải khoảng cách rẽ.",
+        "Cổng đưa ra một ngoại lệ vì sổ cái đã cũ."
+      ],
+      "correct": 1,
+      "explanation": "RecencyGate so sánh (call.turn - ledger.latest_turn) với cửa sổ. 10 - 5 = 5, lớn hơn 3, vì vậy cổng từ chối."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn muốn thêm giới hạn đầu ra cho mỗi cuộc gọi (không có quan sát đơn lẻ nào có thể vượt quá 8000 tokens). Cổng này thuộc về vị trí hợp lý trong chuỗi?",
+      "options": [
+        "Trước WhitelistGate, vì kích thước là tài sản rẻ nhất để kiểm tra.",
+        "Sau BudgetGate, vì ngân sách tích lũy luôn chiếm ưu thế.",
+        "Nó không thể là một cổng vì kích thước chỉ được biết sau khi công cụ chạy.",
+        "Bên trong BudgetGate để các giới hạn tạo ra."
+      ],
+      "correct": 2,
+      "explanation": "Kích thước đầu ra không được biết tại thời điểm đánh giá cổng. harness áp dụng giới hạn sau khi công cụ chạy, bằng cách cắt bớt quan sát trước khi model nhìn thấy nó. Cổng đánh giá đầu vào, không phải đầu ra."
+    },
+    {
+      "stage": "post",
+      "question": "Một người đánh giá yêu cầu bạn chứng minh rằng agent không bao giờ kích hoạt một cuộc gọi công cụ bị từ chối trong một session. Bạn chỉ cho họ artifact nào?",
+      "options": [
+        "Ảnh chụp nhanh ObservationLedger, chỉ chứa các quan sát thành công.",
+        "Danh sách các bản ghi ChainOutcome, chứa mọi quyết định cho mỗi cuộc gọi với lý do từ chối.",
+        "Đầu ra pytest, ghi lại pass/fail. thử nghiệm",
+        "Bản ghi cuộc trò chuyện của model, trong đó có bản tự báo cáo của riêng mình."
+      ],
+      "correct": 1,
+      "explanation": "Bản ghi ChainOutcome đưa ra quyết định cho mỗi cuộc gọi và từ chối lý do. Sổ cái và bản chép lời có thể hỗ trợ yêu cầu, nhưng artifact có thể kiểm toán là các quyết định của chuỗi."
+    }
+  ]
+}
