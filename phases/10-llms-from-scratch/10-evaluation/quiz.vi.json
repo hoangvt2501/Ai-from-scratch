@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Tại sao benchmarks như MMLU trở nên ít hữu ích hơn để so sánh models biên giới?",
+    "options": [
+      "Họ kiểm tra sai đối tượng",
+      "Frontier models đã bão hòa MMLU (điểm 86-89%), nén bảng xếp hạng xuống một phạm vi mà sự khác biệt là nhiễu thống kê",
+      "MMLU được thiết kế cho các models nhỏ hơn",
+      "Các câu hỏi quá dễ"
+    ],
+    "correct": 1,
+    "explanation": "Khi GPT-4, Claude 3 và Llama 3 đều đạt 86-89% trên MMLU, chênh lệch 1 điểm là không có ý nghĩa. benchmark không còn phân biệt đối xử giữa các models, nhưng nó vẫn thống trị văn hóa bảng xếp hạng.",
+    "stage": "pre"
+  },
+  {
+    "question": "Định luật Goodhart là gì trong bối cảnh đánh giá LLM?",
+    "options": [
+      "Luật về model mở rộng quy mô",
+      "Khi một thước đo trở thành mục tiêu, nó không còn là một thước đo tốt - models và các nhóm tối ưu hóa cho benchmarks thay vì khả năng thực sự",
+      "Quy tắc về lịch trình learning rate",
+      "Một định lý về cơ chế attention"
+    ],
+    "correct": 1,
+    "explanation": "Phòng thí nghiệm tối ưu hóa điểm số benchmark (ô nhiễm dữ liệu, prompting cụ thể benchmark). Điểm số tăng lên, nhưng khả năng trong thế giới thực không nhất thiết phải cải thiện. Đánh giá nhiệm vụ cụ thể của riêng bạn là thước đo đáng tin cậy duy nhất.",
+    "stage": "pre"
+  },
+  {
+    "question": "Phương pháp đánh giá LLM với tư cách là thẩm phán là gì?",
+    "options": [
+      "Có một giám khảo là con người đánh giá mọi phản hồi",
+      "Sử dụng LLM mạnh mẽ (ví dụ: GPT-4) để chấm điểm các câu trả lời dựa trên các tiêu chí, thay thế đánh giá tốn kém của con người trên quy mô lớn",
+      "Training một bộ phân loại riêng để đánh giá",
+      "Sử dụng model để tự đánh giá"
+    ],
+    "correct": 1,
+    "explanation": "LLM với tư cách là giám khảo sử dụng một model có khả năng để chấm điểm các câu trả lời dựa trên các tiêu chí đã xác định. Nó rẻ hơn và nhanh hơn so với đánh giá của con người, mặc dù nó có những thành kiến (ví dụ: thích phản hồi dài dòng) phải được hiệu chỉnh.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao việc xây dựng bộ đánh giá tùy chỉnh lại quan trọng hơn là dựa vào benchmarks công khai?",
+    "options": [
+      "benchmarks công chúng luôn sai",
+      "benchmarks công kiểm tra khả năng chung; Ứng dụng của bạn có các yêu cầu cụ thể mà chỉ đánh giá tùy chỉnh mới có thể đo lường",
+      "Đánh giá tùy chỉnh dễ xây dựng hơn",
+      "benchmarks công quá đắt"
+    ],
+    "correct": 1,
+    "explanation": "Điểm model 90% trên MMLU có thể không đạt trong nhiệm vụ cụ thể của bạn (ví dụ: trích xuất ngày tháng từ các tài liệu pháp lý ở định dạng của bạn). Chỉ đánh giá tùy chỉnh với dữ liệu, trường hợp biên và tiêu chí thành công của bạn mới đo lường điều gì quan trọng.",
+    "stage": "post"
+  },
+  {
+    "question": "Ô nhiễm dữ liệu trong bối cảnh LLM benchmarks là gì?",
+    "options": [
+      "Khi dữ liệu training bị hỏng",
+      "Khi benchmark câu hỏi xuất hiện trong dữ liệu trước khi training của model, thổi phồng điểm số mà không phản ánh khả năng thực sự",
+      "Khi model tạo dữ liệu không chính xác",
+      "Khi dữ liệu đánh giá bị gắn nhãn sai"
+    ],
+    "correct": 1,
+    "explanation": "Nếu các câu hỏi MMLU xuất hiện trong kho dữ liệu training, model ghi nhớ câu trả lời thay vì suy luận về chúng. Điều này làm tăng điểm số và làm cho các so sánh benchmark không đáng tin cậy. Đó là một vấn đề ngày càng gia tăng khi kho dữ liệu training mở rộng.",
+    "stage": "post"
+  }
+]
