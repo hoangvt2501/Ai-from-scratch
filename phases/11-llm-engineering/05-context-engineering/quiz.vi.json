@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Sự khác biệt giữa kỹ thuật prompt và kỹ thuật ngữ cảnh là gì?",
+    "options": [
+      "Chúng giống nhau",
+      "prompt là truy vấn của người dùng; ngữ cảnh là mọi thứ trong cửa sổ của model: system prompt, công cụ, tài liệu được truy xuất, lịch sử và chính prompt",
+      "Kỹ thuật ngữ cảnh là về thiết kế cơ sở dữ liệu",
+      "Kỹ thuật Prompt tiên tiến hơn"
+    ],
+    "correct": 1,
+    "explanation": "Kỹ thuật Prompt tập trung vào việc tạo ra hướng dẫn sử dụng. Kỹ thuật ngữ cảnh quản lý toàn bộ đầu vào cho model: những gì đi vào, những gì ở ngoài, theo thứ tự nào và cách phân bổ context window giới hạn.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao thứ tự context window lại quan trọng đối với hiệu suất LLM?",
+    "options": [
+      "Nó không -- LLMs process tất cả tokens như nhau",
+      "LLMs có thành kiến gần đây và ưu tiên, trả nhiều attention hơn cho phần đầu và phần cuối của context window",
+      "Thứ tự bảng chữ cái giúp model tìm kiếm nhanh hơn",
+      "Thứ tự chỉ quan trọng đối với mã"
+    ],
+    "correct": 1,
+    "explanation": "Nghiên cứu cho thấy LLMs chú ý nhiều hơn đến đầu và cuối context window (hiện tượng 'lạc lõng ở giữa'). Đặt thông tin quan trọng nhất ở đầu hoặc cuối ngữ cảnh sẽ cải thiện việc sử dụng.",
+    "stage": "pre"
+  },
+  {
+    "question": "Một trợ lý mã hóa sử dụng 22.700 tokens của một context window 128K. Tại sao quản lý ngân sách vẫn quan trọng?",
+    "options": [
+      "128K là đủ cho mọi trường hợp sử dụng",
+      "Các cuộc trò chuyện dài, tệp mã lớn và tài liệu được truy xuất có thể nhanh chóng lấp đầy cửa sổ; Nếu không quản lý ngân sách, bối cảnh quan trọng sẽ bị cắt bớt",
+      "Token đếm không chính xác",
+      "Chỉ có prompt mới quan trọng"
+    ],
+    "correct": 1,
+    "explanation": "22.700 tokens là đường cơ sở. Một cuộc trò chuyện 50 lượt thêm 30K + tokens. Truy xuất một cơ sở mã lớn sẽ thêm 50K+. Kết quả cuộc gọi công cụ thêm nhiều hơn. Nếu không có quản lý chủ động, cửa sổ sẽ lấp đầy và ngữ cảnh cũ nhất sẽ bị mất.",
+    "stage": "post"
+  },
+  {
+    "question": "Chiến lược cửa sổ trượt cho lịch sử hội thoại là gì?",
+    "options": [
+      "Di chuyển model sang một server khác",
+      "Chỉ giữ N lượt gần đây nhất trong ngữ cảnh và bỏ các lượt cũ hơn, tùy chọn tóm tắt chúng trước",
+      "Xử lý cuộc trò chuyện theo các đoạn có kích thước cố định",
+      "Mở rộng context window năng động"
+    ],
+    "correct": 1,
+    "explanation": "Cửa sổ trượt giữ cho cuộc trò chuyện gần đây nhất của K trong ngữ cảnh đầy đủ. Các lượt cũ hơn sẽ bị loại bỏ hoặc thay thế bằng một bản tóm tắt. Điều này giới hạn việc sử dụng bộ nhớ trong khi vẫn giữ nguyên ngữ cảnh gần đây có liên quan nhất.",
+    "stage": "post"
+  },
+  {
+    "question": "Trình lắp ráp ngữ cảnh nên phân bổ tokens trên các thành phần như thế nào?",
+    "options": [
+      "Phân bổ bằng nhau cho từng thành phần",
+      "Dựa trên động theo loại truy vấn: một câu hỏi đơn giản cần ít ngữ cảnh truy xuất hơn; Một câu hỏi phức tạp cần nhiều hơn nữa, với khoảng trống thế hệ luôn được bảo lưu",
+      "Luôn tối đa hóa ngữ cảnh truy xuất",
+      "Giảm thiểu system prompt tokens"
+    ],
+    "correct": 1,
+    "explanation": "Một câu hỏi thực tế đơn giản có thể cần 500 tokens ngữ cảnh được truy xuất. Một phân tích phức tạp có thể cần 10.000. Một trình lắp ráp ngữ cảnh tốt điều chỉnh phân bổ linh hoạt trong khi luôn dành khoảng trống cho phản hồi của model.",
+    "stage": "post"
+  }
+]
