@@ -1,0 +1,78 @@
+{
+  "lesson": "31-tokenized-dataset-sliding-window",
+  "title": "Tokenized Dataset với Cửa sổ trượt",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Hợp đồng hình dạng cho training batch LM nhân quả là gì?",
+      "options": [
+        "(B, T) id đầu vào và (B, T) id mục tiêu trong đó mục tiêu là đầu vào dịch chuyển sang trái một",
+        "(B, V) một vectors nóng về từ vựng",
+        "(B, T, T) attention mặt nạ có ID đầu vào trên đường chéo",
+        "(B, 2) id đầu vào và cặp nhãn"
+      ],
+      "correct": 0,
+      "explanation": "LM nhân quả training đọc (B, T) id đầu vào và dự đoán cùng một hình dạng của id mục tiêu, trong đó target[t] = đầu vào[t+1]."
+    },
+    {
+      "stage": "check",
+      "question": "Có bao nhiêu windows chiều dài T + 1 phù hợp với một luồng id có chiều dài N với sải chân S?",
+      "options": [
+        "N // (T + 1)",
+        "tối đa (0, 1 + (N - (T + 1)) // S)",
+        "(N - T) * S",
+        "N - T - S"
+      ],
+      "correct": 1,
+      "explanation": "Cửa sổ đầu tiên bắt đầu từ 0. windows tiếp theo bắt đầu từ bội số của S. Cửa sổ cuối cùng vẫn phải bao gồm id T+1."
+    },
+    {
+      "stage": "check",
+      "question": "Giảm một nửa sải chân có ảnh hưởng gì đến dataset?",
+      "options": [
+        "Nó giảm một nửa số lượng training ví dụ mỗi epoch",
+        "Nó tăng gần gấp đôi số lượng training ví dụ mỗi epoch",
+        "Nó không có tác dụng vì windows không bao giờ chồng chéo",
+        "Nó loại bỏ sự chồng chéo giữa các windows liên tiếp"
+      ],
+      "correct": 1,
+      "explanation": "Một sải chân nhỏ hơn tạo ra nhiều windows chồng chéo hơn, tăng số lượng ví dụ và sự đa dạng ranh giới với chi phí là nhiều điện toán hơn trên mỗi epoch."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao lại truyền một ngọn đuốc rõ ràng. Máy phát điện cho DataLoader?",
+      "options": [
+        "Nó tăng tốc độ tải dữ liệu",
+        "Nó loại bỏ nhu cầu về đệm batch",
+        "Nó làm cho sự xáo trộn xác định giữa các lần chạy với cùng một hạt giống",
+        "Nó cho phép đa GPU training"
+      ],
+      "correct": 2,
+      "explanation": "Một trình tạo hạt giống tái tạo cùng một sự xáo trộn. Chạy lại với cùng một hạt giống xem batches theo cùng một thứ tự, điều này được yêu cầu để so sánh hyperparameter công bằng."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao dataset trả về (input[:-1], input[1:]) từ mỗi cửa sổ có kích thước T+1?",
+      "options": [
+        "Nó vứt bỏ một id để tiết kiệm bộ nhớ",
+        "Nó thực hiện mục tiêu thay đổi từng mục tiêu để loss đo lường dự đoán token tiếp theo",
+        "Nó loại bỏ một token đặc biệt khỏi đầu vào",
+        "Đó là một điều kỳ quặc của việc lập chỉ mục PyTorch tensor"
+      ],
+      "correct": 1,
+      "explanation": "Mục tiêu tại vị trí t là đầu vào tại vị trí t + 1. Cắt cửa sổ thành [:-1] và [1:] thể hiện hợp đồng đó."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học bỏ theo windows không hoàn chỉnh thay vì đệm chúng?",
+      "options": [
+        "Đệm sẽ thay đổi kích thước từ vựng",
+        "Thả giữ cho mọi ví dụ có cùng độ dài nên không cần mặt nạ loss",
+        "tokens đệm không được hỗ trợ bởi model",
+        "Dữ liệu bị loại bỏ sẽ được khôi phục vào epoch tiếp theo"
+      ],
+      "correct": 1,
+      "explanation": "Tất cả các ví dụ đều dài chính xác T tokens theo cấu trúc, vì vậy batch là một tensor hình chữ nhật sạch sẽ và loss áp dụng đồng đều mà không cần mặt nạ."
+    }
+  ]
+}
