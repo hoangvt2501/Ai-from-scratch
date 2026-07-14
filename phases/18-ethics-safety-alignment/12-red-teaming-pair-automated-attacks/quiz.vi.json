@@ -1,0 +1,78 @@
+{
+  "lesson": "12-red-teaming-pair-automated-attacks",
+  "title": "Đội đỏ: PAIR và các cuộc tấn công tự động",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao đội đỏ thủ công không đủ để đánh giá models biên giới?",
+      "options": [
+        "Nó không mở rộng quy mô; Tỷ lệ tấn công thành công cần một mẫu thống kê chống lại mục tiêu di chuyển với mỗi lần phát hành model",
+        "prompts thủ công luôn bị chặn bởi các bộ lọc",
+        "Xét nghiệm thủ công tạo ra quá nhiều dương tính giả",
+        "Người kiểm tra thủ công không thể đọc đầu ra model"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "PAIR là viết tắt của gì và nó làm gì?",
+      "options": [
+        "Prompt tinh chỉnh lặp đi lặp lại tự động; kẻ tấn công LLM lặp đi lặp lại đề xuất bẻ khóa cho một mục tiêu, với prior lần thử làm phản hồi theo ngữ cảnh",
+        "Định tuyến Inference đối kháng theo cặp; định tuyến các cuộc tấn công trên khắp models",
+        "Lý do kiểm tra trước hành động; một giàn giáo phòng thủ",
+        "Phần thưởng lặp đi lặp lại đối thủ thuyết phục; thay thế RM bằng một người thuyết phục"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao PAIR hiệu quả hơn GCG đối với mục tiêu hộp đen?",
+      "options": [
+        "PAIR sử dụng model tấn công lớn hơn GCG",
+        "GCG chỉ tấn công models mã nguồn mở",
+        "GCG yêu cầu quyền truy cập gradient hộp trắng và tạo ra các hậu tố không thể đọc được không thể sử dụng phản hồi theo ngữ cảnh; PAIR là hộp đen và ngôn ngữ tự nhiên với học tập theo ngữ cảnh",
+        "PAIR bỏ qua phản hồi của mục tiêu"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao Tỷ lệ tấn công thành công (ASR) phải được báo cáo với cả ngân sách truy vấn và danh tính thẩm phán?",
+      "options": [
+        "Bởi vì các giám khảo luôn đồng ý",
+        "Bởi vì ngân sách chỉ được thiết lập bởi JailbreakBench",
+        "Bởi vì ASR thay đổi tùy theo số lượng truy vấn mà kẻ tấn công được phép và LLM đánh giá phản hồi là bẻ khóa",
+        "Bởi ASR được yêu cầu bởi các quy định kiểm soát xuất khẩu"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Cuộc tấn công tự động nào trong số này được mô tả tốt nhất là 'cây tấn công với việc cắt tỉa'?",
+      "options": [
+        "CHẠM VÀO",
+        "GCG",
+        "PAP",
+        "Tự động DAN"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "benchmark tiêu chuẩn hóa nào sử dụng 510 hành vi trên 7 danh mục với các bài kiểm tra tác hại về ngữ nghĩa và chức năng?",
+      "options": [
+        "Băng ghế bẻ khóa",
+        "Băng ghế HarmBench",
+        "WMDP",
+        "QA trung thực"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
