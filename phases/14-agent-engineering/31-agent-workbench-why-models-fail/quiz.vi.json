@@ -1,0 +1,90 @@
+{
+  "lesson": "31-agent-workbench-why-models-fail",
+  "title": "Kỹ thuật bàn làm việc Agent: Tại sao Models có khả năng vẫn thất bại",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài học xác định đâu là nguyên nhân gốc rễ của thất bại agent trong các nhiệm vụ thực tế?",
+      "options": [
+        "Không đủ model parameters",
+        "Hỏng bàn làm việc: thiếu các bề mặt xung quanh model, không LLM hạn chế",
+        "Mạng chậm",
+        "Dữ liệu training lỗi thời"
+      ],
+      "correct": 1,
+      "explanation": "model không sai về Python; đó là sai lầm về công tác. Các bề mặt xung quanh model bị thiếu."
+    },
+    {
+      "stage": "pre",
+      "question": "Bảy bề mặt bàn làm việc có tên bài học là gì?",
+      "options": [
+        "Hướng dẫn, trạng thái, phạm vi, phản hồi, xác minh, xem xét, bàn giao",
+        "Huấn luyện, đánh giá, triển khai, giám sát, huấn luyện lại, mở rộng quy mô, nghỉ hưu",
+        "Lập kế hoạch, hành động, phản ánh, tinh chỉnh, tranh luận, bỏ phiếu, ship",
+        "Đọc, viết, điều hành, fork, thoát, chờ đợi, giết"
+      ],
+      "correct": 0,
+      "explanation": "Bảy bề mặt là hướng dẫn, trạng thái, phạm vi, phản hồi, xác minh, xem xét, bàn giao."
+    },
+    {
+      "stage": "check",
+      "question": "Cái nào KHÔNG phải là một trong tám hệ thống phân tán primitives các bề mặt của bài học?",
+      "options": [
+        "Chức năng",
+        "Worker",
+        "Trigger",
+        "Backpropagation"
+      ],
+      "correct": 3,
+      "explanation": "Tám primitives là chức năng, worker, trigger, runtime, HTTP/RPC, hàng đợi, session persistence, authorization policy."
+    },
+    {
+      "stage": "check",
+      "question": "Vercel đã báo cáo harness thay đổi tỷ lệ thành công từ và đến như thế nào?",
+      "options": [
+        "20% đến 60%",
+        "80% đến 100%, bằng cách xóa 80% công cụ của agent",
+        "0% đến 100%, bằng cách chuyển đổi models",
+        "50% đến 70%, bằng cách thêm RAG"
+      ],
+      "correct": 1,
+      "explanation": "Việc xóa 80% công cụ đã đưa agent của Vercel từ 80% lên 100% thành công."
+    },
+    {
+      "stage": "check",
+      "question": "Terminal Bench 2.0 thể hiện điều gì về model và harness?",
+      "options": [
+        "Models một mình xác định thứ hạng",
+        "Tương tự model chuyển từ ngoài top 30 lên xếp hạng năm bằng cách chỉ thay đổi harness",
+        "Harness thay đổi không quan trọng",
+        "Chỉ GPUs quan trọng"
+      ],
+      "correct": 1,
+      "explanation": "LangChain's Anatomy of an Agent Harness: cùng model, thay đổi harness, nhảy 25+ hạng."
+    },
+    {
+      "stage": "post",
+      "question": "Bài học khuyên bạn nên làm gì khi bạn nghe từ vựng harness mới?",
+      "options": [
+        "Áp dụng nguyên văn từ vựng",
+        "Dịch trở lại primitives (hàm, worker, trigger, runtime, HTTP/RPC, queue, persistence, policy) trước khi áp dụng",
+        "Từ chối nó",
+        "Chờ OpenAI chuẩn hóa nó"
+      ],
+      "correct": 1,
+      "explanation": "Lý do từ primitives, không phải phân loại nhà cung cấp; Từ vựng thay đổi nhưng kỹ thuật thì không."
+    },
+    {
+      "stage": "post",
+      "question": "Lịch sử trò chuyện nằm ở đâu so với bàn làm việc?",
+      "options": [
+        "Trò chuyện là hệ thống ghi lại",
+        "Trò chuyện dễ bay hơi; repo là hệ thống hồ sơ",
+        "Cả hai đều tương đương",
+        "Không quan trọng"
+      ],
+      "correct": 1,
+      "explanation": "Vòng lặp đóng trên tệp trạng thái, không phải trên lịch sử trò chuyện."
+    }
+  ]
+}
