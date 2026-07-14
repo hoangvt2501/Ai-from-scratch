@@ -1,0 +1,90 @@
+{
+  "lesson": "20-agent-harness-loop-contract",
+  "title": "Hợp đồng vòng lặp Agent Harness",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao model vòng lặp harness như một máy trạng thái rõ ràng thay vì một vòng lặp while với các cờ?",
+      "options": [
+        "Nó cho phép harness từ chối chuyển đổi bất hợp pháp ở một nơi và phát lại sessions từ nhật ký sự kiện",
+        "Nó nhanh hơn trên CPython",
+        "Nó tránh được sự cần thiết của các bài kiểm tra",
+        "Đó là hình dạng duy nhất mà model có thể gọi"
+      ],
+      "correct": 0,
+      "explanation": "Một máy trạng thái đặt các quy tắc hợp pháp trong một hàm chuyển tiếp. Cùng một trình tự đầu vào tái tạo cùng một trạng thái, đó là điều làm cho session có thể phát lại."
+    },
+    {
+      "stage": "pre",
+      "question": "Điểm kéo trong vòng lặp đại diện cho điều gì?",
+      "options": [
+        "Một điểm mà vòng lặp mang lại quyền kiểm soát và đợi người gọi cung cấp đầu vào",
+        "Lệnh gọi model trả về tên công cụ",
+        "Bộ đếm thời gian kích hoạt sau mỗi N giây",
+        "Người đăng ký hook thay đổi payload"
+      ],
+      "correct": 0,
+      "explanation": "Điểm kéo là trả về, không phải ngoại lệ. Người gọi tìm nạp những gì harness yêu cầu và gọi resume()."
+    },
+    {
+      "stage": "check",
+      "question": "Tiểu bang nào là điểm kéo hợp pháp duy nhất cho một cuộc gọi công cụ?",
+      "options": [
+        "THỰC HIỆN",
+        "AWAITING_TOOL",
+        "PHẢN ÁNH",
+        "LẬP KẾ HOẠCH"
+      ],
+      "correct": 1,
+      "explanation": "Chỉ AWAITING_TOOL tạo ra một điểm kéo công cụ. THỰC HIỆN chuyển sang nó khi một bước yêu cầu một công cụ."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì xảy ra khi một hook nâng HookAbort vào before_tool_call?",
+      "options": [
+        "session ngay lập tức chuyển sang DONE",
+        "Lệnh gọi công cụ bị bỏ qua, on_error kích hoạt và vòng lặp chuyển sang REFLECTING",
+        "hook chưa đăng ký",
+        "Ngân sách được đặt lại"
+      ],
+      "correct": 1,
+      "explanation": "HookAbort hủy bỏ việc gửi công cụ trên máy bay, sa thải on_error với lý do hủy bỏ và tiếp tục."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao hooks và sự kiện được giữ như những mối quan tâm riêng biệt?",
+      "options": [
+        "Bởi vì các loại sự kiện là byte và hooks là chuỗi",
+        "Hooks là bắt buộc và có thể đột biến hoặc hủy bỏ. Các sự kiện chỉ mang tính quan sát và chỉ bổ sung.",
+        "Bởi vì kiểm toán script cấm thuê bao",
+        "Bởi vì nhật ký sự kiện không thể lưu trữ các dict"
+      ],
+      "correct": 1,
+      "explanation": "Hooks thay đổi hành vi. Các sự kiện mô tả hành vi. Kết hợp chúng policy và telemetry, đó là lỗi mà chúng ta đang tránh."
+    },
+    {
+      "stage": "post",
+      "question": "Khi vượt quá ngân sách đồng hồ treo tường, trạng thái tiếp theo là gì?",
+      "options": [
+        "XONG - session bị chấm dứt",
+        "EXECUTING — thử lại vòng lặp",
+        "IDLE — một điểm kéo được trả về với một lý do budget_exceeded",
+        "LẬP KẾ - một kế hoạch mới được soạn thảo"
+      ],
+      "correct": 2,
+      "explanation": "Cạn kiệt ngân sách là một lợi nhuận. harness chuyển sang IDLE, kích hoạt on_budget_exceeded và trả về PullRequest để người gọi có thể quyết định gia hạn hay đóng."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học này loại bỏ kế hoạch thay vì gọi model?",
+      "options": [
+        "Bởi vì models gọi điện cục bộ chậm",
+        "Để giữ cho hợp đồng vòng lặp có thể kiểm tra và xác định trước khi bất kỳ model nào bị ràng buộc",
+        "Vì models không thể trả về các lệnh gọi công cụ",
+        "Để tiết kiệm tokens"
+      ],
+      "correct": 1,
+      "explanation": "Việc ghim hợp đồng vòng lặp trước cho phép các bài học sau hoán đổi trong các nhà lập kế hoạch, registries và người điều phối thực tế mà không cần thương lượng lại bộ máy trạng thái."
+    }
+  ]
+}
