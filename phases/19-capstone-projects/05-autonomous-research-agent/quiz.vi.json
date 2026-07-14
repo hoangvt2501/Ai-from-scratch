@@ -1,0 +1,90 @@
+{
+  "lesson": "05-autonomous-research-agent",
+  "title": "Capstone 05 — Agent nghiên cứu tự trị (AI-Scientist Class)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "AI-Scientist-class agent sử dụng hình dạng tìm kiếm nào để khám phá các thí nghiệm?",
+      "options": [
+        "Beam search hơn token đầu ra",
+        "Tìm kiếm cây đầu tiên tốt nhất trên các nút thử nghiệm với điểm mới x chất lượng x ngân sách",
+        "Học tăng cường thuần túy từ phản hồi của con người",
+        "Mở rộng theo chiều rộng đầu tiên với tính điểm ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao sandbox được định cấu hình với --network=none và giới hạn tài nguyên có giới hạn?",
+      "options": [
+        "Để buộc agent sử dụng bộ nhớ đệm prompt",
+        "Để thực thi số học dấu phẩy động xác định",
+        "Để cho phép GPU chuyển qua theo mặc định",
+        "Để ngăn chặn sự ra khỏi mạng và chứa các tác dụng phụ của thử nghiệm trong một phong bì có thể tái tạo"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Vai trò của bước phê bình tầm nhìn trong vòng lặp nhà văn là gì?",
+      "options": [
+        "Chuyển số liệu thành biểu đồ thanh",
+        "Biên dịch bản nháp LaTeX thành PDF, sau đó có bố cục phê bình VLM, tính dễ đọc của hình và alignment bằng chứng tuyên bố",
+        "Tạo ý tưởng thử nghiệm mới từ ảnh chụp màn hình",
+        "Thay thế matplotlib tại thời điểm render"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để nhóm người đánh giá cổng pipeline?",
+      "options": [
+        "Một thẩm phán duy nhất chấp nhận hoặc từ chối trên một lá cờ nhị phân",
+        "Người đánh giá bỏ phiếu ẩn danh và đa số chiến thắng",
+        "Bài đánh giá chỉ chạy sau khi xuất bản",
+        "Năm giám khảo chấm điểm trên các bảng đánh giá kiểu NeurIPS và tổng hợp có trọng số phải vượt qua một ngưỡng, nếu không bản nháp sẽ lặp lại cho người viết"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Capstone thực thi kỷ luật chi phí nào cho mỗi bài báo?",
+      "options": [
+        "Ngân sách cứng 30 đô la được theo dõi thông qua các bộ đếm Langfuse và ước tính trước khi chạy",
+        "Tối ưu hóa chỉ chi phí mà không cần kiểm tra chất lượng",
+        "Điện toán không giới hạn, chỉ đồng hồ treo tường cứng",
+        "Theo dõi GPU giờ nhưng không bao giờ giới hạn"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Chức năng tính điểm nào xếp hạng các nút cây để mở rộng hơn nữa?",
+      "options": [
+        "Mới lạ x chất lượng x ngân sách còn lại",
+        "Số lượng trích dẫn của các bài báo liên quan",
+        "Ưu tiên đồng phục ngẫu nhiên",
+        "Chiều dài đầu ra và số lượng token"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài tập báo cáo đội đỏ chống lại hệ thống là gì?",
+      "options": [
+        "Tỷ lệ truy cập vào bộ nhớ đệm trên hệ thống prompts",
+        "Rò rỉ dữ liệu đa tenant trong vector DB",
+        "Độ trễ đuôi dưới gói loss",
+        "Các nỗ lực thoát Sandbox như bom fork, đánh cắp mạng và thoát khỏi hệ thống tệp"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
