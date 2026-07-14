@@ -1,0 +1,78 @@
+{
+  "lesson": "54-paper-writer",
+  "title": "Người viết giấy",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao người viết tuyên bố các phần, số liệu và trích dẫn là dữ liệu trước khi bất kỳ văn xuôi nào được viết?",
+      "options": [
+        "Bởi vì LaTeX yêu cầu khai báo chuyển tiếp",
+        "Bởi vì cấu trúc là hợp đồng: harness có thể xác nhận tính hoàn chỉnh trước khi tạo văn xuôi",
+        "Bởi vì model cần một system prompt",
+        "Bởi vì BibTeX không thể giải quyết các tham chiếu chuyển tiếp"
+      ],
+      "correct": 1,
+      "explanation": "Cấu trúc đầu tiên cho phép harness xác nhận tính duy nhất, phạm vi trích dẫn và phạm vi số liệu trước khi gọi trình tạo văn xuôi. Bộ xương là hợp đồng."
+    },
+    {
+      "stage": "pre",
+      "question": "Bước tiêm hình tạo ra gì từ một bản kê khai thí nghiệm?",
+      "options": [
+        "Một bản PDF được biên soạn từ artifacts",
+        "Danh sách các bản ghi Hình có id ổn định và đường dẫn được chuẩn hóa cho thư mục giấy",
+        "Một model prompt với mô tả hình",
+        "Một sơ khai thư mục"
+      ],
+      "correct": 1,
+      "explanation": "read_experiment_manifest trả về bản ghi Hình. Mã xác định, đường dẫn được chuẩn hóa, chú thích đến từ tệp kê khai."
+    },
+    {
+      "stage": "check",
+      "question": "Lỗi xác thực nào làm tăng PaperValidationError trước khi bất kỳ tệp nào được ghi?",
+      "options": [
+        "Số lượng tác giả lẻ",
+        "Một phần trích dẫn một khóa không được khai báo trong thư mục",
+        "Một bản tóm tắt dài hơn 200 từ",
+        "Đường dẫn hình không tồn tại trên đĩa"
+      ],
+      "correct": 1,
+      "explanation": "Các khóa thư mục bị thiếu, id hình trùng lặp, tiêu đề trống, tóm tắt trống và tham chiếu hình không xác định đều làm tăng PaperValidationError. Sự tồn tại trên đĩa không được thực thi vì trình biên dịch LaTeX thực thi nó sau này."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao trình tạo văn xuôi lại là một callable được đưa vào PaperWriter chứ không phải là một phương thức trên đó?",
+      "options": [
+        "Bởi vì Python không cho phép các phương pháp lấy Paper làm đối số",
+        "Bởi vì các bài kiểm tra có thể hoán đổi MockProseGenerator xác định cho một cuộc gọi model mà không cần chạm vào người viết",
+        "Bởi vì LaTeX yêu cầu một callback",
+        "Bởi vì lớp dữ liệu không thể giữ trạng thái"
+      ],
+      "correct": 1,
+      "explanation": "Người viết lấy trình tạo văn xuôi làm phụ thuộc. Bài kiểm tra thay thế MockProseGenerator. Production thay thế một cuộc gọi model. Người viết không thay đổi."
+    },
+    {
+      "stage": "post",
+      "question": "PaperWriter.write phát ra ba tệp nào khi thành công?",
+      "options": [
+        "paper.tex, paper.pdf, references.bib",
+        "paper.tex, references.bib, kê khai. json",
+        "phác thảo. json, paper.tex, figures.tar",
+        "bản kê khai. json, prose.txt, paper.pdf"
+      ],
+      "correct": 1,
+      "explanation": "paper.tex là nguồn LaTeX. references.bib là thư mục. kê khai. json là artifact có cấu trúc mà vòng lặp phê bình đọc tiếp theo."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao phần kê khai của hợp đồng của người viết thay vì chỉ tệp LaTeX?",
+      "options": [
+        "Bởi vì LaTeX quá lớn để phân tích cú pháp",
+        "Bởi vì công cụ xuôi dòng (nhà phê bình, bảng điều khiển) đọc các tệp kê khai có cấu trúc, không phải LaTeX",
+        "Bởi vì tệp kê khai. json là tệp duy nhất mà BibTeX chấp nhận",
+        "Bởi vì trình biên dịch LaTeX từ chối các phần không được nhập"
+      ],
+      "correct": 1,
+      "explanation": "Tệp kê khai là một giao diện ổn định cho các giai đoạn xuôi dòng. Các nhà phê bình và bảng điều khiển kiểm tra tệp kê khai. json. LaTeX là artifact mà con người có thể đọc được, không phải giao diện máy."
+    }
+  ]
+}
