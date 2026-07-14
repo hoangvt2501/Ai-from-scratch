@@ -1,0 +1,78 @@
+{
+  "lesson": "phase-19/28-observability-otel-traces",
+  "title": "Observability: Chỉ số Spans và Prometheus của OTel GenAI",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trước khi đọc bài học: lợi ích thiết thực của việc viết spans harness của bạn trong hình dạng thuộc tính OTel GenAI là gì?",
+      "options": [
+        "OTel spans nén tốt hơn trên đĩa.",
+        "Mọi chương trình phụ trợ tương thích với OTel đều có thể đọc chúng mà không cần trình phân tích cú pháp tùy chỉnh.",
+        "OTel là tiêu chuẩn chỉ dành cho Python, vì vậy harness nhận được gợi ý kiểu.",
+        "Nó được yêu cầu bởi HIPAA."
+      ],
+      "correct": 1,
+      "explanation": "Các quy ước là một hợp đồng với hệ sinh thái rộng lớn hơn. Honeycomb, Grafana Tempo, Jaeger và Datadog đều phân tích các thuộc tính gen_ai.* ngay lập tức."
+    },
+    {
+      "stage": "check",
+      "question": "Một ngoại lệ được nêu ra bên trong ngữ cảnh SpanBuilder.span(). Trình tạo bài học ghi lại những gì?",
+      "options": [
+        "span được thả xuống để tránh gây ô nhiễm trace.",
+        "status=ERROR, status_message bao gồm loại ngoại lệ và thông báo, đồng thời một sự kiện 'ngoại lệ' được thêm vào.",
+        "trạng thái vẫn là UNSET và ngoại lệ được nuốt chửng một cách im lặng.",
+        "span được đổi tên thành 'lỗi'."
+      ],
+      "correct": 1,
+      "explanation": "Trạng thái ERROR cộng với sự kiện ngoại lệ khớp với thông số kỹ thuật của OTel. Ngoại lệ được đưa ra lại để mã người gọi có thể phản ứng."
+    },
+    {
+      "stage": "check",
+      "question": "Triển lãm Prometheus cho biểu đồ bao gồm các dòng _bucket, _sum và _count. Tại sao số lượng nhóm được tích lũy (mỗi le nhóm bao gồm tất cả các nhóm nhỏ hơn)?",
+      "options": [
+        "Số lượng tích lũy cho phép trình quét tính toán số lượng trên mỗi vùng lưu trữ thông qua phép trừ mà không lưu trữ tất cả các quan sát.",
+        "Số lượng tích lũy là định dạng duy nhất mà Grafana hỗ trợ.",
+        "Chúng không tích lũy; phần trình bày của bài học là không chuẩn.",
+        "Số lượng tích lũy làm giảm sai số dấu phẩy động."
+      ],
+      "correct": 0,
+      "explanation": "Lựa chọn thiết kế của Prometheus: phần phụ trợ đọc số lượng tích lũy và tính toán chênh lệch trên mỗi nhóm. Điều này cho phép chuỗi thời gian trở thành một bộ đếm đơn điệu đơn giản trên mỗi nhóm."
+    },
+    {
+      "stage": "check",
+      "question": "harness bao bọc việc thực thi công cụ trong một span. Khóa thuộc tính nào xác định nó là lệnh gọi công cụ theo quy ước GenAI?",
+      "options": [
+        "gen_ai.system + gen_ai.request.model.",
+        "gen_ai.tool.name + gen_ai.tool.call.id.",
+        "agent. harness.công cụ + agent. harness.cuộc gọi.",
+        "hoạt động + tool.name."
+      ],
+      "correct": 1,
+      "explanation": "gen_ai.tool.name và gen_ai.tool.call.id là các khóa chuẩn để thực thi công cụ trong các quy ước GenAI."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn muốn truy vấn 'độ trễ p95 của các cuộc gọi read_file là bao nhiêu'. Bạn truy vấn artifact nào?",
+      "options": [
+        "Mỗi span duration_ms trong traces. jsonl, được phân tích cú pháp bởi một script.",
+        "Biểu đồ Prometheus tool_latency_ms{tool=\"read_file\"} được cạo qua một cửa sổ.",
+        "Bộ đếm tools_called_total, chia cho cửa sổ thời gian.",
+        "Lĩnh vực status_message của span."
+      ],
+      "correct": 1,
+      "explanation": "Biểu đồ là công cụ phù hợp cho phần trăm. Bộ đếm chỉ tính; trace chứa spans thô nhưng không được tổng hợp trước."
+    },
+    {
+      "stage": "post",
+      "question": "Một người đánh giá hỏi tại sao bài học lại cuộn tay thay vì nhập opentelemetry-sdk. Câu trả lời nào là đúng?",
+      "options": [
+        "SDK không hỗ trợ các quy ước GenAI.",
+        "Cuộn tay dạy định dạng dây; SDK có thể ghé vào sau với các phím thuộc tính tương tự.",
+        "Lăn tay nhanh hơn ở runtime.",
+        "SDK yêu cầu kết nối mạng tại import thời điểm."
+      ],
+      "correct": 1,
+      "explanation": "Các quy ước ổn định trên các triển khai. Phiên bản cuộn tay tồn tại để rõ ràng; production dây trong SDK và sử dụng lại các phím gen_ai.* giống nhau."
+    }
+  ]
+}
