@@ -1,0 +1,66 @@
+{
+  "lesson": "15-prompt-caching",
+  "title": "Prompt Bộ nhớ đệm và bộ nhớ đệm ngữ cảnh",
+  "questions": [
+    {
+      "stage": "post",
+      "question": "Anthropic áp dụng chiết khấu nào cho việc đọc bộ nhớ đệm so với tốc độ đầu vào cơ bản?",
+      "options": [
+        "Giảm giá 25%",
+        "Giảm giá 50%",
+        "Giảm giá 75%",
+        "Giảm giá 90%"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao dấu thời gian động phải nằm dưới điểm ngắt bộ nhớ đệm chứ không phải phía trên nó?",
+      "options": [
+        "Bộ nhớ đệm chỉ truy cập khi tiền tố giống hệt byte; Dấu thời gian thay đổi sẽ phá vỡ trận đấu cho mọi thứ sau đó",
+        "Dấu thời gian gây nhầm lẫn cho tokenizer",
+        "Chúng có giá tokens hơn văn bản tĩnh",
+        "Anthropic từ chối rõ ràng dấu thời gian trong các khối được lưu trong bộ nhớ cache"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bộ nhớ đệm prompt của OpenAI được định cấu hình như thế nào?",
+      "options": [
+        "Điểm đánh dấu cache_control rõ ràng",
+        "CachedContent API bạn tạo và tham khảo",
+        "Tự động khớp tiền tố mà không cần configuration",
+        "Cờ cấp hệ thống mà bạn chuyển đổi cho mỗi dự án"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Đối với Anthropic, TTL kéo dài 1 giờ có giá bao nhiêu so với mặc định 5 phút?",
+      "options": [
+        "Giống nhau",
+        "Phí ghi gấp 2 lần (cao hơn 50% so với mức cơ sở)",
+        "Gấp 4 lần phí ghi",
+        "Không ghi phí bảo hiểm"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Cần bao nhiêu lần sử dụng lại để hòa vốn với phí ghi 25% của Anthropic?",
+      "options": [
+        "1",
+        "2",
+        "5",
+        "10"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
