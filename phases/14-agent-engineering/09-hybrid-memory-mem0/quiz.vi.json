@@ -1,0 +1,90 @@
+{
+  "lesson": "09-hybrid-memory-mem0",
+  "title": "Bộ nhớ lai: Vector + Đồ thị + KV (Mem0)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cửa hàng KV xử lý truy vấn nào class tốt nhất?",
+      "options": [
+        "Sự tương đồng về ngữ nghĩa qua các cuộc trò chuyện dài",
+        "Tra cứu dữ liệu trực tiếp được khóa bởi (người dùng, loại, thực thể)",
+        "Khả năng tiếp cận giữa các khách hàng dùng chung một thực thể thanh toán",
+        "Truy vấn tạm thời hợp lệ tại thời điểm"
+      ],
+      "correct": 1,
+      "explanation": "KV là O (1) trên các phím chính xác; vector là cho sự tương đồng, đồ thị là cho các mối quan hệ."
+    },
+    {
+      "stage": "pre",
+      "question": "Ba kho lưu trữ mà Mem0 ghi song song trên mỗi add() là gì?",
+      "options": [
+        "Vector, KV, đồ thị",
+        "Bộ nhớ đệm, hàng đợi, nhật ký",
+        "Postgres, Redis, ClickHouse",
+        "Embedding, attention, FFN"
+      ],
+      "correct": 0,
+      "explanation": "Người hâm mộ Mem0 đều viết thư cho các cửa hàng vector, KV và đồ thị."
+    },
+    {
+      "stage": "check",
+      "question": "Ba chiều nào cung cấp điểm tổng hợp của Mem0?",
+      "options": [
+        "Mức độ liên quan, tầm quan trọng, gần đây",
+        "Precision, recall, F1",
+        "Độ trễ, thông lượng, chi phí",
+        "Tự tin, perplexity, BLEU"
+      ],
+      "correct": 0,
+      "explanation": "Điểm là tổng trọng số của mức độ liên quan, tầm quan trọng và thời gian gần đây; trọng lượng điều chỉnh cho mỗi sản phẩm."
+    },
+    {
+      "stage": "check",
+      "question": "Mem0g làm gì khi một sự kiện đến mâu thuẫn với một cạnh hiện có?",
+      "options": [
+        "Xóa cạnh",
+        "Đánh dấu cạnh hiện có là không hợp lệ nhưng không xóa nó, vì vậy các truy vấn thời gian vẫn có thể đi qua",
+        "Đưa ra một ngoại lệ",
+        "Viết lại user_id"
+      ],
+      "correct": 1,
+      "explanation": "Vô hiệu hóa mềm lưu giữ lịch sử cho các truy vấn tạm thời (hợp lệ tại thời điểm)."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bài học khuyên bạn nên điều chỉnh trọng lượng nhiệt hạch cho mỗi sản phẩm?",
+      "options": [
+        "Các nhà cung cấp yêu cầu nó",
+        "Tính gần đây chiếm ưu thế đối với agents trò chuyện trong khi tầm quan trọng chiếm ưu thế đối với agents tuân thủ và mức độ liên quan chiếm ưu thế đối với agents truy xuất",
+        "Vector thư viện từ chối trọng số bằng nhau",
+        "Nó được yêu cầu bởi Apache 2.0"
+      ],
+      "correct": 1,
+      "explanation": "Các sản phẩm khác nhau muốn bias khác nhau trên relevance/importance/recency; Một bộ tạ không phù hợp với tất cả."
+    },
+    {
+      "stage": "post",
+      "question": "Phân loại phạm vi mà Mem0 sử dụng là gì?",
+      "options": [
+        "Công khai, riêng tư, bí mật",
+        "Người dùng, session, agent",
+        "Địa phương, khu vực, toàn cầu",
+        "Đọc, viết, quản trị viên"
+      ],
+      "correct": 1,
+      "explanation": "Phạm vi là người dùng (session chéo), session (một thread), agent (trạng thái trên mỗi thực thể)."
+    },
+    {
+      "stage": "post",
+      "question": "embedding trôi dạt trong mô hình này là gì và bài học khuyên bạn nên giảm thiểu nó như thế nào?",
+      "options": [
+        "Vectors được mã hóa; Xoay phím",
+        "Chất lượng truy xuất Vector giảm khi kho dữ liệu phát triển; định kỳ nhúng lại các bản ghi được sử dụng nhiều nhất trong top N",
+        "Embeddings số nguyên tràn; Chuyển sang float64",
+        "URL thay đổi embedding API; Ghim miền"
+      ],
+      "correct": 1,
+      "explanation": "Việc embedding lại định kỳ các bản ghi nóng giữ cho chất lượng truy xuất ổn định khi kho dữ liệu phát triển."
+    }
+  ]
+}
