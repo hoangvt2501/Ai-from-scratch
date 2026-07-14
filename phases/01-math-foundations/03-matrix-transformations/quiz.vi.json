@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Vectơ riêng của ma trận là gì?",
+      "options": [
+        "Hàng lớn nhất trong ma trận",
+        "Một vector rằng ma trận chỉ chia tỷ lệ (không bao giờ quay) khi nhân",
+        "Một vector vuông góc với tất cả các cột của ma trận",
+        "Các mục chéo của ma trận được biểu thị dưới dạng vector"
+      ],
+      "correct": 1,
+      "explanation": "Một vectơ riêng v thỏa mãn Av = lambda * v, có nghĩa là ma trận A chỉ kéo dài v bởi hệ số vô hướng lambda (giá trị riêng) mà không thay đổi hướng của nó."
+    },
+    {
+      "stage": "pre",
+      "question": "Yếu tố quyết định của ma trận biến đổi 2D đại diện cho điều gì về mặt hình học?",
+      "options": [
+        "Góc quay được áp dụng bởi ma trận",
+        "Hệ số mà ma trận chia tỷ lệ diện tích",
+        "Số lượng vectơ riêng mà ma trận có",
+        "trace của ma trận"
+      ],
+      "correct": 1,
+      "explanation": "Yếu tố quyết định đo lường diện tích tỷ lệ chuyển đổi bao nhiêu. det=1 bảo toàn diện tích (xoay), det=2 nhân đôi diện tích, det=0 nghiền nát chiều thấp hơn và det=-1 bảo toàn diện tích nhưng lật hướng."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao thứ tự của các phép biến đổi ma trận lại quan trọng? (tức là tại sao R @ S khác với S @ R?)",
+      "options": [
+        "Phép cộng ma trận không giao hoán",
+        "Phép nhân ma trận không giao hoán: xoay sau đó chia tỷ lệ cho kết quả khác với chia tỷ lệ sau đó xoay",
+        "Các yếu tố quyết định khác nhau đối với mỗi đơn hàng",
+        "Một lệnh tạo ra ma trận lớn hơn lệnh kia"
+      ],
+      "correct": 1,
+      "explanation": "Phép nhân ma trận không giao hoán. Xoay (1,0) 90 độ sau đó chia tỷ lệ (2,0.5) cho (0,0.5), nhưng tỷ lệ trước sau đó xoay cho (0,2). Các phép toán hình học cấu tạo khác nhau."
+    },
+    {
+      "stage": "post",
+      "question": "Trong mạng nơ-ron tuần hoàn, điều gì xảy ra khi ma trận trọng số có giá trị riêng với độ lớn lớn hơn 1?",
+      "options": [
+        "Mạng học nhanh hơn",
+        "Đầu ra bùng nổ theo cấp số nhân theo các bước thời gian (bùng nổ gradient vấn đề)",
+        "Mạng trở nên ổn định hơn",
+        "Các giá trị riêng hội tụ thành 1 trên training"
+      ],
+      "correct": 1,
+      "explanation": "Phép nhân lặp lại với một ma trận khuếch đại các hướng giá trị riêng. Giá trị riêng > 1 gây ra sự tăng trưởng theo cấp số nhân (bùng nổ gradients), trong khi giá trị riêng < 1 gây ra sự phân rã theo cấp số nhân (biến mất gradients)."
+    },
+    {
+      "stage": "post",
+      "question": "Ma trận A = [[2, 1], [1, 2]] có các giá trị riêng 3 và 1. Phân rã riêng A = V @ D @ V^(-1) tiết lộ điều gì?",
+      "options": [
+        "A tương đương với hai vòng quay",
+        "A kéo dài khoảng cách gấp 3 lần dọc theo hướng [1,1] và giữ nguyên hướng [1,-1]",
+        "A nén tất cả vectors theo hệ số 2",
+        "A có hạng 1 và ánh xạ tất cả vectors thành một đường thẳng"
+      ],
+      "correct": 1,
+      "explanation": "Giá trị riêng 3 với vectơ riêng [1,1] có nghĩa là A kéo dài 3x dọc theo đường chéo. Giá trị riêng 1 với vectơ riêng [1,-1] có nghĩa là A không thay đổi đường chéo. D giữ {3,1}, V giữ các vectơ riêng."
+    }
+  ]
+}
