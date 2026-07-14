@@ -1,0 +1,78 @@
+{
+  "lesson": "24-regulatory-frameworks-eu-us-uk-korea",
+  "title": "Frameworks quy định - EU, US, UK, Korea",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Đạo luật AI EU có hiệu lực khi nào và loại nào được áp dụng đầu tiên?",
+      "options": [
+        "Tháng Tám 2024; các thực hành bị cấm và xóa mù chữ AI được áp dụng 2 Tháng Hai 2025",
+        "Tháng Tám 2026; chỉ GPAI được áp dụng vào ngày bắt buộc",
+        "Tháng Tám 2025; tất cả các danh mục được áp dụng cùng một lúc",
+        "Tháng Giêng 2024; Hệ thống rủi ro cao được áp dụng vào ngày hôm đó"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Mức phạt tiền tối đa theo Đạo luật AI của EU áp dụng từ ngày 2 tháng 8 năm 2026 là bao nhiêu?",
+      "options": [
+        "Không giới hạn",
+        "Lên đến 1 triệu EUR hoặc 0,1% doanh thu toàn cầu",
+        "Lên đến 15 triệu EUR hoặc 3% doanh thu toàn cầu",
+        "Lên đến 5 triệu EUR hoặc 1% doanh thu toàn cầu"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ba chương nào tạo nên Quy tắc Thực hành GPAI (10 tháng 7 năm 2025)?",
+      "options": [
+        "Training, Inference, Triển khai",
+        "Năng lực, Kiểm soát, Tuân thủ",
+        "Quyền riêng tư, Bias, Hình mờ",
+        "Minh bạch, Bản quyền, An toàn và Bảo mật"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "AISI tháng 2 năm 2025 của Vương quốc Anh đổi tên thành 'Viện An ninh AI' báo hiệu gì?",
+      "options": [
+        "Phạm vi hẹp hơn tập trung vào bảo mật khả năng biên giới, loại bỏ bias thuật toán và khung tự do ngôn luận",
+        "Sáp nhập với Văn phòng AI EU",
+        "Đóng đánh giá biên giới Vương quốc Anh",
+        "Mở rộng sang bias thuật toán"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Việc đổi thương hiệu CAISI của Hoa Kỳ (tháng 6 năm 2025) báo hiệu điều gì theo hướng policy?",
+      "options": [
+        "Sáp nhập với FDA",
+        "Đánh giá an toàn trước khi triển khai nghiêm ngặt hơn",
+        "Một sự thay đổi theo hướng 'AI policies ủng hộ tăng trưởng', với trọng tâm là các tiêu chuẩn và hỗ trợ đổi mới và giảm sự chú trọng vào đánh giá trước khi triển khai",
+        "Phát hành mã nguồn mở bắt buộc của models biên giới"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Nghĩa vụ chính trong Đạo luật AI Framework của Hàn Quốc (có hiệu lực từ tháng 1 năm 2026) là gì?",
+      "options": [
+        "Thông qua Đạo luật AI EU giống hệt nhau",
+        "Trọng số mở bắt buộc cho tất cả các models tổng quát",
+        "Cấm hoàn toàn các nhà cung cấp AI nước ngoài",
+        "Điều 12 thiết lập AISI theo MSIT và yêu cầu đại diện địa phương, đánh giá rủi ro và các biện pháp an toàn đối với các AI có tác động cao và tạo ra"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
