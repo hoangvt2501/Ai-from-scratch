@@ -1,0 +1,78 @@
+{
+  "lesson": "85-content-classifier-integration",
+  "title": "Capstone 85 — Tích hợp bộ phân loại nội dung",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao phải chạy bộ phân loại phía đầu ra nếu đầu vào đã được kiểm tra?",
+      "options": [
+        "Để làm cho hệ thống chậm hơn một cách có chủ đích",
+        "Bởi vì bất kỳ bỏ qua đầu vào nào cũng tạo ra đầu ra mà người dùng sẽ nhìn thấy và đầu ra là nơi cuối cùng để bắt nó",
+        "Vì bộ phân loại đầu vào không được dùng nữa",
+        "Bởi vì thư viện tiêu chuẩn yêu cầu cả hai"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Ba bộ phân loại nào được nối dây trong bài học này?",
+      "options": [
+        "Tình cảm, ngôn ngữ, độ dài",
+        "Độc tính, PII, rò rỉ hướng dẫn",
+        "OCR, ASR, TTS",
+        "Chất lượng, tính thực tế, trích dẫn"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bộ định tuyến làm gì khi một phán quyết cao và một phán quyết khác ở mức trung bình?",
+      "options": [
+        "Chỉ chạy hành động trung bình",
+        "Chạy cả hai hành động theo trình tự",
+        "Lấy mức độ nghiêm trọng tối đa và áp dụng hành động đó; khối thống trị biên tập",
+        "Bỏ cả hai phán quyết và ship bản gốc"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao kiểm tra Luhn được sử dụng bên trong bộ phân loại PII?",
+      "options": [
+        "Để dịch các chữ số thành chữ cái",
+        "Để phân biệt chữ số hình thẻ tín dụng chạy với các dãy chữ số tùy ý với dương tính giả thấp",
+        "Để tính SSN",
+        "Để nén biểu thức chính quy"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bộ phân loại rò rỉ lệnh quyết định như thế nào?",
+      "options": [
+        "Bằng cách phát hiện dấu ngoặc nhọn trong đầu ra",
+        "Bằng cách tính toán cosin tam giác giữa đầu ra và một system prompt đã biết, với một ngưỡng",
+        "Bằng cách gọi cho một model khác",
+        "Bằng cách đếm tokens"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bộ phân loại độc tính kiểm tra phủ định trong một cửa sổ nhỏ bên trái?",
+      "options": [
+        "Để làm chậm biểu thức chính quy",
+        "Để bỏ qua các trận đấu như 'bạn không ngu ngốc' để bộ phân loại không biên tập quá nhiều những đảm bảo thông thường",
+        "Để tăng tỷ lệ dương tính giả",
+        "Bởi vì phủ định là yêu cầu của Unicode"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
