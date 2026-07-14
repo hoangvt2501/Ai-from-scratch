@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Làm thế nào để một ViT biến một hình ảnh thành một chuỗi tokens?",
+      "options": [
+        "Làm phẳng toàn bộ hình ảnh thành một vector",
+        "Áp dụng conv với kernel_size = stride = patch_size để chia hình ảnh thành các bản vá không chồng chéo và chiếu tuyến tính từng bản vá thành một token embedding trong một thao tác",
+        "Chạy CNN đầu tiên và sử dụng bản đồ feature của nó làm tokens",
+        "Sắp xếp cường độ pixel"
+      ],
+      "correct": 1,
+      "explanation": "Lớp đầu tiên của ViT là một conv với kernel_size = sải chân = 16, biến hình ảnh 224x224 thành lưới 14x14 gồm các mảng 16x16, mỗi mảng được chiếu đến mờ = 768. Conv duy nhất đó thực hiện cả vá lỗi và chiếu. Kết quả là 196 tokens mà một transformer encoder tiêu chuẩn có thể process."
+    },
+    {
+      "stage": "pre",
+      "question": "[CLS] token trong ViT là gì và tại sao nó lại cần thiết?",
+      "options": [
+        "Một vector học được đặt trước trình tự token; sau N transformer lớp, đầu ra của nó tổng hợp toàn bộ hình ảnh và cung cấp cho đầu phân loại",
+        "Giá trị pixel đặc biệt",
+        "Trình giữ chỗ cho dữ liệu bị thiếu",
+        "Khẩu trang dropout"
+      ],
+      "correct": 0,
+      "explanation": "ViT tuân theo quy ước của BERT: thêm một vector đã học (CLS token) vào chuỗi bản vá. Self-attention cho phép mọi token nhìn thấy mọi token khác, vì vậy CLS token tổng hợp thông tin toàn cầu từ tất cả các bản vá. Bộ phân loại chỉ đọc đầu ra CLS. Các thiết kế thay thế sử dụng tính chung trung bình trên tất cả các tokens bản vá (được sử dụng bởi ConvNeXt và nhiều models sau ViT)."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao giấy ViT ban đầu cần pretraining JFT-300M để đánh bại ResNet và tại sao DeiT thì không?",
+      "options": [
+        "ViT bị hỏng nếu không có JFT-300M",
+        "ViT có thiên vị quy nạp yếu hơn CNN; nếu không có đủ dữ liệu, nó quá khớp. DeiT cho thấy rằng với sự tăng cường mạnh mẽ (RandAugment, Mixup, CutMix), độ sâu ngẫu nhiên và tùy chọn CNN distillation, ViT huấn luyện tốt chỉ trên ImageNet-1k",
+        "DeiT sử dụng các attention khác nhau",
+        "Bài báo ViT đã sai"
+      ],
+      "correct": 1,
+      "explanation": "ViT thiếu bias quy nạp (không có địa phương, không có phương sai dịch thuật) có nghĩa là mạng phải học những điều này từ dữ liệu. Với 1 triệu hình ảnh ImageNet rất khó; với 300 triệu hình ảnh JFT thật dễ dàng. DeiT đã thay thế dữ liệu bằng các cải tiến công thức training: tăng cường nặng, độ sâu ngẫu nhiên và distillation từ một giáo viên CNN, tất cả đều bù đắp cho sự thiếu hụt priors."
+    },
+    {
+      "stage": "post",
+      "question": "Tiền LayerNorm (`x = x + sublayer(LN(x))`) so với hậu LayerNorm (`x = LN(x + sublayer(x))`) - được sử dụng trong transformers hiện đại và tại sao?",
+      "options": [
+        "Hậu LN; Nó đơn giản hơn",
+        "Trước LN; nó huấn luyện các mạng sâu hơn một cách ổn định mà không cần khởi động tốc độ học và tránh được sự bất ổn gradient mà hậu LN phải chịu đựng qua khoảng 6 lớp",
+        "Chúng giống hệt nhau",
+        "Không phải cả hai; transformers hiện đại bỏ qua LayerNorm"
+      ],
+      "correct": 1,
+      "explanation": "Post-LN là transformer ban đầu (2017) và yêu cầu khởi động cẩn thận + tốc độ học nhỏ qua 6-8 lớp. Pre-LN (Xiong et al., 2020; được sử dụng bởi ViT, GPT-2+, mọi LLM hiện đại) ổn định hơn về mặt số: dòng dư tích lũy mà không đi qua LN và mỗi lớp con hoạt động trên một đầu vào chuẩn hóa. Mỗi transformer sâu hơn 12 lớp đều sử dụng pre-LN."
+    },
+    {
+      "stage": "post",
+      "question": "Swin Transformer giới thiệu attention có cửa sổ. Nó giải quyết vấn đề gì?",
+      "options": [
+        "Biến mất gradients",
+        "attention đầy đủ có O((H*W)^2) cost; Swin restricts attention to local windows of 7x7 patches, reducing cost to O(H*W * window^2). Các khối xen kẽ dịch chuyển cửa sổ bằng một nửa kích thước của nó để thông tin cuối cùng trộn lẫn trên hình ảnh",
+        "BatchNorm không được hỗ trợ",
+        "Overfitting kết cấu"
+      ],
+      "correct": 1,
+      "explanation": "Hình ảnh 224x224 với các bản vá 4x4 có 56 * 56 = 3136 tokens; attention đầy đủ là 3136 ^ 2 = ~ 10 triệu cặp mỗi lớp. Swin chỉ tham dự trong vòng 7x7 windows, cung cấp 49^2 = 2401 cặp mỗi cửa sổ (cộng với số cửa sổ). Dịch chuyển windows trong các khối xen kẽ trộn thông tin trên windows qua một vài lớp. Điều này đưa một địa phương giống CNN trở lại prior transformer mà không từ bỏ attention."
+    }
+  ]
+}
