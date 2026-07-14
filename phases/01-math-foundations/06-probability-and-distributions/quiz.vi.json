@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt giữa hàm khối lượng xác suất (PMF) và hàm mật độ xác suất (PDF) là gì?",
+      "options": [
+        "PMF được sử dụng cho các biến liên tục, PDF cho các biến rời rạc",
+        "PMF đưa ra xác suất chính xác cho các kết quả rời rạc, trong khi PDF cung cấp mật độ cho các biến liên tục phải được tích hợp trong một khoảng thời gian để có xác suất",
+        "Không có sự khác biệt; Chúng là cùng một khái niệm với các tên khác nhau",
+        "PMF luôn có tổng là 0,5, PDF tích hợp thành 1"
+      ],
+      "correct": 1,
+      "explanation": "Đối với các biến rời rạc, PMF cho P (X = k) trực tiếp. Đối với các biến liên tục, PDF f(x) là mật độ -- P(a<=X<=b) yêu cầu tích phân f(x) từ a đến b. Mật độ tại một điểm duy nhất không phải là xác suất."
+    },
+    {
+      "stage": "pre",
+      "question": "Định lý giới hạn trung tâm nói gì?",
+      "options": [
+        "Tất cả dữ liệu đều tuân theo phân phối chuẩn",
+        "Giá trị trung bình của nhiều mẫu ngẫu nhiên độc lập hội tụ thành phân phối chuẩn bất kể phân phối nguồn",
+        "datasets lớn luôn có variance thấp",
+        "Xác suất xảy ra các sự kiện hiếm gặp giảm khi kích thước mẫu tăng lên"
+      ],
+      "correct": 1,
+      "explanation": "CLT nói rằng giá trị trung bình của nhiều biến ngẫu nhiên độc lập tiếp cận Gaussian, bất kể phân phối ban đầu trông như thế nào. Điều này giải thích tại sao phân phối chuẩn xuất hiện ở khắp mọi nơi."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao softmax trừ đi logit tối đa trước khi lũy thừa ('thủ thuật 'softmax')?",
+      "options": [
+        "Để làm cho tất cả các xác suất bằng nhau",
+        "Để ngăn tràn số làm số lượng lớn theo cấp số nhân trong khi tạo ra kết quả giống hệt nhau về mặt toán học",
+        "Để chuẩn hóa logits có giá trị trung bình bằng không",
+        "Để tăng tốc độ tính toán bằng cách giảm số lượng số mũ"
+      ],
+      "correct": 1,
+      "explanation": "exp(100) tràn đến vô cực. Trừ max(logits) sẽ thay đổi tất cả các giá trị để giá trị lớn nhất là 0. exp(0)=1 là an toàn. Phép trừ hủy bỏ trong chuẩn hóa, cho xác suất giống hệt nhau."
+    },
+    {
+      "stage": "post",
+      "question": "loss entropy chéo để phân loại đơn giản hóa thành -log(q(true_class)). Điều này có nghĩa là gì về mặt trực giác?",
+      "options": [
+        "Nhân xác suất dự đoán với các nhãn thực",
+        "Phạt model dựa trên xác suất dự đoán của nó thấp như thế nào đối với class chính xác - dự đoán thấp hơn có nghĩa là cao hơn loss",
+        "Tính trung bình log probabilities trên tất cả classes",
+        "Tính entropy của phân phối thực"
+      ],
+      "correct": 1,
+      "explanation": "Nếu model dự đoán 0,9 cho class chính xác, loss = -log(0,9) = 0,105 (thấp). Nếu nó dự đoán 0,01, loss = -log(0,01) = 4,6 (cao). loss trừng phạt sự tự tin thấp vào câu trả lời đúng."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao ngôn ngữ models hoạt động với log probabilities thay vì xác suất thô?",
+      "options": [
+        "Log probabilities dễ diễn giải trực quan hơn",
+        "Nhân nhiều xác suất nhỏ làm cho dòng chảy xuống bằng không; log probabilities chuyển đổi sản phẩm thành tổng, tránh điều này",
+        "Log probabilities được yêu cầu bởi kiến trúc transformer",
+        "Xác suất thô không thể biểu diễn các giá trị nhỏ hơn 0,01"
+      ],
+      "correct": 1,
+      "explanation": "P (câu) = P (từ 1) * P (từ 2) * ... nhanh chóng giảm xuống 0.0 với float64. Log P (câu) = log P (word1) + log P (word2) + ... ở trong một phạm vi hữu hạn. Sản phẩm trở thành tổng."
+    }
+  ]
+}
