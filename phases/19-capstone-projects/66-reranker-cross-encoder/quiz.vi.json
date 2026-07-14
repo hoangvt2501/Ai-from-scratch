@@ -1,0 +1,78 @@
+{
+  "lesson": "66-reranker-cross-encoder",
+  "title": "Cross-Encoder Reranker",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt về kiến trúc giữa bi-encoder và cross-encoder là gì?",
+      "options": [
+        "Bi-encoders sử dụng cosine; sử dụng chéo encoders sản phẩm chấm",
+        "Bi-encoders được huấn luyện; cross-encoders không",
+        "Một encoder hai nhúng truy vấn và tài liệu một cách độc lập; một encoder chéo đọc chuỗi (truy vấn, tài liệu) được nối với đầy đủ attention trên cả hai",
+        "Cross-encoders chỉ chạy trên GPUs"
+      ],
+      "correct": 2,
+      "explanation": "attention chéo qua mối nối là điều mang lại cho encoder chéo precision của nó; encoder hai không bao giờ nhìn thấy truy vấn và tài liệu cùng nhau."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao một encoder chéo không thể được sử dụng làm công cụ truy xuất chính trên kho dữ liệu 10 triệu tài liệu?",
+      "options": [
+        "Nó yêu cầu một forward pass cho mỗi cặp (truy vấn, tài liệu), tức là 10 triệu lần vượt qua cho mỗi truy vấn",
+        "Nó không thể nhúng văn bản",
+        "Nó không hỗ trợ điểm âm",
+        "Nó yêu cầu token CLS ở cuối trình tự"
+      ],
+      "correct": 0,
+      "explanation": "Thông lượng sụp đổ ở quy mô kho dữ liệu; encoder chéo chạy một lần cho mỗi cặp thay vì một lần cho mỗi tài liệu tại thời điểm lập chỉ mục."
+    },
+    {
+      "stage": "check",
+      "question": "Vai trò của N parameter trong pipeline truy xuất sau đó xếp hạng lại hai giai đoạn là gì?",
+      "options": [
+        "Đó là số lớp trong encoder chéo",
+        "Đó là số lượng ứng viên được trả lại bởi hai encoder để cross-encoder điểm lại",
+        "Đó là kích thước của từ vựng",
+        "Đó là chiều ẩn encoder chéo"
+      ],
+      "correct": 1,
+      "explanation": "N là nhóm xếp hạng lại; nó giới hạn chất lượng (cross-encoder không được vượt quá bi-encoder recall ở N) và độ trễ (cross-encoder chạy N đường chuyền về phía trước)."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bạn phải chọn N lớn hơn K (thường là 3x hoặc hơn)?",
+      "options": [
+        "encoder chéo yêu cầu N phải là bội số của K",
+        "Nếu N bằng K thì các encoder chéo không thể sắp xếp lại, chỉ cân lại; xếp hạng lại thang máy thu gọn về không",
+        "N nhỏ hơn làm giảm chiều embedding",
+        "BM25 yêu cầu nó để tính toán IDF"
+      ],
+      "correct": 1,
+      "explanation": "Với N = K không có gì để sắp xếp lại; công việc duy nhất của encoder chéo là chọn đúng K trong số N, cần N > K."
+    },
+    {
+      "stage": "check",
+      "question": "Đầu gộp trung bình của cross-encoder làm gì trong bài học này?",
+      "options": [
+        "Tính trung bình các đầu ra lớp cuối cùng trên các vị trí không phải đệm và cung cấp một đầu tuyến tính duy nhất để tạo ra một vô hướng có liên quan",
+        "Tổng các chỉ số embedding",
+        "Nhóm trên phân phối từ vựng",
+        "Tính toán softmax trên các vị trí tài liệu"
+      ],
+      "correct": 0,
+      "explanation": "Nhóm trung bình trên các vị trí không phải pad, sau đó một lớp tuyến tính duy nhất xuất ra điểm liên quan; CLS-pooling là một giải pháp thay thế có chất lượng tương tự."
+    },
+    {
+      "stage": "post",
+      "question": "Ghi lại điểm số chéo encoder hạng 1 giúp phát hiện chế độ thất bại production nào?",
+      "options": [
+        "Truy vấn ngoài miền: khi điểm xếp hạng lại top 1 thấp hơn ngưỡng cụ thể của kho dữ liệu, công model báo hiệu rằng không có gì trong kho dữ liệu thực sự trả lời truy vấn",
+        "Mất mạng",
+        "Từ vựng trôi dạt trong tokenizer",
+        "Tham nhũng chỉ số trong hai encoder"
+      ],
+      "correct": 0,
+      "explanation": "Điểm xếp hạng 1 thấp liên tục là điểm encoder chéo cho bạn biết nhóm được truy xuất không chứa câu trả lời; hiển thị điều đó cho LLM là độ tin cậy thấp."
+    }
+  ]
+}
