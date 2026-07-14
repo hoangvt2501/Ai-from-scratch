@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Trừu tượng hóa Mô-đun có ba trách nhiệm gì trong một framework học sâu?",
+    "options": [
+      "Tải dữ liệu, tiền xử lý dữ liệu, tăng cường dữ liệu",
+      "forward() để tính toán, backward() cho gradients, parameters() cho trọng lượng có thể huấn luyện",
+      "Biên dịch, tối ưu hóa, triển khai",
+      "Mã hóa, nhúng, giải mã"
+    ],
+    "correct": 1,
+    "explanation": "Mỗi Mô-đun triển khai forward() để tính toán đầu ra, backward() để truyền gradients và parameters() để hiển thị trọng số có thể huấn luyện. Giao diện thống nhất này cho phép bất kỳ mô-đun nào được kết hợp với bất kỳ mô-đun nào khác.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao Sequential process các mô-đun theo thứ tự ngược lại trong quá trình backward pass?",
+    "options": [
+      "Nó là tùy tiện - cả hai hướng đều hoạt động",
+      "Gradients luồng từ loss ngược qua mạng, vì vậy lớp cuối cùng sẽ tính toán gradients đầu tiên",
+      "Thứ tự ngược lại sử dụng ít bộ nhớ hơn",
+      "Nó ngăn chặn gradient nổ"
+    ],
+    "correct": 1,
+    "explanation": "backward pass bắt đầu ở loss và lan truyền gradients về phía đầu vào. Lớp cuối cùng nhận loss gradient trước, tính toán gradients cục bộ của nó và chuyển chúng đến lớp trước.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao optimizer.zero_grad() là một lệnh gọi riêng biệt thay vì được thực hiện tự động?",
+    "options": [
+      "Đó là một sai lầm thiết kế PyTorch",
+      "Nó cho phép tích lũy gradient qua nhiều batches trước khi thực hiện một bước optimizer duy nhất",
+      "Nó tiết kiệm bộ nhớ",
+      "Nó giúp gỡ lỗi dễ dàng hơn"
+    ],
+    "correct": 1,
+    "explanation": "Tách zero_grad khỏi bước cho phép tích lũy gradient: bạn có thể chạy backward() nhiều lần (qua mini-batches) và tính tổng gradients trước khi gọi step(). Điều này mô phỏng kích thước batch lớn hơn.",
+    "stage": "post"
+  },
+  {
+    "question": "Thứ tự chính xác của các hoạt động trong vòng lặp training là gì?",
+    "options": [
+      "lùi, tiến, zero_grad, bước",
+      "tiến, loss, zero_grad, lùi, bước",
+      "zero_grad, tiến, loss, lùi, bước",
+      "tiến, zero_grad, lùi, loss, bước"
+    ],
+    "correct": 2,
+    "explanation": "Mẫu tiêu chuẩn: zero_grad (xóa gradients cũ), chuyển tiếp (tính toán dự đoán), loss (tính toán loss vô hướng), lùi (tính toán gradients), bước (cập nhật parameters). Nhận sai thứ tự này sẽ gây ra các lỗi tinh tế.",
+    "stage": "post"
+  },
+  {
+    "question": "Vai trò của DataLoader trong framework là gì?",
+    "options": [
+      "Nó huấn luyện model",
+      "Nó chia dữ liệu thành batches và tùy chọn xáo trộn giữa các epochs để batch gradient descent nhỏ",
+      "Nó tính toán hàm loss",
+      "Nó khởi tạo trọng số"
+    ],
+    "correct": 1,
+    "explanation": "DataLoader xử lý hai mối quan tâm thực tế: phân lô (bạn không thể nhét tất cả dữ liệu vào bộ nhớ) và xáo trộn (thứ tự ngẫu nhiên ngăn model ghi nhớ trình tự dữ liệu).",
+    "stage": "post"
+  }
+]
