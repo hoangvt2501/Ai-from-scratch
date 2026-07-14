@@ -1,0 +1,102 @@
+{
+  "lesson": "14-information-retrieval-search",
+  "title": "Truy xuất và tìm kiếm thông tin",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "BM25 chấm điểm tài liệu dựa trên điều gì?",
+      "options": [
+        "Chỉnh sửa khoảng cách đến truy vấn",
+        "Tần suất thuật ngữ, IDF và sự hiện diện chuẩn hóa độ dài tài liệu của các thuật ngữ truy vấn",
+        "Embedding cosin vào truy vấn",
+        "PageRank trên kho dữ liệu"
+      ],
+      "correct": 1,
+      "explanation": "BM25 cân độ bão hòa TF, IDF và chuẩn hóa độ dài để chấm điểm các kết quả khớp từ vựng."
+    },
+    {
+      "stage": "pre",
+      "question": "Điểm yếu chính của việc truy xuất chỉ dày đặc mà BM25 bắt được là gì?",
+      "options": [
+        "Truy vấn đa ngôn ngữ",
+        "Độ trễ",
+        "Tài liệu dài",
+        "Từ khóa và giá trị nhận dạng khớp chính xác (mã sản phẩm, chuỗi lỗi, thực thể được đặt tên) mà embeddings ngữ nghĩa có thể bỏ sót"
+      ],
+      "correct": 3,
+      "explanation": "Độ embeddings dày đặc có thể làm mờ số nhận dạng và chuỗi chính xác; BM25 đóng đinh chúng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao Reciprocal Rank Fusion (RRF) bỏ qua điểm thô từ mỗi săn mồi?",
+      "options": [
+        "RRF yêu cầu xác suất",
+        "Điểm thô là bất hợp pháp để sử dụng",
+        "Tăng tốc độ sắp xếp",
+        "BM25 và điểm dày đặc sống ở các thang đo khác nhau; Chỉ sử dụng các vị trí xếp hạng làm cho sự kết hợp mạnh mẽ để hiệu chuẩn"
+      ],
+      "correct": 3,
+      "explanation": "RRF sử dụng 1 / (k + xếp hạng), vì vậy thang điểm của hai hệ thống tính điểm không nhất thiết phải khớp nhau."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao chỉ chạy công cụ xếp hạng lại encoder chéo trên 30 kết quả hợp nhất hàng đầu?",
+      "options": [
+        "Người xếp hạng lại giảm recall",
+        "FAISS yêu cầu Top 30",
+        "Cần encoders chéo ở mọi bước",
+        "Cross-encoders chậm trên mỗi cặp; Khấu hao chúng trên một nhóm ứng viên nhỏ mang lại accuracy cao với độ trễ chấp nhận được"
+      ],
+      "correct": 3,
+      "explanation": "Truy vấn điểm encoders chéo + tài liệu chung; Chỉ chạy chúng trên nhóm ứng cử viên hợp nhất nhỏ giữ cho độ trễ có thể quản lý được."
+    },
+    {
+      "stage": "check",
+      "question": "Chỉ số nào là quan trọng nhất để tối ưu hóa cho RAG retriever?",
+      "options": [
+        "BLEU",
+        "Thông lượng",
+        "Recall@k, vì người đọc không thể trả lời nếu đoạn văn chính xác bị thiếu trong top-k",
+        "Độ trễ"
+      ],
+      "correct": 2,
+      "explanation": "Nếu đoạn văn phù hợp không có trong top-k được truy xuất, người đọc chắc chắn sẽ thất bại."
+    },
+    {
+      "stage": "post",
+      "question": "Hầu hết các thất bại production RAG bắt nguồn từ đâu, theo kinh nghiệm của ngành năm 2026?",
+      "options": [
+        "Điều chỉnh xếp hạng lại",
+        "Ăn và chia nhỏ, không phải model; Bối cảnh xấu đánh bại những độc giả giỏi",
+        "Prompt chi tiết",
+        "Sự lựa chọn LLM"
+      ],
+      "correct": 1,
+      "explanation": "Khoảng 80% lỗi RAG trace chất lượng phân đoạn và nuốt chửng, không phải model tạo sinh."
+    },
+    {
+      "stage": "post",
+      "question": "Mẫu truy xuất 'phụ huynh-doc' là gì?",
+      "options": [
+        "Chọn tài liệu dài nhất",
+        "Truy xuất các đoạn con nhỏ cho precision, sau đó mở rộng sang khối cha khi nhiều phần tử con từ cùng một phần tử mẹ xuất hiện, giữ nguyên ngữ cảnh",
+        "Chỉ nhúng tài liệu mẹ",
+        "Chỉ sử dụng embeddings tài liệu gốc"
+      ],
+      "correct": 1,
+      "explanation": "Truy xuất ở cấp độ trẻ em là chính xác; Mở rộng sang cha mẹ bảo tồn bối cảnh xung quanh mà người đọc cần."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn nên ship truy xuất ba chiều (BM25 + dày đặc + SPLADE)?",
+      "options": [
+        "Chỉ trên dưới 1000 tài liệu",
+        "Chỉ dành cho corpora chỉ có tiếng Anh",
+        "Khi cơ sở hạ tầng hỗ trợ, các chỉ mục và truy vấn thưa thớt đã học kết hợp danh từ riêng với ý định ngữ nghĩa",
+        "Luôn luôn"
+      ],
+      "correct": 2,
+      "explanation": "Truy xuất ba chiều vượt trội hơn hai chiều vào năm 2026 benchmarks đối với các truy vấn từ vựng-ngữ nghĩa hỗn hợp, với cơ sở hạ tầng SPLADE."
+    }
+  ]
+}
