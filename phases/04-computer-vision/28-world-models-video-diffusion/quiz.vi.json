@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt về kiến trúc nào phân biệt một thế giới có điều kiện hành động model (Genie 3) với một model tạo video thuần túy (Sora 2)?",
+      "options": [
+        "Các models có điều kiện hành động nhỏ hơn",
+        "Điều kiện trình tạo video thuần túy trên prompt ở t = 0 và triển khai; Thế giới có điều kiện hành động models thực hiện một hành động tiềm ẩn hoặc rõ ràng trên mỗi khung hình để người dùng có thể điều khiển rollout thế hệ giữa",
+        "Chỉ có training datasets khác nhau",
+        "World models chỉ hoạt động trên các cảnh 3D"
+      ],
+      "correct": 1,
+      "explanation": "Sora 2 là tự hồi quy trên tokens không-thời gian; prompt của nó thiết lập bối cảnh nhưng bạn không thể thay đổi hướng giữa rollout. Genie 3 suy ra hoặc thực hiện một hành động tiềm ẩn ở mỗi bước và điều chỉnh dự đoán khung hình tiếp theo trên đó, cho phép người dùng tương tác với thế giới mô phỏng. Tính tương tác này là điều làm cho model trở thành một 'trình mô phỏng thế giới' chứ không phải là một trình tạo video."
+    },
+    {
+      "stage": "pre",
+      "question": "Chia attention trong một video transformer có nghĩa là gì?",
+      "options": [
+        "Một nửa số tokens được đeo mặt nạ",
+        "Mỗi khối thực hiện một attention thời gian (cùng vị trí không gian, trên các khung) theo sau là một attention không gian (cùng một khung, trên các vị trí); chi phí này từ O ((T * H*W)^2) into O((H*W) *T^2) + O(T* (H * W) ^ 2) - rẻ hơn đáng kể so với sản phẩm chung",
+        "Chỉ một nửa số lớp chạy attention",
+        "Attention được chia thành GPUs"
+      ],
+      "correct": 1,
+      "explanation": "Sự attention khớp đầy đủ trong không thời gian tokens là cấm: đối với tokens thời gian T = 150 và lưới không gian 60x45 (tokens không gian 2700), khớp (T * H*W)^2 ≈ 1.6e11 pairs. Divided attention runs temporal attention at each spatial position (H*W * T ^ 2 ≈ 6.1e7) và attention không gian ở mỗi bước thời gian (T * (H * W) ^ 2 ≈ 1.1e9) - ít hơn nhiều bậc độ lớn. TimeSformer đã giới thiệu mẫu này; hầu hết mọi video năm 2026 DiT (Sora, Wan, HunyuanVideo) đều sử dụng biến thể chia hoặc cửa sổ."
+    },
+    {
+      "stage": "post",
+      "question": "Bản phát hành năm 2026 của Sora 2 quảng cáo tính hợp lý về mặt vật lý tốt hơn. Điều này nhắm mục tiêu vào chế độ lỗi cụ thể nào?",
+      "options": [
+        "Cân bằng màu sắc và độ tương phản",
+        "Trọng lượng, sự cân bằng, sự vĩnh cửu của đối tượng, nguyên nhân và kết quả - model giờ xử lý các vật thể bị rơi, nhân vật va chạm và 'cố tình thất bại' (một cú nhảy bị bỏ lỡ) đáng tin cậy hơn so với Sora 1",
+        "Hiển thị văn bản bên trong hình ảnh",
+        "Thời lượng video"
+      ],
+      "correct": 1,
+      "explanation": "models video thế hệ Prior nổi tiếng thất bại trong việc ăn mì spaghetti, uống từ ly và các cảnh vật thể dai dẳng - tay sẽ đi qua các đồ vật, các vật phẩm sẽ biến mất giữa hành động. Sora 2 quảng cáo rõ ràng những cải tiến về trọng lượng, sự cân bằng, tính vĩnh viễn của đối tượng và nhân quả, được đo lường dựa trên tính hợp lý bên trong và công khai benchmarks. Đây là những thất bại về chất lượng chủ đạo mà lĩnh vực này vẫn đang giải quyết."
+    },
+    {
+      "stage": "post",
+      "question": "Trong stack robot mới nổi (VLM + tạo video + động lực học nghịch đảo), động lực học nghịch đảo model làm gì?",
+      "options": [
+        "Nó tạo ra khung hình tiếp theo",
+        "Nó cần một cặp (quan sát hiện tại, quan sát tiếp theo mong muốn từ video model) và xuất ra hành động động cơ mức thấp sẽ kết nối chúng; Điều này khép lại vòng lặp giữa rollouts tưởng tượng và hoạt động thực tế",
+        "Nó huấn luyện VLM",
+        "Nó gắn nhãn dữ liệu training"
+      ],
+      "correct": 1,
+      "explanation": "Các kế hoạch VLM, video model tưởng tượng và động lực học nghịch đảo model biến trí tưởng tượng thành các lệnh vận động. Với hai quan sát liên tiếp, động lực học nghịch đảo đặt câu hỏi: hành động nào đã tạo ra sự chuyển đổi này? stack ba thành phần này cho phép robot huấn luyện chủ yếu trong một trình mô phỏng đã học, sử dụng model video để tạo dữ liệu và model động lực học nghịch đảo để thực hiện."
+    },
+    {
+      "stage": "post",
+      "question": "Các đội lái xe tự động sử dụng models thế giới (Cosmos-Drive, Gaia-2, DrivingWorld) để thay thế chi phí nào?",
+      "options": [
+        "Bảo hiểm đội xe thực tế",
+        "Thu thập dữ liệu trong thế giới thực đắt tiền cho các trường hợp góc hiếm hoặc nguy hiểm (lối đi dành cho người đi bộ, đường băng giá, phương tiện bất thường); Video lái xe tổng hợp cung cấp dữ liệu đánh giá và training theo yêu cầu cho các tình huống đó",
+        "Phí đường bộ",
+        "Khấu hao xe"
+      ],
+      "correct": 1,
+      "explanation": "Thu thập dữ liệu lái xe ở góc cua mất hàng triệu dặm trong thế giới thực. Cosmos-Drive, Gaia-2 và DrivingWorld tạo ra nó dựa trên quỹ đạo và bản đồ. Các nhóm sử dụng dữ liệu này để mở rộng training bộ, đánh giá các nhà lập kế hoạch trong các điều kiện có thể tái tạo và giảm thiểu rủi ro mà họ không thể thực hiện một cách có đạo đức trong thực tế. Thay thế một phần nhỏ của bộ sưu tập trong thế giới thực bằng tổng hợp là một trong những chiến thắng production rõ ràng nhất cho models thế giới video vào năm 2026."
+    }
+  ]
+}
