@@ -1,0 +1,67 @@
+[
+  {
+    "id": "feateng-pre-1",
+    "stage": "pre",
+    "question": "Tại sao feature engineering thường có tác động hơn so với việc chọn một thuật toán đẹp hơn?",
+    "options": [
+      "Feature engineering làm cho mã chạy nhanh hơn",
+      "Tốt features hiển thị các mẫu cho model mà dữ liệu thô ẩn, làm cho ngay cả đơn giản models hiệu quả",
+      "Feature engineering loại bỏ sự cần thiết của một bộ kiểm tra",
+      "Các thuật toán ưa thích không thể process dữ liệu thô"
+    ],
+    "correct": 1,
+    "explanation": "Việc trình bày dữ liệu quan trọng hơn thuật toán. Một feature được thiết kế tốt như BMI (weight/height^2) trực tiếp phơi bày mô hình có liên quan, làm cho ngay cả hồi quy logistic cũng cạnh tranh với các tập hợp phức tạp."
+  },
+  {
+    "id": "feateng-pre-2",
+    "stage": "pre",
+    "question": "Mã hóa một nóng là gì?",
+    "options": [
+      "Thay thế từng danh mục bằng tần số của nó trong dataset",
+      "Tạo một cột nhị phân cho mỗi danh mục, với chính xác một cột được đặt thành 1 mỗi hàng",
+      "Chuyển đổi tất cả features thành giá trị từ 0 đến 1",
+      "Mã hóa biến mục tiêu dưới dạng xác suất"
+    ],
+    "correct": 1,
+    "explanation": "Mã hóa một nóng tạo một cột nhị phân cho mỗi danh mục duy nhất. Đối với feature màu có giá trị red/blue/green, nó tạo ra ba cột: is_red, is_blue is_green."
+  },
+  {
+    "id": "feateng-post-1",
+    "stage": "post",
+    "question": "Rủi ro rò rỉ dữ liệu với mã hóa mục tiêu là gì?",
+    "options": [
+      "Nó làm cho model quá chậm để tập luyện",
+      "Nó thay thế các danh mục bằng giá trị mục tiêu trung bình, có thể làm rò rỉ thông tin từ tập kiểm tra nếu không được tính toán trên dữ liệu training",
+      "Nó tạo ra quá nhiều features",
+      "Nó chỉ hoạt động với các mục tiêu nhị phân"
+    ],
+    "correct": 1,
+    "explanation": "Mã hóa mục tiêu thay thế từng danh mục bằng mục tiêu trung bình cho danh mục đó. Nếu được tính toán trên toàn bộ dataset (bao gồm cả dữ liệu thử nghiệm), nhãn thử nghiệm sẽ bị rò rỉ thành training features, làm tăng ước tính hiệu suất."
+  },
+  {
+    "id": "feateng-post-2",
+    "stage": "post",
+    "question": "TF-IDF trọng số một từ theo tần số tài liệu nghịch đảo của nó. Hiệu quả là gì?",
+    "options": [
+      "Các từ phổ biến như 'the' có trọng lượng cao vì chúng xuất hiện thường xuyên",
+      "Các từ hiếm, đặc biệt có trọng lượng cao hơn trong khi các từ phổ biến có trọng lượng thấp hơn",
+      "Tất cả các từ đều có trọng lượng như nhau bất kể tần suất",
+      "Chỉ những từ thường gặp nhất trong mỗi tài liệu được giữ lại"
+    ],
+    "correct": 1,
+    "explanation": "IDF = log (tổng số tài liệu / tài liệu chứa từ). Các từ phổ biến (xuất hiện trong nhiều tài liệu) có IDF thấp. Những từ hiếm, đặc biệt có IDF cao, khiến chúng có ảnh hưởng hơn trong việc thể hiện."
+  },
+  {
+    "id": "feateng-post-3",
+    "stage": "post",
+    "question": "Bạn có hai features với tương quan 0,98. Tại sao bạn có thể xóa một cú sút?",
+    "options": [
+      "Tương quan cao features luôn khiến model gặp sự cố",
+      "Chúng là dư thừa - cả hai đều mang thông tin gần như giống nhau và việc giữ cả hai đều làm tăng rủi ro overfitting mà không cần thêm tín hiệu",
+      "Tương quan features làm cho dữ liệu không cố định",
+      "Tương quan trên 0,5 có nghĩa là các features đang đo lường những thứ khác nhau"
+    ],
+    "correct": 1,
+    "explanation": "Features có r = 0,98 gần như dư thừa. Giữ cả hai sẽ thêm một bản sao nhiễu làm tăng kích thước, rủi ro overfitting và tính đa tuyến tính mà không cung cấp thông tin mới về mục tiêu."
+  }
+]
