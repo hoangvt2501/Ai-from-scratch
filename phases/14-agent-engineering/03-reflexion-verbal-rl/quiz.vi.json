@@ -1,0 +1,90 @@
+{
+  "lesson": "03-reflexion-verbal-rl",
+  "title": "Phản xạ: Học tăng cường bằng lời nói",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Phản xạ thay thế điều gì trong học tăng cường tiêu chuẩn?",
+      "options": [
+        "Định hình phần thưởng với phần thưởng liên tục",
+        "Gradient cập nhật với phản ánh ngôn ngữ tự nhiên được lưu trữ giữa các thử nghiệm",
+        "Policy mạng với tìm kiếm ngẫu nhiên",
+        "Bộ nhớ theo từng giai đoạn với bộ nhớ tham số"
+      ],
+      "correct": 1,
+      "explanation": "Phản xạ sử dụng phản xạ ngôn ngữ tự nhiên trong trí nhớ theo từng tập thay vì cập nhật cân nặng."
+    },
+    {
+      "stage": "pre",
+      "question": "Ba thành phần nào xác định hệ thống Reflexion?",
+      "options": [
+        "Lập kế hoạch, Worker, Solver",
+        "Diễn viên, Người đánh giá, Người phản xạ bản thân",
+        "Máy phát điện, Nhà phê bình, Optimizer",
+        "Bộ chọn, Bộ mở rộng, Bộ truyền ngược"
+      ],
+      "correct": 1,
+      "explanation": "Phản xạ đưa agent thành một Actor chạy quỹ đạo, một Evaluator chấm điểm chúng và một Self-Reflector viết bài học."
+    },
+    {
+      "stage": "check",
+      "question": "Loại đánh giá nào sử dụng tín hiệu nhị phân bên ngoài như kiểm tra đơn vị hoặc câu trả lời đúng đã biết?",
+      "options": [
+        "Heuristic",
+        "Vô hướng",
+        "Tự đánh giá",
+        "Dựa trên phiếu bầu"
+      ],
+      "correct": 1,
+      "explanation": "Các công cụ đánh giá vô hướng đọc các tín hiệu pass/fail từ ground truth (thành công của ALFWorld, các bài kiểm tra HumanEval)."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao tự đánh giá là tín hiệu yếu hơn phản hồi vô hướng?",
+      "options": [
+        "Tính toán chậm hơn",
+        "Bản thân model đánh giá không có grounding bên ngoài nên nó có thể đóng dấu cao su cho câu trả lời của chính mình",
+        "Nó luôn yêu cầu một model lớn hơn",
+        "Nó không thể chạy trên các công cụ"
+      ],
+      "correct": 1,
+      "explanation": "Tự đánh giá thiếu sự kiểm tra bên ngoài, vì vậy ảo giác tự tin đạt điểm cao; Ghép nối nó với xác minh dựa trên công cụ."
+    },
+    {
+      "stage": "check",
+      "question": "Trường hợp nào mà bài học liệt kê là nơi mà Phản xạ KHÔNG giúp ích gì?",
+      "options": [
+        "Tạo mã nơi các bài kiểm tra có thể chấm điểm",
+        "Lỗi tạm thời bên ngoài như mạng bị ngừng hoạt động",
+        "Tác vụ điều hướng ALFWorld",
+        "Câu hỏi nhiều bước HotpotQA"
+      ],
+      "correct": 1,
+      "explanation": "Suy ngẫm về sự cố mất điện tạm thời bên ngoài tạo ra sự phản ánh không giúp ích gì cho các cuộc chạy trong tương lai."
+    },
+    {
+      "stage": "post",
+      "question": "Thối rữa trí nhớ trong mô hình Phản xạ là gì?",
+      "options": [
+        "Mất phản xạ khi process khởi động lại",
+        "Bộ đệm theo từng đợt chứa đầy các phản xạ lỗi thời hoặc sai và làm chậm hoặc thiên vị các thử nghiệm trong tương lai",
+        "Phản xạ được nhà cung cấp mã hóa",
+        "Sự phản xạ prompt vượt quá context window"
+      ],
+      "correct": 1,
+      "explanation": "Những suy nghĩ cũ kỹ hoặc sai lầm tích lũy làm suy giảm hành vi; giảm thiểu bằng nén hoặc TTL."
+    },
+    {
+      "stage": "post",
+      "question": "Mô hình production nào phù hợp nhất với Reflexion của bài học?",
+      "options": [
+        "Quy trình áp dụng-chỉnh sửa của con trỏ",
+        "Những bài học CLAUDE.md của Claude Code được bổ sung cho các sessions trong tương lai",
+        "OpenAI batch API",
+        "Bộ nhớ đệm prompt của Anthropic"
+      ],
+      "correct": 1,
+      "explanation": "CLAUDE.md học tập, quy tắc học tập của quy trình làm việc chuyên nghiệp và tính toán thời gian ngủ của Letta đều bên ngoài bộ đệm phản ánh theo từng tập."
+    }
+  ]
+}
