@@ -1,0 +1,90 @@
+{
+  "lesson": "08-memory-blocks-sleep-time-compute",
+  "title": "Khối bộ nhớ và Điện toán thời gian ngủ (Letta)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ba cấp bộ nhớ của Letta là gì?",
+      "options": [
+        "Bộ nhớ đệm, KV, lưu trữ",
+        "Cốt lõi, recall, lưu trữ",
+        "RAM, hoán đổi, đĩa",
+        "Làm việc, nhiều tập, ngữ nghĩa"
+      ],
+      "correct": 1,
+      "explanation": "Letta sử dụng các bậc cốt lõi (luôn hiển thị), recall (lịch sử cuộc trò chuyện) và lưu trữ (bên ngoài)."
+    },
+    {
+      "stage": "pre",
+      "question": "Tính toán thời gian ngủ nhắm mục tiêu vào vấn đề production nào?",
+      "options": [
+        "Độ trễ đuôi từ việc hợp nhất bộ nhớ trên đường dẫn quan trọng",
+        "accuracy cao hơn về các bài toán",
+        "Chi phí embedding thấp hơn",
+        "Phân tích cú pháp JSON nhanh hơn"
+      ],
+      "correct": 0,
+      "explanation": "Thời gian ngủ di chuyển prune/summarize/reconcile ra khỏi đường dẫn đối mặt với người dùng, vì vậy các phản hồi chính luôn nhanh."
+    },
+    {
+      "stage": "check",
+      "question": "Thuộc tính nào KHÔNG phải là trường khối bộ nhớ trong Letta?",
+      "options": [
+        "Nhãn",
+        "Giá trị",
+        "Giới hạn",
+        "embedding_model_version"
+      ],
+      "correct": 3,
+      "explanation": "Khối mang id, nhãn, giá trị, giới hạn, mô tả; Phiên bản embedding model không phải là một phần của schema khối."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao thời gian ngủ agent có thể chạy model mạnh hơn so với thời gian chính?",
+      "options": [
+        "Nó nhận được một khóa API riêng tư",
+        "Nó nằm ngoài đường dẫn quan trọng, vì vậy nó không bị hạn chế về độ trễ",
+        "Nó được miễn rate limits",
+        "Hoạt động bộ nhớ tốn một nửa tokens"
+      ],
+      "correct": 1,
+      "explanation": "Bởi vì nó không chặn phản hồi của người dùng, thời gian ngủ agent có thể chậm hơn và tốn kém hơn."
+    },
+    {
+      "stage": "check",
+      "question": "Các khối Con người và Persona khái quát hóa mô hình nào?",
+      "options": [
+        "Vector embeddings",
+        "Các khối có thể chỉnh sửa do người dùng xác định tùy ý (Nhiệm vụ, Dự án, An toàn, ...)",
+        "Kênh JSON-RPC",
+        "processes hệ điều hành"
+      ],
+      "correct": 1,
+      "explanation": "Letta khái quát hóa hai khối MemGPT cho bất kỳ khối nào do người dùng xác định với id, nhãn, giá trị, giới hạn, mô tả."
+    },
+    {
+      "stage": "post",
+      "question": "Trôi thầm lặng trong mô hình này là gì?",
+      "options": [
+        "Một agent chính không bao giờ thấy rằng thời gian ngủ agent viết lại một khối bên dưới nó; Sửa lỗi với phiên bản và sự khác biệt hiển thị",
+        "Ghi đĩa chậm",
+        "Nâng cấp Embedding model",
+        "Jitter giới hạn tốc độ"
+      ],
+      "correct": 0,
+      "explanation": "Các khối lập phiên bản và hiển thị các khác biệt trong trace làm cho việc ghi lại thời gian ngủ hiển thị cho vòng lặp chính."
+    },
+    {
+      "stage": "post",
+      "question": "Điều gì đã thay thế `Thought:` tokens nội tuyến và mẫu send_message/heartbeat trong Letta V1?",
+      "options": [
+        "Lý luận tự nhiên phát ra trên một kênh riêng biệt và đi qua các lượt",
+        "Một LLM thứ hai dành riêng cho những suy nghĩ",
+        "Một system prompt lớn hơn",
+        "Suy nghĩ do người dùng gõ thủ công"
+      ],
+      "correct": 0,
+      "explanation": "Letta V1 (letta_v1_agent) sử dụng suy luận gốc ở cấp độ nhà cung cấp, không phải suy nghĩ hình prompt."
+    }
+  ]
+}
