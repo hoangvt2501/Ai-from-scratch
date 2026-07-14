@@ -1,0 +1,90 @@
+{
+  "lesson": "04-tree-of-thoughts-lats",
+  "title": "Tree of Thoughts và LATS: Tìm kiếm có chủ ý",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao chain-of-thought gặp khó khăn trong Game of 24?",
+      "options": [
+        "model không thể nhân số nguyên",
+        "Đi bộ tuyến tính không thể lùi lại khi bước đầu sai, vì vậy các bước sau sẽ làm phức tạp thêm lỗi",
+        "Thời prompt quá ngắn",
+        "CoT yêu cầu một công cụ máy tính mà GPT-4 thiếu"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không phân nhánh, một biểu thức phụ sớm sai sẽ đầu độc rest của chuỗi; bài báo chỉ đo lường 4% cho CoT."
+    },
+    {
+      "stage": "pre",
+      "question": "Nút trong tìm kiếm Tree of Thoughts là gì?",
+      "options": [
+        "Một token do model sản xuất",
+        "Một bước hoặc suy nghĩ trung gian mạch lạc, với K có thể mở rộng con",
+        "Cập nhật cân nặng trong quá trình fine-tuning",
+        "Một công cụ đã đăng ký với runtime"
+      ],
+      "correct": 1,
+      "explanation": "ToT coi lý luận như một cái cây, trong đó mỗi nút là một suy nghĩ trung gian có thể mở rộng thành K con."
+    },
+    {
+      "stage": "check",
+      "question": "Vai nào trong ba vai này KHÔNG phải là một trong những vai diễn của LATS cho LLM?",
+      "options": [
+        "Policy đề xuất các hành động tiếp theo",
+        "Hàm giá trị chấm điểm quỹ đạo một phần",
+        "Người tự phản ánh viết những suy ngẫm về thất bại",
+        "Optimizer cập nhật model trọng số giữa rollouts"
+      ],
+      "correct": 3,
+      "explanation": "LATS không có gradient; Ba vai trò LLM là policy, giá trị và tự phản ánh. Không có cập nhật trọng lượng."
+    },
+    {
+      "stage": "check",
+      "question": "Đặt tên cho bốn giai đoạn MCTS trong danh sách bài học.",
+      "options": [
+        "Mẫu, Chấm điểm, Sắp xếp, Gửi",
+        "Chọn, Mở rộng, Mô phỏng, Lan truyền ngược",
+        "Lập kế hoạch, thực hiện, phản ánh, dừng lại",
+        "Tìm kiếm, Tổng hợp, Tổng hợp-Một lần nữa, Dừng lại"
+      ],
+      "correct": 1,
+      "explanation": "MCTS tiến hành chọn, mở rộng, mô phỏng, lan truyền ngược mỗi lần lặp."
+    },
+    {
+      "stage": "check",
+      "question": "Trong UCT, vai trò của hằng số thăm dò c là gì?",
+      "options": [
+        "Nó chia tỷ lệ ước tính giá trị Q",
+        "Nó có trọng số thuật ngữ thăm dò sqrt (ln N / n) so với thuật ngữ khai thác Q",
+        "Nó đặt độ sâu cây tối đa",
+        "Nó kiểm soát số lượng rollouts"
+      ],
+      "correct": 1,
+      "explanation": "c cân bằng khai thác (Q) với thời hạn thăm dò; điều chỉnh cho mỗi nhiệm vụ."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào tìm kiếm có hại chủ động so với một quỹ đạo duy nhất?",
+      "options": [
+        "Khi người đánh giá ồn ào và có một câu trả lời đúng duy nhất, vì vậy việc tìm kiếm hội tụ vào một câu trả lời sai có điểm cao",
+        "Khi nhiệm vụ liên quan đến nhiều câu trả lời đúng",
+        "Bất cứ khi nào tokens rẻ",
+        "Khi tác vụ là tạo mã"
+      ],
+      "correct": 0,
+      "explanation": "Một hàm giá trị nhiễu cộng với một câu trả lời đúng duy nhất chính xác là khi tìm kiếm quá phù hợp với nhiễu."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn nên sử dụng token nhiều hơn bao nhiêu cho ToT trong Game of 24 so với CoT?",
+      "options": [
+        "Khoảng 2x",
+        "Khoảng 10x",
+        "100x đến 1000x",
+        "Ít hơn CoT vì cắt tỉa"
+      ],
+      "correct": 2,
+      "explanation": "Bài học trích dẫn chi phí token 100-1000 lần cho ToT trong Game of 24 so với CoT."
+    }
+  ]
+}
