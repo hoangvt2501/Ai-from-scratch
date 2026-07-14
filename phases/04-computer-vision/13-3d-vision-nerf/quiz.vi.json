@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao một CNN đơn giản không thể process một điểm cloud trực tiếp?",
+      "options": [
+        "Đám mây điểm quá lớn",
+        "CNN giả định các pixel đầu vào được sắp xếp trên một lưới thông thường với cấu trúc vùng lân cận; điểm cloud là một tập hợp các điểm không có thứ tự trong R^3 không có lưới và kích thước biến, vi phạm cả hai giả định",
+        "CNN chỉ hoạt động trên thang độ xám",
+        "Đám mây điểm yêu cầu quaternion"
+      ],
+      "correct": 1,
+      "explanation": "CNN phức tạp cần một khu vực lân cận thường xuyên. Một điểm cloud không có lưới cũng như số điểm cố định. Voxeli hóa cloud mang lại một lưới (được sử dụng bởi CNN 3D) nhưng đắt bộ nhớ. PointNet đã bỏ qua điều này với kiến trúc bất biến hoán vị xử lý từng điểm một cách độc lập sau đó tổng hợp đối xứng."
+    },
+    {
+      "stage": "pre",
+      "question": "Thủ thuật nào làm cho hoán vị PointNet bất biến trên các điểm đầu vào?",
+      "options": [
+        "Batch chuẩn hóa",
+        "MLP được chia sẻ được áp dụng cho mọi điểm một cách độc lập, tiếp theo là tổng hợp đối xứng (nhóm tối đa hoặc tổng); Vì tổng hợp bỏ qua thứ tự điểm, đầu ra của toàn bộ mạng là bất biến thứ tự",
+        "Chức năng loss đặc biệt",
+        "Sắp xếp các điểm trước forward pass"
+      ],
+      "correct": 1,
+      "explanation": "Thủ thuật chức năng đối xứng là cốt lõi của mọi dòng mạng point-cloud kể từ năm 2017. Chạy cùng một MLP trên mọi điểm (cùng trọng số, không phụ thuộc vào thứ tự) và sau đó tổng hợp với một hàm không phụ thuộc vào thứ tự. Tối đa và tổng là hai lựa chọn chính tắc; max được sử dụng bởi PointNet và hầu hết các hậu duệ."
+    },
+    {
+      "stage": "post",
+      "question": "Một NeRF MLP vani được cung cấp với tọa độ thô (x, y, z) tạo ra kết quả mờ. Điều gì khắc phục nó?",
+      "options": [
+        "Thêm dữ liệu training",
+        "Mã hóa vị trí: tọa độ dự án thành features Fourier (sin/cos của 2^l * pi * x cho nhiều l) trước MLP; điều này cho phép MLP phân cực tần số thấp đại diện cho các chi tiết tần số cao",
+        "Sử dụng precision 16-bit",
+        "Chuyển sang CNN"
+      ],
+      "correct": 1,
+      "explanation": "MLP thiên về mặt quang phổ: chúng dễ dàng phù hợp với các chức năng trơn tru và gặp khó khăn với tần số cao. Mã hóa vị trí nâng mỗi tọa độ thành một vector đã chứa tín hiệu tần số cao. MLP sau đó có một công việc dễ dàng hơn nhiều trong việc kết hợp những features đó thành hình học và kết cấu sắc nét. Thủ thuật tương tự được sử dụng trong mã hóa vị trí transformer và trong thời gian khuếch tán embedding."
+    },
+    {
+      "stage": "post",
+      "question": "Pixel được kết xuất NeRF được tính như thế nào?",
+      "options": [
+        "Là đầu ra của lớp MLP cuối cùng",
+        "Bằng cách truyền một tia từ máy ảnh qua pixel, N sampling điểm dọc theo tia, truy vấn MLP tại mỗi điểm (mật độ, màu sắc) và kết hợp các mẫu với một phương trình kết xuất thể tích tích lũy các màu có trọng số alpha dọc theo tia",
+        "Bằng cách tra cứu lưới voxel được tính toán trước",
+        "Bằng cách chạy một chập trên bản đồ độ sâu"
+      ],
+      "correct": 1,
+      "explanation": "Kết xuất NeRF là kết xuất volume cổ điển với trường mật độ thần kinh. Đối với mỗi pixel, bạn chọn một tia, mẫu dọc theo tia, truy vấn (sigma, c) tại mỗi mẫu và tổng hợp bằng cách sử dụng alpha (1 - exp(-sigma * delta)) và độ truyền tích lũy. Backprop thông qua bước kết xuất này là thứ huấn luyện MLP từ ảnh 2D - không có sự giám sát 3D rõ ràng nào xuất hiện."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao 3D Gaussian splatting phần lớn thay thế NeRF vào năm production?",
+      "options": [
+        "Nó tạo ra hình ảnh chất lượng cao hơn",
+        "Nó là một biểu diễn rõ ràng (hàng triệu Gaussian 3D với độ mờ và màu sắc) hiển thị trong thời gian thực thông qua rasterization thay vì truy vấn MLP trên các tia được lấy mẫu; training là vài phút thay vì hàng giờ, kết xuất nhanh hơn 100 lần và chất lượng tương đương",
+        "NeRF đã được chứng minh là không chính xác về mặt toán học",
+        "Gaussian dễ nén hơn"
+      ],
+      "correct": 1,
+      "explanation": "3D Gaussian Splatting (SIGGRAPH 2023) thay thế cảnh ngầm dựa trên MLP bằng một cloud rõ ràng về primitives Gaussian 3D. Kết xuất trở thành GPU rasterization, nhanh hơn nhiều so với sampling trên mỗi tia pixel thông qua MLP. Hầu hết các sản phẩm NeRF năm 2026 ship với Gaussian bắn tung tóe hoặc các sản phẩm kế nhiệm của nó; mô hình NeRF vẫn cung cấp thông tin cho mục tiêu training và toán học."
+    }
+  ]
+}
