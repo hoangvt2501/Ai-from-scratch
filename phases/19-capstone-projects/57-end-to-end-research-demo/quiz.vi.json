@@ -1,0 +1,78 @@
+{
+  "lesson": "57-end-to-end-research-demo",
+  "title": "Bản demo nghiên cứu từ đầu đến cuối",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Công việc của bản demo trong bài học này là gì?",
+      "options": [
+        "Để thay thế các bài học trước đó bằng một framework mới duy nhất",
+        "Để soạn primitives từ các bài học trước đó thông qua Python imports đơn giản",
+        "Để benchmark bộ lập lịch so với đường cơ sở",
+        "Để gọi một ngôn ngữ thực model trên mỗi branch"
+      ],
+      "correct": 1,
+      "explanation": "Bản demo là một bài kiểm tra thành phần. Mỗi giai đoạn tồn tại trong bài học riêng của nó. Bản demo imports chúng và kết nối báo cáo. Không có framework mới, không có trừu tượng mới."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao bài học tải các bài học trước đó thông qua importlib thay vì import gói thông thường?",
+      "options": [
+        "Bởi vì importlib nhanh hơn",
+        "Bởi vì mỗi bài học trước đó là một mã/thư mục độc lập, không phải là một gói đã cài đặt; importlib tải chúng theo đường dẫn tệp",
+        "Vì asyncio yêu cầu importlib",
+        "Bởi vì các bài học có chung tên mô-đun và sẽ va chạm"
+      ],
+      "correct": 1,
+      "explanation": "Các bài học không phải là các gói được cài đặt. Mỗi ships một main.py bên trong mã/thư mục riêng của nó. importlib.util.spec_from_file_location tải chúng theo đường dẫn mà không làm ô nhiễm không gian tên mô-đun toàn cục."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để người chọn kết quả tốt nhất quyết định giữa branches khi nhiều hơn một bài kích hoạt một bài báo?",
+      "options": [
+        "Nó chọn branch có nhiều thử nghiệm chạy nhất",
+        "Nó chọn branch có phần thưởng trung bình cao nhất, phá vỡ các mối quan hệ theo thứ tự bảng chữ cái theo id branch",
+        "Nó chọn ngẫu nhiên để công bằng",
+        "Nó chọn branch được kích hoạt đầu tiên"
+      ],
+      "correct": 1,
+      "explanation": "Trung bình cao nhất thắng. Hòa gặp lỗi trên id branch vì vậy bản demo là xác định. Ngẫu nhiên sẽ đánh bại bài kiểm tra quyết định."
+    },
+    {
+      "stage": "check",
+      "question": "Bộ chọn đưa ra lỗi nào khi bộ lập lịch báo cáo không có triggers giấy?",
+      "options": [
+        "Lỗi giá trị",
+        "NoTriggerError, làm ngắn mạch bản demo trước khi trình viết chạy",
+        "PaperValidationError",
+        "Nó trả về Không có"
+      ],
+      "correct": 1,
+      "explanation": "NoTriggerError là chế độ lỗi được nhập. Trả về Không có sẽ cho phép trình ghi chạy trên đầu vào sai định dạng và bị hỏng sau đó với lỗi ít có thể hành động hơn."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bản demo chạy hai lần với cùng một hạt giống trong bài kiểm tra quyết định?",
+      "options": [
+        "Để tập không đồng bộ hai lần",
+        "Để khẳng định rằng mã branch, phần thưởng và phần giấy được chọn giống hệt nhau giữa các lần chạy",
+        "Để phát hiện rò rỉ bộ nhớ",
+        "Để chứng minh rằng người lập lịch trình là công bằng"
+      ],
+      "correct": 1,
+      "explanation": "Quyết định luận là một phần của hợp đồng. Hai lần chạy với cùng một hạt giống phải tạo ra cùng một artifacts. Thử nghiệm ghim điều đó."
+    },
+    {
+      "stage": "post",
+      "question": "Báo cáo demo chứa những gì sau khi chạy thành công?",
+      "options": [
+        "Chỉ tệp LaTeX cuối cùng",
+        "scheduler_report, best_branch, best_reward, critic_result, paper_manifest và stop_reason",
+        "Chỉ số lượng thử nghiệm và chuỗi trạng thái",
+        "Nhật ký model prompt và hoàn thành"
+      ],
+      "correct": 1,
+      "explanation": "Kết quả của mọi giai đoạn đều được giữ nguyên. Báo cáo là một thành phần của các kết quả ngược dòng, không phải là một bản tóm tắt được chuyển đổi. Công cụ xuôi dòng đọc tệp kê khai; trình gỡ lỗi đọc trace bên trong scheduler_report."
+    }
+  ]
+}
