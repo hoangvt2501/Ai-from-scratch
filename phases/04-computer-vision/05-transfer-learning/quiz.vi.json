@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bạn có 500 hình ảnh được gắn nhãn cho một tác vụ mới gần với bản phân phối ImageNet. Chế độ nào có ý nghĩa nhất?",
+      "options": [
+        "Huấn luyện ResNet-50 từ đầu",
+        "Đóng băng đường trục ImageNet-pretrained và chỉ huấn luyện một đầu tuyến tính mới",
+        "Fine-tune mọi lớp với cùng một LR lớn",
+        "Bỏ qua trọng lượng pretrained; datasets nhỏ hoạt động tốt nhất với models nhỏ"
+      ],
+      "correct": 1,
+      "explanation": "Với 500 hình ảnh, bạn không có đủ tín hiệu để huấn luyện một mạng sâu từ đầu hoặc để fine-tune tất cả các lớp từ đầu đến cuối một cách an toàn mà không phá hủy pretrained features. Đóng băng xương sống và chỉ training một đầu mới (đầu dò tuyến tính) sử dụng pretrained features trực tiếp và là công thức tiêu chuẩn cho các datasets nhỏ, miền gần."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao các lớp conv ban đầu của mạng ImageNet-pretrained truyền tốt đến hình ảnh y tế mặc dù ImageNet không chứa tia X?",
+      "options": [
+        "PyTorch tự động khởi tạo lại các lớp ban đầu",
+        "Các lớp ban đầu mã hóa primitives hình ảnh chung - cạnh, hướng, độ tương phản - được chia sẻ trên hầu hết mọi miền trực quan; chỉ các lớp muộn chuyên về danh mục ImageNet",
+        "ImageNet bí mật chứa dữ liệu y tế",
+        "Chuyển chỉ hoạt động khi miền khớp"
+      ],
+      "correct": 1,
+      "explanation": "Các bộ lọc giống như Gabor và máy dò kết cấu đơn giản là những features các lớp CNN ban đầu học trên bất kỳ kho dữ liệu hình ảnh tự nhiên nào. Chúng phản ánh số liệu thống kê về ánh sáng, bóng tối và các cạnh trong nhiếp ảnh, hình ảnh y tế, kính hiển vi và dữ liệu vệ tinh. Các lớp muộn dần dần chuyên biệt, đó là lý do tại sao fine-tuning tập trung vào một vài khối cuối cùng."
+    },
+    {
+      "stage": "post",
+      "question": "Khi fine-tuning từ đầu đến cuối với tỷ lệ học tập phân biệt, tại sao các lớp đầu lại có LR nhỏ hơn các lớp sau?",
+      "options": [
+        "Các lớp ban đầu có ít parameters hơn",
+        "Các lớp ban đầu mã hóa các features chung mà bạn muốn lưu giữ; các lớp muộn mã hóa các features cụ thể của nhiệm vụ phải di chuyển; LR nhỏ hơn trên các lớp đầu ngăn ngừa trôi feature và quên thảm khốc",
+        "PyTorch yêu cầu LR theo lớp để đảm bảo tính chính xác",
+        "LR nhỏ hơn trong các lớp đầu tăng tốc training"
+      ],
+      "correct": 1,
+      "explanation": "Các lớp ban đầu đã mã hóa primitives hình ảnh phù hợp; Bạn muốn các bản cập nhật nhỏ để những features đó được giữ nguyên. Các lớp muộn cần phải chuyển sang nhiệm vụ mới. Một learning rate cho cả model buộc phải thỏa hiệp làm tổn thương cả hai đầu. LR phân biệt đối xử cho phép mỗi giai đoạn di chuyển theo tốc độ riêng của nó, đó là điểm ngọt ngào thực nghiệm cho fine-tuning."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn fine-tune ResNet trên dataset y tế 10 class gồm 800 hình ảnh thang độ xám (được sao chép thành 3 kênh). Accuracy là 10% (cơ hội ngẫu nhiên trong 10 classes). Nguyên nhân có thể xảy ra nhất là gì?",
+      "options": [
+        "Bạn đã sử dụng sai chức năng loss",
+        "BatchNorm thống kê đang chạy là từ ảnh ImageNet RGB và không khớp với phân bố y tế thang độ xám, vì vậy một vài lớp BN đầu tiên tạo ra nhiễu lan truyền về phía trước",
+        "ResNet không thể xử lý đầu vào thang độ xám",
+        "800 hình ảnh đơn giản là quá ít đối với bất kỳ việc học chuyển tiếp nào"
+      ],
+      "correct": 1,
+      "explanation": "BatchNorm giữ running_mean và running_var khỏi ImageNet. Trên một dataset nhỏ, dịch chuyển phân phối, những bộ đệm đó không bao giờ thích ứng đủ nhanh trong một fine-tune ngắn và BN chuẩn hóa các kích hoạt với số liệu thống kê sai. Khắc phục: đóng băng số liệu thống kê BN, chuyển sang GroupNorm hoặc pretrain số liệu thống kê BN bằng cách khởi động chỉ BN trên dataset mục tiêu."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn so sánh hai lần chạy: (a) đầu dò tuyến tính trên đường trục ImageNet bị đóng băng, 82% accuracy; (b) fine-tune từ đầu đến cuối, 78% accuracy. Bạn nên kết luận gì?",
+      "options": [
+        "Fine-tuning không hữu ích; ship đầu dò tuyến tính",
+        "Một fine-tune kết thúc bên dưới đầu dò tuyến tính hầu như luôn là lỗi training - LR quá cao, BN bị xử lý sai hoặc scheduler/optimizer cấu hình sai; Chẩn đoán trước khi kết luận bất cứ điều gì về chuyển giao",
+        "dataset quá lớn",
+        "Pretrained trọng lượng là xấu"
+      ],
+      "correct": 1,
+      "explanation": "Fine-tuning phải luôn đánh bại hoặc khớp với đầu dò tuyến tính, vì đầu dò tuyến tính là một trường hợp đặc biệt của fine-tuning với đường trục LR = 0. Nếu fine-tune tệ hơn, pipeline đang tích cực phá hủy pretrained features. Cách khắc phục là hạ thấp LR xương sống, áp dụng LR phân biệt đối xử hoặc đóng băng BN - không phải từ bỏ fine-tuning."
+    }
+  ]
+}
