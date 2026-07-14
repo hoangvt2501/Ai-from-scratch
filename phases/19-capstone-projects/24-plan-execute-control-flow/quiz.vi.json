@@ -1,0 +1,90 @@
+{
+  "lesson": "24-plan-execute-control-flow",
+  "title": "Lập kế hoạch-thực hiện luồng điều khiển",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trách nhiệm của người lập kế hoạch trong một agent thực hiện kế hoạch là gì?",
+      "options": [
+        "Để gọi người điều phối trên mỗi bước",
+        "Để tạo danh sách các bước được nhập theo thứ tự, trình thực thi sẽ chạy",
+        "Để thực thi timeouts",
+        "Để xử lý transport JSON-RPC"
+      ],
+      "correct": 1,
+      "explanation": "Planner phát ra các kế hoạch có cấu trúc. Người thực thi điều hành chúng. Kết hợp cả hai là cái bẫy chain-of-thought mà bài học này đang tránh xa."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao expected_outcome là một phần của hình dạng Bước mặc dù trình thực thi không kiểm tra nó?",
+      "options": [
+        "Bởi vì trình điều phối sử dụng nó làm khóa bộ nhớ cache",
+        "Bởi vì nó cung cấp cho công cụ lập kế hoạch lại và trình theo dõi một điều kiện thành công đã nêu để đọc",
+        "Bởi vì registry yêu cầu nó",
+        "Bởi vì model huấn luyện trên đó"
+      ],
+      "correct": 1,
+      "explanation": "Công cụ lập kế hoạch lại đọc nó khi sửa đổi. Trình theo dõi hiển thị nó trên dòng thời gian. Nó là một hợp đồng mà con người có thể đọc được trên bước."
+    },
+    {
+      "stage": "check",
+      "question": "Khi một bước không thành công và người lập kế hoạch lại trả về một kế hoạch mới, người thực thi phát ra gì trên luồng sự kiện?",
+      "options": [
+        "Không có gì - lập kế hoạch lại im lặng",
+        "session.complete với status=failed",
+        "plan.diff với removed/added/revised mã bước",
+        "tool.error theo sau là session.start"
+      ],
+      "correct": 2,
+      "explanation": "plan.diff làm cho bản sửa đổi hiển thị. Viết lại im lặng là lỗi mà chúng ta đang tránh."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao có cả max_steps và max_replans dưới dạng ngân sách riêng biệt?",
+      "options": [
+        "Bởi vì chúng đo lường các đơn vị khác nhau. Các bước giới hạn tổng số lần thực hiện; lập kế hoạch lại giới hạn số lần người lập kế hoạch được gọi.",
+        "Bởi vì asyncio yêu cầu cả hai",
+        "Bởi vì người điều phối từ chối các kế hoạch không giới hạn",
+        "Bởi vì registry tính lên kế hoạch lại"
+      ],
+      "correct": 0,
+      "explanation": "max_replans bắt được một kế hoạch tiếp tục trả lại cùng một kế hoạch bị hỏng. max_steps bắt được một kế hoạch chạy trốn không ngừng phát triển."
+    },
+    {
+      "stage": "check",
+      "question": "Lý do nào được trả về khi người lập kế hoạch trả về một danh sách trống trong cuộc gọi đầu tiên?",
+      "options": [
+        "step_budget",
+        "replan_budget",
+        "goal_met",
+        "no_plan"
+      ],
+      "correct": 3,
+      "explanation": "Không có kế hoạch, không thực hiện. session kết thúc bằng lý do = no_plan và trạng thái = thất bại."
+    },
+    {
+      "stage": "post",
+      "question": "Có gì trong PlanDiff.revised?",
+      "options": [
+        "ID bước có trong gói cũ và không có trong gói mới",
+        "ID bước trong kế hoạch mới không có trong kế hoạch cũ",
+        "ID bước có tool_name hoặc đối số thay đổi giữa các lần sửa đổi",
+        "ID bước mà người lập kế hoạch yêu cầu bỏ qua"
+      ],
+      "correct": 2,
+      "explanation": "Sửa đổi là tập hợp các ID có chữ ký (tool_name, args) thay đổi trong bản sửa đổi."
+    },
+    {
+      "stage": "post",
+      "question": "Khi trình thực thi cạn kiệt max_replans, SessionResult.reason kết quả là gì?",
+      "options": [
+        "goal_met",
+        "step_budget",
+        "replan_budget",
+        "no_plan"
+      ],
+      "correct": 2,
+      "explanation": "replan_budget. Trạng thái không thành công. Lịch sử thực hiện mọi bước chạy, bao gồm cả các lỗi đã kích hoạt kế hoạch lại."
+    }
+  ]
+}
