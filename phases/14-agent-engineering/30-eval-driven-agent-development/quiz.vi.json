@@ -1,0 +1,90 @@
+{
+  "lesson": "30-eval-driven-agent-development",
+  "title": "Phát triển Agent định hướng đánh giá",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ba lớp đánh giá mà tên bài học là gì?",
+      "options": [
+        "benchmarks tĩnh, đánh giá ngoại tuyến tùy chỉnh, đánh giá production trực tuyến",
+        "Đơn vị, tích hợp, đầu cuối",
+        "Khói, hồi quy, chấp nhận",
+        "Trước, kiểm tra, đăng"
+      ],
+      "correct": 0,
+      "explanation": "Tĩnh (SWE-bench, GAIA), ngoại tuyến tùy chỉnh (LLM-judge, exec, quỹ đạo), trực tuyến (phát lại, cảnh báo, cost/latency)."
+    },
+    {
+      "stage": "pre",
+      "question": "Điểm khởi đầu được đề xuất của Anthropic là gì?",
+      "options": [
+        "Bắt đầu với cuộc tranh luận nhiều agent",
+        "Bắt đầu với prompts đơn giản, tối ưu hóa chúng bằng đánh giá toàn diện và chỉ thêm hệ thống agentic nhiều bước khi cần thiết",
+        "Bắt đầu với orchestration phân cấp",
+        "Chỉ bắt đầu với một model biên giới"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic nói rõ rằng đánh giá là vòng lặp bên ngoài thúc đẩy mọi lựa chọn khác."
+    },
+    {
+      "stage": "check",
+      "question": "Vòng lặp chặt chẽ optimizer người đánh giá là gì?",
+      "options": [
+        "Huấn luyện, đánh giá, triển khai",
+        "Người đề xuất tạo ra đầu ra, đánh giá đánh giá, tinh chỉnh cho đến khi người đánh giá vượt qua (Tự tinh chỉnh khái quát)",
+        "Lấy mẫu, sắp xếp, loại bỏ trùng lặp",
+        "Bộ nhớ cache, thử lại, không thành công"
+      ],
+      "correct": 1,
+      "explanation": "Nó được khái quát hóa Tự tinh chỉnh: bất kỳ luồng nào cũng có thể bao bọc trong đề xuất-thẩm phán-tinh chỉnh."
+    },
+    {
+      "stage": "check",
+      "question": "Thực tiễn tốt nhất năm 2026 cho nơi các eval sống là gì?",
+      "options": [
+        "Chỉ trong bảng thông tin nhà cung cấp riêng biệt",
+        "Bên cạnh mã, chạy trong CI trên mỗi PR, cổng merges điểm đánh giá",
+        "Chỉ chạy hàng quý",
+        "Thuộc sở hữu độc quyền của đội ngũ QA"
+      ],
+      "correct": 1,
+      "explanation": "Cùng vị trí với mã, CI-gated, theo dõi hồi quy là tiêu chuẩn."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bài học cảnh báo về một thẩm phán LLM mà không có grounding?",
+      "options": [
+        "Nó quá chậm",
+        "Các thẩm phán cũng bị ảo giác; ghép nối với mẫu CRITIC để có cơ sở đánh giá trên các công cụ bên ngoài",
+        "Nó vi phạm Apache 2.0",
+        "Nó chỉ hoạt động trên GPUs"
+      ],
+      "correct": 1,
+      "explanation": "PHÊ BÌNH (Bài 5) được áp dụng: xác minh dựa trên công cụ giữ cho thẩm phán trung thực."
+    },
+    {
+      "stage": "post",
+      "question": "Sự nguy hiểm của việc quá phù hợp với các đánh giá là gì?",
+      "options": [
+        "Chi phí điện toán tăng",
+        "Tối ưu hóa cho bộ đánh giá khác với tính hữu ích của production; Luân phiên trường hợp",
+        "Vector phân đoạn chỉ số",
+        "Độ trễ giảm quá xa"
+      ],
+      "correct": 1,
+      "explanation": "Xoay vòng bộ đánh giá giữ cho việc tối ưu hóa phù hợp với thực tế production."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao các eval bong tróc gây ra vấn đề?",
+      "options": [
+        "Chúng tăng gấp đôi chi phí inference",
+        "Các trường hợp không xác định tạo ra báo động giả; Pin Seeds và trạng thái chụp nhanh",
+        "Họ không thể truy cập cơ sở dữ liệu",
+        "Họ vượt quá context window"
+      ],
+      "correct": 1,
+      "explanation": "Flake làm cho hồi quy không thể đọc được; Quyết định luận (hạt giống, ảnh chụp nhanh trạng thái) là bắt buộc."
+    }
+  ]
+}
