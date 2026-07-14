@@ -1,0 +1,102 @@
+{
+  "lesson": "20-structured-outputs-constrained-decoding",
+  "title": "Đầu ra có cấu trúc và giải mã hạn chế",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao 'trả lại JSON' chỉ prompt không đủ cho production?",
+      "options": [
+        "JSON quá dài dòng",
+        "Prompts quá dài",
+        "Frontier models tuân thủ hầu hết thời gian nhưng không phải lúc nào cũng vậy; Một phần nhỏ các đầu ra sai định dạng phá vỡ các trình phân tích cú pháp xuôi dòng",
+        "Prompting không thể mô tả schemas"
+      ],
+      "correct": 2,
+      "explanation": "Cấu trúc chỉ Prompt hoạt động ~ 80% thời gian trên models biên giới; production cần đảm bảo cứng rắn hơn."
+    },
+    {
+      "stage": "pre",
+      "question": "Giải mã ràng buộc sửa đổi điều gì ở mỗi bước thế hệ?",
+      "options": [
+        "Các KV cache",
+        "Các tokenizer",
+        "Các training loss",
+        "logit vector, che tokens sẽ làm mất hiệu lực ngữ pháp mục tiêu để chỉ có thể lấy mẫu các phần tiếp tục hợp lệ"
+      ],
+      "correct": 3,
+      "explanation": "Bộ xử lý logit đặt tokens không hợp lệ thành -inf để softmax không thể lấy mẫu chúng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao giải mã ràng buộc có thể nhanh hơn tạo tự do?",
+      "options": [
+        "model nhỏ hơn",
+        "tokens giàn giáo cưỡng bức (ví dụ: '{\"name\": \"') có thể được phát ra trực tiếp mà không cần sampling và không gian tìm kiếm token hợp lệ sẽ thu hẹp",
+        "Nó tránh hoàn toàn softmax",
+        "Nó bỏ qua backprop"
+      ],
+      "correct": 1,
+      "explanation": "Xác định bỏ qua tokens sampling và giảm các bộ token hợp lệ sẽ giảm chi phí giải mã."
+    },
+    {
+      "stage": "check",
+      "question": "Lựa chọn thiết kế schema nào ngăn chặn sự cam kết sớm của model?",
+      "options": [
+        "Đặt 'câu trả lời' lên hàng đầu",
+        "Sử dụng các phím ngắn hơn",
+        "Đặt các trường suy luận trước trường answer/decision để model suy nghĩ trước khi commit",
+        "Sử dụng snake_case"
+      ],
+      "correct": 2,
+      "explanation": "Thứ tự trường là logic: đặt lý luận trước cho phép model suy nghĩ trước khi khóa câu trả lời."
+    },
+    {
+      "stage": "check",
+      "question": "Hạn chế của các công cụ giải mã hạn chế dựa trên FSM như Outlines là gì?",
+      "options": [
+        "Chúng không phải là xác định",
+        "Họ khóa bạn vào OpenAI",
+        "schemas đệ quy phải được làm phẳng; cấu trúc đệ quy thực sự cần các công cụ dựa trên CFG như XGrammar",
+        "Họ chỉ hỗ trợ enum"
+      ],
+      "correct": 2,
+      "explanation": "FSM không thể đại diện cho đệ quy không giới hạn; Động cơ CFG xử lý nó."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao Instructor được mô tả là không sửa đổi logits?",
+      "options": [
+        "Người hướng dẫn định dạng schema thành prompt và parses/retries đầu ra; logit mặt nạ xảy ra server bên hoặc hoàn toàn không",
+        "Nó sử dụng các bản cập nhật gradient",
+        "Yêu cầu của Anthropic",
+        "Nó chỉnh sửa prompt"
+      ],
+      "correct": 0,
+      "explanation": "Người hướng dẫn sử dụng đầu ra có cấu trúc phía nhà cung cấp cộng với xác thực và thử lại phía máy khách, không logit mặt giấu."
+    },
+    {
+      "stage": "post",
+      "question": "Một regex nghiêm ngặt như date='YYYY-MM-DD' có thể giới thiệu vấn đề gì?",
+      "options": [
+        "Nó yêu cầu sự hỗ trợ của CFG",
+        "Nó loại bỏ bất kỳ cửa thoát nào cho các giá trị không xác định, vì vậy model tạo ra một ngày thay vì trả về null/sentinel",
+        "Nó phá vỡ JSON phân tích cú pháp",
+        "Biểu thức chính quy chậm"
+      ],
+      "correct": 1,
+      "explanation": "Ngữ pháp quá nghiêm ngặt buộc model phải phát minh ra các giá trị; Luôn cho phép null/sentinel cho những điều chưa biết."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn nên sử dụng giải mã có hướng dẫn vLLM so với API đầu ra có cấu trúc của nhà cung cấp?",
+      "options": [
+        "Luôn luôn là nhà cung cấp",
+        "Chỉ dành cho schemas nhỏ",
+        "Chỉ với BPE cấp byte",
+        "inference tự lưu trữ, nơi bạn kiểm soát model và muốn đảm bảo cấp logit mà không cần thử lại"
+      ],
+      "correct": 3,
+      "explanation": "Giải mã có hướng dẫn vLLM phù hợp với phân phát tự lưu trữ với các ràng buộc cấp logit; Nhà cung cấp APIs khóa bạn vào stack của họ."
+    }
+  ]
+}
