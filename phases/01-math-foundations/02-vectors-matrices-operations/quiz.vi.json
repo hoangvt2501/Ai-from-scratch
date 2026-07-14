@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Đối với phép nhân ma trận (m x n) @ (n x p), điều gì phải đúng về các chiều?",
+      "options": [
+        "m phải bằng p",
+        "Kích thước bên trong n phải khớp với",
+        "Tất cả các kích thước phải bằng nhau",
+        "m phải lớn hơn p"
+      ],
+      "correct": 1,
+      "explanation": "Phép nhân ma trận yêu cầu số cột trong ma trận đầu tiên (n) bằng số hàng trong ma trận thứ hai (n). Kết quả có hình dạng (m x p)."
+    },
+    {
+      "stage": "pre",
+      "question": "Ma trận nhận dạng là gì?",
+      "options": [
+        "Ma trận của tất cả những cái",
+        "Một ma trận vuông với các số trên đường chéo và số không ở những nơi khác đóng vai trò là nhận dạng nhân",
+        "Một ma trận trong đó mọi yếu tố là duy nhất",
+        "Chuyển vị của bất kỳ ma trận nhất định nào"
+      ],
+      "correct": 1,
+      "explanation": "Ma trận nhận dạng I có những cái trên đường chéo và số không ở những nơi khác. Nhân bất kỳ ma trận nào với I trả về ma trận ban đầu không thay đổi, giống như nhân một số với 1."
+    },
+    {
+      "stage": "post",
+      "question": "Sự khác biệt chính giữa phép nhân theo nguyên tố và phép nhân ma trận là gì?",
+      "options": [
+        "Yếu tố khôn ngoan nhanh hơn trong khi phép nhân ma trận chính xác hơn",
+        "Nhân theo phần tử các vị trí phù hợp (yêu cầu cùng hình dạng), phép nhân ma trận lấy tích chấm của hàng và cột (kích thước bên trong phải khớp)",
+        "Chúng tạo ra cùng một kết quả nhưng sử dụng ký hiệu khác nhau",
+        "Phần tử khôn ngoan chỉ hoạt động trên vectors trong khi phép nhân ma trận hoạt động trên ma trận"
+      ],
+      "correct": 1,
+      "explanation": "Sản phẩm khôn ngoan (Hadamard) nhân các phần tử tương ứng và yêu cầu các hình dạng giống hệt nhau. Phép nhân ma trận tính tích chấm giữa các hàng và cột với quy tắc (m,n)@(n,p)=(m,p)."
+    },
+    {
+      "stage": "post",
+      "question": "Trong cụm từ 'output = relu(W @ x + b)', phát sóng đóng vai trò gì?",
+      "options": [
+        "Nó phát sóng tính toán trên nhiều GPUs",
+        "Nó tự động kéo dài bias vector b để phù hợp với hình dạng của W @ x để chúng có thể được thêm vào",
+        "Nó chuyển đổi các kiểu dữ liệu của W và x để khớp",
+        "Nó lặp lại kích hoạt relu trên tất cả các yếu tố"
+      ],
+      "correct": 1,
+      "explanation": "W @ x tạo ra một cột vector và b cũng là một vector. Phát sóng kéo dài b trên chiều batch nếu cần, cho phép thêm theo phần tử mà không cần khớp hình dạng rõ ràng."
+    },
+    {
+      "stage": "post",
+      "question": "Yếu thức số không cho ma trận biểu thị điều gì?",
+      "options": [
+        "Ma trận có tất cả các mục nhập bằng không",
+        "Ma trận là số ít: nó nghiền nát ít nhất một chiều, không thể đảo ngược và không có giải pháp duy nhất",
+        "Ma trận là ma trận nhận dạng",
+        "Ma trận thực hiện một vòng quay"
+      ],
+      "correct": 1,
+      "explanation": "Yếu tố quyết định bằng không có nghĩa là phép biến đổi thu gọn không gian ít nhất một chiều (ví dụ: ánh xạ 2D thành một đường thẳng). Ma trận không có nghịch đảo và các hệ tuyến tính sử dụng nó hoặc không có nghiệm hoặc vô số giải."
+    }
+  ]
+}
