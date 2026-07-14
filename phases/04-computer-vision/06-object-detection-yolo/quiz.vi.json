@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Máy dò YOLO có lưới 13x13, 3 neo trên mỗi ô và 20 classes tạo ra đầu ra có hình dạng (N, 13, 13, 3, 25). Tại sao chiều cuối cùng lại là 25?",
+      "options": [
+        "4 tọa độ hộp + 1 bias + 20 classes",
+        "4 tọa độ hộp + 1 đối tượng + 20 classes = 5 + C",
+        "25 là số classes trong COCO",
+        "Nó đang đệm cho lũy thừa tiếp theo của 2"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi neo phát ra bốn mục tiêu hồi quy hộp (tx, ty, tw, th), một điểm khách quan và C class logits. Đối với máy dò kiểu YOLO, kích thước mỗi neo luôn là 5 + C. Trên COCO với 80 classes là 85; trên PASCAL VOC với 20 là 25."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao YOLO dự đoán tx, ty thông qua sigmoid trước khi thêm ô lưới?",
+      "options": [
+        "Để chuẩn hóa chúng thành [0, 1] để trung tâm ở bên trong buồng giam và không thể thoát ra lãnh thổ của tế bào lân cận",
+        "Sigmoid được yêu cầu bởi tích chập",
+        "Để ngăn ngừa NaN trong quá trình training",
+        "Để làm cho hộp lớn hơn"
+      ],
+      "correct": 0,
+      "explanation": "sigmoid(tx) nằm trong [0, 1], vì vậy (sigmoid(tx) + cell_x) * sải chân đặt trung tâm ở đâu đó bên trong ô ở cột cell_x. Ràng buộc này giữ cho mỗi ô chỉ chịu trách nhiệm cho các đối tượng nằm ở giữa trong khu vực riêng của nó, đó là giả định làm cho training dựa trên lưới ổn định."
+    },
+    {
+      "stage": "post",
+      "question": "Máy dò của bạn dự đoán 15 hộp xung quanh một vật thể duy nhất sau đầu. Bạn áp dụng NMS với iou_threshold=0.45 và nhận lại 1 hộp. NMS đã làm gì?",
+      "options": [
+        "Nó tính trung bình tất cả 15 dự đoán",
+        "Nó sắp xếp 15 hộp theo điểm số, giữ điểm cao nhất và xóa mọi hộp có IoU vượt quá 0,45; 14 người còn lại đều trùng lặp người chiến thắng trên ngưỡng nên một người vẫn còn",
+        "Nó chọn một người sống sót ngẫu nhiên",
+        "Nó merged các hộp về mặt hình học"
+      ],
+      "correct": 1,
+      "explanation": "NMS là một loại bỏ trùng lặp tham lam: sắp xếp theo điểm số, giữ ở trên cùng, loại bỏ mọi thứ gần nó (ngưỡng > IoU), lặp lại. Nó không merge hoặc trung bình. Đó là lý do tại sao độ trễ phát hiện benchmarks bao gồm thời gian NMS và tại sao các models hiện đại như RT-DETR thay thế nó bằng một giải pháp thay thế đã học."
+    },
+    {
+      "stage": "post",
+      "question": "model của bạn có mAP@0,5 = 0,75 nhưng mAP@0,5:0,95 = 0,32. Cách giải thích chính xác nhất là gì?",
+      "options": [
+        "model bị hỏng; mAP@0.5 phải bằng mAP@0.5:0.95",
+        "model tìm đúng đối tượng nhưng các hộp của nó không được định vị chặt chẽ - tốt ở IoU 0,5, không thành công ở IoU 0,7+",
+        "dataset có quá nhiều classes",
+        "Ngưỡng inference quá cao"
+      ],
+      "correct": 1,
+      "explanation": "mAP@0.5 khoan dung về bản địa hóa; mAP@0,5:0,95 trung bình vượt quá ngưỡng nghiêm ngặt lên đến 0,95. Khoảng cách lớn giữa hai có nghĩa là các hộp ở đúng vị trí nhưng không chật hẹp. Các bản sửa lỗi điển hình: CIoU/DIoU hộp loss, features độ phân giải cao hơn, bộ neo được điều chỉnh tốt hơn cho phù hợp với dataset."
+    },
+    {
+      "stage": "post",
+      "question": "Trọng lượng loss YOLO lambda_coord = 5.0 và lambda_noobj = 0.5 gần giống với giấy gốc. Các tỷ lệ này mã hóa những gì?",
+      "options": [
+        "GPU đánh đổi bộ nhớ",
+        "Thực tế là hầu hết các ô không có đối tượng, vì vậy các ô không có đối tượng phải được giảm trọng lượng nếu không chúng sẽ thống trị tổng số loss; và thực tế là hồi quy hộp là một loss quy mô nhỏ hơn so với entropy chéo, vì vậy nó cần tăng trọng số để tạo ra gradients tương đương",
+        "Những lựa chọn ngẫu nhiên mà các tác giả không bao giờ biện minh",
+        "Số lượng neo trên mỗi ô"
+      ],
+      "correct": 1,
+      "explanation": "Trong lưới 13x13 có 169 ô, thường có một đến năm đối tượng. 160+ ô trống đều đóng góp tính khách quan loss; Nếu không có một lambda_noobj nhỏ, họ sẽ lấn át tín hiệu tích cực. Ngược lại, loss hộp MSE nhỏ về mặt số bên cạnh entropy chéo, vì vậy lambda_coord > 1 giữ gradients của nó có thể so sánh được. Cả hai tỷ lệ đều là về sự cân bằng gradient độ lớn của mỗi thành phần."
+    }
+  ]
+}
