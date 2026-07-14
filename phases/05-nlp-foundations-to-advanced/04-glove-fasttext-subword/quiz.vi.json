@@ -1,0 +1,102 @@
+{
+  "lesson": "04-glove-fasttext-subword",
+  "title": "GloVe, FastText và Subword Embeddings",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "GloVe đã đóng góp gì cho Word2Vec?",
+      "options": [
+        "Phân tích trực tiếp của ma trận đồng xuất hiện từ-từ với loss có trọng số",
+        "tokenization cấp byte",
+        "Mạng nơ-ron sâu hơn",
+        "Từ phụ n-gram embeddings"
+      ],
+      "correct": 0,
+      "explanation": "GloVe phân tích ma trận đồng xuất hiện toàn cầu với log-loss có trọng số chu đáo."
+    },
+    {
+      "stage": "pre",
+      "question": "FastText giải quyết vấn đề gì mà Word2Vec và GloVe không giải quyết?",
+      "options": [
+        "Giảm chi phí training",
+        "Chuyển giao đa ngôn ngữ",
+        "Tạo vectors cho các từ không nhìn thấy bằng cách soạn n gam ký tự",
+        "Định hướng đa nghĩa"
+      ],
+      "correct": 2,
+      "explanation": "FastText soạn một từ vector từ từ phụ n-gram của nó, vì vậy các từ OOV vẫn nhận được một vector hợp lý."
+    },
+    {
+      "stage": "check",
+      "question": "Trong GloVe, hàm trọng số f(x) = (x/x_max)^alpha đóng vai trò gì?",
+      "options": [
+        "Giảm cân các cặp cực kỳ thường xuyên để họ không thống trị loss",
+        "Chọn mẫu âm tính",
+        "Khởi tạo trọng số ngẫu nhiên",
+        "Chuẩn hóa vectors theo chiều dài đơn vị"
+      ],
+      "correct": 0,
+      "explanation": "Trọng số ngăn chặn các sự xuất hiện đồng hiện ở khắp mọi nơi như (the, and) thống trị training."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để bước BPE merge chọn cặp nào để kết hợp tiếp theo?",
+      "options": [
+        "Một cặp ngẫu nhiên",
+        "Cặp đầu tiên về mặt từ điển",
+        "Cặp token liền kề thường xuyên nhất trong kho dữ liệu",
+        "Cặp có IDF cao nhất"
+      ],
+      "correct": 2,
+      "explanation": "BPE lặp đi lặp lại merges cặp liền kề thường xuyên nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao GPT-2 sử dụng BPE cấp byte?",
+      "options": [
+        "Byte BPE bỏ qua merge training",
+        "Từ vựng cơ bản 256 byte bao gồm bất kỳ đầu vào nào, loại bỏ hoàn toàn từ vựng ngoài vốn từ vựng",
+        "Byte huấn luyện nhanh hơn ký tự",
+        "Byte bảo toàn vỏ ngầm"
+      ],
+      "correct": 1,
+      "explanation": "Bắt đầu từ 256 byte có nghĩa là mọi chuỗi UTF-8 được mã hóa; không có gì là OOV."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn nên sử dụng tokenizer nào khi fine-tuning pretrained transformer?",
+      "options": [
+        "Luôn SentencePiece",
+        "Chính xác tokenizer model shipped với; Mismatch phá vỡ embeddings",
+        "Cái nào có vốn từ vựng lớn nhất",
+        "Luôn BPE cấp byte"
+      ],
+      "correct": 1,
+      "explanation": "Tokenizer-model không phù hợp âm thầm làm hỏng đầu vào; Luôn ghép nối shipped tokenizer với model của nó."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn sẽ chọn FastText thay vì GloVe cho pretrained từ vectors?",
+      "options": [
+        "Khi bạn cần một model 50d",
+        "Đối với các ngôn ngữ hoặc miền giàu hình thái với các từ mới và lỗi chính tả thường xuyên",
+        "Khi độ trễ chặt chẽ nhất",
+        "Khi kho dữ liệu rất nhỏ"
+      ],
+      "correct": 1,
+      "explanation": "Thành phần từ phụ của FastText xử lý các biến tấu, từ mới và lỗi chính tả mà GloVe không thể."
+    },
+    {
+      "stage": "post",
+      "question": "Đơn vị nào tạo thành cơ sở của các từ vựng WordPiece, BPE và SentencePiece?",
+      "options": [
+        "Câu",
+        "Toàn bộ từ",
+        "Đoạn văn",
+        "Các đoạn từ phụ (ký tự, n-gram hoặc merges đã học) dưới cấp từ"
+      ],
+      "correct": 3,
+      "explanation": "Cả ba đều là từ phụ tokenizers; Chúng khác nhau về cách học merges hoặc các tác phẩm, không phải là từ phụ."
+    }
+  ]
+}
