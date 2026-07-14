@@ -1,0 +1,78 @@
+{
+  "lesson": "21-tool-registry-schema-validation",
+  "title": "Công cụ Registry với Xác thực Schema",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao phải đăng ký schema của công cụ riêng biệt với trình xử lý của nó?",
+      "options": [
+        "Bởi vì schemas phải sống trong YAML",
+        "Vì vậy, trình xác thực vẫn là dữ liệu thuần túy và trình xử lý vẫn là mã mờ đục",
+        "Bởi vì trình xử lý không thể trả về JSON",
+        "Vì schemas phải biên dịch"
+      ],
+      "correct": 1,
+      "explanation": "Giữ schema dưới dạng dữ liệu và trình xử lý dưới dạng mã cho phép trình xác thực là một hàm thuần túy trên cây schema."
+    },
+    {
+      "stage": "check",
+      "question": "Những từ khóa nào cố tình nằm ngoài tập hợp con mà bài học này thực hiện?",
+      "options": [
+        "loại, thuộc tính, bắt buộc",
+        "minLength, maxLength, mẫu",
+        "mộtCủa, bất kỳ, $ref, tất cả",
+        "mặt hàng, enum"
+      ],
+      "correct": 2,
+      "explanation": "Các từ khóa bị bỏ qua thêm chu kỳ và độ phân giải tham chiếu. Chúng ta giữ tập con tuyến tính để trình xác thực duy trì một bước đi đệ quy duy nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao register() từ chối các bản sao theo mặc định?",
+      "options": [
+        "Bởi vì registry không thể lưu trữ nhiều bản ghi cho mỗi tên",
+        "Ghi đè im lặng là nguyên nhân gây ra sự trôi dạt danh mục công cụ production",
+        "Bởi vì schema không thể được xác thực lại",
+        "Bởi vì không thể thay thế bộ xử lý"
+      ],
+      "correct": 1,
+      "explanation": "Buộc override=True hiển thị trường hợp hai phần của mã có ý định sở hữu cùng một tên công cụ."
+    },
+    {
+      "stage": "check",
+      "question": "Trình xác thực làm gì khi một schema chỉ định số nguyên kiểu nhưng nhận được giá trị True?",
+      "options": [
+        "Coi nó là 1 và vượt qua",
+        "Trả về lỗi kiểu vì bool không phải là số nguyên trong trình xác thực này",
+        "Đưa ra một ngoại lệ chưa được xử lý",
+        "Ép buộc thành số nguyên một cách im lặng"
+      ],
+      "correct": 1,
+      "explanation": "Python bool là một lớp con của int, nhưng trình xác thực lọc bool ra khỏi kiểm tra số nguyên. JSON boolean và số nguyên là khác biệt."
+    },
+    {
+      "stage": "post",
+      "question": "Khi đối tượng đầu vào là {'user': {'email': 0}} và schema yêu cầu user.email phải là chuỗi, đường dẫn lỗi là gì?",
+      "options": [
+        "/",
+        "/người dùng",
+        "/user/email",
+        "user.email"
+      ],
+      "correct": 2,
+      "explanation": "Con trỏ JSON mã hóa sự đi xuống thông qua người dùng, sau đó gửi email dưới dạng /user/email."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao registry không phải là ranh giới an ninh?",
+      "options": [
+        "Bởi vì trình xử lý vẫn có thể hoạt động sai sau khi xác thực vượt qua",
+        "Bởi vì trình xử lý không đồng bộ",
+        "Bởi vì schema là JSON",
+        "Bởi vì registry đang process"
+      ],
+      "correct": 0,
+      "explanation": "registry kiểm tra hình dạng. Hành vi, timeouts và cách ly thuộc về người điều phối và sandbox."
+    }
+  ]
+}
