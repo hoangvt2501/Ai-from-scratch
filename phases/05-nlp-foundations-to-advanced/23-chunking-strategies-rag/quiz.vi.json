@@ -1,0 +1,102 @@
+{
+  "lesson": "23-chunking-strategies-rag",
+  "title": "Chiến lược phân đoạn cho RAG",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao chiến lược phân đoạn lại quan trọng như embedding model trong RAG?",
+      "options": [
+        "Ranh giới khối xác định liệu câu trả lời có thể truy xuất được hay không; Bad Chunks đánh bại bất kỳ embedding nào",
+        "Chunking thu nhỏ model",
+        "Các khối nhỏ hơn huấn luyện nhanh hơn",
+        "FAISS yêu cầu phân khối"
+      ],
+      "correct": 0,
+      "explanation": "Nghiên cứu năm 2025 của Vectara cho thấy chất lượng phân đoạn khớp hoặc vượt quá tác động embedding-model đến chất lượng truy xuất."
+    },
+    {
+      "stage": "pre",
+      "question": "RecursiveCharacterTextSplitter của LangChain thử những gì theo thứ tự?",
+      "options": [
+        "Luôn chia theo ký tự N",
+        "Tách trên token ID",
+        "Hãy thử tách ngắt đoạn, sau đó là dòng mới, sau đó là ranh giới câu, sau đó là khoảng trắng",
+        "Chỉ tách trên khoảng trắng"
+      ],
+      "correct": 2,
+      "explanation": "Tách đệ quy quay trở lại đoạn -> dòng mới -> câu -> khoảng trống để bảo toàn cấu trúc."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao mẫu tài liệu mẹ cải thiện chất lượng câu trả lời?",
+      "options": [
+        "Trẻ em đưa ra khả năng truy xuất chính xác; Trả về khối cha lớn hơn sẽ bảo toàn bối cảnh xung quanh mà người đọc cần",
+        "Nó loại bỏ embeddings",
+        "Nó tránh tokenization",
+        "Nó sử dụng ít chu kỳ GPU hơn"
+      ],
+      "correct": 0,
+      "explanation": "Truy xuất theo các chunk con nhỏ cho precision, sau đó mở rộng đến cha cho ngữ cảnh."
+    },
+    {
+      "stage": "check",
+      "question": "'Truy xuất theo ngữ cảnh' của Anthropic thêm gì vào mỗi phần trước khi lập chỉ mục?",
+      "options": [
+        "Thẻ POS",
+        "Mã ngôn ngữ",
+        "Một bản tóm tắt 50-100 từ được tạo LLM đặt đoạn trong ngữ cảnh tổng thể của tài liệu",
+        "Nhiễu ngẫu nhiên"
+      ],
+      "correct": 2,
+      "explanation": "Truy xuất theo ngữ cảnh thêm vào trước một bản tóm tắt vị trí được viết bằng LLM cho mỗi khối; ~ 35-50% recall tăng."
+    },
+    {
+      "stage": "check",
+      "question": "Phát hiện nào vào năm 2026 mâu thuẫn với sự khôn ngoan thông thường về sự chồng chéo của khối?",
+      "options": [
+        "Cần có sự chồng chéo đối với BM25",
+        "Sự chồng chéo benchmarks thực nghiệm năm 2026 thường không mang lại lợi ích có thể đo lường được trong khi tăng gấp đôi chi phí chỉ số",
+        "Chồng chéo chỉ cải thiện truy xuất theo ngữ cảnh",
+        "Chồng chéo phải là 50%"
+      ],
+      "correct": 1,
+      "explanation": "Các nghiên cứu mới hơn (SPLADE + Mistral trên NQ) cho thấy sự chồng chéo của khối hiếm khi giúp ích và thổi phồng kích thước chỉ số."
+    },
+    {
+      "stage": "post",
+      "question": "Kích thước khối nào benchmark năm 2026 của NVIDIA liên kết với các truy vấn factoid?",
+      "options": [
+        "64 tokens",
+        "Khoảng 256-512 tokens",
+        "2048-4096 tokens",
+        "8192 tokens"
+      ],
+      "correct": 1,
+      "explanation": "Các truy vấn factoid được hưởng lợi từ các phần nhỏ hơn (256-512 tokens) tập trung tín hiệu câu trả lời."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao sàn token tối thiểu lại quan trọng khi sử dụng phân đoạn ngữ nghĩa?",
+      "options": [
+        "Yêu cầu của BERT",
+        "Nếu không có sàn, phân đoạn ngữ nghĩa có thể tạo ra các mảnh nhỏ 40 token gây ảnh hưởng đến việc truy xuất",
+        "Sàn tăng tốc inference",
+        "Sàn ngăn chặn sự chồng chéo"
+      ],
+      "correct": 1,
+      "explanation": "Các chunker ngữ nghĩa có thể phân đoạn quá mức; Thực thi kích thước tối thiểu ngăn chặn các mảnh tín hiệu thấp."
+    },
+    {
+      "stage": "post",
+      "question": "'Phân đoạn muộn' có tác dụng gì khác với phân đoạn truyền thống?",
+      "options": [
+        "Bỏ qua hoàn toàn việc phân đoạn",
+        "Nhúng toàn bộ tài liệu ở cấp độ token trước, sau đó gộp token embeddings vào vectors khối để bảo toàn ngữ cảnh khối chéo",
+        "Khối sau khi truy xuất",
+        "Thay vào đó, sử dụng BM25"
+      ],
+      "correct": 1,
+      "explanation": "Phân đoạn muộn nhúng đầu tiên và nhóm thứ hai, duy trì các tương tác theo ngữ cảnh qua ranh giới chunk."
+    }
+  ]
+}
