@@ -1,0 +1,90 @@
+{
+  "lesson": "19-benchmarks-swebench-gaia",
+  "title": "Benchmarks: SWE-bench, GAIA, AgentBench",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Người đánh giá của SWE-bench kiểm tra gì trên bản vá ứng viên?",
+      "options": [
+        "Điểm BLEU so với bản sửa lỗi tham chiếu",
+        "Các bài kiểm tra trước đây không đạt giờ vượt qua (FAIL_TO_PASS) và các bài kiểm tra trước đó vẫn đạt (PASS_TO_PASS)",
+        "Độ dài bản vá dưới 200 dòng",
+        "Patch vượt qua một giám khảo LLM riêng biệt"
+      ],
+      "correct": 1,
+      "explanation": "Các cổng harness trong quá trình chuyển đổi kiểm thử: các bài kiểm tra tiết lộ lỗi phải lật trong khi các bài kiểm tra hồi quy phải giữ màu xanh lá cây."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao SWE-bench Verified tồn tại?",
+      "options": [
+        "Nó chạy nhanh hơn",
+        "Tập hợp con 500 nhiệm vụ do con người quản lý của OpenAI loại bỏ các vấn đề mơ hồ và các bài kiểm tra không đáng tin cậy",
+        "Nó bao gồm nhiều ngôn ngữ hơn",
+        "Nó sử dụng một định dạng bản vá khác"
+      ],
+      "correct": 1,
+      "explanation": "Đã xác minh là tập hợp con rõ ràng hơn để báo cáo đáng tin cậy."
+    },
+    {
+      "stage": "check",
+      "question": "SWE-bench + đã tìm thấy gì về các bản vá lỗi thành công?",
+      "options": [
+        "32,67% rò rỉ văn bản giải pháp trong vấn đề và 31,08% có phạm vi kiểm tra yếu đáng ngờ",
+        "Tất cả các bản vá đã được ghi nhớ",
+        "Không có ô nhiễm",
+        "Các bản vá luôn vượt quá 1000 dòng"
+      ],
+      "correct": 0,
+      "explanation": "SWE-bench+ gắn cờ rò rỉ giải pháp và độ phủ sóng yếu trên một phần lớn các bản vá lỗi thành công."
+    },
+    {
+      "stage": "check",
+      "question": "Triết lý thiết kế của GAIA là gì?",
+      "options": [
+        "Khó cho con người, dễ cho AI",
+        "Về mặt khái niệm đơn giản đối với con người (khoảng 92%) nhưng khó đối với AI (GPT-4 ban đầu với plugin: khoảng 15%)",
+        "Thuần túy benchmark truy xuất vector",
+        "Chỉ câu hỏi một lượt"
+      ],
+      "correct": 1,
+      "explanation": "GAIA cố tình dễ dàng cho con người, khó AI, thử nghiệm lý luận + công cụ + phương thức."
+    },
+    {
+      "stage": "check",
+      "question": "Cái nào KHÔNG phải là một trong những danh mục môi trường của AgentBench?",
+      "options": [
+        "Mã (Bash, DB, KG)",
+        "Trò chơi (Alfworld, LTP)",
+        "Web (WebShop, Mind2Web)",
+        "Gradient (RL, IRL)"
+      ],
+      "correct": 3,
+      "explanation": "AgentBench bao gồm mã, trò chơi, web và thế hệ mở. Không có thể loại gradient."
+    },
+    {
+      "stage": "post",
+      "question": "Bài học xác định cách báo cáo số SWE-bench sai là gì?",
+      "options": [
+        "Báo cáo phân tích trên mỗi repo",
+        "Báo cáo một số tổng hợp mà không đề cập đến ngữ cảnh Đã xác minh hoặc SWE-bench+",
+        "Báo cáo số bước",
+        "Báo cáo đồng hồ treo tường"
+      ],
+      "correct": 1,
+      "explanation": "Cố định một số che giấu ô nhiễm và chi phí; luôn báo cáo ngữ cảnh đã xác minh và theo phân phối."
+    },
+    {
+      "stage": "post",
+      "question": "Những benchmarks này KHÔNG đo được kích thước nào?",
+      "options": [
+        "Chi phí hoạt động trong thế giới thực (tokens, đồng hồ treo tường), an toàn đối nghịch và lĩnh vực của riêng bạn",
+        "Chuyển đổi thử nghiệm",
+        "Thành công trên mỗi nhiệm vụ",
+        "Số bước"
+      ],
+      "correct": 0,
+      "explanation": "Benchmarks tổng hợp; Chúng không nắm bắt được chi phí, độ mạnh đối nghịch hoặc tên miền của bạn."
+    }
+  ]
+}
