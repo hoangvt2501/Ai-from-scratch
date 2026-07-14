@@ -1,0 +1,67 @@
+[
+  {
+    "id": "nb-pre-1",
+    "stage": "pre",
+    "question": "Giả định 'ngây thơ' trong Naive Bayes là gì?",
+    "options": [
+      "Xác suất prior của mỗi class bằng nhau",
+      "Tất cả features đều độc lập có điều kiện với nhãn class",
+      "Dữ liệu tuân theo phân phối chuẩn",
+      "model không có parameters để học"
+    ],
+    "correct": 1,
+    "explanation": "Naive Bayes giả định mọi feature đều độc lập với mọi feature khác, có điều kiện trên class. Điều này sai về mặt toán học (ví dụ: 'máy móc' và 'học tập' cùng xảy ra) nhưng hoạt động tốt trong thực tế."
+  },
+  {
+    "id": "nb-pre-2",
+    "stage": "pre",
+    "question": "Làm mịn Laplace ngăn chặn điều gì trong Naive Bayes?",
+    "options": [
+      "Overfitting đến datasets lớn",
+      "Xác suất bằng không cho các từ chưa từng thấy trong một class trong training",
+      "training chậm trên dữ liệu high-dimensional",
+      "Class imbalance trong dataset"
+    ],
+    "correct": 1,
+    "explanation": "Nếu không làm mịn, một từ chưa bao giờ xuất hiện trong 'spam' training email sẽ nhận được P(word|spam) = 0, làm cho toàn bộ sản phẩm bằng không bất kể bằng chứng mạnh mẽ khác. Làm mịn Laplace thêm 1 vào mỗi lần đếm."
+  },
+  {
+    "id": "nb-post-1",
+    "stage": "post",
+    "question": "Giả định độc lập ngây thơ rõ ràng là sai đối với văn bản. Tại sao Naive Bayes vẫn phân loại tốt?",
+    "options": [
+      "Nó chỉ hoạt động trên các từ vựng rất nhỏ khi tính độc lập được giữ vững",
+      "Phân loại chỉ cần xếp hạng class chính xác, không cần ước tính xác suất chính xác và giả định đưa ra các lỗi ổn định ảnh hưởng đến tất cả classes tương tự",
+      "Các triển khai hiện đại bí mật loại bỏ giả định độc lập",
+      "Nó chỉ hoạt động khi features thực sự độc lập"
+    ],
+    "correct": 1,
+    "explanation": "NB cần xếp hạng classes chính xác, không ước tính xác suất chính xác. Giả định độc lập là bias cao nhưng variance thấp, làm cho nó ổn định với dữ liệu hạn chế. Tương quan features bằng chứng đếm kép cho class chính xác."
+  },
+  {
+    "id": "nb-post-2",
+    "stage": "post",
+    "question": "Khi nào bạn nên sử dụng NB đa thức so với NB Gaussian?",
+    "options": [
+      "Đa thức cho hồi quy, Gaussian để phân loại",
+      "Đa thức cho count/frequency features từ, Gaussian cho features có giá trị thực liên tục",
+      "Đa thức cho dữ liệu nhị phân, Gaussian cho các bài toán đa class",
+      "Chúng có thể hoán đổi cho nhau - luôn sử dụng tùy chọn nào nhanh hơn"
+    ],
+    "correct": 1,
+    "explanation": "Số lượng models feature NB đa thức (tần số từ trong văn bản). Gaussian NB giả định features tuân theo các phân phối chuẩn, thích hợp cho các features liên tục như phép đo hoặc đọc cảm biến."
+  },
+  {
+    "id": "nb-post-3",
+    "stage": "post",
+    "question": "Một email chứa 'miễn phí' hai lần và 'tiền' một lần. Trong NB đa thức với log probabilities, điểm spam được tính như thế nào?",
+    "options": [
+      "log P(spam) + log P(miễn phí|spam) + log P(tiền|spam)",
+      "log P(spam) + 2 * log P(miễn phí|spam) + 1 * log P(tiền|spam)",
+      "P (thư rác) * P (miễn phí | thư rác) * P (tiền | thư rác)",
+      "log P(spam) * 2 * log P(miễn phí|spam)"
+    ],
+    "correct": 1,
+    "explanation": "NB đa thức nhân từ likelihoods nâng lên thành số đếm của chúng. Trong log space: log P(spam) + 2*log P(free|spam) + 1*log P(money|spam). Số lượng từ hoạt động như một số mũ."
+  }
+]
