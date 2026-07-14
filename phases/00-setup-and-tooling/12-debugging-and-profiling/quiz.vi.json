@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Điều gì làm cho việc gỡ lỗi mã AI/ML về cơ bản khác với gỡ lỗi một ứng dụng web điển hình?",
+      "options": [
+        "Mã AI sử dụng các ngôn ngữ lập trình khác nhau",
+        "AI lỗi thường không gặp sự cố - chúng âm thầm tạo ra kết quả không chính xác mà không có thông báo lỗi",
+        "Mã AI không thể được gỡ lỗi bằng các công cụ tiêu chuẩn như câu lệnh in",
+        "Mã AI luôn yêu cầu GPU để gỡ lỗi"
+      ],
+      "correct": 1,
+      "explanation": "Lỗi AI tồi tệ nhất tạo ra đầu ra có vẻ hợp lệ. Một vòng lặp training được định cấu hình sai có thể chạy trong nhiều giờ mà không có lỗi trong khi model không học được gì hữu ích, không giống như web apps gặp sự cố với stack traces."
+    },
+    {
+      "stage": "pre",
+      "question": "Trình phân tích đo lường điều gì?",
+      "options": [
+        "Mã có tạo ra đầu ra chính xác hay không",
+        "Mỗi phần của mã tiêu tốn bao nhiêu thời gian và bộ nhớ",
+        "Có bao nhiêu lỗi tồn tại trong cơ sở mã",
+        "Phạm vi mã của kiểm thử đơn vị"
+      ],
+      "correct": 1,
+      "explanation": "Trình phân tích đo lường mức tiêu thụ tài nguyên -- thời gian thực thi cho mỗi hàm, phân bổ bộ nhớ và sử dụng GPU -- giúp bạn tìm ra nút thắt cổ chai và tối ưu hóa hiệu suất."
+    },
+    {
+      "stage": "post",
+      "question": "Các model của bạn đạt được 99% accuracy trong bộ kiểm tra. Bạn nên nghi ngờ lỗi nào dành riêng cho AI trước?",
+      "options": [
+        "model có quá nhiều parameters",
+        "Rò rỉ dữ liệu - các mẫu thử nghiệm có thể đã bị rò rỉ vào bộ training",
+        "learning rate quá cao",
+        "Kích thước batch quá lớn"
+      ],
+      "correct": 1,
+      "explanation": "accuracy cao đáng ngờ thường cho thấy rò rỉ dữ liệu - chồng chéo giữa dữ liệu training và dữ liệu thử nghiệm, hoặc features có chứa nhãn đích. Luôn kiểm tra train/test chồng chéo."
+    },
+    {
+      "stage": "post",
+      "question": "Phát hiện phổ biến nhất khi lập hồ sơ phân tích thời gian của vòng lặp training là gì?",
+      "options": [
+        "Việc backward pass mất 90% thời gian",
+        "Tải dữ liệu mất nhiều thời gian hơn so với chuyển tiếp và lùi cộng lại",
+        "Viết nhật ký mất nhiều thời gian nhất",
+        "GPU phân bổ bộ nhớ là nút thắt cổ chai"
+      ],
+      "correct": 1,
+      "explanation": "Tải dữ liệu thường mất 60%+ thời gian training khi num_workers=0 trong DataLoader. Bản sửa lỗi là đặt num_workers > 0 để tải dữ liệu song song với tính toán GPU."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn thấy NaN loss ở bước 500. Cách tiếp cận nào sẽ giúp bạn tìm ra nguyên nhân gốc rễ?",
+      "options": [
+        "Khởi động lại training từ đầu với một hạt giống ngẫu nhiên khác",
+        "Sử dụng detect_nan để kiểm tra NaN/Inf trong gradients và thêm breakpoint() tại điểm lỗi",
+        "Tăng kích thước batch để ổn định gradients",
+        "Chuyển từ Adam sang SGD optimizer"
+      ],
+      "correct": 1,
+      "explanation": "Đầu tiên, xác định nguồn gốc của NaN bằng cách kiểm tra gradients cho từng parameter. Điểm ngắt có điều kiện ở bước NaN cho phép bạn kiểm tra các giá trị tensor một cách tương tác. Nguyên nhân phổ biến: learning rate quá cao, log(0) hoặc chia cho không."
+    }
+  ]
+}
