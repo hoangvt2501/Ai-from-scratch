@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bạn cung cấp hình ảnh RGB 224x224 vào một conv với kernel_size=3, sải chân = 1, đệm = 0. Kích thước không gian đầu ra là gì?",
+      "options": [
+        "224x224",
+        "222x222",
+        "112x112",
+        "74x74"
+      ],
+      "correct": 1,
+      "explanation": "Kích thước đầu ra = (H - K + 2P) / S + 1 = (224 - 3 + 0) / 1 + 1 = 222. Nếu không có đệm, mỗi lần tích chập 3x3 sẽ thu nhỏ bản đồ feature xuống 2 pixel trên mỗi trục - một pixel so với mỗi đường viền."
+    },
+    {
+      "stage": "pre",
+      "question": "Một lớp conv có in_channels=3, out_channels=64, kernel_size=3, với bias. Có bao nhiêu parameters có thể học được?",
+      "options": [
+        "1,728",
+        "1,792",
+        "576",
+        "192"
+      ],
+      "correct": 1,
+      "explanation": "C_out * C_in * K * K + C_out = 64 * 3 * 3 * 3 + 64 = 1.728 + 64 = 1.792. +C_out là một bias trên mỗi kênh đầu ra. So sánh nó với một lớp dày đặc trên cùng một đầu vào (224 * 224 * 3 -> 64 = khoảng 9,6 triệu tham số) và bạn sẽ thấy tại sao tích chập là prior phù hợp cho hình ảnh."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao CNN hiện đại thích stacks tích chập 3x3 hơn một chuyển đổi 5x5 hoặc 7x7?",
+      "options": [
+        "Tích chập 3x3 được tăng tốc phần cứng; những cái lớn hơn thì không",
+        "Hai convs 3x3 bao phủ cùng một trường tiếp nhận 5x5 với ít parameters hơn (2 * 9 so với 25) và thêm một độ phi tuyến tính bổ sung giữa chúng",
+        "Hạt nhân lớn tràn GPU thanh ghi",
+        "3x3 là kích thước hạt nhân duy nhất hỗ trợ khoảng đệm"
+      ],
+      "correct": 1,
+      "explanation": "Xếp chồng 3x3 convs cho cùng một trường tiếp nhận như một conv lớn nhưng có ít parameters hơn và nhiều phi tuyến tính hơn, giúp tăng sức mạnh biểu cảm. VGG đã chứng minh điều này bằng kinh nghiệm và mọi gia đình hiện đại (ResNet, ConvNeXt) đều kế thừa thiết kế."
+    },
+    {
+      "stage": "post",
+      "question": "Biến đổi im2col thực sự làm gì?",
+      "options": [
+        "Nó nén hình ảnh để vừa với bộ nhớ cache GPU",
+        "Nó trích xuất mọi cửa sổ tiếp nhận có kích thước hạt nhân từ đầu vào và stacks chúng dưới dạng cột để việc tích chập trở thành một ma trận duy nhất nhân lên",
+        "Nó chuyển đổi float32 pixel thành int8 để số học nhanh hơn",
+        "Nó nối tất cả các hình ảnh trong một batch thành một ma trận 2D duy nhất"
+      ],
+      "correct": 1,
+      "explanation": "im2col định hình lại đầu vào để mỗi cột là một trường tiếp nhận phẳng. Làm phẳng hạt nhân thành một hàng làm giảm tích chập xuống cols @ w_flat. T, một lệnh gọi GEMM duy nhất GPUs thực thi nhanh hơn hàng nghìn lần so với vòng lặp Python bốn lần. Mỗi thư viện production conv là một số biến thể của thư viện này."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn stack bốn chập 3x3 (tất cả đều sải 1, không gộp). Trường tiếp nhận của tế bào thần kinh ở lớp cuối cùng là gì?",
+      "options": [
+        "3x3 - mỗi chuyển đổi là 3x3",
+        "5x5 - hai convs cho 5x5 và độ sâu không giúp ích gì",
+        "9x9 — mỗi conv thêm 2 ở mỗi bên: 1 + 4 * (3-1) = 9",
+        "15x15 — mỗi conv tăng gấp ba lần trường tiếp nhận"
+      ],
+      "correct": 2,
+      "explanation": "Đối với L xếp chồng K x K với sải chân 1, trường tiếp nhận = 1 + L * (K - 1). Với L = 4 và K = 3 là 1 + 4 * 2 = 9. Công thức tương tự khái quát hóa với sải bước: trường tiếp nhận phát triển nhân lên thông qua các lớp sải bước, đó là lý do tại sao một mạng lưới sâu với việc lấy mẫu xuống có thể bao phủ toàn bộ hình ảnh trong mười hoặc mười lăm khối."
+    }
+  ]
+}
