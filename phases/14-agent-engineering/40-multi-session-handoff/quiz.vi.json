@@ -1,0 +1,90 @@
+{
+  "lesson": "40-multi-session-handoff",
+  "title": "Chuyển giao nhiều Session",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trường nào là trường chịu lực trong gói bàn giao?",
+      "options": [
+        "Tóm tắt",
+        "next_action (nếu không có nó, tài liệu là báo cáo trạng thái, không phải bàn giao)",
+        "commands_run",
+        "verdict_pointer"
+      ],
+      "correct": 1,
+      "explanation": "Một bàn giao với mọi thứ ngoại trừ next_action là một báo cáo trạng thái; Bước cụ thể tiếp theo là điều làm cho session tiếp theo hiệu quả."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao bàn giao được tạo ra chứ không phải bằng văn bản?",
+      "options": [
+        "Máy phát điện nhanh hơn",
+        "Bàn giao viết tay bị bỏ qua vào một ngày vất vả; Máy phát điện đọc bàn làm việc artifacts và phát ra gói, vì vậy agent chỉ để bàn làm việc ở trạng thái mà máy phát có thể tóm tắt",
+        "Máy phát điện mã hóa tốt hơn",
+        "Apache 2.0 yêu cầu nó"
+      ],
+      "correct": 1,
+      "explanation": "Tự động hóa thu hẹp khoảng cách giữa ý định và tính nhất quán."
+    },
+    {
+      "stage": "check",
+      "question": "Gói ship ở hai dạng nào?",
+      "options": [
+        "PDF và PNG",
+        "handoff.md (con người có thể đọc được) và bàn giao. json (máy có thể đọc được, cả hai đều từ cùng một nguồn artifacts; JSON thắng khi phân kỳ)",
+        "Email và Slack",
+        "YAML và TOML"
+      ],
+      "correct": 1,
+      "explanation": "Giảm giá cho con người, JSON cho agent tiếp theo; cả hai đều đến từ cùng một máy phát điện."
+    },
+    {
+      "stage": "check",
+      "question": "Bài học phân biệt nén với bàn giao như thế nào?",
+      "options": [
+        "Chúng giống nhau",
+        "Đầm nén kéo dài một session; Handoff kết thúc một cách rõ ràng và bắt đầu phần tiếp theo trong bối cảnh mới. Gói là thứ làm cho quá trình chuyển đổi đó trở nên rẻ",
+        "Đầm nén được trả phí, bàn giao là miễn phí",
+        "Handoff yêu cầu GPU"
+      ],
+      "correct": 1,
+      "explanation": "Khung Hermes Issue 20372: viết một bàn giao nhỏ gọn trước khi nén tại chỗ làm giảm chất lượng, sau đó tiếp tục trong một session mới."
+    },
+    {
+      "stage": "check",
+      "question": "Bài học đề nghị điều gì về thời điểm kết thúc một session?",
+      "options": [
+        "Ở bối cảnh 100%, sau đó hoảng loạn",
+        "Trước 50-75% ngân sách bối cảnh, trong khi bối cảnh còn nguyên vẹn; rẻ để viết trước khi nén artifacts trạng thái ô nhiễm",
+        "Chỉ vào lúc nửa đêm",
+        "Chỉ sau một merge"
+      ],
+      "correct": 1,
+      "explanation": "Bọc sớm giúp đầu vào của máy phát điện sạch sẽ."
+    },
+    {
+      "stage": "post",
+      "question": "Bài học khuyên bạn nên cắt nhật ký phản hồi trong gói thành gì?",
+      "options": [
+        "Chỉ các mục nhập K đầu tiên",
+        "Các mục nhập K cuối cùng cộng với mọi mục nhập có lối thoát không phải bằng không, vì vậy gói vẫn nhỏ trong khi lịch sử lỗi vẫn tồn tại",
+        "N mục nhập ngẫu nhiên",
+        "Chỉ mục nhập gần đây nhất"
+      ],
+      "correct": 1,
+      "explanation": "Trang trí không đối xứng: thất bại phải tồn tại; Câu đố ở đuôi rất rẻ để giữ."
+    },
+    {
+      "stage": "post",
+      "question": "Siêu dữ liệu nào làm cho sự phối hợp giữa nhiều agent sessions hoạt động?",
+      "options": [
+        "Mã hóa tuyệt mật",
+        "branch, last_known_good_commit và trạng thái (đang hoạt động | thay thế | lưu trữ); Chỉ một lần chuyển giao đang hoạt động cho mỗi branch và chủ đề",
+        "Kênh Slack được chia sẻ",
+        "Hàng đợi trung tâm"
+      ],
+      "correct": 1,
+      "explanation": "Bàn giao cũ là thất bại nhiều agent thống trị; trạng thái + branch + LKG giữ cho bộ hoạt động nhỏ."
+    }
+  ]
+}
