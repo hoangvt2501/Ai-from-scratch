@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "'Hình dạng' của một tensor mô tả điều gì?",
+      "options": [
+        "Một bộ liệt kê kích thước dọc theo mỗi trục",
+        "Tổng số phần tử trong tensor",
+        "Loại dữ liệu của các phần tử tensor",
+        "Địa chỉ bộ nhớ của tensor"
+      ],
+      "correct": 0,
+      "explanation": "Hình dạng là một bộ liệt kê kích thước dọc theo mỗi trục. Ví dụ, một tensor có hình dạng (2, 3, 4) có 2 phần tử dọc theo trục 0, 3 dọc theo trục 1 và 4 dọc theo trục 2."
+    },
+    {
+      "stage": "pre",
+      "question": "Trong PyTorch, hình ảnh batch tensor sử dụng bố cục nào theo mặc định?",
+      "options": [
+        "NHWC (batch, chiều cao, chiều rộng, kênh)",
+        "NCHW (batch, kênh, chiều cao, chiều rộng)",
+        "CHWN (kênh, chiều cao, chiều rộng, batch)",
+        "WHCN (chiều rộng, chiều cao, kênh, batch)"
+      ],
+      "correct": 1,
+      "explanation": "PyTorch mặc định là bố cục NCHW (kênh đầu tiên). TensorFlow mặc định là NHWC (kênh cuối cùng). Bố cục không khớp gây ra lỗi âm thầm hoặc vấn đề về hiệu suất."
+    },
+    {
+      "stage": "post",
+      "question": "Hình dạng kết quả khi phát tensors hình dạng (8, 1, 6, 1) và (7, 1, 5) là gì?",
+      "options": [
+        "(8, 7, 6, 1)",
+        "(8, 1, 6, 5)",
+        "(8, 7, 6, 5)",
+        "Phát sóng không thành công — hình dạng không tương thích"
+      ],
+      "correct": 2,
+      "explanation": "Căn chỉnh các hình dạng từ bên phải: (8,1,6,1) và (1,7,1,5). Kích thước tương thích khi bằng nhau hoặc một bằng 1. Kết quả lấy giá trị lớn nhất dọc theo mỗi trục: (8, 7, 6, 5)."
+    },
+    {
+      "stage": "post",
+      "question": "Trong biểu thức einsum 'bhtd,bhsd->bhts', điều gì xảy ra với chỉ số 'd'?",
+      "options": [
+        "Nó được giữ trong đầu ra như một trục mới",
+        "Nó được tổng hợp (rút gọn) vì nó xuất hiện trong cả hai đầu vào nhưng không xuất hiện trong đầu ra",
+        "Nó được phát sóng trên cả hai tensors",
+        "Nó được chuyển vị giữa hai tensors đầu vào"
+      ],
+      "correct": 1,
+      "explanation": "Trong einsum, bất kỳ chỉ mục nào xuất hiện trong đầu vào nhưng không xuất hiện trong đầu ra đều được tổng hợp. Chỉ mục 'd' xuất hiện trong cả 'bhtd' và 'bhsd' nhưng không xuất hiện trong đầu ra 'bhts', vì vậy nó được rút gọn (nhân và tổng)."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao việc gọi .view() không thành công trên tensor được chuyển vị trong PyTorch?",
+      "options": [
+        "tensors được chuyển vị có kiểu dữ liệu khác",
+        "tensor không liền kề trong bộ nhớ sau khi chuyển vị và chế độ xem yêu cầu dữ liệu liền kề",
+        "Xem chỉ hoạt động trên tensors 2D",
+        "Chuyển vị thay đổi tổng số phần tử"
+      ],
+      "correct": 1,
+      "explanation": "Chuyển vị hoán đổi các bước mà không di chuyển dữ liệu, làm cho các tensor không liền kề. Thao tác .view() yêu cầu bố cục bộ nhớ liền kề. Sử dụng .reshape() hoặc gọi .contiguous() trước."
+    }
+  ]
+}
