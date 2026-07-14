@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "temperature < 1.0 làm gì với phân phối đầu ra của model ngôn ngữ?",
+      "options": [
+        "Làm cho sự phân phối đồng đều hơn (ngẫu nhiên hơn)",
+        "Làm sắc nét sự phân phối, làm cho token xác suất cao nhất có nhiều khả năng hơn",
+        "Xóa tất cả tokens ngoại trừ phần trên cùng",
+        "Không ảnh hưởng đến đầu ra"
+      ],
+      "correct": 1,
+      "explanation": "Temperature < 1.0 chia logits cho một số nhỏ hơn 1, điều này khuếch đại sự khác biệt giữa các logits. Sau softmax, xác suất cao nhất token nhận được một phần thậm chí còn lớn hơn. Temperature tiếp cận 0 cho phép giải mã tham lam (argmax)."
+    },
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt chính giữa top-k và top-p (hạt nhân) sampling là gì?",
+      "options": [
+        "Top-k nhanh hơn top-p",
+        "Top-k giữ một số tokens cố định; top-p giữ một số biến dựa trên xác suất tích lũy",
+        "Top-p chỉ hoạt động với temperature = 1.0",
+        "Top-k hoạt động trên logits trong khi top-p hoạt động trên xác suất"
+      ],
+      "correct": 1,
+      "explanation": "Top-k luôn giữ chính xác k tokens bất kể phân phối xác suất. Top-p thích ứng giữ tập tokens nhỏ nhất có xác suất tích lũy vượt quá p. Khi model tự tin, top-p giữ ít tokens; khi không chắc chắn, nó giữ lại nhiều người."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bạn không thể lan truyền ngược thông qua một phép toán sampling tiêu chuẩn z ~ N(mu, sigma^2)?",
+      "options": [
+        "Phân phối chuẩn không có gradients",
+        "Phép toán sampling là không xác định và không có đạo hàm được xác định rõ ràng đối với mu và sigma",
+        "PyTorch không hỗ trợ phân phối chuẩn",
+        "gradient luôn chính xác bằng không"
+      ],
+      "correct": 1,
+      "explanation": "Sampling giới thiệu sự gián đoạn ngẫu nhiên - bạn không thể tính toán d(sample)/d(mu) cho một lần rút ngẫu nhiên. Thủ thuật tái tham số hóa giải quyết vấn đề này bằng cách viết z = mu + sigma * epsilon (trong đó epsilon ~ N(0,1)), làm cho z trở thành một hàm xác định, có thể vi phân của mu và sigma."
+    },
+    {
+      "stage": "post",
+      "question": "Trong MCMC Metropolis-Hastings, điều gì xảy ra nếu độ lệch chuẩn của đề xuất được đặt quá lớn?",
+      "options": [
+        "Chuỗi hội tụ nhanh hơn vì nó có những bước lớn hơn",
+        "Hầu hết các đề xuất đều nằm trong các khu vực có xác suất thấp và bị từ chối, vì vậy chuỗi hầu như không di chuyển",
+        "Phân phối tĩnh thay đổi thành phân phối đồng đều",
+        "Thời gian đốt cháy trở thành bằng không"
+      ],
+      "correct": 1,
+      "explanation": "Với độ lệch chuẩn đề xuất lớn, các điểm được đề xuất khác xa so với vị trí hiện tại và có khả năng nằm ở các khu vực có xác suất thấp. Chúng bị từ chối, khiến chuỗi bị mắc kẹt ở điểm hiện tại. Tỷ lệ chấp nhận tối ưu là khoảng 23% đối với các đề xuất high-dimensional Gaussian."
+    },
+    {
+      "stage": "post",
+      "question": "Trong sampling từ chối, điều gì xảy ra với tỷ lệ chấp nhận khi chiều của phân phối mục tiêu tăng lên?",
+      "options": [
+        "Nó không đổi bất kể kích thước",
+        "Nó tăng lên vì có nhiều chiều hơn để chấp nhận trong",
+        "Nó giảm theo cấp số nhân vì hầu hết các đề xuất volume bị từ chối",
+        "Nó tiếp cận 50% trong mọi trường hợp"
+      ],
+      "correct": 2,
+      "explanation": "Trong các kích thước cao, volume của phân phối đề xuất trùng lặp với phân phối mục tiêu sẽ thu hẹp theo cấp số nhân. Giới hạn M tăng lên và tỷ lệ chấp nhận (1/M) giảm theo cấp số nhân. Đây là lời nguyền của không gian để từ chối sampling."
+    }
+  ]
+}
