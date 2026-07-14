@@ -1,0 +1,67 @@
+[
+  {
+    "id": "trees-pre-1",
+    "stage": "pre",
+    "question": "Tạp chất Gini đo lường gì tại một nút cây quyết định?",
+    "options": [
+      "Độ sâu của nút trong cây",
+      "Xác suất phân loại sai một mẫu được chọn ngẫu nhiên với phân phối class tại nút đó",
+      "Tổng số mẫu tại nút",
+      "Mối tương quan giữa features"
+    ],
+    "correct": 1,
+    "explanation": "Tạp chất Gini = 1 - tổng (p_k^2). Nó đo lường tần suất một mẫu được chọn ngẫu nhiên sẽ bị phân loại sai nếu được dán nhãn theo phân phối class tại nút đó. Nút thuần túy = 0."
+  },
+  {
+    "id": "trees-pre-2",
+    "stage": "pre",
+    "question": "Ưu điểm chính của models dựa trên cây so với mạng nơ-ron đối với dữ liệu dạng bảng là gì?",
+    "options": [
+      "Cây có thể process hình ảnh và văn bản nguyên bản",
+      "Cây luôn có bias thấp hơn mạng nơ-ron",
+      "Cây xử lý các loại feature hỗn hợp, yêu cầu ít xử lý trước hơn và dễ giải thích hơn",
+      "Cây cối huấn luyện nhanh hơn trên phần cứng GPU"
+    ],
+    "correct": 2,
+    "explanation": "Cây xử lý features số và phân loại mà không cần mã hóa, yêu cầu tiền xử lý tối thiểu và tạo ra các quy tắc có thể giải thích. Mạng nơ-ron vượt trội về spatial/sequential dữ liệu, không phải bảng phẳng."
+  },
+  {
+    "id": "trees-post-1",
+    "stage": "post",
+    "question": "Tại sao một khu rừng ngẫu nhiên sử dụng cả bootstrap sampling VÀ tập con feature ngẫu nhiên ở mỗi lần phân tách?",
+    "options": [
+      "Để tăng tốc độ training bằng cách giảm kích thước dataset",
+      "Để tạo ra các cây đa dạng, có liên quan để tính trung bình giảm variance mà không làm tăng bias",
+      "Để đảm bảo mỗi cây nhìn thấy mọi điểm dữ liệu ít nhất một lần",
+      "Để giảm độ sâu của từng cây"
+    ],
+    "correct": 1,
+    "explanation": "Cả hai nguồn ngẫu nhiên đều làm cho cây đa dạng. Nếu không có feature ngẫu nhiên, tất cả các cây sẽ tách ra trên cùng một feature thống trị. Sự đa dạng là điều làm cho tính trung bình có hiệu quả trong việc giảm variance."
+  },
+  {
+    "id": "trees-post-2",
+    "stage": "post",
+    "question": "Một nút chứa 8 và 2 con mèo. Tạp chất Gini của nó là gì?",
+    "options": [
+      "0.0",
+      "0.20",
+      "0.32",
+      "0.50"
+    ],
+    "correct": 2,
+    "explanation": "Gini = 1 - (0,8 ^ 2 + 0,2 ^ 2) = 1 - (0,64 + 0,04) = 0,32. Nút chủ yếu là chó nhưng không thuần túy, vì vậy Gini nằm trong khoảng từ 0 (thuần túy) đến 0,5 (tối đa đối với nhị phân)."
+  },
+  {
+    "id": "trees-post-3",
+    "stage": "post",
+    "question": "MDI (Giảm tạp chất trung bình) Tầm quan trọng feature nghiêng về loại feature nào?",
+    "options": [
+      "features nhị phân chỉ có hai giá trị",
+      "Features có variance thấp",
+      "Số lượng cao features với nhiều điểm phân chia có thể xảy ra",
+      "Features có mối tương quan cao với mục tiêu"
+    ],
+    "correct": 2,
+    "explanation": "MDI thiên về features số lượng cao vì chúng cung cấp nhiều điểm phân chia có thể có hơn, giúp họ có nhiều cơ hội hơn để giảm tạp chất do may mắn. Tầm quan trọng của hoán vị đáng tin cậy hơn."
+  }
+]
