@@ -1,0 +1,102 @@
+{
+  "lesson": "25-entity-linking",
+  "title": "Liên kết thực thể & định hướng",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Liên kết thực thể bổ sung gì trên NER?",
+      "options": [
+        "Bản dịch",
+        "Phân cực tình cảm",
+        "Thẻ một phần của bài phát biểu",
+        "Nó ánh xạ mỗi đề cập được phát hiện đến một mục duy nhất trong cơ sở tri thức (Wikidata, Wikipedia hoặc KB tên miền)"
+      ],
+      "correct": 3,
+      "explanation": "EL biến đề cập thành id KB chính tắc, phân biệt giữa các thực thể cùng tên."
+    },
+    {
+      "stage": "pre",
+      "question": "Hai nhiệm vụ con chính trong liên kết thực thể là gì?",
+      "options": [
+        "Tokenization và phân tích cú pháp",
+        "Gắn thẻ POS và thuật ngữ hóa",
+        "Embedding và phân cụm",
+        "Tạo ứng cử viên (danh sách rút gọn các mục KB hợp lý) và định hướng (chọn đúng ngữ cảnh nhất định)"
+      ],
+      "correct": 3,
+      "explanation": "EL phân tách thành các ứng cử viên đề xuất sau đó xếp hạng họ theo ngữ cảnh."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao phải đề cập đến recall được báo cáo cùng với accuracy định hướng?",
+      "options": [
+        "Đề cập đến recall là bắt buộc theo GDPR",
+        "Recall thay thế precision",
+        "Định hướng không thể phục hồi từ các ứng cử viên bị thiếu; pipeline được giới hạn bởi recall thế hệ ứng cử viên",
+        "Recall được yêu cầu bởi spaCy"
+      ],
+      "correct": 2,
+      "explanation": "Nếu các ứng cử viên bỏ lỡ thực thể vàng, không có công cụ định hướng nào có thể sửa chữa nó; recall tầng pipeline chất lượng."
+    },
+    {
+      "stage": "check",
+      "question": "GENRE thực hiện liên kết thực thể như thế nào?",
+      "options": [
+        "Giải mã tên chính tắc của thực thể token từng token theo giải mã ràng buộc trên một loạt các id KB hợp lệ",
+        "Bởi BM25",
+        "Bằng cách tính toán TF-IDF",
+        "Theo PageRank"
+      ],
+      "correct": 0,
+      "explanation": "GENRE tạo tên KB chuẩn với giải mã ràng buộc để đảm bảo id hợp lệ."
+    },
+    {
+      "stage": "check",
+      "question": "Xử lý NIL trong liên kết thực thể là gì?",
+      "options": [
+        "Dự đoán nhãn 'không nằm trong KB' khi không có ứng cử viên nào phù hợp thực sự (thực thể mới nổi, những người không rõ ràng)",
+        "Trả lại toàn bộ danh sách ứng cử viên",
+        "Viết hoa đầu vào",
+        "Bỏ qua mọi đề cập"
+      ],
+      "correct": 0,
+      "explanation": "Dự đoán NIL ngăn chặn việc đoán sai ID KB cho các thực thể mà KB không bao gồm."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao sự phổ biến bias ảnh hưởng đến liên kết thực thể trong các tên miền chuyên biệt?",
+      "options": [
+        "Models được huấn luyện về dữ liệu web dự đoán quá mức các thực thể thường xuyên (ví dụ: bóng rổ Jordan so với ML nhà nghiên cứu Michael I. Jordan)",
+        "Nó chỉ thiên vị về các thực thể cũ hơn",
+        "Mức độ phổ biến loại bỏ NIL",
+        "Sự nổi tiếng giúp recall"
+      ],
+      "correct": 0,
+      "explanation": "Mức độ phổ biến priors làm sai lệch các dự đoán khỏi các cuộc đụng độ tên miền cụ thể ít phổ biến hơn."
+    },
+    {
+      "stage": "post",
+      "question": "Mô hình LLM-EL an toàn vào năm 2026 là gì?",
+      "options": [
+        "Cung cấp danh sách ứng viên và sử dụng đầu ra JSON bị hạn chế mà LLM chỉ có thể chọn từ các id KB hợp lệ",
+        "Chỉ cần prompt 'tìm thực thể'",
+        "Tạo dạng tự do",
+        "Bỏ qua việc tạo ứng viên"
+      ],
+      "correct": 0,
+      "explanation": "Việc hạn chế LLM vào danh sách ứng viên hợp lệ sẽ ngăn chặn các id KB được tạo ra và giữ cho đầu ra có thể truy vấn được."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao NER phải đề cập đến ranh giới chính xác để liên kết thực thể với công việc?",
+      "options": [
+        "Lỗi ranh giới lan truyền: 'Bank of America' bị cắt vào 'Ngân hàng' hiển thị sai ứng cử viên và tăng EL recall",
+        "Ranh giới precision chỉ ảnh hưởng đến các chỉ số NER, không ảnh hưởng đến chất lượng ứng viên liên kết thực thể",
+        "Ranh giới thay đổi tokenization",
+        "Ranh giới phá vỡ tra cứu Wikipedia"
+      ],
+      "correct": 0,
+      "explanation": "Đề cập sai giới hạn sẽ lấy lại bộ bí danh sai, lan truyền lỗi thành định hướng."
+    }
+  ]
+}
