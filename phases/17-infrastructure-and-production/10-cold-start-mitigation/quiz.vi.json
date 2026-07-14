@@ -1,0 +1,78 @@
+{
+  "lesson": "10-cold-start-mitigation",
+  "title": "Cold Start Giảm thiểu cho LLMs phi máy chủ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Một cold start thường mất khoảng bao lâu để model 70B trên một nút mới mà không có biện pháp giảm thiểu?",
+      "options": [
+        "Trên 1 giờ",
+        "30-60 giây",
+        "3-8 phút",
+        "Dưới 10 giây"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học đề xuất feature phía AWS nào để chèn trước container hình ảnh để kéo hình ảnh bước 2 biến mất?",
+      "options": [
+        "Kiến trúc volume kép Bottlerocket được tham chiếu từ EC2NodeClass",
+        "Định nghĩa nhiệm vụ ECS",
+        "Vị trí đội xe tại chỗ",
+        "EBS volume chỉ ảnh chụp nhanh"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Modal feature nào cung cấp thứ gần nhất với \"khởi động GPU ấm trong vài giây\" bằng cách giải tuần tự hóa trạng thái sau tải trực tiếp vào HBM?",
+      "options": [
+        "Tải NVMe-to-DRAM theo tầng",
+        "Di chuyển trực tiếp",
+        "GPU ảnh chụp nhanh bộ nhớ (checkpoints)",
+        "Chạy: ai Model Streamer"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao chuyển dữ liệu di chuyển trực tiếp tokens thay vì KV cache giữa các nút?",
+      "options": [
+        "GDPR yêu cầu di chuyển trực tiếp",
+        "Đầu vào tokens có entropy lớn hơn",
+        "KV cache được mã hóa và không thể di chuyển",
+        "Tính toán lại KV trên đích rẻ hơn so với truyền GB KV cache qua mạng"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Lớp phi máy chủ nào giao dịch trực tiếp chi phí GPU để sẵn sàng dự đoán bằng cách duy trì ít nhất một bản sao?",
+      "options": [
+        "Hồ bơi ấm áp với min_workers > = 1",
+        "Tải theo tầng",
+        "Hạt giống trước tên lửa chai",
+        "Di chuyển trực tiếp"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học nói rằng giảm thiểu khởi động nguội phải được xếp chồng lên nhau qua các lớp thay vì được chọn như một công cụ duy nhất?",
+      "options": [
+        "Không có lớp nào loại bỏ mọi bước (cung cấp nút, kéo hình ảnh, tải trọng lượng, khởi động động cơ); xếp chồng các lớp nén từng bước",
+        "Đó là một yêu cầu quy định",
+        "Modal sở hữu toàn bộ stack",
+        "Tất cả năm lớp được đóng gói trong vLLM"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
