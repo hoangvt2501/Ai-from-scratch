@@ -1,0 +1,90 @@
+{
+  "lesson": "10-skill-libraries-voyager",
+  "title": "Skill Thư viện và Học tập suốt đời (Voyager)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Voyager coi gì là không gian hành động?",
+      "options": [
+        "Primitive lệnh Minecraft",
+        "Mã thực thi (JavaScript hàm) được lưu trữ, truy xuất và soạn thảo",
+        "Chỉ prompts nhắn tin",
+        "Học tăng cường giá trị Q"
+      ],
+      "correct": 1,
+      "explanation": "Đóng góp của Voyager là biến mã thành hành động: skills là chương trình, không phải lệnh thô."
+    },
+    {
+      "stage": "pre",
+      "question": "Ba thành phần nào xác định Voyager agent?",
+      "options": [
+        "Encoder, decoder, đầu giá trị",
+        "Chương trình giảng dạy tự động, thư viện skill, prompting lặp đi lặp lại",
+        "Người lập kế hoạch, người thi hành, thẩm phán",
+        "Chó tha mồi, máy phát điện, người xếp hạng"
+      ],
+      "correct": 1,
+      "explanation": "Voyager cấu trúc agent xung quanh chương trình giảng dạy, thư viện skill và prompting lặp lại."
+    },
+    {
+      "stage": "check",
+      "question": "Ba tín hiệu nào có thể trả về từ một nỗ lực thực hiện skill?",
+      "options": [
+        "Đạt, không đạt, thử lại",
+        "Thành công, lỗi (có stack trace), tự xác minh không thành công",
+        "Xanh lá cây, vàng, đỏ",
+        "Nhịp tim, ack, nack"
+      ],
+      "correct": 1,
+      "explanation": "Cơ chế prompting lặp đi lặp lại của Voyager được điều khiển bởi ba tín hiệu này được gập lại vào phiên bản tiếp theo."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để chương trình giảng dạy tự động chọn nhiệm vụ tiếp theo?",
+      "options": [
+        "Đồng phục ngẫu nhiên trên không gian hành động",
+        "Ngay trên khả năng hiện tại, dựa trên trạng thái môi trường và skill tồn kho (điểm hấp dẫn khám phá)",
+        "Luôn là nhiệm vụ khó khăn nhất hiện có",
+        "Chỉ danh sách do người dùng cung cấp"
+      ],
+      "correct": 1,
+      "explanation": "Người đề xuất nhắm đến các nhiệm vụ ngay trên khả năng hiện tại để tiến độ ổn định."
+    },
+    {
+      "stage": "check",
+      "question": "Sản phẩm năm 2026 nào là sự kết hợp rõ ràng nhất của bài học với Voyager skill?",
+      "options": [
+        "OpenAI fine-tuning",
+        "Claude Agent SDK skills: mã được đặt tên, có thể truy xuất cộng với các hướng dẫn được tải theo yêu cầu",
+        "Chỉ số thông",
+        "Lớp AWS Lambda"
+      ],
+      "correct": 1,
+      "explanation": "Agent SDK skills khớp với mẫu mã có khả năng truy xuất có tên của Voyager."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học khuyến nghị xóa bỏ khi viết cho thư viện skill?",
+      "options": [
+        "Đĩa đắt tiền",
+        "Nếu không có dedup, cùng một skill được thêm vào nhiều lần với các mô tả hơi khác nhau; truy xuất sẽ trả về một phiên bản chính tắc",
+        "Nhà cung cấp từ chối trùng lặp",
+        "Git khối trùng lặp"
+      ],
+      "correct": 1,
+      "explanation": "Các mô tả gần như trùng lặp thu gọn thành một skill chính tắc duy nhất để truy xuất vẫn sạch sẽ."
+    },
+    {
+      "stage": "post",
+      "question": "Trôi dạt skill sáng tác mô tả vấn đề gì?",
+      "options": [
+        "Một skill ngừng biên dịch sau khi nâng cấp Python",
+        "Một phụ huynh skill âm thầm chọn một phiên bản con tinh chỉnh mà nó chưa bao giờ được thử nghiệm; Khắc phục bằng cách ghim các phiên bản skill",
+        "Skills được mã hóa trong bộ nhớ",
+        "Truy xuất không trả về gì"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không ghim phiên bản, việc tinh chỉnh con sẽ âm thầm thay đổi hành vi của cha mẹ."
+    }
+  ]
+}
