@@ -1,0 +1,90 @@
+{
+  "lesson": "42-agent-workbench-capstone",
+  "title": "Capstone: Ship Gói bàn làm việc Agent có thể tái sử dụng",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Capstone tạo ra những gì?",
+      "options": [
+        "Một bài nghiên cứu",
+        "Một thư mục thả vào được tạo phiên bản (agent-workbench-pack/) với bảy bề mặt cộng với một bin/install.sh đặt chúng xuống một cách đồng nhất",
+        "Một LLM mới",
+        "Bảng điều khiển giám sát"
+      ],
+      "correct": 1,
+      "explanation": "Gói là công thức; Mỗi cài đặt là một khẩu phần."
+    },
+    {
+      "stage": "pre",
+      "question": "Cái nào KHÔNG phải là một phần của bố cục gói?",
+      "options": [
+        "AGENTS.md + tài liệu/",
+        "schemas/",
+        "scripts/",
+        "vendor_proprietary_weights/"
+      ],
+      "correct": 3,
+      "explanation": "Bố cục gói là AGENTS.md, docs/, schemas/, scripts/, bin/, README.md. Gói này không phụ thuộc vào framework và bất khả tri của nhà cung cấp."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao gói mang tệp VERSION?",
+      "options": [
+        "Đối với SEO",
+        "Những va chạm lớn đối với những thay đổi schema/script yêu cầu di chuyển; nhỏ để bổ sung; bản vá chỉ dành cho tài liệu; repo đích ghi lại phiên bản mà nó đã được cài đặt",
+        "Để theo dõi chỉ số IQ agent",
+        "Để quảng cáo trên Hacker News"
+      ],
+      "correct": 1,
+      "explanation": "Hình dạng tương tự như npm, Cargo, pyproject.toml; VERSION là hợp đồng, không phải tiếp thị."
+    },
+    {
+      "stage": "check",
+      "question": "Phân phối công cụ chéo trông như thế nào trong gói này?",
+      "options": [
+        "Mã hóa cứng đường dẫn của từng công cụ",
+        "Một tệp nguồn có liên kết tượng trưng (ln -s AGENTS.md CLAUDE.md, .cursor/rules/, .github/copilot-instructions.md) để cùng một nguồn được quạt đến mọi agent mã hóa",
+        "Sao chép thủ công cho mỗi công cụ",
+        "Khóa nhà cung cấp cho mỗi công cụ"
+      ],
+      "correct": 1,
+      "explanation": "Thiết lập ai nx của Nx là tài liệu tham khảo; Trình cài đặt của gói cũng làm tương tự với các liên kết tượng trưng."
+    },
+    {
+      "stage": "check",
+      "question": "Bài học khuyến nghị trình gỡ cài đặt hoạt động như thế nào?",
+      "options": [
+        "Xóa mọi thứ bao gồm cả trạng thái",
+        "Từ chối ở trạng thái không tầm thường; Không bao giờ xóa agent_state người dùng. json, task_board. json, hoặc đầu ra /; Chỉ xóa schemas, scripts, tài liệu và AGENTS.md (có chọn không tham gia)",
+        "Chỉ xóa tài liệu",
+        "Tắt git"
+      ],
+      "correct": 1,
+      "explanation": "Trạng thái thuộc về người sử dụng; gói không sở hữu nó."
+    },
+    {
+      "stage": "post",
+      "question": "Điều gì nằm ngoài gói?",
+      "options": [
+        "Schemas",
+        "Các nhiệm vụ cụ thể của dự án, cuộc gọi SDK nhà cung cấp, văn xuôi giới thiệu nhóm - gói này không phụ thuộc vào framework và tồn tại bên cạnh giới thiệu, không phải bên trong nó",
+        "Scripts",
+        "Trình cài đặt"
+      ],
+      "correct": 1,
+      "explanation": "Nhiệm vụ thuộc về bảng của repo mục tiêu, không phải gói; Các cuộc gọi SDK của nhà cung cấp sẽ khóa gói ở một framework."
+    },
+    {
+      "stage": "post",
+      "question": "Gói ship nhiều agents mã hóa cùng một lúc thông qua kênh nào?",
+      "options": [
+        "Sao chép bằng tay",
+        "Bản phân phối kiểu SkillKit (skillkit install agent-workbench-pack) đặt nó trên 32 AI agents từ một nguồn duy nhất",
+        "Tệp đính kèm email",
+        "Chỉ GitHub ghi chú phát hành"
+      ],
+      "correct": 1,
+      "explanation": "Đóng gói repo là nguồn gốc của sự thật; SkillKit là kênh phân phối; Khóa nhà cung cấp sụp đổ."
+    }
+  ]
+}
