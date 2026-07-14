@@ -1,0 +1,78 @@
+{
+  "lesson": "08-inference-metrics-goodput",
+  "title": "Inference Chỉ số — TTFT, TPOT, ITL, Goodput, P99",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Thành phần nào thống trị TTFT (thời gian token đầu tiên)?",
+      "options": [
+        "Thời gian chuyển tiếp chỉ giải mã",
+        "I/O đĩa cho trọng lượng",
+        "Tokenizer GIL trên cao",
+        "Thời gian xếp hàng, thời gian yêu cầu mạng và thời gian điền trước"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học gọi thước đo nào là thước đo thực sự quan trọng đối với sản phẩm?",
+      "options": [
+        "GPU chu kỳ nhiệm vụ",
+        "Tổng thông lượng tính bằng tokens mỗi giây",
+        "Goodput — một phần yêu cầu đáp ứng đồng thời mọi ràng buộc SLO",
+        "Ý nghĩa ITL"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao số liệu thống kê trung bình lại sai để báo cáo về độ trễ LLM?",
+      "options": [
+        "Giá trị trung bình không bao giờ có thể tính toán được trên các câu trả lời streaming",
+        "Mean chỉ hoạt động để điền trước, không giải mã",
+        "LLM phân phối độ trễ bị lệch phải; người dùng thường xuyên đạt được các ngoại lệ P99 có nghĩa là ẩn",
+        "Mean không được hỗ trợ bởi GenAI-Perf"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao GenAI-Perf và LLMPerf không đồng ý về TPOT cho cùng một lần chạy?",
+      "options": [
+        "GenAI-Perf chỉ chạy trên Blackwell",
+        "GenAI-Perf loại trừ TTFT khỏi tính toán ITL; LLMPerf bao gồm nó, vì vậy lựa chọn công cụ thay đổi số",
+        "LLMPerf sử dụng micro giây và GenAI-Perf sử dụng mili giây",
+        "Họ lấy mẫu các yêu cầu khác nhau"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Đối với các yêu cầu đầu ra dài (>500 tokens), chỉ số nào chiếm ưu thế về độ trễ từ đầu đến cuối?",
+      "options": [
+        "TPOT nhân với chiều dài đầu ra",
+        "Thời gian khởi động nguội",
+        "TTFT",
+        "Thời gian phản hồi mạng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bộ nào nắm bắt tốt nhất SLO hợp lý đối mặt với người tiêu dùng của bài học cho model trò chuyện 70 tỷ vào năm 2026?",
+      "options": [
+        "Chỉ P50, không có phân vị nào trên",
+        "TTFT P99 800 ms, TPOT P99 25 ms, E2E P99 3 giây cho đầu ra <300-token, > đầu ra tốt = 99%",
+        "TTFT P99 8s, TPOT P99 200ms, goodput 50%",
+        "TTFT trung bình 10 ms, TPOT trung bình 1 ms"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
