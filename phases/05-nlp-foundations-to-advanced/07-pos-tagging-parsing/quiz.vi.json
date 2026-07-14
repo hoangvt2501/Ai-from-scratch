@@ -1,0 +1,102 @@
+{
+  "lesson": "07-pos-tagging-parsing",
+  "title": "Gắn thẻ POS và phân tích cú pháp",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Mục tiêu của việc gắn thẻ POS là gì?",
+      "options": [
+        "Phát hiện cảm xúc",
+        "Dịch câu",
+        "Trích xuất các thực thể được đặt tên",
+        "Gán một danh mục ngữ pháp (danh từ, động từ, v.v.) cho mỗi token"
+      ],
+      "correct": 3,
+      "explanation": "Gắn thẻ POS gắn nhãn mỗi token với phần của bài phát biểu."
+    },
+    {
+      "stage": "pre",
+      "question": "Bộ thẻ nào là mặc định cho công việc đa ngôn ngữ?",
+      "options": [
+        "Ngân hàng cây Penn",
+        "Phụ thuộc Stanford",
+        "Phụ thuộc phổ quát",
+        "Công ty-2003"
+      ],
+      "correct": 2,
+      "explanation": "Universal Dependencies cung cấp một tập hợp 17 thẻ thô hơn, không phụ thuộc vào ngôn ngữ."
+    },
+    {
+      "stage": "check",
+      "question": "Máy gắn thẻ BIGRAM HMM POS model gì?",
+      "options": [
+        "Chỉ P(tags)",
+        "Phân tích cú pháp phần phụ thuộc",
+        "Embedding điểm tương đồng",
+        "Chuyển tiếp P (thẻ | thẻ trước) cộng với phát xạ P (từ | thẻ), được giải mã bằng Viterbi"
+      ],
+      "correct": 3,
+      "explanation": "Bigram HMM sử dụng chuyển đổi thẻ và phát hành từ; Viterbi tìm thấy dãy xác suất cao nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Thuật toán Viterbi tính toán gì cho trình gắn thẻ HMM?",
+      "options": [
+        "Xác suất cao nhất duy nhất tag chuỗi thông qua lập trình động trên tag mạng tinh thể",
+        "Ma trận chuyển tiếp",
+        "Xác suất cận biên của mỗi thẻ",
+        "Chỉ xác suất chuyển tiếp"
+      ],
+      "correct": 0,
+      "explanation": "Viterbi tìm dãy argmax với O(n * |T|^2) lập trình động."
+    },
+    {
+      "stage": "check",
+      "question": "Phân tích cú pháp phụ thuộc tạo ra điều gì?",
+      "options": [
+        "Một cây trong đó mỗi từ có một từ đầu và một mối quan hệ ngữ pháp được dán nhãn",
+        "Một chuỗi BIO phẳng",
+        "Cây khu vực bầu cử gồm các nhãn NP/VP/PP",
+        "Một chuỗi đồng tham chiếu"
+      ],
+      "correct": 0,
+      "explanation": "Phân tích cú pháp phụ thuộc cung cấp các cạnh cho mỗi từ (đầu, quan hệ); Phân tích cú pháp khu vực bầu cử cung cấp các cấu trúc cụm từ lồng nhau."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao mức trần accuracy trên thẻ PTB POS lại khoảng 97-98%?",
+      "options": [
+        "Models không được vượt quá 98% trong bất kỳ nhiệm vụ nào",
+        "Universal Dependencies giới hạn ở mức 98%",
+        "Người chú thích con người chỉ đồng ý khoảng 97% thời gian, vì vậy models trên ~ 98% có thể là dữ liệu thử nghiệm overfitting",
+        "Hạn chế phần cứng"
+      ],
+      "correct": 2,
+      "explanation": "Sự bất đồng của người chú thích giới hạn accuracy có thể đạt được; Những con số rất cao thường báo hiệu overfitting."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao gắn thẻ POS vẫn quan trọng vào năm 2026 LLM pipelines?",
+      "options": [
+        "LLMs không thể chạy nếu không có nó",
+        "Lemmatization, cảm xúc dựa trên khía cạnh, phân tách truy vấn, xác thực đầu ra có cấu trúc và chuyển giao đa ngôn ngữ đều vẫn sử dụng POS hoặc phân tích cú pháp phụ thuộc",
+        "Bắt buộc đối với tokenization",
+        "Thay thế transformers"
+      ],
+      "correct": 1,
+      "explanation": "POS và phân tích cú pháp phụ thuộc cung cấp nhiều nhiệm vụ xuôi dòng có cấu trúc ngay cả khi LLMs tạo văn xuôi."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn nên tiếp cận thư viện nào trong hầu hết các tác vụ POS / phân tích cú pháp production?",
+      "options": [
+        "scikit-học",
+        "NumPy",
+        "spaCy (hoặc stanza/trankit cho phạm vi ngôn ngữ accuracy hàng đầu hoặc rộng hơn)",
+        "Cuộn trình phân tích cú pháp của riêng bạn"
+      ],
+      "correct": 2,
+      "explanation": "spaCy ships trình phân tích cú pháp POS + phụ thuộc cấp production nhanh; stanza/trankit bao gồm các ngôn ngữ rộng hơn."
+    }
+  ]
+}
