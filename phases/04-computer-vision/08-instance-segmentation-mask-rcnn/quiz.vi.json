@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao Mask R-CNN thay thế RoIPool bằng RoIAlign?",
+      "options": [
+        "RoIAlign nhanh hơn trên GPUs",
+        "RoIPool làm tròn tọa độ hộp thành các số nguyên ở nhiều bước, làm sai lệch ánh xạ feature từ các pixel đầu vào lên đến một pixel bản đồ feature; RoIAlign sử dụng sampling hai tuyến tính không làm tròn, bảo toàn bản địa hóa",
+        "RoIPool chỉ hoạt động trên CPU",
+        "RoIPool là một vấn đề bản quyền"
+      ],
+      "correct": 1,
+      "explanation": "Chi phí làm tròn của RoIPool lên đến độ lệch kích thước sải chân (ví dụ: 32 pixel trên bản đồ feature sải chân 32). RoIAlign samples tại tọa độ float chính xác thông qua nội suy hai tuyến. Sự thay đổi này đã nâng AP mặt nạ lên 3-4 điểm trên COCO trong bài báo gốc và hiện là tiêu chuẩn trong mọi máy dò quan tâm đến bản địa hóa."
+    },
+    {
+      "stage": "pre",
+      "question": "Đầu mặt nạ của Mask R-CNN xuất ra mặt nạ 28x28 mỗi class cho mỗi đề xuất. Tại sao mỗi class?",
+      "options": [
+        "Bởi vì mặt nạ nhị phân cần các kênh trên mỗi class để hỗ trợ",
+        "Tách dự đoán mặt nạ khỏi phân loại: đầu mặt nạ chỉ phải học hình dạng cho từng class riêng biệt, vì vậy quyết định của bộ phân loại không ảnh hưởng đến mặt nạ nào được sản xuất, chỉ kênh nào được đọc ở inference",
+        "Mặt nạ nhị phân tràn trong một kênh duy nhất",
+        "Giấy yêu cầu nó"
+      ],
+      "correct": 1,
+      "explanation": "Sản xuất một mặt nạ cho mỗi class cho mỗi đề xuất tách rời việc học hình dạng mặt nạ từ phân loại. Tại inference, bạn chỉ đọc kênh khớp với class dự đoán. Việc tách rời đa nhiệm này rất quan trọng vì hình dạng mặt nạ và xác suất class là các mục tiêu khác nhau được huấn luyện với các gradients khác nhau."
+    },
+    {
+      "stage": "post",
+      "question": "Sắc lệnh dự đoán Mask R-CNN của torchvision có `labels` bắt đầu từ 1 chứ không phải 0. Tại sao?",
+      "options": [
+        "Lỗi kế thừa",
+        "Class 0 được dành riêng cho nền; classes người dùng luôn dựa trên 1 để đầu phân loại có thể coi nền như một class thực với logits và gradients riêng của nó",
+        "torchvision sử dụng lập chỉ mục dựa trên 1 trong suốt",
+        "Training dữ liệu xác định nó"
+      ],
+      "correct": 1,
+      "explanation": "Hầu hết các máy dò coi nền là class 0 và classes nền trước rõ ràng là 1..C. softmax trên (C + 1) classes cho phép mạng học cách chủ động dự đoán 'không có đối tượng nào ở đây' thay vì chỉ có độ tin cậy thấp trên tất cả các classes. Một dataset có 4 classes thực cần num_classes = 5 khi hoán đổi dự đoán."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn fine-tune Mặt nạ R-CNN trên 500 hình ảnh dataset và val mAP cao nguyên trong khi loss tàu hỏa tiếp tục giảm. Điều đầu tiên để thử là gì?",
+      "options": [
+        "Thêm nhiều epochs",
+        "Đóng băng đường trục và FPN để model chỉ tinh chỉnh RPN và đầu; 500 hình ảnh là quá ít để cập nhật parameters đường trục 23M mà không cần overfitting",
+        "Chuyển sang phân đoạn U-Net",
+        "Sử dụng learning rate cao hơn"
+      ],
+      "correct": 1,
+      "explanation": "Trên datasets nhỏ, bạn không có đủ tín hiệu để fine-tune từng parameter. Đóng băng đường trục pretrained và FPN (ImageNet + COCO features) và chỉ training đầu đối tượng RPN và hai đầu classifier/mask là công thức tiêu chuẩn và thường sửa chữa cao nguyên này trong một lần chạy training."
+    },
+    {
+      "stage": "post",
+      "question": "FPN bên trong Mask R-CNN có bốn cấp độ (P2, P3, P4, P5) ở các bước 4, 8, 16, 32. Tại sao không chỉ sử dụng một cấp độ?",
+      "options": [
+        "Để sử dụng nhiều bộ nhớ GPU hơn",
+        "Các đối tượng trong hình ảnh tự nhiên span một loạt các tỷ lệ; định tuyến mỗi đề xuất đến cấp FPN phù hợp với kích thước của nó cung cấp cho người đứng đầu một bản đồ feature với trường tiếp nhận phù hợp cho đối tượng đó, điều này hoàn toàn tốt hơn so với việc luôn sử dụng một tỷ lệ",
+        "Bốn cấp độ là tùy ý",
+        "Để giảm số lượng parameter"
+      ],
+      "correct": 1,
+      "explanation": "Một vật thể nhỏ trên bản đồ feature sải chân 32 chiếm một ô duy nhất, hầu như không có thông tin không gian. FPN định tuyến các đối tượng nhỏ đến các mức độ phân giải cao, nông (P2) và các đối tượng lớn đến các mức độ phân giải thấp, sâu (P5), phù hợp với trường tiếp nhận với kích thước đối tượng. Đây là lý do tại sao mọi máy dò hiện đại đều có một kim tự tháp."
+    }
+  ]
+}
