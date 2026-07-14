@@ -1,0 +1,90 @@
+{
+  "lesson": "20-benchmarks-webarena-osworld",
+  "title": "Benchmarks: WebArena và OSWorld",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao WebArena tự lưu trữ bốn ứng dụng mục tiêu của mình?",
+      "options": [
+        "Để tiết kiệm tiền",
+        "Để ghim các phiên bản có thể tái tạo để đánh giá dựa trên thực thi và không bị bong tróc",
+        "Để chạy trên GPUs",
+        "Để tránh TLS"
+      ],
+      "correct": 1,
+      "explanation": "Các ứng dụng tự lưu trữ được ghim giúp đánh giá dựa trên thực thi đáng tin cậy và có thể so sánh theo thời gian."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao OSWorld sử dụng ảnh chụp màn hình hệ điều hành thực thay vì APIs trợ năng?",
+      "options": [
+        "Khả năng tiếp cận APIs quá nhanh",
+        "Ảnh chụp màn hình buộc agent thực hiện grounding GUI thực trong 1920x1080, phù hợp với các ràng buộc production",
+        "Khả năng truy cập APIs rò rỉ PII",
+        "Ảnh chụp màn hình có chi phí thấp hơn"
+      ],
+      "correct": 1,
+      "explanation": "Đánh giá dựa trên ảnh chụp màn hình buộc grounding pixel-to-element, ràng buộc production thực tế."
+    },
+    {
+      "stage": "check",
+      "question": "OSWorld xuất hiện hai chế độ lỗi chính nào?",
+      "options": [
+        "Độ trễ và băng thông",
+        "Kiến thức vận hành và grounding GUI",
+        "Embedding trôi và rò rỉ token",
+        "Ảo giác và từ chối"
+      ],
+      "correct": 1,
+      "explanation": "Grounding (pixel-to-element) và kiến thức hoạt động (menu, phím tắt) là những yếu tố chặn tiêu đề."
+    },
+    {
+      "stage": "check",
+      "question": "OSWorld-Human thêm gì vào đầu benchmark cơ sở?",
+      "options": [
+        "Các nhiệm vụ khác",
+        "Quỹ đạo hành động vàng được quản lý thủ công làm nổi bật khoảng cách kém hiệu quả agent 1,4-2,7 lần",
+        "Độ phân giải màn hình lớn hơn",
+        "Một hệ điều hành mới"
+      ],
+      "correct": 1,
+      "explanation": "Quỹ đạo vàng làm cho hiệu quả quỹ đạo có thể đo lường được, không chỉ là tỷ lệ thành công."
+    },
+    {
+      "stage": "check",
+      "question": "Bài học trích dẫn con số thời gian phát hành nào cho WebArena?",
+      "options": [
+        "GPT-4 agent tốt nhất 14,41% thành công so với con người 78,24%",
+        "agent tốt nhất ở mức 99% với con người ở mức 100%",
+        "agent tốt nhất ở mức 50% với con người ở mức 50%",
+        "agent tốt nhất ở mức 0% trên diện rộng"
+      ],
+      "correct": 0,
+      "explanation": "Khoảng cách 14,41% so với 78,24% là con số thời gian phát hành WebArena."
+    },
+    {
+      "stage": "post",
+      "question": "Cảnh báo bài học sẽ xảy ra điều gì với đánh giá chỉ ảnh chụp màn hình khi agent sử dụng APIs DOM hoặc trợ năng?",
+      "options": [
+        "Không có gì thay đổi",
+        "Bạn bỏ lỡ thử thách grounding mà OSWorld được thiết kế để đo lường",
+        "Bạn vượt quá rate limit",
+        "Các bài kiểm tra vượt qua một cách tầm thường"
+      ],
+      "correct": 1,
+      "explanation": "Đánh giá API agent hỗ trợ tiếp cận trên benchmarks chỉ ảnh chụp màn hình sẽ bỏ qua bài kiểm tra grounding."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bỏ qua độ dài quỹ đạo là một thất bại trong đo điểm chuẩn?",
+      "options": [
+        "Nó che giấu chi phí và sự kém hiệu quả mà chỉ riêng tỷ lệ thành công đã bỏ lỡ (khoảng cách 1,4-2,7x các bề mặt OSWorld-Human)",
+        "Chiều dài quỹ đạo luôn phù hợp với vàng",
+        "Quỹ đạo không thể đo lường được",
+        "Chiều dài là số liệu duy nhất quan trọng"
+      ],
+      "correct": 0,
+      "explanation": "Hai agents ở mức thành công 60% có thể khác nhau 2-3 lần về các bước; Chi phí và hiệu quả chỉ hiển thị nếu bạn đo chiều dài quỹ đạo."
+    }
+  ]
+}
