@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Phân đoạn khái niệm nhanh chóng (PCS), được giới thiệu bởi SAM 3 là gì?",
+      "options": [
+        "Phân đoạn tất cả các trường hợp của một khái niệm được mô tả bằng cụm danh từ ngắn hoặc ví dụ hình ảnh trong một forward pass, trả về mặt nạ cộng với ID phiên bản duy nhất",
+        "Phân đoạn prompt trực quan (point/box) như SAM cổ điển",
+        "Một chuỗi nhiều bước của máy dò, sau đó là SAM",
+        "Chế độ chỉ theo dõi"
+      ],
+      "correct": 0,
+      "explanation": "PCS là khả năng đặc trưng của SAM 3. Bạn đi ngang qua 'xe buýt trường học màu vàng' hoặc một hình ảnh ví dụ về một chiếc xe buýt; SAM 3 trả về mọi phiên bản phù hợp với mặt nạ và ID duy nhất riêng, cộng với điểm hiện diện. SAM cổ điển cần một prompt cho mỗi phiên bản; PCS sản xuất tất cả các trận đấu từ đầu đến cuối."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao phải giữ máy dò tách rời + SAM 2 pipeline (SAM 2 nối đất) vào năm 2026 nếu SAM 3 đã thực hiện phân đoạn theo lời nhắc bằng văn bản?",
+      "options": [
+        "SAM 2 nối đất luôn chính xác hơn",
+        "Tính mô-đun — bạn có thể hoán đổi các trình phát hiện từ vựng mở khác nhau (DINO-X, Florence-2, Grounding DINO 1.5) cho các miền, ràng buộc giấy phép hoặc hành vi ngưỡng khác nhau; Kiến trúc của SAM 3 là nguyên khối",
+        "SAM 3 không hỗ trợ video",
+        "SAM 3 chỉ khả dụng trong cloud"
+      ],
+      "correct": 1,
+      "explanation": "SAM 2 nối đất là thành phần của máy dò và SAM 2 với trọng lượng đông lạnh. Tính mô-đun đó đôi khi chính xác là những gì bạn cần - một máy dò hình ảnh y tế, một máy dò thân thiện với giấy phép hoặc kiểm soát ngưỡng chặt chẽ. SAM 3 chính xác hơn từ đầu đến cuối để sử dụng phổ biến nhưng khó tùy chỉnh hơn. Cả hai đều có production vai trò vào năm 2026."
+    },
+    {
+      "stage": "post",
+      "question": "Đầu hiện diện của SAM 3 tạo ra những gì?",
+      "options": [
+        "Danh sách các ô giới hạn ứng cử viên",
+        "Ngân hàng bộ nhớ theo dõi",
+        "Xác suất vô hướng rằng khái niệm được truy vấn tồn tại trong hình ảnh, tách rời khỏi bản địa hóa; để model nói 'không hiện diện' một cách rõ ràng và giảm dương tính giả cho các khái niệm vắng mặt",
+        "Mặt nạ cuối cùng"
+      ],
+      "correct": 2,
+      "explanation": "Người đứng đầu sự hiện diện tách biệt quyết định 'đây có ở đây không?' với quyết định 'nó ở đâu?'. Một model phải tạo ra các hộp bất cứ khi nào được yêu cầu có xu hướng ảo giác phù hợp với các khái niệm vắng mặt. Với đầu hiện diện, SAM 3 có thể trả về không phát hiện một cách rõ ràng. Điều này cũng cải thiện sự phân biệt giữa các prompts có liên quan chặt chẽ (ví dụ: 'một cầu thủ mặc áo trắng' và 'một cầu thủ mặc áo đỏ')."
+    },
+    {
+      "stage": "post",
+      "question": "SAM 3.1 Object Multiplex (tháng 3 năm 2026) đã giới thiệu cơ chế bộ nhớ dùng chung để theo dõi. Nó thay thế điều gì?",
+      "options": [
+        "SAM 2 hoàn toàn",
+        "Ngân hàng bộ nhớ riêng biệt cho mỗi phiên bản; Multiplex thu gọn chúng thành một bộ nhớ dùng chung với các truy vấn trên mỗi phiên bản để theo dõi N đối tượng chạy nhanh hơn đáng kể trong khi vẫn giữ được accuracy",
+        "Toàn bộ đầu hiện diện",
+        "Xương sống ViT"
+      ],
+      "correct": 1,
+      "explanation": "Prior theo dõi SAM 2 / SAM 3 duy trì một ngân hàng bộ nhớ cho mỗi phiên bản được theo dõi, do đó chi phí tăng tuyến tính theo số lượng đối tượng. Object Multiplex giới thiệu một bộ nhớ dùng chung duy nhất cộng với các truy vấn cho mỗi phiên bản để tìm nạp features dành riêng cho phiên bản. Theo dõi nhiều phiên bản giờ đây hiệu quả — cần thiết cho đám đông và cảnh nhiều đối tượng dày đặc."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn cần phát hiện từ vựng mở theo thời gian thực (chỉ hộp, không có mặt nạ) trên thiết bị biên. Gia đình model 2026 nào là lựa chọn phù hợp?",
+      "options": [
+        "SAM 3",
+        "Chuỗi máy dò CLIP + tùy chỉnh",
+        "SAM 2 nối đất",
+        "YOLO-World (và các máy dò từ vựng mở thời gian thực liên quan); SAM 3 sản xuất mặt nạ và nặng hơn, trong khi YOLO-World được thiết kế đặc biệt cho các hộp ở khung hình / giây cao trên phần cứng biên"
+      ],
+      "correct": 3,
+      "explanation": "YOLO-World và các models tương tự (OV-DINO, LLMDet) là các công cụ phát hiện từ vựng mở theo thời gian thực. Họ không sản xuất mặt nạ nhưng chúng đạt 30-60 khung hình / giây ở 640x640 ở GPUs khiêm tốn. SAM 3 là lựa chọn phù hợp khi mặt nạ và theo dõi quan trọng. Luôn khớp trọng lượng dụng cụ với nhiệm vụ: chỉ phát hiện là tốt nếu không có mặt nạ trên đầu."
+    }
+  ]
+}
