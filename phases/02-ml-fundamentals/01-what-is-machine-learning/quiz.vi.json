@@ -1,0 +1,67 @@
+[
+  {
+    "id": "ml-intro-pre-1",
+    "stage": "pre",
+    "question": "Trong học có giám sát, model nhận được gì trong quá trình training?",
+    "options": [
+      "Chỉ nhập dữ liệu không có nhãn",
+      "Các cặp đầu vào-đầu ra trong đó câu trả lời đúng được cung cấp",
+      "Tín hiệu phần thưởng cho mỗi hành động được thực hiện",
+      "Một bộ quy tắc được viết bởi một chuyên gia con người"
+    ],
+    "correct": 1,
+    "explanation": "Học có giám sát huấn luyện về các cặp đầu vào-đầu ra (dữ liệu được gắn nhãn). model học cách ánh xạ đầu vào với các đầu ra chính xác đã biết."
+  },
+  {
+    "id": "ml-intro-pre-2",
+    "stage": "pre",
+    "question": "Mục đích của việc chia dữ liệu thành training và bộ thử nghiệm là gì?",
+    "options": [
+      "Để làm cho training nhanh hơn bằng cách sử dụng ít dữ liệu hơn",
+      "Để có dữ liệu sao lưu trong trường hợp dữ liệu training bị mất",
+      "Để đánh giá xem model có khái quát hóa thành dữ liệu mà nó chưa từng thấy trong quá trình training hay không",
+      "Để cân bằng classes trong dataset"
+    ],
+    "correct": 2,
+    "explanation": "Bộ kiểm tra đo lường sự khái quát hóa. Nếu bạn đánh giá trên dữ liệu training, bạn đo lường khả năng ghi nhớ chứ không phải học tập."
+  },
+  {
+    "id": "ml-intro-post-1",
+    "stage": "post",
+    "question": "Một model nhận được 98% accuracy trên dữ liệu training nhưng 55% trên dữ liệu thử nghiệm. Đây là một ví dụ về điều gì?",
+    "options": [
+      "Underfitting: model quá đơn giản",
+      "Overfitting: model ghi nhớ nhiễu training thay vì học các mẫu chung",
+      "Trôi dữ liệu: phân phối thử nghiệm đã thay đổi",
+      "Khái quát hóa tốt: model học được các mô hình thực sự"
+    ],
+    "correct": 1,
+    "explanation": "Khoảng cách lớn giữa training accuracy (cao) và accuracy thử nghiệm (thấp) là dấu hiệu của overfitting. Người model ghi nhớ dữ liệu training."
+  },
+  {
+    "id": "ml-intro-post-2",
+    "stage": "post",
+    "question": "Một trang thương mại điện tử muốn nhóm khách hàng thành các phân khúc dựa trên hành vi mua hàng mà không có bất kỳ nhãn nào được xác định trước. Đây là loại ML nào?",
+    "options": [
+      "Học có giám sát (phân loại)",
+      "Học có giám sát (hồi quy)",
+      "Học không giám sát (phân cụm)",
+      "Học tăng cường"
+    ],
+    "correct": 2,
+    "explanation": "Tìm các nhóm tự nhiên trong dữ liệu mà không có nhãn được xác định trước là phân cụm, là một hình thức học tập không giám sát."
+  },
+  {
+    "id": "ml-intro-post-3",
+    "stage": "post",
+    "question": "Kịch bản nào KHÔNG phải là trường hợp sử dụng tốt cho machine learning?",
+    "options": [
+      "Dự đoán khách hàng rời bỏ từ dữ liệu hành vi lịch sử",
+      "Phát hiện các giao dịch gian lận trong hàng triệu khoản thanh toán",
+      "Chuyển đổi nhiệt độ từ độ C sang độ F",
+      "Phân loại hình ảnh tổn thương da là lành tính hoặc ác tính"
+    ],
+    "correct": 2,
+    "explanation": "Độ C đến độ F là một công thức cố định (F = 9/5 * C + 32). Các quy tắc đơn giản, được xác định rõ ràng không cần ML. ML làm tăng thêm sự phức tạp mà không có lợi ích."
+  }
+]
