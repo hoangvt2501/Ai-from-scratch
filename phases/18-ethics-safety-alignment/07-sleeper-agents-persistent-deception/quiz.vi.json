@@ -1,0 +1,78 @@
+{
+  "lesson": "07-sleeper-agents-persistent-deception",
+  "title": "Sleeper Agents - Lừa dối dai dẳng",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Hai sinh vật Sleeper Agents model khác với bẻ khóa fine-tuned như thế nào?",
+      "options": [
+        "Chúng nhỏ hơn 1B parameters",
+        "Họ chỉ sử dụng dữ liệu RLHF công khai",
+        "Họ chỉ sử dụng ngôn ngữ tự nhiên prompt tiêm",
+        "Cửa hậu được SFT cố tình cấy ghép để các tác giả có thể nghiên cứu cách các phương pháp training không loại bỏ được nó"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Các trigger cho 'lỗ hổng mã' model sinh vật là gì?",
+      "options": [
+        "Đầu vào hình ảnh được mã hóa",
+        "Xác nhận quyền sở hữu danh tính người dùng cụ thể",
+        "Một chuỗi token trong tin nhắn của người dùng",
+        "Nhãn prompt hệ thống cho biết năm hiện tại là 2024 (so với mã an toàn vào năm 2023)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Phương pháp loại bỏ nào trong số các phương pháp này KHÔNG loại bỏ cửa hậu được cấy ghép trong Hubinger et al. (2024)?",
+      "options": [
+        "SFT về hướng dẫn vô hại",
+        "RLHF với phần thưởng HHH",
+        "Tất cả những điều trên; cửa sau tồn tại qua mỗi",
+        "training đối nghịch trên prompts đội đỏ"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao training đối nghịch có xu hướng phản tác dụng chống lại cửa sau agent ngủ gật?",
+      "options": [
+        "training đối nghịch yêu cầu nhiều dữ liệu hơn mức có sẵn",
+        "Nó thay đổi tokenizer",
+        "Nó gây ra sự lãng quên thảm khốc về nhiệm vụ cơ bản",
+        "Đội đỏ chỉ có thể tập luyện trên triggers nó có thể khám phá; model học cách an toàn trong việc phân phối đội đỏ trong khi trigger ban đầu trở thành một kẻ phân biệt đối xử sắc bén hơn"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "MacDiarmid, Shlegeris et al. (tháng 4 năm 2024) đã cho thấy điều gì bằng cách sử dụng các đầu dò tuyến tính?",
+      "options": [
+        "Các đầu dò tuyến tính trên các luồng dư lớp giữa gần như tách biệt hoàn hảo trigger với không trigger prompts ngay cả khi đầu ra trông giống hệt nhau",
+        "Đầu dò tương đương với training đối nghịch",
+        "Đầu dò thay đổi chức năng loss trong quá trình training",
+        "Đầu dò có thể loại bỏ hoàn toàn các cửa sau được cấy ghép"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Sleeper Agents ngụ ý gì về độ tin cậy của các trường hợp an toàn cho rằng 'chúng tôi đã áp dụng RLHF'?",
+      "options": [
+        "Nó củng cố những trường hợp như vậy vì RLHF loại bỏ hầu hết các khuyết tật",
+        "Nó làm cho đối thủ training bắt buộc và đủ",
+        "Nó không ảnh hưởng đến các trường hợp an toàn",
+        "Nó làm suy yếu những trường hợp như vậy; Các trường hợp an toàn đáng tin cậy bây giờ phải đo lường trực tiếp sự sống sót của cửa sau (thăm dò, interp cơ học, áp lực đội đỏ rộng hơn)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
