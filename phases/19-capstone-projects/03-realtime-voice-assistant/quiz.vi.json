@@ -1,0 +1,90 @@
+{
+  "lesson": "03-realtime-voice-assistant",
+  "title": "Capstone 03 - Trợ lý giọng nói thời gian thực (ASR đến LLM đến TTS)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao giọng nói agent không thể được xây dựng bằng cách ghép ba cuộc gọi chặn REST?",
+      "options": [
+        "REST endpoints có 30 giây khó timeout",
+        "REST không tương thích với WebRTC",
+        "JSON tuần tự hóa quá chậm đối với dữ liệu âm thanh",
+        "Độ trễ end-to-end dưới 800ms yêu cầu streaming đường ống ở mọi giai đoạn"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Vai trò của máy dò rẽ cùng với VAD là gì?",
+      "options": [
+        "Huấn luyện một bản sao giọng nói tùy chỉnh cho agent",
+        "Đọc một phần bản ghi và chấm điểm xem người dùng đã thực sự hoàn thành lời nói của họ hay chưa",
+        "Phát hiện người nói nào đang nói chuyện trong cuộc gọi nhiều bên",
+        "Trộn nhạc nền vào luồng đầu ra"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Khi người dùng bắt đầu nói trong khi agent đang phản hồi giữa, điều gì phải xảy ra để xông vào cảm thấy đúng?",
+      "options": [
+        "TTS kết thúc câu hiện tại trước khi nhường nhịn",
+        "Bộ pipeline đệm âm thanh của người dùng cho đến khi TTS hoàn tất",
+        "TTS bị hủy ngay lập tức, LLM đầu ra còn lại bị giảm và ASR vũ khí lại",
+        "agent nâng TTS volume để khẳng định mức độ ưu tiên"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao một chất lấp đầy ngắn như \"một giây, hãy để tôi kiểm tra\" được phát ra khi một công cụ vượt quá khoảng 300ms?",
+      "options": [
+        "Nó tránh im lặng để cuộc trò chuyện không bị đình trệ trong khi công cụ kênh bên chạy",
+        "Nó triggers một ASR model dự phòng",
+        "Nó đặt lại bộ đệm jitter WebRTC",
+        "Nó cải thiện WER trong lời nói tiếp theo"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Đoạn âm thanh đầu tiên phải rời khỏi server trong khoảng bao lâu kể từ LLM token đầu tiên?",
+      "options": [
+        "20 mili giây",
+        "800 mili giây",
+        "2 giây",
+        "200 mili giây"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Số liệu nào đo lường trực tiếp việc sà lan không phù hợp hoặc đóng cửa quá háo hức?",
+      "options": [
+        "WER",
+        "MOS",
+        "Tỷ lệ chấp nhận",
+        "Tỷ lệ cắt sai"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Dưới 3% loss gói, các pipeline dựa vào hai hành vi thích ứng nào?",
+      "options": [
+        "Chuyển sang LLM lớn hơn và vô hiệu hóa TTS",
+        "Quay trở lại codec âm thanh PSTN",
+        "Giữ một phần bảng điểm và nâng ngưỡng cổng phát biểu của VAD",
+        "Khởi động lại phòng LiveKit"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
