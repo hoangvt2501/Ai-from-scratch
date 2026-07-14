@@ -1,0 +1,78 @@
+{
+  "lesson": "62-vision-language-pretraining",
+  "title": "Tầm nhìn-Ngôn ngữ Pretraining",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Hai khả năng riêng biệt nào mà việc kết hợp InfoNCE và LM loss huấn luyện thành một model?",
+      "options": [
+        "Tốc độ và accuracy",
+        "Xếp hạng (tìm hình ảnh phù hợp cho chú thích) và thế hệ (viết chú thích cho hình ảnh)",
+        "Nén và giải nén",
+        "Tokenization và hủy mã hóa"
+      ],
+      "correct": 1,
+      "explanation": "InfoNCE xử lý xếp hạng; LM loss xử lý thế hệ. CoCa, BLIP và những người bạn kết hợp cả hai trong một training vượt qua."
+    },
+    {
+      "stage": "pre",
+      "question": "Trong InfoNCE cho một batch của N cặp, có bao nhiêu cặp dương và cặp âm được hình thành?",
+      "options": [
+        "1 dương tính và N âm",
+        "N dương dọc theo đường chéo của ma trận tương tự và âm N*(N-1) lệch đường chéo",
+        "N dương tính và N âm tính",
+        "N^2 tích cực"
+      ],
+      "correct": 1,
+      "explanation": "Các cặp phù hợp N nằm trên đường chéo; mọi thứ lệch đường chéo đều là âm."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao temperature tương phản thường là một parameter học hỏi?",
+      "options": [
+        "PyTorch yêu cầu nó",
+        "Điều chỉnh bằng tay rất mong manh; để tau học cho phép model tìm thấy độ đỉnh softmax phù hợp khi thang embedding phát triển trong quá trình training",
+        "Tau đã học nhanh hơn trên GPU",
+        "Nó tránh sử dụng Adam"
+      ],
+      "correct": 1,
+      "explanation": "CLIP đã giới thiệu log-tau đã học để softmax tương phản vẫn nằm trong chế độ hữu ích khi các chuẩn mực embedding phát triển."
+    },
+    {
+      "stage": "check",
+      "question": "Mô-đun con nào nhận được gradient từ loss LM nhưng không nhận được từ loss tương phản?",
+      "options": [
+        "Tầm nhìn encoder",
+        "Các cross-attention decoder",
+        "Máy chiếu MLP",
+        "Mặt văn bản encoder"
+      ],
+      "correct": 1,
+      "explanation": "loss tương phản không chạm vào decoder; LM loss không chạm vào encoder nhóm trung bình phía văn bản."
+    },
+    {
+      "stage": "check",
+      "question": "ignore_index=PAD_ID đạt được điều gì trong entropy chéo LM?",
+      "options": [
+        "Tăng tốc độ loss",
+        "Mặt nạ đệm các vị trí ra khỏi loss để model không bị trừng phạt vì dự đoán tokens sau khi chú thích kết thúc",
+        "Mã hóa pad tokens",
+        "Sắp xếp lại tokens"
+      ],
+      "correct": 1,
+      "explanation": "Các vị trí đệm không mang tín hiệu; bỏ qua chúng sẽ ngăn loss học cách dự đoán pad."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao một bản demo 50 bước về dữ liệu tổng hợp đủ để gọi bài học là hoàn thành?",
+      "options": [
+        "model đạt đến hiện đại ở 50 bậc thang",
+        "Bản demo chứng minh gradient hệ thống ống nước hoạt động từ đầu đến cuối; hình dạng production training giống hệt nhau nhưng chạy hàng triệu bước trên dữ liệu thực",
+        "50 bước là mức tối đa được hỗ trợ",
+        "Dữ liệu thực sẽ thay đổi kiến trúc"
+      ],
+      "correct": 1,
+      "explanation": "Động lực học được chứng minh (cả hai tổn thất đều giảm, không có NaN, tau ổn định) là cùng một động lực mà một tỷ hình ảnh sẽ hiển thị; chỉ cần mở rộng quy mô."
+    }
+  ]
+}
