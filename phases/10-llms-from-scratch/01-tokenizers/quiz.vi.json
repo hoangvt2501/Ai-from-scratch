@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Mục đích chính của tokenizer trong LLM pipeline là gì?",
+    "options": [
+      "Cách xóa từ dừng khỏi văn bản",
+      "Để chuyển đổi văn bản thành một chuỗi số nguyên mà model có thể process",
+      "Cách dịch văn bản giữa các ngôn ngữ",
+      "Cách nén văn bản để lưu trữ"
+    ],
+    "correct": 1,
+    "explanation": "LLMs process số, không phải văn bản. tokenizer chuyển đổi mọi ký tự, từ và ký hiệu thành ID số nguyên từ một từ vựng cố định. Sự chuyển đổi này không trung lập - nó xác định cách model 'nhìn' ngôn ngữ.",
+    "stage": "pre"
+  },
+  {
+    "question": "BPE (Mã hóa cặp byte) làm gì để xây dựng vốn từ vựng của mình?",
+    "options": [
+      "Chỉ chia văn bản thành các ký tự riêng lẻ",
+      "Lặp đi lặp lại merges cặp tokens liền kề thường xuyên nhất cho đến khi đạt được kích thước từ vựng mục tiêu",
+      "Sử dụng tra cứu từ điển cho toàn bộ từ",
+      "Gán ngẫu nhiên ID cho chuỗi con"
+    ],
+    "correct": 1,
+    "explanation": "BPE bắt đầu với bytes/characters riêng lẻ và lặp đi lặp lại merges cặp liền kề phổ biến nhất. 'th' + 'e' trở thành 'the'. Sau hàng nghìn merges, các từ phổ biến trở thành một tokens trong khi các từ hiếm được chia thành các phần phụ.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao kích thước từ vựng tạo ra sự đánh đổi trong thiết kế LLM?",
+    "options": [
+      "Từ vựng lớn hơn luôn hoạt động tốt hơn",
+      "Quá nhỏ tạo ra các chuỗi dài (tính toán nhiều hơn); chất thải quá lớn embedding parameters tokens hiếm",
+      "Kích thước từ vựng không ảnh hưởng đến hiệu suất model",
+      "Từ vựng nhỏ hơn luôn hiệu quả hơn"
+    ],
+    "correct": 1,
+    "explanation": "Từ vựng nhỏ (ví dụ: cấp độ ký tự) có nghĩa là mỗi từ có nhiều tokens, tăng độ dài trình tự và tính toán. Lãng phí từ vựng lớn parameters vào tokens hiếm khi xuất hiện trong dữ liệu training. Hầu hết LLMs sử dụng tokens 32K-100K.",
+    "stage": "post"
+  },
+  {
+    "question": "Dự phòng cấp byte giải quyết vấn đề gì trong tokenization?",
+    "options": [
+      "Nó tăng tốc độ tokenization",
+      "Nó đảm bảo mọi đầu vào (biểu tượng cảm xúc, scripts hiếm, dữ liệu nhị phân) đều có thể được mã hóa mà không có tokens 'không xác định'",
+      "Nó làm giảm kích thước từ vựng",
+      "Nó cải thiện model accuracy"
+    ],
+    "correct": 1,
+    "explanation": "Với dự phòng cấp byte, tokenizer có thể quay trở lại giá trị byte thô (có thể là 256) cho bất kỳ ký tự nào không có trong từ vựng. Điều này đảm bảo phạm vi phủ sóng hoàn toàn - không có đầu vào nào là 'không xác định'.",
+    "stage": "post"
+  },
+  {
+    "question": "tokenizer ảnh hưởng như thế nào đến hiệu suất không nói tiếng Anh ở LLMs?",
+    "options": [
+      "Tokenizers hoạt động tốt như nhau cho tất cả các ngôn ngữ",
+      "Các ngôn ngữ không được đại diện trong dữ liệu training trở nên tồi tệ hơn token merges, đòi hỏi nhiều tokens hơn cho mỗi từ và lãng phí context window",
+      "Văn bản không phải tiếng Anh luôn được mã hóa ký tự",
+      "Tokenization không ảnh hưởng đến hiệu suất ngôn ngữ"
+    ],
+    "correct": 1,
+    "explanation": "BPE merges được học từ dữ liệu training. Nếu văn bản tiếng Nhật chiếm 5% kho dữ liệu, các ký tự tiếng Nhật nhận được ít merges hơn, yêu cầu tokens nhiều hơn 2-5 lần mỗi từ so với tiếng Anh. Điều này thu hẹp hiệu quả context window cho văn bản không phải tiếng Anh.",
+    "stage": "post"
+  }
+]
