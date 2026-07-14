@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Sự khác biệt cơ bản giữa model ngôn ngữ cơ sở và model điều chỉnh hướng dẫn là gì?",
+    "options": [
+      "Chúng có kiến trúc khác nhau",
+      "Một model cơ sở tiếp tục các mẫu văn bản; Một model được điều chỉnh hướng dẫn làm theo hướng dẫn và trả lời các câu hỏi",
+      "Các models được điều chỉnh theo hướng dẫn lớn hơn",
+      "models cơ bản nhanh hơn"
+    ],
+    "correct": 1,
+    "explanation": "Một model cơ sở được huấn luyện với dự đoán token tiếp tục các mẫu văn bản. Đặt câu hỏi và nó có thể tạo ra nhiều câu hỏi hơn. SFT dạy nó tạo ra câu trả lời bằng cách training trên các cặp (hướng dẫn, phản hồi).",
+    "stage": "pre"
+  },
+  {
+    "question": "Mục đích của việc che giấu loss trên tokens không phải trợ lý trong SFT là gì?",
+    "options": [
+      "Để tăng tốc độ training",
+      "Để huấn luyện model chỉ để tạo phản hồi, không phải để ghi nhớ định dạng lệnh hoặc hệ thống prompts",
+      "Để giảm mức sử dụng bộ nhớ",
+      "Để ngăn chặn overfitting"
+    ],
+    "correct": 1,
+    "explanation": "Trong SFT, bạn muốn model học cách phản hồi chứ không phải cách tái tạo lệnh. Loss mặt nạ đặt loss thành 0 cho system/user tokens vì vậy gradients chỉ đến từ tokens phản hồi của trợ lý.",
+    "stage": "pre"
+  },
+  {
+    "question": "Dữ liệu SFT training thường tuân theo định dạng nào?",
+    "options": [
+      "Tài liệu văn bản thô",
+      "Mẫu trò chuyện với các vai trò hệ thống, người dùng và trợ lý được đánh dấu bằng tokens đặc biệt",
+      "Cặp khóa-giá trị",
+      "SQL truy vấn và kết quả"
+    ],
+    "correct": 1,
+    "explanation": "Dữ liệu SFT sử dụng định dạng trò chuyện có cấu trúc: hành vi cài đặt system prompt, hướng dẫn người dùng và phản hồi của trợ lý. Đặc biệt tokens đánh dấu ranh giới vai trò để model học được cấu trúc trò chuyện.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao SFT model có thể tạo ra perplexity thấp hơn về chất lượng đàm thoại benchmarks nhưng kém hơn?",
+    "options": [
+      "Các benchmarks đã sai",
+      "SFT tối ưu hóa cho việc đối sánh mẫu trên training ví dụ, không phải cho các đánh giá chất lượng sắc thái mà con người quan tâm - điều đó đòi hỏi RLHF/DPO",
+      "model quá nhỏ",
+      "learning rate đã sai"
+    ],
+    "correct": 1,
+    "explanation": "SFT dạy model tuân theo các định dạng và đưa ra các phản hồi hợp lý. Nó không dạy câu trả lời nào tốt hơn khi có nhiều tùy chọn hợp lệ. alignment sở thích của con người (RLHF/DPO) giải quyết khoảng cách này.",
+    "stage": "post"
+  },
+  {
+    "question": "Thường cần bao nhiêu cặp hướng dẫn-phản hồi chất lượng cao để SFT hiệu quả?",
+    "options": [
+      "Hàng triệu",
+      "10.000 đến 100.000 ví dụ chất lượng cao",
+      "Dưới 100",
+      "Tỷ"
+    ],
+    "correct": 1,
+    "explanation": "SFT tiết kiệm dữ liệu một cách đáng ngạc nhiên. Các nghiên cứu cho thấy rằng các ví dụ chất lượng cao 10K-100K (như Alpaca hoặc LIMA datasets) có thể dạy hướng dẫn sau một cách hiệu quả. Chất lượng quan trọng hơn nhiều so với số lượng.",
+    "stage": "post"
+  }
+]
