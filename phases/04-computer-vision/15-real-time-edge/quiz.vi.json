@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bạn benchmark một model và báo cáo 'trung bình 12ms cho mỗi hình ảnh trên 4090'. Còn thiếu gì?",
+      "options": [
+        "Không có gì; đó là một benchmark hoàn chỉnh",
+        "Phần trăm (p50/p95/p99), kỷ luật khởi động và đồng bộ hóa CUDA; Một mình giá trị trung bình ẩn độ trễ đuôi và có thể đo lường việc gửi hạt nhân thay vì thực thi hạt nhân",
+        "Kích thước model",
+        "Tên dataset"
+      ],
+      "correct": 1,
+      "explanation": "Độ trễ Production được đo bằng phần trăm vì các hệ thống thời gian thực bị lỗi ở đuôi chứ không phải mức trung bình. Nếu không khởi động, biên dịch JIT sẽ thổi phồng một vài phép đo đầu tiên. Không có ngọn đuốc. cuda.synchronize, GPU kernel khởi chạy return trước khi hạt nhân kết thúc, vì vậy bạn đo lường việc gửi chứ không phải thực thi. Cả ba đều phải đúng để con số có ý nghĩa."
+    },
+    {
+      "stage": "pre",
+      "question": "Độ trễ FLOPs và trên thiết bị không tương quan hoàn hảo. Tại sao?",
+      "options": [
+        "FLOPs bộ đếm bị hỏng",
+        "Các hoạt động khác nhau có độ thân thiện với phần cứng khác nhau; tích chập theo chiều sâu có thể có FLOPs thấp hơn nhưng bị ràng buộc với bộ nhớ trên GPUs, trong khi tích chập dày đặc sử dụng Tensor lõi một cách hiệu quả. Băng thông bộ nhớ, chi phí khởi chạy hạt nhân và hành vi bộ nhớ đệm cũng định hình độ trễ ngoài FLOPs thô",
+        "FLOPs bỏ qua kích thước batch",
+        "PyTorch đếm FLOPs không chính xác"
+      ],
+      "correct": 1,
+      "explanation": "FLOPs là một proxy rẻ. Độ trễ của đồng hồ treo tường phụ thuộc vào mức độ phù hợp của một hoạt động với điểm mạnh của phần cứng: chân Tensor lõi dày đặc; chiều sâu convs dừng băng thông bộ nhớ; attention bị đình trệ khi đọc bộ nhớ có độ dài trình tự^2. Đối với FLOPs tìm kiếm kiến trúc rất hữu ích; Đối với các quyết định triển khai đo lường trên thiết bị mục tiêu."
+    },
+    {
+      "stage": "post",
+      "question": "Lượng tử INT8 tĩnh sau training thường mất bao nhiêu accuracy trên thị lực ImageNet-class models?",
+      "options": [
+        "5-10 điểm phần trăm",
+        "0,1-1 điểm phần trăm khi được hiệu chỉnh đúng cách; models kết nối hợp nhất batch-norm đặc biệt hoạt động tốt theo INT8",
+        "Luôn luôn 0; nó không mất dữ liệu",
+        "20+ điểm; không sử dụng được"
+      ],
+      "correct": 1,
+      "explanation": "PTQ tĩnh trên models thị giác được hiệu chỉnh tốt mất một phần nhỏ của điểm xuống còn khoảng 1 điểm. Các chế độ loss lớn hơn là (a) dữ liệu hiệu chuẩn không đủ, (b) định lượng hóa các hoạt động với các ngoại lệ cực đoan (cố định bằng lượng tử hóa hoặc cắt trên mỗi kênh), (c) các lớp BatchNorm không hợp nhất. Khi chúng được xử lý, INT8 về cơ bản là miễn phí."
+    },
+    {
+      "stage": "post",
+      "question": "Ứng dụng dành cho thiết bị di động của bạn cần model tầm nhìn dưới 10MB với độ trễ dưới 10 mili giây. Bạn chọn xương sống nào?",
+      "options": [
+        "ResNet-50 ·",
+        "MobileNetV3-Small hoặc EfficientNet-Lite-B0 được lượng tử hóa thành INT8; cả hai đều nhắm mục tiêu ngân sách này và biên dịch rõ ràng thành TFLite / Core ML",
+        "Cơ sở ViT",
+        "ConvNeXt-Lớn"
+      ],
+      "correct": 1,
+      "explanation": "Tầm nhìn di động shipping vào năm 2026 vẫn bị chi phối bởi các biến thể MobileNetV3 và EfficientNet-Lite vì chúng được thiết kế cho ngân sách này: chiều sâu, h-swish, bóp-kích thích, nhận biết lượng tử ngay từ ngày đầu tiên. ResNet-50 và ViT-Base là 100MB + trong FP32 và 25MB + trong INT8, thổi bay ngân sách kích thước trước khi đo độ trễ."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn xuất một PyTorch model sang ONNX với opset 17 và nó không thành công với 'Toán tử không được hỗ trợ'. Nguyên nhân có khả năng xảy ra nhất là gì?",
+      "options": [
+        "Thư viện ONNX đã lỗi thời",
+        "(1) Một op tùy chỉnh không có ánh xạ ONNX; (2) một đường dẫn luồng điều khiển không xác định mà việc theo dõi không thể nắm bắt; (3) tương tác tensor-vô hướng ngầm trong Python nhưng không có tương đương ONNX. Sửa lỗi: thay thế op, sử dụng `torch.jit.script` cho luồng điều khiển hoặc nâng cấp opset",
+        "model có quá nhiều parameters",
+        "Hình dạng đầu vào không chính xác"
+      ],
+      "correct": 1,
+      "explanation": "Xuất ONNX là theo dõi theo mặc định, vì vậy bất kỳ thứ gì mà theo dõi không thể nắm bắt được — luồng điều khiển runtime, branches cấp Python, hoạt động CUDA tùy chỉnh — đều không thành công. Hầu hết các lỗi là một nút duy nhất không có ONNX tương đương (thường là một op tùy chỉnh nhỏ hoặc một cuộc gọi đến torch.special.*). Cách khắc phục là thay thế op, chuyển sang `torch.jit.script` hoặc chuyển sang opset mới hơn nơi op tồn tại."
+    }
+  ]
+}
