@@ -1,0 +1,78 @@
+{
+  "lesson": "06-sglang-radixattention",
+  "title": "SGLang và RadixChú ý đến khối lượng công việc nặng tiền tố",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cấu trúc dữ liệu cốt lõi nào hỗ trợ việc tái sử dụng KV cache của SGLang?",
+      "options": [
+        "Một cây cơ số trong đó mỗi nút sở hữu một phạm vi token và các khối KV của nó",
+        "Một bảng băm được khóa bởi đầy đủ prompt",
+        "Danh sách bỏ qua được khóa theo id yêu cầu",
+        "Cây B điểm attention"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao lập lịch FCFS sai đối với lưu lượng truy cập nhiều tiền tố trên SGLang?",
+      "options": [
+        "FCFS chỉ hoạt động trên AMD GPUs",
+        "FCFS là policy SGLang được khuyến nghị",
+        "FCFS không tương thích với PagedAttention",
+        "FCFS có thể loại bỏ một branch tiền tố nóng trước khi yêu cầu tiền tố dài tiếp theo xảy ra, phá vỡ việc sử dụng lại cây cơ số"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bộ lập lịch nhận biết bộ nhớ cache của SGLang sử dụng độ chi tiết trục xuất nào để khớp với hình dạng cơ số?",
+      "options": [
+        "Chỉ cho mỗi yêu cầu",
+        "Toàn bộ branches, bắt đầu từ những lá sử dụng ngắn nhất",
+        "Đơn tokens",
+        "Trục xuất ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Đòn bẩy trực tiếp nhất của kỹ sư để giữ cho tiền tố chia sẻ cây cơ số có thể phát hiện được là gì?",
+      "options": [
+        "Hạ núm sử dụng bộ nhớ GPU",
+        "Sửa thứ tự mẫu prompt để nội dung bất biến (hệ thống, công cụ schemas) luôn được đặt lên hàng đầu",
+        "Luôn sử dụng lô tĩnh",
+        "Tắt tính năng phân lô liên tục"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học KHÔNG mong đợi RadixAttention giành chiến thắng trên mô hình khối lượng công việc nào?",
+      "options": [
+        "Agents với công cụ dùng chung schemas",
+        "Khối lượng công việc thoại với lời mở đầu lặp đi lặp lại",
+        "RAG với phần mở đầu truy xuất được chia sẻ",
+        "Thế hệ single-shot với prompts độc đáo và không dùng chung system prompt"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Việc triển khai của ProjectDiscovery đã chuyển từ 7% lên 74% tỷ lệ truy cập vào bộ nhớ đệm tiền tố bằng cách làm gì?",
+      "options": [
+        "Di chuyển nội dung động ra khỏi tiền tố có thể lưu trong bộ nhớ đệm",
+        "Tăng số GPU từ 8 lên 16",
+        "Chuyển từ vLLM sang SGLang mà không cần bất kỳ thay đổi prompt nào",
+        "Tắt tính năng phân lô liên tục"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
