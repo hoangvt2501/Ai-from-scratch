@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trong mô hình ViT-MLP-LLM VLM, thành phần nào được huấn luyện phổ biến nhất trong khi các thành phần khác được giữ đông lạnh trong quá trình alignment?",
+      "options": [
+        "Tầm nhìn encoder",
+        "Máy chiếu (MLP 2-4 lớp giữa ViT và LLM) - nó lập bản đồ tầm nhìn tokens vào không gian embedding của LLM và mang hầu hết tín hiệu alignment đa phương thức",
+        "Các LLM",
+        "Tất cả các thành phần luôn được huấn luyện cùng nhau"
+      ],
+      "correct": 1,
+      "explanation": "Công thức VLM tiêu chuẩn huấn luyện máy chiếu trước tiên với ViT và LLM đông lạnh (giai đoạn alignment), sau đó tùy chọn giải phóng mọi thứ để điều chỉnh trước khi training và hướng dẫn. Máy chiếu nhỏ (hàng chục đến hàng trăm triệu tham số) và chịu gánh nặng của cầu phương thức. Fine-tuning ở production thường chỉ huấn luyện máy chiếu + LoRA trên attention - rẻ và hiệu quả."
+    },
+    {
+      "stage": "pre",
+      "question": "DeepStack (được sử dụng trong Qwen3-VL) làm gì?",
+      "options": [
+        "Chỉ sử dụng features của lớp ViT sâu nhất",
+        "Stacks features từ nhiều độ sâu ViT trước khi chiếu, vì vậy LLM nhìn thấy cả ngữ nghĩa cấp cao (lớp sâu) và chi tiết không gian chi tiết (lớp nông)",
+        "Tăng gấp đôi độ sâu của LLM",
+        "Là một sơ đồ lượng tử cụ thể"
+      ],
+      "correct": 1,
+      "explanation": "Vanilla VLMs chỉ dự án ViT lớp cuối cùng features. DeepStack lấy mẫu nhiều độ sâu, nối và dự án. Các lớp sâu cho ngữ nghĩa ('đây là một biểu đồ'); Các layer nông cho vị trí và kết cấu ('thanh ở x = 120 là màu đỏ'). Sự kết hợp này thu hẹp khoảng cách grounding đối với các tác vụ yêu cầu bản địa hóa tốt, như GUI agent hành động hoặc phụ đề dày đặc."
+    },
+    {
+      "stage": "post",
+      "question": "Một production VLM cho thấy độ tin cậy văn bản cao nhưng văn bản được tạo mô tả các đối tượng không có trong hình ảnh. Số liệu nào nắm bắt được thất bại này?",
+      "options": [
+        "Perplexity",
+        "Tỷ lệ lỗi phương thức chéo (CMER) — phần đầu ra có độ tin cậy văn bản cao nhưng độ tương đồng cosin hình ảnh-văn bản (thông qua trình kiểm tra họ CLIP) thấp; ~ 12% điển hình trên dữ liệu web chưa được quản lý",
+        "Accuracy trên MMMU",
+        "Độ trễ thế hệ Token"
+      ],
+      "correct": 1,
+      "explanation": "CMER là một KPI production alignment. Nó nắm bắt được mô hình ảo giác VLM cổ điển: model chắc chắn về văn bản của nó, nhưng văn bản không dựa trên hình ảnh. Giám sát CMER theo endpoint và loại prompt; coi CMER tăng như một tín hiệu cho thấy model đang trôi dạt ra khỏi phân phối hoặc gặp phải một danh mục prompt mà nó không thể xử lý. Skywork.ai đã cắt giảm ảo giác ~ 35% bằng cách biến CMER thành KPI class đầu tiên."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao VLMs hiện đại sử dụng SigLIP hoặc encoders thị giác tùy chỉnh thay vì ImageNet ResNet được giám sát làm xương sống?",
+      "options": [
+        "SigLIP nhanh hơn",
+        "CLIP/SigLIP-style encoders được huấn luyện cùng với văn bản, vì vậy không gian đầu ra của chúng đã gần như phù hợp với ngôn ngữ; Máy chiếu sau đó phải làm ít công việc hơn nhiều và lý do model tốt hơn về các khái niệm văn bản trực quan",
+        "ResNets không thể tạo ra tokens",
+        "SigLIP có nhiều parameters hơn"
+      ],
+      "correct": 1,
+      "explanation": "Ngôn ngữ thị giác pretraining định hình encoder sống trong một không gian tương thích với văn bản. Một ImageNet ResNet được giám sát được huấn luyện mà không có bất kỳ tín hiệu văn bản nào, vì vậy việc kết nối với một LLM đòi hỏi máy chiếu lớn hơn nhiều và nhiều dữ liệu hơn. CLIP/SigLIP/DINOv3 encoders tạo ra features mà một LLM có thể tiêu thụ với một vài lớp tuyến tính. Hầu hết mọi VLM SOTA đều sử dụng họ CLIP hoặc SigLIP encoder vì lý do này."
+    },
+    {
+      "stage": "post",
+      "question": "Qwen3-VL-235B-A22B đạt điểm cao nhất trên OSWorld. OSWorld là gì và điều này ngụ ý điều gì?",
+      "options": [
+        "Một benchmark tổng hợp",
+        "Một agent benchmark trong đó model vận hành GUI máy tính để bàn - xác định các nút, đọc trạng thái giao diện người dùng, phát ra hành động; Điểm số cao nhất của Qwen3-VL ngụ ý VLMs hiện là agents hình ảnh khả thi để tự động hóa GUI",
+        "Một benchmark ước tính tư thế",
+        "A video QA benchmark"
+      ],
+      "correct": 1,
+      "explanation": "OSWorld kiểm tra xem một model có thể tự động vận hành môi trường máy tính để bàn thông qua ảnh chụp màn hình hay không. Điểm số toàn cầu hàng đầu của Qwen3-VL cho thấy mô hình 'agent trực quan' - VLM đọc màn hình, quyết định hành động, gọi công cụ mouse/keyboard - đã vượt qua lãnh thổ thực tế. Đây là những gì các bản demo PC AI 2026 chạy; nó cũng là một con đường trực tiếp vào các sản phẩm QA, RPA và khả năng tiếp cận tự động."
+    }
+  ]
+}
