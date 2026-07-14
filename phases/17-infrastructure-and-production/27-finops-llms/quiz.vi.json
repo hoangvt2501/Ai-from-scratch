@@ -1,0 +1,78 @@
+{
+  "lesson": "27-finops-llms",
+  "title": "FinOps cho LLMs — Kinh tế đơn vị và Phân bổ đa Tenant",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao FinOps truyền thống phá vỡ chi tiêu LLM?",
+      "options": [
+        "LLMs không tốn tiền",
+        "LLM hóa đơn luôn miễn phí",
+        "Cloud nhà cung cấp từ chối liệt kê",
+        "Chi phí là giao dịch token hơn là thời gian hoạt động của tài nguyên; Thẻ không tự động lan truyền từ các cuộc gọi API và bạn phải đóng dấu user/task/tenant tại trang web cuộc gọi"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học yêu cầu ba khía cạnh phân bổ nào trong ngày đầu tiên?",
+      "options": [
+        "Mỗi người dùng (user_id), mỗi tác vụ (task_id + tuyến đường), mỗi tenant (tenant_id)",
+        "Phiên bản nhà cung cấp, model API",
+        "Khu vực, AZ, trung tâm dữ liệu",
+        "GPU, CPU, RAM"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bốn lớp token nào nên được chia nhỏ trong phân bổ chi phí?",
+      "options": [
+        "Prompt, công cụ, bộ nhớ, phản hồi",
+        "Đầu vào, đầu ra, mạng, đĩa",
+        "Bộ nhớ đệm, model, gateway observability",
+        "GPU, CPU, RAM, lưu trữ"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Kill-switch trigger trong thang thực thi là gì?",
+      "options": [
+        "Tenant tiêu điểm z > 4 so với đường cơ sở; Tự động tạm dừng tenant và trang khi gọi",
+        "Độ trễ P50 > 2 giây",
+        "Bất kỳ phản hồi 5xx nào",
+        "Chi tiêu hơn 1 đô la trong một phút"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học đề xuất chỉ số đơn vị nào thay vì tokens USD/M?",
+      "options": [
+        "Chi phí mỗi gateway",
+        "Chi phí mỗi GPU giờ",
+        "Chi phí mỗi giây",
+        "Chi phí trên mỗi kết quả sản phẩm (ví dụ: chi phí cho mỗi yêu cầu hỗ trợ đã giải quyết, chi phí cho mỗi bài viết được tạo, chi phí cho mỗi nhiệm vụ agent thành công)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học gọi là mô hình phân bổ nào là accuracy cao nhất mà các nhóm trưởng thành sử dụng?",
+      "options": [
+        "Sampling và ngoại suy",
+        "Phân bổ dựa trên Model",
+        "Chỉ gắn thẻ và tổng hợp",
+        "Telemetry joiner — tham gia traces thanh toán qua ID trace"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
