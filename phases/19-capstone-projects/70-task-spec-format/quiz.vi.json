@@ -1,0 +1,78 @@
+{
+  "lesson": "70-task-spec-format",
+  "title": "Định dạng thông số kỹ thuật nhiệm vụ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao phải đóng băng schema bản ghi nhiệm vụ trước khi viết mã tính điểm?",
+      "options": [
+        "Nó làm cho trình phân tích cú pháp JSON chạy nhanh hơn",
+        "Nó khóa hợp đồng để các số liệu, người chạy và bộ xử lý hậu kỳ đồng ý về tên trường",
+        "Nó loại bỏ nhu cầu về trình xác thực",
+        "Nó cho phép tên chỉ số mới tùy ý mà không cần thay đổi thêm"
+      ],
+      "correct": 1,
+      "explanation": "schema là hợp đồng mà mọi người tiêu dùng xuôi dòng đều đọc. Khóa nó cho phép bạn thay đổi các thành phần một cách độc lập mà không làm hỏng rest."
+    },
+    {
+      "stage": "pre",
+      "question": "Từ vựng đóng mà lĩnh vực metric_name chấp nhận là gì?",
+      "options": [
+        "Bất cứ điều gì người chạy được cấu hình để nhận dạng",
+        "exact_match, f1, bleu_4, rouge_l, accuracy, code_exec",
+        "Bất kỳ chuỗi nào mà tác giả tác vụ chọn",
+        "Chỉ exact_match và f1"
+      ],
+      "correct": 1,
+      "explanation": "Bài học ghim từ vựng số liệu vào sáu tên. Thêm một yêu cầu một bài học mới và một mục trình xác thực mới."
+    },
+    {
+      "stage": "check",
+      "question": "Trình xác thực làm gì khi thấy một trường cấp cao nhất không xác định trên bản ghi?",
+      "options": [
+        "Tước bỏ nó và tiếp tục",
+        "Ghi nhật ký cảnh báo nhưng chấp nhận bản ghi",
+        "Trả về lỗi xác thực và từ chối bản ghi",
+        "Đổi tên thành metadata.unknown"
+      ],
+      "correct": 2,
+      "explanation": "Các trường không xác định là một mối nguy hiểm tương thích chuyển tiếp. Trình xác thực từ chối chúng để schema vẫn là nguồn tin cậy duy nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao few-shot ví dụ được đính kèm vào bản ghi nhiệm vụ chứ không phải do người chạy tính toán?",
+      "options": [
+        "Người chạy không có file I/O",
+        "Ý định của tác giả là một phần của quá trình đánh giá; các ví dụ ràng buộc đối với nhiệm vụ loại bỏ mỗi model variance trong xây dựng prompt",
+        "Nó tiết kiệm dung lượng đĩa",
+        "Few-shot chỉ được sử dụng trong thời gian fine-tuning"
+      ],
+      "correct": 1,
+      "explanation": "Thành phần Few-shot là một phần của định nghĩa eval, không phải giao diện model. Đặt nó vào nhiệm vụ có nghĩa là mọi model đều nhìn thấy cùng một prompt."
+    },
+    {
+      "stage": "check",
+      "question": "Cặp danh mục-số liệu nào là bất hợp pháp theo trình xác thực?",
+      "options": [
+        "Tóm tắt + rouge_l",
+        "Số học + exact_match",
+        "MCQ + bleu_4",
+        "code_exec + code_exec"
+      ],
+      "correct": 2,
+      "explanation": "BLEU trên một chữ cái là vô nghĩa. Trình xác thực thực thi rằng các tác vụ mcq chỉ sử dụng exact_match hoặc accuracy."
+    },
+    {
+      "stage": "post",
+      "question": "Quy tắc post_process extract_letter trả về điều gì khi thế hệ được `Answer: C is correct`?",
+      "options": [
+        "Chuỗi đầy đủ không thay đổi",
+        "C",
+        "Trả lời",
+        "Một chuỗi trống"
+      ],
+      "correct": 1,
+      "explanation": "extract_letter trả về ký tự đầu tiên khớp với [A-E] trong thế hệ. Chuỗi có C ở đầu thân bài."
+    }
+  ]
+}
