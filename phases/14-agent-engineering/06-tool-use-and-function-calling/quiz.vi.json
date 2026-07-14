@@ -1,0 +1,90 @@
+{
+  "lesson": "06-tool-use-and-function-calling",
+  "title": "Sử dụng và Function Calling dụng cụ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Toolformer sử dụng tín hiệu nào để quyết định có giữ chú thích công cụ ứng cử viên hay không?",
+      "options": [
+        "Thỏa thuận nhãn mác của con người",
+        "Liệu việc bao gồm kết quả công cụ có làm giảm token loss tiếp theo trên văn bản xung quanh hay không",
+        "Công cụ có trả về trong vòng 100 mili giây hay không",
+        "Công cụ có phát ra JSON hợp lệ hay không"
+      ],
+      "correct": 1,
+      "explanation": "Tín hiệu tự giám sát của Toolformer giữ các chú thích có kết quả công cụ thấp hơn vào token loss tiếp theo."
+    },
+    {
+      "stage": "pre",
+      "question": "Phân tách BFCL V4 mà bài học báo cáo là gì?",
+      "options": [
+        "100% một lượt",
+        "40% agentic, 30% nhiều lượt, 10% trực tiếp, 10% không trực tiếp, 10% ảo giác",
+        "50% sống, 50% tổng hợp",
+        "33% agentic, 33% lập kế hoạch, 33% phản ánh"
+      ],
+      "correct": 1,
+      "explanation": "Trọng lượng BFCL V4 là 40 agentic / 30 nhiều lượt / 10 trực tiếp / 10 không trực tiếp / 10 ảo giác."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao mô tả của một công cụ chịu lực?",
+      "options": [
+        "Đó là những gì người dùng nhìn thấy trong giao diện người dùng",
+        "model đọc nó để chọn công cụ phù hợp; Mô tả xấu là nguyên nhân hàng đầu gây ra lỗi sai công cụ",
+        "Nó kiểm soát các nhóm thanh toán",
+        "Nó được yêu cầu bởi JSON Schema"
+      ],
+      "correct": 1,
+      "explanation": "Mô tả công cụ là tín hiệu chính của model để lựa chọn công cụ; Mô tả kém gây ra định tuyến sai công cụ."
+    },
+    {
+      "stage": "check",
+      "question": "tool_use_id đóng vai trò gì trong tool calling song song?",
+      "options": [
+        "Nó nén JSON payload",
+        "Nó tương quan từng kết quả công cụ với lệnh gọi ban đầu của nó để kết quả trả về lộ trình không theo thứ tự một cách chính xác",
+        "Nó cho phép cuộc gọi dựa trên phím API",
+        "Nó cho phép bộ nhớ đệm"
+      ],
+      "correct": 1,
+      "explanation": "tool_use_id là mối tương quan token; hoán đổi chúng sẽ định tuyến kết quả đến cuộc gọi sai."
+    },
+    {
+      "stage": "check",
+      "question": "Đánh giá dựa trên trạng thái V3 cố gắng nắm bắt class thất bại nào?",
+      "options": [
+        "Token rò rỉ",
+        "Các lệnh gọi công cụ đối sánh AST trông đúng nhưng để API ở trạng thái sai",
+        "Thực thi công cụ chậm",
+        "Trôi phiên bản Schema"
+      ],
+      "correct": 1,
+      "explanation": "Đánh giá dựa trên trạng thái kiểm tra trạng thái API kết quả (ví dụ: tệp thực sự được tạo) thay vì so khớp lệnh gọi cú pháp."
+    },
+    {
+      "stage": "post",
+      "question": "Bài học năm 2026 nào KHÔNG liệt kê trong số những bài học mở cho function calling?",
+      "options": [
+        "Xâu chuỗi công cụ đường chân trời dài",
+        "Ra quyết định linh hoạt trên nhiều công cụ",
+        "Ký ức qua các lượt",
+        "Tốc độ giải mã cấp Token"
+      ],
+      "correct": 3,
+      "explanation": "Các vấn đề mở là trí nhớ, ra quyết định năng động, chuỗi chân trời dài và phát hiện ảo giác; tốc độ giải mã không có trong danh sách."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao một công cụ run_shell(cmd) chung được gọi là cờ đỏ trong bài học này?",
+      "options": [
+        "Nó chậm",
+        "Nó mở rộng ranh giới sandbox; Các công cụ cụ thể như git_status() ràng buộc read/write bề mặt và rủi ro",
+        "Nó không thể được gọi song song",
+        "Các nhà cung cấp từ chối nó"
+      ],
+      "correct": 1,
+      "explanation": "Các công cụ hẹp hạn chế bề mặt sandbox; Một công cụ shell chung cấp toàn bộ bề mặt của máy chủ."
+    }
+  ]
+}
