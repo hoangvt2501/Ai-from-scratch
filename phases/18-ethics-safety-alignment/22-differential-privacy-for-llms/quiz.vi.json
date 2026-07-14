@@ -1,0 +1,78 @@
+{
+  "lesson": "22-differential-privacy-for-llms",
+  "title": "Quyền riêng tư khác biệt cho LLMs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Quyền riêng tư vi sai (epsilon, delta) đảm bảo điều gì cho thuật toán ngẫu nhiên M?",
+      "options": [
+        "M không ghi nhớ bất kỳ dữ liệu training nào",
+        "M là xác định cho đến nhiễu",
+        "Đối với bất kỳ hai datasets nào khác nhau trong một ví dụ và bất kỳ sự kiện nào S, P(M(D) trong S) <= e^epsilon * P(M(D') trong S) + delta, vì vậy không thể suy ra sự đóng góp của bất kỳ cá nhân nào một cách đáng tin cậy",
+        "M có thể chứng minh tương đương với một thuật toán không riêng tư"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bước nào KHÔNG phải là một bước của DP-SGD như được mô tả bởi Abadi et al. 2016?",
+      "options": [
+        "Lấy mẫu một batch nhỏ và tính toán cho từng ví dụ gradients",
+        "Cắt từng gradient cho mỗi ví dụ đến ngưỡng C",
+        "Ngẫu nhiên hóa lại tokenizer của model giữa các bước",
+        "Tổng gradients bị cắt và thêm nhiễu Gaussian được chia tỷ lệ bằng sigma * C"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao LoRA + DP-SGD là configuration phổ biến năm 2025?",
+      "options": [
+        "DP-SGD đầy đủ trên một model biên giới là rất nghiêm cấm; LoRA giới hạn gradient cập nhật cho một bộ chuyển đổi nhỏ, giảm dung lượng lưu trữ gradient trên mỗi ví dụ trong khi vẫn cung cấp đảm bảo DP trên bộ điều hợp",
+        "Nó sử dụng LoRA như một tokenizer",
+        "LoRA tăng epsilon theo thiết kế",
+        "LoRA loại bỏ nhu cầu về kế toán"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cuộc kiểm toán tháng 3 năm 2025 (arXiv:2503.06808) đã giải quyết căng thẳng giữa canary-MIA và trích xuất dữ liệu training như thế nào?",
+      "options": [
+        "Nó loại bỏ hoàn toàn nhu cầu về canary",
+        "Nó đã chứng minh DP-SGD là không cần thiết",
+        "Nó cho thấy cả hai đều đo lường cùng một thuộc tính",
+        "Nó cho thấy chúng đo lường những thứ khác nhau: MIA trên canary được chèn vào báo cáo ghi nhớ vì canary không được tối ưu hóa để trở thành những ví dụ 'có thể trích xuất nhất' thực sự quan trọng đối với quyền riêng tư"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "PMixED (arXiv:2403.15638) cung cấp những gì thay thế cho DP training?",
+      "options": [
+        "Biến thể DP-SGD nhanh hơn",
+        "Kế toán mới cho Renyi DP",
+        "Quyền riêng tư vi sai thời gian Inference thông qua sự kết hợp của các chuyên gia về các bản phân phối token tiếp theo, với nhiễu tổng hợp; tránh DP hoàn toàn training",
+        "Một cách để tính epsilon chỉ từ kế toán epsilon-delta"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Đảo ngược quyền riêng tư khác biệt thông qua cuộc tấn công Phản hồi LLM là gì?",
+      "options": [
+        "Sử dụng điểm tin cậy của model được huấn luyện DP như một oracle để xác định lại các cá nhân, ngay cả khi đầu ra không bị rò rỉ trực tiếp",
+        "Một cuộc tấn công vào entropy tokenizer",
+        "Một phương pháp để đặt lại epsilon về không",
+        "Một biện pháp đối phó với việc chèn canary"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
