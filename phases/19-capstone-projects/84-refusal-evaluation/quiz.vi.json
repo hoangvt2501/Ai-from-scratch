@@ -1,0 +1,78 @@
+{
+  "lesson": "84-refusal-evaluation",
+  "title": "Capstone 84 - Đánh giá từ chối",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Từ chối thiếu đo lường điều gì?",
+      "options": [
+        "Tần suất các câu trả lời model prompts được dán nhãn không an toàn",
+        "Tần suất model từ chối prompts dán nhãn an toàn",
+        "model phát ra bao nhiêu tokens cho mỗi phản hồi",
+        "Chi phí của cuộc gọi API mỗi prompt"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao lại sử dụng một LLM giả thay vì một model thực sự cho bài học này?",
+      "options": [
+        "Bởi vì models thật không được phép trong capstones",
+        "Vì vậy, cùng một đầu vào mang lại cùng một đầu ra trong các lần chạy, tạo ra các thay đổi mã do các nguyên nhân đã biết",
+        "Bởi vì LLMs giả chính xác hơn thực tế",
+        "Bởi vì bài học đòi hỏi GPU phần cứng"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cho số prompt an toàn = 30, số lượng an toàn bị từ chối = 5, tỷ lệ từ chối quá mức là bao nhiêu?",
+      "options": [
+        "0.50",
+        "0.17",
+        "0.30",
+        "0.05"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Sai số hiệu chuẩn dự kiến (ECE) đo lường gì ở đây?",
+      "options": [
+        "Tỷ lệ từ chối đối với prompts không an toàn",
+        "Khoảng cách giữa độ tin cậy đã công bố của model và accuracy quan sát được của nó, được chia thành các phạm vi tin cậy",
+        "Tổng số token được tính trên tất cả các câu trả lời",
+        "Số lượng quy tắc biểu thức chính quy đã kích hoạt"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao framework tham gia prompts không an toàn chống lại phân loại bài 82?",
+      "options": [
+        "Để chạy lại bài học 82 corpus loader",
+        "Để báo cáo việc từ chối dưới mức cho mỗi danh mục tấn công để nhóm xem model bị rò rỉ trên ranh giới nào",
+        "Nâng mức độ nghiêm trọng của mỗi prompt lên một",
+        "Cách xóa trùng lặp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao framework trả lại cả từ chối quá mức và từ chối quá mức thay vì một điểm an toàn duy nhất?",
+      "options": [
+        "Bởi vì các lớp dữ liệu Python thích nhiều trường",
+        "Bởi vì chúng là hai lỗi đối lập nhau và một số duy nhất sẽ ẩn lỗi nào tệ hơn trên một bản dựng nhất định",
+        "Bởi vì từ chối dưới chỉ được sử dụng trong CI",
+        "Bởi vì từ chối quá mức được tính toán bởi một nhóm khác"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
