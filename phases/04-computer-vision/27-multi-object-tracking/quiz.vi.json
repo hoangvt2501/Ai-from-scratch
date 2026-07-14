@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Thuật toán Hungary làm gì trong việc theo dõi bằng cách phát hiện?",
+      "options": [
+        "Nó lọc ra các phát hiện có độ tin cậy thấp",
+        "Nó giải quyết việc chỉ định một-một với chi phí tối thiểu giữa các bản nhạc và phát hiện - thường sử dụng 1 - IoU làm chi phí - để khớp mỗi bản nhạc với nhiều nhất một phát hiện và ngược lại",
+        "Nó huấn luyện máy dò",
+        "Nó dự đoán quỹ đạo trong tương lai"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi khung hình theo dõi bằng cách phát hiện đều thực hiện một bài toán phân công: M theo dõi, N phát hiện, tìm kết quả phù hợp nhất với một-một. Tiếng Hungary là thuật toán đa thức tối ưu cho việc này. Chi phí thường là 1 - IoU (chồng chéo cao hơn = chi phí thấp hơn). scipy.optimize.linear_sum_assignment là việc thực hiện tiêu chuẩn. SORT, DeepSORT, ByteTrack, BoT-SORT đều sử dụng nó."
+    },
+    {
+      "stage": "pre",
+      "question": "Đóng góp nổi bật của ByteTrack là gì?",
+      "options": [
+        "Một xương sống mới",
+        "Một liên kết giai đoạn thứ hai cố gắng khớp các bản nhạc còn sót lại với các phát hiện có độ tin cậy thấp, khôi phục các tắc nghẽn ngắn và ID mà trình theo dõi tiêu chuẩn sẽ mất khi loại bỏ các phát hiện đó",
+        "Bộ lọc Kalman mới",
+        "Một sự xuất hiện embedding"
+      ],
+      "correct": 1,
+      "explanation": "Hầu hết các trình theo dõi loại bỏ các phát hiện dưới ngưỡng tin cậy (~0,5). ByteTrack giữ chúng và chạy đường chuyền thứ hai của Hungary để cố gắng khớp chúng với các đường ray không khớp với bất kỳ phát hiện có độ tin cậy cao nào. Điều này phục hồi các tắc nghẽn và vượt qua ngắn, nâng IDF1 lên đáng kể trên MOT17 mà không có bất kỳ sự xuất hiện nào features. Sự đơn giản của nó làm cho nó trở thành mặc định trong Ultralytics và Roboflow Supervision."
+    },
+    {
+      "stage": "post",
+      "question": "Làm thế nào để trình theo dõi dựa trên bộ nhớ của SAM 2 tránh liên kết rõ ràng kiểu Hungary?",
+      "options": [
+        "Nó chạy SORT nội bộ",
+        "Nó lưu trữ features không gian-thời gian cho mỗi trường hợp trong ngân hàng bộ nhớ; Trên mỗi khung hình mới, cross-attention giữa bộ nhớ và features hiện tại trực tiếp tạo ra mặt nạ của cùng một phiên bản, với sự liên kết ngầm trong hoạt động attention",
+        "Nó sử dụng bộ lọc Kalman",
+        "Nó yêu cầu ID được gắn nhãn thủ công trên mỗi khung hình"
+      ],
+      "correct": 1,
+      "explanation": "SAM 2 thay thế vòng lặp phát hiện sau đó liên kết bằng bộ phân đoạn có điều kiện bộ nhớ. Ngân hàng bộ nhớ giữ features của phiên bản từ các khung hình trước đó. Ở mỗi khung hình mới, decoder tham dự chéo features của khung hình mới so với bộ nhớ và mặt nạ kết quả là cùng một phiên bản — không có bước gán bên ngoài. Điều này xử lý các trường hợp che khuất kéo dài một cách duyên dáng vì bộ nhớ vẫn tồn tại ngay cả khi phiên bản biến mất trong nhiều khung hình."
+    },
+    {
+      "stage": "post",
+      "question": "Đối với video giám sát mà yêu cầu chính là giữ cho ID của mỗi người nhất quán, bạn nên báo cáo số liệu nào?",
+      "options": [
+        "CHUYỂN ĐỔI",
+        "IDF1 — giá trị trung bình hài hòa của ID precision và recall; Đo lường khả năng bảo quản danh tính theo thời gian thay vì accuracy phát hiện trên mỗi khung hình",
+        "Top 1 accuracy",
+        "FID"
+      ],
+      "correct": 1,
+      "explanation": "MOTA kết hợp các lỗi phát hiện và liên kết, vì vậy trình theo dõi có nhiều kết quả dương tính giả có thể ẩn lỗi ID của nó. IDF1 được thiết kế cho câu hỏi 'ai là ai theo thời gian': nó khớp các bản nhạc được dự đoán với các bản nhạc có sự thật trên toàn cầu trên toàn bộ video và tính toán F1 trên nhãn nhận dạng. Đối với giám sát và phân tích đám đông, IDF1 là số liệu để báo cáo; HOTA là tiêu chuẩn học thuật rộng hơn."
+    },
+    {
+      "stage": "post",
+      "question": "SAM 3.1 Object Multiplex (tháng 3 năm 2026) giới thiệu bộ nhớ dùng chung trên nhiều phiên bản được theo dõi. Điều đó cho phép điều gì?",
+      "options": [
+        "accuracy thấp hơn",
+        "Theo dõi nhiều đối tượng hiệu quả — một ngân hàng bộ nhớ dùng chung với truy vấn trên mỗi phiên bản tokens thay thế N ngân hàng bộ nhớ riêng biệt, do đó, quy mô chi phí theo tuyến tính về số lượng phiên bản và các cảnh có kích thước đám đông hòa nhạc trở nên dễ xử lý",
+        "inference chỉ dành cho Cloud",
+        "Mục tiêu training mới"
+      ],
+      "correct": 1,
+      "explanation": "Pre-Multiplex SAM 2 / SAM 3 theo dõi từng đối tượng bằng ngân hàng bộ nhớ riêng của nó; chi phí được chia tỷ lệ tuyến tính theo số lượng phiên bản. Multiplex (tháng 3 năm 2026) giới thiệu một bộ nhớ dùng chung với truy vấn trên mỗi phiên bản tokens tìm nạp features dành riêng cho phiên bản. Theo dõi nhiều đối tượng - đám đông, giao thông, nhà kho workers - lần đầu tiên trở nên hiệu quả với trình theo dõi dựa trên bộ nhớ."
+    }
+  ]
+}
