@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "'Trần một agent' là gì?",
+      "options": [
+        "Số lượng công cụ tối đa mà agent có thể sử dụng",
+        "Điểm mà một agent không thành công vì nhiệm vụ vượt quá một context window, đòi hỏi chuyên môn khác nhau hoặc cần công việc song song",
+        "Giới hạn về số lượng cuộc gọi API mà một agent có thể thực hiện mỗi phút",
+        "Kích thước model tối đa có thể chạy trên một GPU"
+      ],
+      "correct": 1,
+      "explanation": "Một agent có một context window, một system prompt và processes tuần tự. Khi các nhiệm vụ yêu cầu đọc 50 tệp (tràn ngữ cảnh), chuyển đổi giữa nghiên cứu và mã hóa (chuyên môn hỗn hợp) hoặc thực hiện công việc độc lập đồng thời (song song), một agent duy nhất sẽ bị hỏng."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao bạn có thể sử dụng nhiều agents chuyên môn thay vì một agent tướng mạnh mẽ?",
+      "options": [
+        "Nhiều agents luôn rẻ hơn một model lớn",
+        "Mỗi agent có thể có một system prompt tập trung, ngữ cảnh nhỏ hơn và các công cụ chuyên dụng, dẫn đến hiệu suất tốt hơn trong các nhiệm vụ phụ cụ thể của nó",
+        "Nhiều agents có thể chia sẻ cùng một context window",
+        "agents chung không thể sử dụng các công cụ"
+      ],
+      "correct": 1,
+      "explanation": "Một nhà nghiên cứu agent tối ưu hóa cho tìm kiếm, một lập trình viên agent tối ưu hóa để triển khai và một người đánh giá agent tối ưu hóa cho chất lượng mã, mỗi người thực hiện công việc của họ tốt hơn một agent cố gắng làm cả ba cùng một lúc."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào mô hình đa agent pipeline (tuần tự) tốt hơn mô hình quạt ra song song?",
+      "options": [
+        "Khi bạn muốn giảm thiểu tổng độ trễ",
+        "Khi mỗi giai đoạn phụ thuộc vào đầu ra của giai đoạn trước, chẳng hạn như nghiên cứu sau đó mã hóa rồi xem lại",
+        "Khi tất cả các nhiệm vụ con độc lập với nhau",
+        "Khi bạn có nhiều GPUs hơn nhiệm vụ"
+      ],
+      "correct": 1,
+      "explanation": "Pipeline mẫu đúng khi công việc vốn dĩ tuần tự: lập trình viên cần đầu ra của nhà nghiên cứu và người đánh giá cần đầu ra của lập trình viên. Phân xuất song song sẽ tốt hơn khi các tác vụ con độc lập."
+    },
+    {
+      "stage": "post",
+      "question": "Mô hình giám sát trong hệ thống đa agent là gì?",
+      "options": [
+        "Một con người phân công nhiệm vụ theo cách thủ công cho từng agent",
+        "Một người điều phối trung tâm agent phân tách nhiệm vụ, ủy quyền cho worker agents, thu thập kết quả và quyết định các bước tiếp theo",
+        "Một hệ thống giám sát ghi lại các hành động agent để gỡ lỗi",
+        "Một mô hình mà agents bỏ phiếu cho câu trả lời tốt nhất"
+      ],
+      "correct": 1,
+      "explanation": "Người giám sát agent hoạt động như một người quản lý dự án: nó chia nhiệm vụ thành các nhiệm vụ phụ, giao chúng cho các workers chuyên ngành, xem xét đầu ra của chúng và quyết định xem nên lặp lại hay hoàn thiện. Điều này cung cấp khả năng kiểm soát tập trung quy trình làm việc."
+    },
+    {
+      "stage": "post",
+      "question": "Sự đánh đổi chính của hệ thống đa agent so với agents đơn là gì?",
+      "options": [
+        "Hệ thống đa agent luôn tạo ra kết quả chất lượng thấp hơn",
+        "Tăng độ phức tạp, độ trễ và chi phí từ nhiều cuộc gọi LLM và giao tiếp giữa các agent, được đánh đổi để xử lý tốt hơn các tác vụ phức tạp",
+        "Hệ thống đa agent yêu cầu nhiều dữ liệu training hơn",
+        "Hệ thống đa agent không thể sử dụng các công cụ bên ngoài"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi agent bổ sung có nghĩa là nhiều cuộc gọi LLM hơn (chi phí), nhiều chuyến đi khứ hồi hơn (độ trễ) và nhiều chế độ lỗi hơn (độ phức tạp của gỡ lỗi). Multi-agent chỉ đáng giá khi nhiệm vụ thực sự vượt quá những gì một agent có thể xử lý."
+    }
+  ]
+}
