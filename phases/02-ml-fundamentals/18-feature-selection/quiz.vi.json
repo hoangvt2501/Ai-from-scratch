@@ -1,0 +1,67 @@
+[
+  {
+    "id": "featsel-pre-1",
+    "stage": "pre",
+    "question": "Tại sao việc thêm nhiều features thực sự có thể làm cho model hoạt động kém hơn?",
+    "options": [
+      "Nhiều features luôn cải thiện model accuracy",
+      "Không liên quan features thêm nhiễu, tăng nguy cơ overfitting và làm loãng tín hiệu khỏi các features hữu ích",
+      "Models có giới hạn cứng về số lượng features họ có thể chấp nhận",
+      "Nhiều features khiến model hết bộ nhớ"
+    ],
+    "correct": 1,
+    "explanation": "Các features không liên quan tạo cơ hội cho model để quá phù hợp với nhiễu trong dữ liệu training. Chúng làm tăng tính không gian, làm cho dữ liệu thưa thớt hơn và khoảng cách kém ý nghĩa hơn (lời nguyền về tính chiều)."
+  },
+  {
+    "id": "featsel-pre-2",
+    "stage": "pre",
+    "question": "Sự khác biệt chính giữa các phương pháp lựa chọn feature bộ lọc và trình bao bọc là gì?",
+    "options": [
+      "Phương pháp lọc sử dụng model để đánh giá features; Phương thức wrapper sử dụng thống kê",
+      "Phương pháp lọc chấm điểm features sử dụng số liệu thống kê mà không cần model; Wrapper huấn luyện một model để đánh giá feature tập con",
+      "Phương pháp lọc luôn chính xác hơn phương pháp bao bọc",
+      "Các phương thức bao bọc chỉ có thể chọn một feature tại một thời điểm"
+    ],
+    "correct": 1,
+    "explanation": "Phương pháp lọc (ngưỡng variance, thông tin lẫn nhau, tương quan) điểm features với các biện pháp thống kê. Các phương thức bao bọc (RFE, lựa chọn chuyển tiếp) huấn luyện models nhiều lần để đánh giá các tập con feature khác nhau."
+  },
+  {
+    "id": "featsel-post-1",
+    "stage": "post",
+    "question": "Thông tin lẫn nhau có thể phát hiện các mối quan hệ mà mối tương quan Pearson không thể. Loại nào?",
+    "options": [
+      "Mối quan hệ tuyến tính giữa features liên tục",
+      "Các mối quan hệ phi tuyến như phụ thuộc bậc hai hoặc tuần hoàn",
+      "Mối quan hệ giữa chỉ features phân loại",
+      "Các mối quan hệ yêu cầu hơn 1000 điểm dữ liệu"
+    ],
+    "correct": 1,
+    "explanation": "Tương quan Pearson chỉ đo lường liên kết tuyến tính. Một mối quan hệ bậc hai (y = x ^ 2) không có mối tương quan nhưng thông tin tương hỗ cao. MI nắm bắt bất kỳ sự phụ thuộc thống kê nào giữa các biến."
+  },
+  {
+    "id": "featsel-post-2",
+    "stage": "post",
+    "question": "Chính quy hóa L1 (Lasso) thực hiện lựa chọn feature như một phần của training. Làm sao?",
+    "options": [
+      "Nó loại bỏ features có variance thấp trước khi training bắt đầu",
+      "Nó đẩy trọng số của các features không liên quan đến chính xác bằng không, loại bỏ chúng khỏi model một cách hiệu quả",
+      "Nó xếp hạng features theo mối tương quan với mục tiêu",
+      "Nó huấn luyện các models riêng biệt cho từng feature"
+    ],
+    "correct": 1,
+    "explanation": "Chính quy hóa L1 thêm |w| hình phạt đối với loss. Hình học của ràng buộc L1 (hình kim cương) làm cho một số giải pháp trọng lượng hạ cánh chính xác bằng không, tạo ra models thưa thớt tự động chọn features."
+  },
+  {
+    "id": "featsel-post-3",
+    "stage": "post",
+    "question": "RFE loại bỏ các feature ít quan trọng nhất và huấn luyện lại. Tại sao điều này tốt hơn là chỉ loại bỏ tất cả các features quan trọng thấp cùng một lúc?",
+    "options": [
+      "Nó không tốt hơn - loại bỏ tất cả cùng một lúc luôn được ưu tiên hơn",
+      "Feature quan trọng thay đổi khi features bị xóa, vì vậy việc xóa lặp đi lặp lại tính đến các tương tác giữa features",
+      "RFE sử dụng số liệu tầm quan trọng khác với loại bỏ một bước",
+      "Loại bỏ từng cái một chỉ cần thiết cho mạng nơ-ron"
+    ],
+    "correct": 1,
+    "explanation": "Feature quan trọng là tương đối. Khi một feature tương quan bị loại bỏ, tầm quan trọng của đối tác của nó có thể tăng lên. Loại bỏ lặp đi lặp lại cho phép model đánh giá lại tầm quan trọng ở mỗi bước, nắm bắt các tương tác này."
+  }
+]
