@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "model của bạn xuất ra logits thô của hình dạng (N, C). Bạn viết `loss = cross_entropy(softmax(logits), y)`. Điều gì xảy ra?",
+      "options": [
+        "Không có gì - đó là API chính xác",
+        "cross_entropy áp dụng lại softmax bên trong, vì vậy bạn sẽ tính toán softmax(softmax(logits)), tạo ra xác suất gần như đồng đều và gradients vô dụng",
+        "cross_entropy đưa ra ValueError về hình dạng",
+        "Accuracy giảm chính xác 1/C"
+      ],
+      "correct": 1,
+      "explanation": "cross_entropy của PyTorch mong đợi logits thô - nó hợp nhất log_softmax và NLL bên trong để ổn định số lượng. Áp dụng softmax đầu tiên cho softmax(softmax(x)), nén logits về hướng đồng nhất và làm cho gradients gần bằng không. Training loss có vẻ hợp lý trong một vài bước sau đó dừng lại. Luôn vượt qua logits thô."
+    },
+    {
+      "stage": "pre",
+      "question": "Bạn đánh giá bộ phân loại 10 class và nhận được 92% accuracy. Class 0 có 9.000 ví dụ; classes 1-9 chia sẻ 1.000 ví dụ (khoảng 111 mỗi mẫu, tổng cộng 10.000). Số tiêu đề che giấu điều gì?",
+      "options": [
+        "Không có gì - accuracy là accuracy",
+        "model có thể dự đoán class 0 cho mọi đầu vào và vẫn đạt điểm 90% (9000/10000); 2% còn lại có thể đến từ bất kỳ class nào khác. Per-class precision/recall cho bạn biết điều gì đang thực sự xảy ra",
+        "Các loss xác thực bị sai",
+        "model chắc chắn quá vừa vặn"
+      ],
+      "correct": 1,
+      "explanation": "Trên một 9000/1000 phân tách (mất cân bằng 90/10 với tổng số 10.000 ví dụ), luôn dự đoán phần lớn class nhận được 9000/10000 = 90% accuracy. Một con số 92% có thể che giấu chín classes thiểu số với khoảng 20% accuracy mỗi người. Mỗi class precision, recall, F1 và ma trận nhầm lẫn là những chẩn đoán làm nổi bật điều này, đó là lý do tại sao chỉ riêng accuracy tổng hợp không bao giờ biện minh shipping một bộ phân loại."
+    },
+    {
+      "stage": "post",
+      "question": "Mixup thay thế nhãn một nóng bằng các mục tiêu mềm nội suy như lambda * y_i + (1-lambda) * y_j. Tại sao điều này giúp khái quát hóa?",
+      "options": [
+        "Nó tăng gấp đôi kích thước batch hiệu quả",
+        "model buộc phải đưa ra các dự đoán mượt mà giữa các classes thay vì ghi nhớ các mục tiêu một nóng, điều này giúp cải thiện cả hiệu chuẩn và kiểm tra accuracy",
+        "Nó cho phép bạn tập luyện với một learning rate lớn hơn",
+        "Nó đảm bảo không có loss tàu hỏa"
+      ],
+      "correct": 1,
+      "explanation": "Training chống lại các mục tiêu cứng một nóng đẩy logits phải sắc bén tùy ý ở mỗi điểm training, điều này làm tổn hại đến hiệu chuẩn và mời gọi overfitting. Sự kết hợp lồi giữa đầu vào và nhãn của Mixup buộc bộ phân loại hoạt động trơn tru giữa các điểm training, đây là một prior hợp lý cho classes hình ảnh tự nhiên và liên tục cải thiện accuracy thử nghiệm mà không cần thêm dữ liệu."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn hoán đổi `RandomCrop(32, padding=4, padding_mode='zeros')` lấy `padding_mode='reflect'` trên CIFAR-10. Tại sao phản ánh tốt hơn ở đây?",
+      "options": [
+        "Tấm phản xạ nhanh hơn",
+        "Zero padding tạo ra các đường viền đen cứng mà model học cách phụ thuộc; Reflect Pad phản chiếu các pixel cạnh để cắt tăng cường trông giống như ảnh tự nhiên",
+        "Reflect pad thay đổi kích thước đầu ra",
+        "Miếng đệm phản xạ được yêu cầu bởi chuẩn hóa batch"
+      ],
+      "correct": 1,
+      "explanation": "Cây trồng không có đệm có viền đen có thể nhìn thấy làm rò rỉ thông tin về vị trí cây trồng vào features. Mạng có thể học cách nhìn vào góc và ngầm hoàn tác việc tăng cường. Reflect pad phản chiếu nội dung thực, vì vậy mọi ảnh cắt vẫn trông giống như một hình ảnh tự nhiên và mạng không thể gian lận khi tăng cường."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn huấn luyện một bộ phân loại và ma trận nhầm lẫn cho thấy hầu hết các lỗi là class 3 được dự đoán là class 5 và class 5 được dự đoán là class 3. Bước tiếp theo có tác động nhất là gì?",
+      "options": [
+        "Thêm nhiều dữ liệu training trên tất cả classes một cách đồng đều",
+        "Tăng kích thước batch",
+        "Nhìn vào một mẫu hình ảnh class-3 và class-5 gây nhầm lẫn cho model; Hai classes có thể thực sự mơ hồ, dán nhãn sai hoặc giống nhau về mặt hình ảnh theo cách yêu cầu tăng cường có mục tiêu hoặc gắn nhãn lại training tập",
+        "Chuyển từ SGD sang Adam"
+      ],
+      "correct": 2,
+      "explanation": "Ma trận nhầm lẫn tập trung vào một cặp lệch đường chéo có nghĩa là chế độ hỏng hóc là cụ thể. Hành động đúng đắn là kiểm tra những hình ảnh đó: bạn thường tìm thấy dữ liệu bị dán nhãn sai, classes gần như trùng lặp hoặc một bất biến đơn giản mà model chưa học được. Những thay đổi toàn diện (nhiều dữ liệu hơn, optimizer mới) hiếm khi giúp ích khi lỗi được cục bộ hóa như vậy."
+    }
+  ]
+}
