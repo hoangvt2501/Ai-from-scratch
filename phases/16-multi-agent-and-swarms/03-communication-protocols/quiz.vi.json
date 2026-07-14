@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "MCP (Model Context Protocol) giải quyết vấn đề gì cho AI agents?",
+      "options": [
+        "Nó cung cấp một định dạng tiêu chuẩn cho dữ liệu training",
+        "Nó cung cấp cho agents một cách tiêu chuẩn để khám phá và sử dụng các công cụ bị lộ bởi servers bên ngoài mà không cần triển khai công cụ mã hóa cứng",
+        "Nó mã hóa giao tiếp giữa agents",
+        "Nó nén windows ngữ cảnh lớn để phù hợp với các models nhỏ hơn"
+      ],
+      "correct": 1,
+      "explanation": "MCP chuẩn hóa quyền truy cập công cụ: server hiển thị các công cụ với JSON schemas và bất kỳ agent tương thích với MCP nào cũng có thể khám phá và gọi chúng. Điều này tách việc triển khai công cụ khỏi mã agent."
+    },
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt giữa MCP và A2A là gì?",
+      "options": [
+        "MCP dành cho Python agents và A2A dành cho JavaScript agents",
+        "MCP kết nối agents với các công cụ (agent-to-tool), trong khi A2A kết nối agents với các agents khác (agent-to-agent) để ủy quyền nhiệm vụ",
+        "MCP đồng bộ và A2A không đồng bộ",
+        "MCP là mã nguồn mở và A2A là độc quyền"
+      ],
+      "correct": 1,
+      "explanation": "MCP là giao thức để truy cập công cụ (một agent gọi một công cụ). A2A là giao thức cho agent cộng tác (một agent ủy thác một nhiệm vụ cho một agent khác). Họ giải quyết các lớp khác nhau của vấn đề giao tiếp."
+    },
+    {
+      "stage": "post",
+      "question": "Trong A2A, 'thẻ agent' là gì và tại sao nó lại quan trọng?",
+      "options": [
+        "Bảng thông tin trực quan hiển thị agent chỉ số hiệu suất",
+        "Tài liệu JSON tại một URL nổi tiếng mô tả các khả năng, skills và endpoint của agent, cho phép các agents khác khám phá và ủy thác nhiệm vụ cho nó",
+        "Thông tin xác thực bảo mật xác thực danh tính của agent",
+        "Tệp configuration đặt system prompt của agent"
+      ],
+      "correct": 1,
+      "explanation": "Thẻ agent (được lưu trữ tại /.well-known/agent.json) là cách agents tự quảng cáo. Nó liệt kê skills, định dạng input/output được hỗ trợ và endpoint tác vụ. Những agents khác đọc thẻ này để quyết định có ủy thác công việc hay không và làm thế nào."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao các hệ thống đa agent cần các giao thức truyền thông có cấu trúc thay vì chỉ truyền chuỗi giữa các agents?",
+      "options": [
+        "Chuỗi quá lớn để gửi qua HTTP",
+        "Các giao thức có cấu trúc cung cấp độ an toàn kiểu, khả năng phát hiện, xử lý lỗi và khả năng tương tác giữa các agents được xây dựng bởi các nhóm khác nhau với các frameworks khác nhau",
+        "Phân tích cú pháp chuỗi tốn kém về mặt tính toán đối với LLMs",
+        "Các giao thức có cấu trúc được yêu cầu bởi tất cả các nhà cung cấp cloud"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có hợp đồng có cấu trúc, agents từ các nhóm khác nhau hiểu sai kết quả của nhau, việc xử lý lỗi là đặc biệt và không có cách nào để khám phá những gì agent khác có thể làm. Các giao thức cung cấp ngôn ngữ được chia sẻ làm cho các hệ thống đa agent trở nên đáng tin cậy."
+    },
+    {
+      "stage": "post",
+      "question": "ACP (Agent Communication Protocol) khác với A2A như thế nào trong mục tiêu thiết kế của nó?",
+      "options": [
+        "ACP nhanh hơn A2A cho các ứng dụng thời gian thực",
+        "ACP tập trung vào khả năng kiểm tra doanh nghiệp với lịch sử tin nhắn đầy đủ và theo dõi tuân thủ, trong khi A2A tập trung vào ủy quyền nhiệm vụ nhẹ",
+        "ACP chỉ hoạt động trong một tổ chức duy nhất trong khi A2A hoạt động giữa các tổ chức",
+        "ACP sử dụng WebSockets trong khi A2A sử dụng HTTP"
+      ],
+      "correct": 1,
+      "explanation": "ACP được thiết kế cho môi trường doanh nghiệp, nơi mọi tương tác agent phải có thể kiểm tra, truy xuất nguồn gốc và tuân thủ. A2A đơn giản hơn và tập trung vào việc hoàn thành nhiệm vụ. ACP bổ sung lớp quản trị mà các ngành công nghiệp được quản lý yêu cầu."
+    }
+  ]
+}
