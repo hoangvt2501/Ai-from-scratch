@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "\"Kiểm soát phiên bản\" chủ yếu giúp bạn làm gì?",
+      "options": [
+        "Tăng tốc độ thực thi mã",
+        "Theo dõi các thay đổi đối với tệp theo thời gian và cộng tác với những người khác",
+        "Nén tệp để tiết kiệm dung lượng đĩa",
+        "Tự động sửa lỗi trong mã của bạn"
+      ],
+      "correct": 1,
+      "explanation": "Các hệ thống kiểm soát phiên bản như git theo dõi mọi thay đổi được thực hiện đối với tệp, cho phép bạn hoàn nguyên về trạng thái trước đó và cộng tác với những người khác trên cùng một cơ sở mã."
+    },
+    {
+      "stage": "pre",
+      "question": "'repository' là gì trong bối cảnh phát triển phần mềm?",
+      "options": [
+        "Dịch vụ lưu trữ cloud như Google Drive",
+        "Một tập hợp các tệp và lịch sử thay đổi hoàn chỉnh của chúng được quản lý bởi kiểm soát phiên bản",
+        "Cơ sở dữ liệu để lưu trữ dữ liệu người dùng",
+        "Trình quản lý gói để cài đặt thư viện"
+      ],
+      "correct": 1,
+      "explanation": "repository (repo) là một thư mục được theo dõi bởi git chứa tất cả các tệp dự án cùng với lịch sử đầy đủ của các thay đổi được thực hiện đối với các tệp đó."
+    },
+    {
+      "stage": "post",
+      "question": "Trình tự chính xác để lưu và sao lưu công việc của bạn trong git là gì?",
+      "options": [
+        "git đẩy, git thêm, git commit",
+        "git commit, git thêm, git đẩy",
+        "git thêm, git commit git đẩy",
+        "git sao chép, git thêm git đẩy"
+      ],
+      "correct": 2,
+      "explanation": "Đầu tiên, bạn stage thay đổi với 'git add', sau đó lưu ảnh chụp nhanh với 'git commit', sau đó tải lên điều khiển từ xa bằng 'git push'. Đây là quy trình làm việc hàng ngày."
+    },
+    {
+      "stage": "post",
+      "question": "'git checkout -b experiment/new-optimizer' làm gì?",
+      "options": [
+        "Tải xuống một branch từ GitHub có tên là experiment/new-optimizer",
+        "Tạo một branch mới có tên là experiment/new-optimizer và chuyển sang nó",
+        "Xóa branch experiment/new-optimizer",
+        "Hoàn nguyên tất cả các tệp để khớp với experiment/new-optimizer branch"
+      ],
+      "correct": 1,
+      "explanation": "Cờ '-b' tạo ra một branch mới với tên đã cho và ngay lập tức chuyển sang tên đó, cho phép bạn thử nghiệm mà không ảnh hưởng đến branch chính."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bạn nên thêm '.pt', '.pth' và '.safetensors' vào .gitignore của mình?",
+      "options": [
+        "Chúng là Python tệp kiểm tra không nên được commit",
+        "Chúng là model checkpoint tệp quá lớn để git và có thể được tạo lại",
+        "Chúng chứa các phím API nhạy cảm",
+        "Git không thể theo dõi các tệp nhị phân dưới bất kỳ hình thức nào"
+      ],
+      "correct": 1,
+      "explanation": "Các tệp Model checkpoint (.pt, .pth, .safetensors) thường có kích thước gigabyte. Git không được thiết kế cho các tệp nhị phân lớn, vì vậy chúng nên được loại trừ và tạo lại hoặc lưu trữ riêng biệt."
+    }
+  ]
+}
