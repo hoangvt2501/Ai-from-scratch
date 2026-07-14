@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Máy tính xách tay Jupyter là gì?",
+      "options": [
+        "Trình soạn thảo văn bản để viết Python scripts",
+        "Một tài liệu tương tác kết hợp các ô mã thực thi với văn bản đánh dấu và đầu ra nội tuyến",
+        "Hệ thống kiểm soát phiên bản cho các dự án khoa học dữ liệu",
+        "Trình quản lý gói cho thư viện Python"
+      ],
+      "correct": 1,
+      "explanation": "Sổ ghi chép Jupyter (.ipynb) là một môi trường tương tác, nơi bạn có thể viết và thực thi mã trong ô, xem đầu ra nội tuyến và kết hợp mã với giải thích văn bản được định dạng."
+    },
+    {
+      "stage": "pre",
+      "question": "Hạt nhân Jupyter làm gì?",
+      "options": [
+        "Định dạng các ô đánh dấu thành HTML",
+        "Chạy mã trong các ô và giữ các biến trong bộ nhớ giữa các lần thực thi",
+        "Quản lý lưu trữ tệp cho sổ ghi chép",
+        "Kết nối máy tính xách tay với GitHub để kiểm soát phiên bản"
+      ],
+      "correct": 1,
+      "explanation": "Hạt nhân là một Python process riêng biệt thực thi mã ô và duy trì trạng thái (biến, imports) trong bộ nhớ. Tất cả các ô trong sổ ghi chép chia sẻ cùng một hạt nhân."
+    },
+    {
+      "stage": "post",
+      "question": "Sự khác biệt giữa các lệnh ma thuật %timeit và %%time là gì?",
+      "options": [
+        "%timenó đo thời gian trên tường, %% thời gian đo CPU thời gian",
+        "%timenó chạy code nhiều lần và trung bình, %%time chạy code một lần",
+        "%timenó hoạt động trên các dòng đơn lẻ, %%time hoạt động trên toàn bộ sổ ghi chép",
+        "Không có sự khác biệt, họ là bí danh"
+      ],
+      "correct": 1,
+      "explanation": "%timenó chạy câu lệnh nhiều lần cho mức trung bình thống kê (tốt cho microbenchmarks). %%time chạy ô một lần và báo cáo thời gian tường (tốt cho training lần chạy)."
+    },
+    {
+      "stage": "post",
+      "question": "Nguyên nhân phổ biến nhất khiến máy tính xách tay hoạt động trên máy tính của bạn nhưng bị lỗi khi ai đó chạy nó từ trên xuống dưới là gì?",
+      "options": [
+        "Sử dụng phiên bản Python khác",
+        "Thực thi ô không theo thứ tự tạo ra các phụ thuộc ẩn trên thứ tự thực hiện",
+        "Thiếu lệnh ma thuật nội tuyến %matplotlib",
+        "Sử dụng quá nhiều ô đánh dấu"
+      ],
+      "correct": 1,
+      "explanation": "Việc chạy các ô không theo thứ tự sẽ tạo ra các phần phụ thuộc trạng thái ẩn. Một biến có thể tồn tại vì bạn đã chạy ô 5 trước ô 2. Kernel > Restart & Run All xác minh thực thi tuyến tính."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn nên chuyển mã từ sổ ghi chép sang .py script?",
+      "options": [
+        "Ngay sau khi bạn viết hơn 10 dòng mã",
+        "Khi mã là tiện ích có thể tái sử dụng, training pipeline hoặc mã production",
+        "Không bao giờ -- sổ tay luôn tốt hơn cho công việc AI",
+        "Chỉ khi bạn cần chạy trên GPU"
+      ],
+      "correct": 1,
+      "explanation": "Quy tắc là 'khám phá trong sổ tay, ship trong scripts.' Các tiện ích có thể tái sử dụng, training pipelines và bất kỳ thứ gì đang chạy trong production nên được .py tệp. Máy tính xách tay dùng để khám phá và tạo mẫu."
+    }
+  ]
+}
