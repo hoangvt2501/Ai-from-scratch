@@ -1,0 +1,90 @@
+{
+  "lesson": "06-devops-troubleshooting-agent",
+  "title": "Capstone 06 — Agent khắc phục sự cố DevOps cho Kubernetes",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tư thế quyền mặc định cho bề mặt RBAC của agent khắc phục sự cố là gì?",
+      "options": [
+        "Chỉ đọc theo mặc định, với các động từ phá hoại được kiểm soát đằng sau một server riêng biệt và sự chấp thuận của con người",
+        "Namespace-admin chỉ trong không gian tên bị ảnh hưởng",
+        "Tương đương với kỹ sư trực",
+        "Cluster-admin để nó có thể tự phục hồi"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Biểu đồ tri thức mà agent đi trong quá trình phân tích nguyên nhân gốc rễ là gì?",
+      "options": [
+        "Các nút là các đối tượng K8s cộng với các nguồn telemetry; các cạnh mã hóa quyền sở hữu, lập lịch và quan sát",
+        "Danh sách phẳng các nhóm được khởi động lại gần đây",
+        "Tên chỉ số Prometheus được sắp xếp theo nhóm",
+        "Biểu đồ đánh giá GitHub commits và PR"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Các giả thuyết nguyên nhân gốc rễ được xếp hạng như thế nào cho bản tóm tắt Slack?",
+      "options": [
+        "Bằng điểm bằng chứng kết hợp độ gần đây, độ đặc hiệu, độ dài đường dẫn đồ thị và số lượng trích dẫn",
+        "Chỉ bằng xác suất log model",
+        "Theo tên cảnh báo theo bảng chữ cái",
+        "Theo thứ tự chúng được tạo ra"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bản ghi nhật ký kiểm tra lại ra lệnh agent được xem xét cũng như những lệnh được thực thi?",
+      "options": [
+        "Người đánh giá có thể bắt được những lần suýt trượt khi agent suýt chạy một lệnh phá hoại",
+        "ArgoCD chỉ chấp nhận các lệnh được xem xét",
+        "Slack API cần cả hai để phân phối",
+        "Các cuộc tấn công phát lại yêu cầu cả hai danh sách"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cơ chế nào ngăn chặn agent đơn phương quay trở lại khi triển khai xấu?",
+      "options": [
+        "Các công cụ phá hoại tồn tại trên một MCP server riêng biệt đằng sau token phê duyệt từ thẻ Slack",
+        "Một LLM thẩm phán thứ hai bỏ phiếu về rollback",
+        "Branch bảo vệ trên repo GitOps",
+        "PagerDuty tự động tạm dừng triển khai"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Mục tiêu thời gian thực hiện giả thuyết p50 là gì?",
+      "options": [
+        "Trong ca trực tiếp theo",
+        "Dưới 1 giờ",
+        "Dưới 5 phút từ cảnh báo đến bản tóm tắt Slack",
+        "Dưới 30 giây"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bộ sự cố tổng hợp được sử dụng để ghi điểm RCA accuracy lớn như thế nào?",
+      "options": [
+        "1 sự cố demo theo kịch bản",
+        "5 kịch bản",
+        "100 cảnh báo production lấy mẫu ngẫu nhiên",
+        "20 kịch bản bao gồm OOMKill, DNS flap, HPA thrash, PVC fill, v.v."
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
