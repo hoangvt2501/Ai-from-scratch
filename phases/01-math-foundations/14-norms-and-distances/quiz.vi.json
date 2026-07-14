@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự tương đồng cosin đo lường điều gì giữa hai vectors?",
+      "options": [
+        "Khoảng cách Euclid giữa chúng",
+        "Góc giữa chúng, bỏ qua độ lớn của chúng",
+        "Tổng các sản phẩm theo nguyên tố của chúng",
+        "Sự khác biệt tối đa trong bất kỳ chiều đơn lẻ nào"
+      ],
+      "correct": 1,
+      "explanation": "Độ tương tự cosin đo cosin của góc giữa hai vectors, được chuẩn hóa bởi độ lớn của chúng. Nó nằm trong khoảng từ -1 (ngược lại) đến +1 (cùng hướng) và bỏ qua độ dài vector, đó là lý do tại sao nó chiếm ưu thế trong NLP nơi độ dài tài liệu là nhiễu."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao khoảng cách L1 được gọi là 'khoảng cách Manhattan'?",
+      "options": [
+        "Nó được phát minh ở Manhattan",
+        "Nó đo khoảng cách dọc theo lưới, như thể đi bộ trên các khối thành phố",
+        "Nó chỉ hoạt động trong chính xác hai chiều",
+        "Nó tính toán sự khác biệt tối đa trên tất cả các chiều"
+      ],
+      "correct": 1,
+      "explanation": "Khoảng cách L1 tính tổng sự khác biệt tuyệt đối dọc theo mỗi trục, tương ứng với đường đi ngắn nhất trên lưới nơi bạn chỉ có thể di chuyển dọc theo trục (không có đường chéo) - giống như đi bộ trên lưới đường phố thành phố."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao chính quy hóa L1 (Lasso) tạo ra trọng lượng thưa thớt trong khi chính quy hóa L2 (Ridge) thì không?",
+      "options": [
+        "L1 sử dụng hằng số phạt lớn hơn L2",
+        "Ràng buộc kim cương L1 có các góc trên trục trong đó trọng lượng bằng không; loss đường viền có khả năng chạm vào các góc",
+        "Chính quy hóa L2 chỉ áp dụng cho các điều khoản bias",
+        "Các clip chính quy hóa L1 có trọng số dưới ngưỡng về không"
+      ],
+      "correct": 1,
+      "explanation": "Vùng ràng buộc L1 là một hình kim cương với các góc thẳng hàng với các trục. Các hình elip đường viền của hàm loss rất có thể chạm vào viên kim cương ở một góc, nơi một hoặc nhiều trọng lượng chính xác bằng không. Ràng buộc L2 là một vòng tròn không có góc, vì vậy điểm chạm có tất cả các trọng lượng không phải bằng không."
+    },
+    {
+      "stage": "post",
+      "question": "Khoảng cách Wasserstein có lợi thế gì so với phân kỳ KL khi so sánh phân phối xác suất?",
+      "options": [
+        "Wasserstein luôn nhỏ hơn phân kỳ KL",
+        "Wasserstein cung cấp gradients có ý nghĩa ngay cả khi các phân phối không trùng lặp, trong khi KL đi đến vô cực",
+        "Wasserstein đối xứng nhưng KL thì không",
+        "Cả B và C đều đúng"
+      ],
+      "correct": 3,
+      "explanation": "Khoảng cách Wasserstein là một số liệu thực sự (đối xứng, thỏa mãn bất đẳng thức tam giác) và cung cấp gradients ngay cả đối với các phân phối không chồng chéo. Phân kỳ KL là không đối xứng và đi đến vô cực khi các phân phối không trùng lặp, đó là lý do tại sao WGAN thay thế GAN dựa trên KL."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn sẽ sử dụng khoảng cách Mahalanobis thay vì khoảng cách Euclid?",
+      "options": [
+        "Khi features đều là nhị phân (0 hoặc 1)",
+        "Khi features có các thang đo khác nhau và tương quan với nhau",
+        "Khi bạn so sánh các chuỗi thay vì vectors",
+        "Khi bạn cần tính toán nhanh hơn L2"
+      ],
+      "correct": 1,
+      "explanation": "Khoảng cách Mahalanobis giải thích cho cấu trúc hiệp phương sai của dữ liệu, khử tương quan và chuẩn hóa features trước khi tính khoảng cách L2. Nó xử lý chính xác features ở các thang đo khác nhau và có mối tương quan, trong khi khoảng cách Euclid đối xử với tất cả các chiều như nhau."
+    }
+  ]
+}
