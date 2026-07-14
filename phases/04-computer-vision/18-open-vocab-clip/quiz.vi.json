@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "loss tương phản của CLIP là đối xứng (hình ảnh thành văn bản + chuyển văn bản thành hình ảnh). Tại sao lại là cả hai hướng?",
+      "options": [
+        "Độ ổn định số",
+        "Bạn muốn cả hai truy vấn hoạt động inference: truy xuất văn bản thành hình ảnh và truy xuất hình ảnh thành văn bản. Training chỉ một hướng làm cho accuracy của hướng kia giảm đáng kể",
+        "Bởi vì các loss phải có tổng bằng không",
+        "Đối xứng là yêu cầu của PyTorch"
+      ],
+      "correct": 1,
+      "explanation": "Không gian embedding cần phải đối xứng giữa các phương thức vì các tác vụ xuôi dòng truy vấn theo cả hai hướng. Zero-shot phân loại là chuyển văn bản thành hình ảnh (phân loại hình ảnh đã cho văn bản prompts). Truy xuất có thể diễn ra theo một trong hai cách. Training chỉ có i2t hoặc chỉ t2i khiến hướng khác yếu."
+    },
+    {
+      "stage": "pre",
+      "question": "Zero-shot phân loại với CLIP hoạt động bởi... ?",
+      "options": [
+        "Chạy một đầu bộ phân loại được huấn luyện trên ImageNet",
+        "Mã hóa prompts giống như 'ảnh chó' cho mỗi ứng cử viên class, mã hóa hình ảnh thử nghiệm và lấy argmax của sự tương đồng cosin giữa embedding hình ảnh và tất cả class văn bản embeddings",
+        "Fine-tuning hình ảnh encoder trên class",
+        "Tìm kiếm cơ sở dữ liệu của các ví dụ được gắn nhãn"
+      ],
+      "correct": 1,
+      "explanation": "Zero-shot có nghĩa là không có training cụ thể về nhiệm vụ: các biểu diễn của model đã cho phép bạn so sánh hình ảnh với mô tả văn bản tùy ý. Viết một prompt mỗi class, mã hóa tất cả prompts và hình ảnh thử nghiệm, độ tương tự cosin, argmax. 'Mẹo' duy nhất là kỹ thuật prompt - sử dụng nhiều mẫu mỗi class và tính trung bình embeddings của chúng đạt 1-3 top 1 trên ImageNet."
+    },
+    {
+      "stage": "post",
+      "question": "SigLIP thay thế softmax của CLIP bằng một loss sigmoid trên mỗi cặp. Điều đó mang lại lợi ích gì?",
+      "options": [
+        "Hạt nhân GPU nhanh hơn",
+        "loss sigmoid là mỗi cặp, vì vậy nó không phụ thuộc vào batch như một mẫu số chuẩn hóa. SigLIP tập luyện tốt ở kích thước batch nhỏ hơn, nơi softmax loss của CLIP đói tiêu cực",
+        "Sử dụng bộ nhớ thấp hơn",
+        "Chỉ accuracy tốt hơn trên COCO"
+      ],
+      "correct": 1,
+      "explanation": "Entropy chéo đối xứng của CLIP là một softmax trên toàn bộ batch, vì vậy âm hiệu quả = batch_size - 1. Nhỏ batches bỏ đói nó. SigLIP là mỗi cặp: mỗi cặp (hình ảnh, chú thích) nhận được một quyết định nhị phân (khớp hoặc không). Không có chuẩn hóa cấp batch, vì vậy SigLIP hoạt động ở batch 128 trong khi CLIP cần 8192. Ở tỷ lệ bằng nhau, SigLIP khớp hoặc đánh bại CLIP."
+    },
+    {
+      "stage": "post",
+      "question": "Một học viên báo cáo 88% zero-shot top 1 trên CIFAR-10 với CLIP ViT-B/32 và 90% với cùng model sử dụng 80 mẫu prompt mỗi class. Tại sao tính trung bình mẫu lại hữu ích?",
+      "options": [
+        "Nó tăng gấp đôi dataset",
+        "Các mẫu khác nhau kích hoạt các khía cạnh khác nhau của sự phân phối văn bản encoder học; tính trung bình làm mịn class embedding trên đa dạng các mô tả ngôn ngữ tự nhiên hợp lý của class, tạo ra một trung tâm mạnh mẽ hơn",
+        "Nó làm giảm variance trong logit_scale",
+        "80 là con số kỳ diệu cho CLIP"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi mẫu là một gợi ý ngôn ngữ tự nhiên khác nhau. 'Một bức ảnh của một' nhấn mạnh một khía cạnh; 'một bức ảnh mờ của một' một bức ảnh khác; 'một bản phác thảo của một' là một bản phác thảo khác. Tính trung bình văn bản embeddings cho một đại diện mượt mà hơn về khái niệm '' ít nhạy cảm hơn với những điều kỳ quặc prompt cá nhân. Bài báo OpenAI CLIP đã xuất bản 80 mẫu nâng zero-shot ImageNet lên ~ 2 điểm."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao VLMs hiện đại (LLaVA, Qwen-VL, InternVL) sử dụng encoder tầm nhìn dòng CLIP thay vì ImageNet ResNet được giám sát?",
+      "options": [
+        "CLIP encoders nhanh hơn",
+        "features CLIP được căn chỉnh với ngôn ngữ tự nhiên, vì vậy LLM có thể suy luận về chúng với ít thích nghi hơn; features ImageNet được giám sát chưa bao giờ được huấn luyện về phụ đề và cần các lớp trình chiếu nặng để kết nối với văn bản",
+        "ResNets không thể nhìn thấy màu sắc",
+        "Đó là một yêu cầu cấp phép"
+      ],
+      "correct": 1,
+      "explanation": "Một VLM bắt vít một encoder tầm nhìn vào một model ngôn ngữ và huấn luyện một phép chiếu nhỏ. Các encoders kiểu CLIP được huấn luyện dựa trên văn bản, vì vậy đầu ra của chúng đã tồn tại trong một không gian mà LLM có thể sử dụng với một vài lớp chuyển thể tuyến tính. ImageNet được giám sát encoders không có khái niệm về cấu trúc ngôn ngữ tự nhiên và yêu cầu các MLP bắc cầu lớn hơn nhiều để làm việc với LLM. Đây là lý do tại sao mọi VLM SOTA đều sử dụng tháp tầm nhìn gia đình CLIP."
+    }
+  ]
+}
