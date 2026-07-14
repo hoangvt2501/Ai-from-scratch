@@ -1,0 +1,90 @@
+{
+  "lesson": "10-multi-agent-software-team",
+  "title": "Capstone 10 — Nhóm kỹ thuật phần mềm đa Agent",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao một agent harness đạt mức trần đối với các tác vụ lớn ngay cả với bối cảnh 200k token?",
+      "options": [
+        "Một agents không thể thực hiện lệnh gọi công cụ",
+        "Sandboxes từ chối lưu trữ nhiều hơn một process",
+        "Ngữ cảnh không thể giữ kế hoạch kiến trúc, bốn lát cắt cơ sở mã song song, bình luận của người đánh giá và đầu ra thử nghiệm cùng một lúc",
+        "Models thiếu hỗ trợ cho git"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Vai trò của kiến trúc sư sở hữu gì trong hình dạng nhà xưởng này?",
+      "options": [
+        "Xem lại sự khác biệt merged cho ảo giác",
+        "Đọc vấn đề và phát ra kế hoạch với các tác vụ con có giao diện rõ ràng",
+        "Chạy bộ thử nghiệm trong một sandbox sạch sẽ",
+        "Buộc hợp nhất branches khi lập trình viên không đồng ý"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao mỗi lập trình viên làm việc trong git worktree của riêng nó cộng với một sandbox Daytona?",
+      "options": [
+        "Cây làm việc sao chép nhanh hơn branches",
+        "Daytona là sandbox duy nhất hỗ trợ SSH",
+        "Cây làm việc biệt lập cho phép N lập trình viên thực hiện các tác vụ con song song mà không cần bước vào các tệp được chia sẻ",
+        "Kiến trúc sư yêu cầu ID cây làm việc"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Người đánh giá có ràng buộc gì để giữ cho nó trung thực?",
+      "options": [
+        "Nó chỉ có thể chạy sau khi người thử nghiệm đăng xuất",
+        "Nó không thể phê duyệt các khác biệt mà nó là tác giả hoặc đề xuất",
+        "Nó phải phê duyệt mọi diff mà nó đọc",
+        "Nó phải giống model với kiến trúc sư"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bảng đánh giá lại cân nhắc hiệu quả token so với đường cơ sở một agent?",
+      "options": [
+        "Nhiều agent luôn rẻ hơn",
+        "Ranh giới vai trò bổ sung bối cảnh tóm tắt và bàn giao, vì vậy câu hỏi thực sự là liệu nhà máy có thắng trên mỗi đô la hay không",
+        "Một agent không có câu chuyện observability",
+        "Chi phí Token không liên quan đến hiệu suất"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "artifact nào được tạo ra từ mỗi vấn đề thất bại trong quá trình khám nghiệm tử thi?",
+      "options": [
+        "Mẫu kế hoạch kiến trúc sư mới",
+        "Thông số kỹ thuật giao thức A2A được cập nhật",
+        "Nhật ký đẩy lực",
+        "Biểu đồ bàn giao-thất bại xác định ranh giới vai trò nào gặp lỗi (kế hoạch, merge, xem xét, kiểm tra)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Capstone sử dụng bộ đánh giá nào để chấm điểm pass@1 trên các vai trò?",
+      "options": [
+        "Tập hợp con SWE-bench Pro 50 số",
+        "HumanEval-Java",
+        "MT-Băng ghế-v2",
+        "Băng ghế di chuyển"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
