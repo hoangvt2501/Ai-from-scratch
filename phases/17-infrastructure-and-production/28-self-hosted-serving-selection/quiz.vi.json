@@ -1,0 +1,78 @@
+{
+  "lesson": "28-self-hosted-serving-selection",
+  "title": "Lựa chọn phục vụ tự tổ chức — llama.cpp, Ollama, TGI, vLLM, SGLang",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài học chọn công cụ nào làm mặc định một lệnh của máy tính xách tay dành cho nhà phát triển?",
+      "options": [
+        "TGI",
+        "Ollama",
+        "vLLM",
+        "llama.cpp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Sự kiện năm 2025 nào thay đổi mặc định khỏi TGI cho các dự án mới?",
+      "options": [
+        "TGI được mua lại bởi Anthropic",
+        "TGI tăng giá",
+        "TGI bỏ hỗ trợ CUDA",
+        "TGI đã vào chế độ bảo trì vào ngày 11 tháng 12 năm 2025 — chỉ sửa lỗi trong tương lai"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ràng buộc phần cứng nào buộc llama.cpp và loại trừ vLLM / TRT-LLM?",
+      "options": [
+        "Táo M4",
+        "AMD MI300X",
+        "Phễu NVIDIA",
+        "Chỉ CPU (không có chân tốc)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Công cụ nào thực hiện vị trí bài học cho agentic khối lượng công việc nhiều lượt và tiền tố nặng nhờ RadixAttention?",
+      "options": [
+        "Ollama",
+        "llama.cpp",
+        "SGLang",
+        "TGI"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học đề xuất pipeline dev-to-prod nào trên cùng một trọng lượng GGUF hoặc HF?",
+      "options": [
+        "Chỉ TRT-LLM, từ trên xuống dưới",
+        "Ollama trong dev và Ollama trong prod",
+        "Ollama trong dev, llama.cpp trong dàn dựng, vLLM (hoặc SGLang cho tiền tố nặng) trong prod",
+        "TGI ở khắp mọi nơi"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao Ollama không được khuyến khích vì chia sẻ production?",
+      "options": [
+        "Nó là mã nguồn đóng",
+        "Nó chỉ chạy trên Windows",
+        "Đi HTTP tuần tự hóa làm tăng chi phí, quản lý đồng thời đơn giản hơn vLLM và hỗ trợ OpenTelemetry bị trễ",
+        "Nó không thể tải GGUF"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
