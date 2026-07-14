@@ -53,8 +53,10 @@
             phaseId:    phase.id,
             phaseName:  phase.name,
             name:       lesson.name     || '',
-            summary:    lesson.summary  || '',
-            keywords:   lesson.keywords || '',
+            summary:    lesson.summary    || '',
+            summaryVi:  lesson.summaryVi  || '',
+            keywords:   lesson.keywords   || '',
+            keywordsVi: lesson.keywordsVi || '',
             type:       lesson.type     || '',
             lang:       lesson.lang     || '',
             status:     lesson.status   || '',
@@ -105,6 +107,8 @@
     var name     = item.name.toLowerCase();
     var summary  = (item.summary  || '').toLowerCase();
     var keywords = (item.keywords || '').toLowerCase();
+    var summaryVi = (item.summaryVi || '').toLowerCase();
+    var keywordsVi = (item.keywordsVi || '').toLowerCase();
     var phase    = (item.phaseName || '').toLowerCase();
     var lang     = (item.lang  || '').toLowerCase();
     var type     = (item.type  || '').toLowerCase();
@@ -127,7 +131,7 @@
         s += (s === 0 ? 65 : 20);
       } else {
         // Weaker: every word spread across name + summary + keywords + phase
-        var blob = name + ' ' + summary + ' ' + keywords + ' ' + phase;
+        var blob = name + ' ' + summary + ' ' + keywords + ' ' + summaryVi + ' ' + keywordsVi + ' ' + phase;
         var allInBlob = words.every(function (w) { return blob.indexOf(w) !== -1; });
         if (allInBlob) s += 15;
       }
@@ -136,6 +140,8 @@
     // Supporting fields — ordered by expected relevance
     if (summary.indexOf(q)  !== -1) s += 25;
     if (keywords.indexOf(q) !== -1) s += 22; // H3 headings: dense vocabulary
+    if (summaryVi.indexOf(q) !== -1) s += 25;
+    if (keywordsVi.indexOf(q) !== -1) s += 22;
     if (says.indexOf(q)     !== -1) s += 22; // glossary "what people say"
     if (phase.indexOf(q)    !== -1) s += 18;
     if (lang.indexOf(q)     !== -1) s += 14;
@@ -150,6 +156,8 @@
       // Last resort: single word anywhere in keywords or summary
       if (s === 0 && keywords.indexOf(q) !== -1) s += 18;
       if (s === 0 && summary.indexOf(q)  !== -1) s += 12;
+      if (s === 0 && keywordsVi.indexOf(q) !== -1) s += 18;
+      if (s === 0 && summaryVi.indexOf(q) !== -1) s += 12;
     }
 
     return s;

@@ -6,24 +6,30 @@ on:
     paths:
       - "phases/**"
       - "scripts/audit_lessons.py"
+      - "scripts/audit_translations.py"
       - "scripts/build_catalog.py"
       - "scripts/check_readme_counts.py"
       - "README.md"
       - "ROADMAP.md"
       - "glossary/**"
       - "site/build.js"
+      - "site/cmdpalette.js"
+      - "site/lesson.html"
       - ".github/workflows/curriculum.yml"
   pull_request:
     branches: [main]
     paths:
       - "phases/**"
       - "scripts/audit_lessons.py"
+      - "scripts/audit_translations.py"
       - "scripts/build_catalog.py"
       - "scripts/check_readme_counts.py"
       - "README.md"
       - "ROADMAP.md"
       - "glossary/**"
       - "site/build.js"
+      - "site/cmdpalette.js"
+      - "site/lesson.html"
       - ".github/workflows/curriculum.yml"
 
 permissions:
@@ -42,6 +48,8 @@ jobs:
           python-version: "3.12"
       - name: run scripts/audit_lessons.py
         run: python3 scripts/audit_lessons.py
+      - name: run scripts/audit_translations.py
+        run: python3 scripts/audit_translations.py --require-quizzes
 
   readme-counts-sync:
     name: README counts auto-fix (main only)

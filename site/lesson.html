@@ -1593,6 +1593,9 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </button>
+      <button class="theme-toggle" id="languageToggle" aria-label="Đọc bằng tiếng Việt" type="button">
+        <span class="theme-icon" id="languageIcon">VI</span>
+      </button>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
         <span class="theme-icon" id="themeIcon">N</span>
       </button>
@@ -1699,6 +1702,40 @@
 
       var params = new URLSearchParams(window.location.search);
       var lessonPath = params.get('path');
+      var requestedLang = params.get('lang');
+      var storedLang = localStorage.getItem('lessonLanguage');
+      var lessonLang = requestedLang === 'vi' || requestedLang === 'en'
+        ? requestedLang
+        : (storedLang === 'vi' ? 'vi' : 'en');
+      document.documentElement.setAttribute('lang', lessonLang);
+      localStorage.setItem('lessonLanguage', lessonLang);
+
+      var languageToggle = document.getElementById('languageToggle');
+      var languageIcon = document.getElementById('languageIcon');
+      if (languageIcon) languageIcon.textContent = lessonLang === 'vi' ? 'EN' : 'VI';
+      if (languageToggle) {
+        languageToggle.setAttribute('aria-label', lessonLang === 'vi' ? 'Read in English' : 'Đọc bằng tiếng Việt');
+        languageToggle.addEventListener('click', function () {
+          var nextLang = lessonLang === 'vi' ? 'en' : 'vi';
+          params.set('lang', nextLang);
+          localStorage.setItem('lessonLanguage', nextLang);
+          window.location.search = params.toString();
+        });
+      }
+      if (lessonLang === 'vi') {
+        var staticLabels = [
+          ['.skip-link', 'Bỏ qua đến nội dung'],
+          ['.header-nav a[href="index.html#contents"]', 'Nội dung'],
+          ['.header-nav a[href="catalog.html"]', 'Danh mục'],
+          ['.header-nav a[href="prereqs.html"]', 'Lộ trình'],
+          ['.header-nav a[href="glossary.html"]', 'Thuật ngữ'],
+          ['.lesson-loading-text', 'Đang tải bài học...']
+        ];
+        for (var labelIndex = 0; labelIndex < staticLabels.length; labelIndex++) {
+          var labelElement = document.querySelector(staticLabels[labelIndex][0]);
+          if (labelElement) labelElement.textContent = staticLabels[labelIndex][1];
+        }
+      }
 
       if (!lessonPath) {
         showError('No lesson path specified', 'Add ?path=phases/01-math-foundations/01-linear-algebra-intuition to the URL.');
@@ -1856,14 +1893,27 @@
         // via build-meta.js), so PR preview deploys render their own lesson
         // edits instead of always pulling main. Falls back to main.
         var ref = (typeof window !== 'undefined' && window.__AIFS_REF) ? window.__AIFS_REF : 'main';
-        var base = 'https://raw.githubusercontent.com/rohitg00/ai-engineering-from-scratch/' + ref + '/';
-        var rawUrl = base + path + '/docs/en.md';
-        var quizUrl = base + path + '/quiz.json';
+        var isLocalPreview = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        var base = isLocalPreview
+          ? '../'
+          : 'https://raw.githubusercontent.com/rohitg00/ai-engineering-from-scratch/' + ref + '/';
+        var docFile = lessonLang === 'vi' ? 'vi.md' : 'en.md';
+        var quizFile = lessonLang === 'vi' ? 'quiz.vi.json' : 'quiz.json';
+        var rawUrl = base + path + '/docs/' + docFile;
+        var englishUrl = base + path + '/docs/en.md';
+        var quizUrl = base + path + '/' + quizFile;
+        var englishQuizUrl = base + path + '/quiz.json';
 
-        fetch(rawUrl)
+        fetch(rawUrl, isLocalPreview ? { cache: 'no-store' } : undefined)
           .then(function (res) {
-            if (!res.ok) throw new Error('fetch-failed');
-            return res.text();
+            if (res.ok) return res.text();
+            if (lessonLang === 'vi') {
+              return fetch(englishUrl, isLocalPreview ? { cache: 'no-store' } : undefined).then(function (fallback) {
+                if (!fallback.ok) throw new Error('fetch-failed');
+                return fallback.text();
+              });
+            }
+            throw new Error('fetch-failed');
           })
           .then(function (md) {
             try {
@@ -1873,8 +1923,14 @@
               showError('Render error', 'Loaded the lesson markdown but failed to render it. Details in the browser console.');
               return;
             }
-            fetch(quizUrl)
-              .then(function (res) { return res.ok ? res.json() : null; })
+            fetch(quizUrl, isLocalPreview ? { cache: 'no-store' } : undefined)
+              .then(function (res) {
+                if (res.ok) return res.json();
+                if (lessonLang === 'vi') {
+                  return fetch(englishQuizUrl, isLocalPreview ? { cache: 'no-store' } : undefined).then(function (fallback) { return fallback.ok ? fallback.json() : null; });
+                }
+                return null;
+              })
               .catch(function () { return null; })
               .then(function (data) {
                 if (!data) return;
@@ -1912,7 +1968,7 @@
       function updateLessonSeo(title, md) {
         var ORIGIN = 'https://aiengineeringfromscratch.com';
         var path = new URLSearchParams(location.search).get('path') || '';
-        var url = ORIGIN + '/lesson.html?path=' + path;
+        var url = ORIGIN + '/lesson.html?path=' + path + (lessonLang === 'vi' ? '&lang=vi' : '');
         var desc = lessonDescription(md);
         var fullTitle = title + ' · AI Engineering from Scratch';
         var set = function (sel, val) { var m = document.querySelector(sel); if (m) m.setAttribute('content', val); };
@@ -1934,7 +1990,7 @@
           '@context': 'https://schema.org',
           '@graph': [
             { '@type': 'LearningResource', name: title, description: desc, url: url,
-              inLanguage: 'en', isAccessibleForFree: true,
+              inLanguage: lessonLang, isAccessibleForFree: true,
               isPartOf: { '@type': 'Course', name: 'AI Engineering from Scratch', url: ORIGIN } },
             { '@type': 'BreadcrumbList', itemListElement: [
               { '@type': 'ListItem', position: 1, name: 'Home', item: ORIGIN },
@@ -2024,8 +2080,9 @@
           return candidate;
         }
 
-        var html = '<div class="toc-header">On this page</div>';
-        html += '<nav aria-label="On this page"><ul class="toc-nav">';
+        var tocTitle = lessonLang === 'vi' ? 'Trong trang này' : 'On this page';
+        var html = '<div class="toc-header">' + tocTitle + '</div>';
+        html += '<nav aria-label="' + tocTitle + '"><ul class="toc-nav">';
         for (var i = 0; i < headings.length; i++) {
           var heading = headings[i];
           var level = heading.tagName.toLowerCase();

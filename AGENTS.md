@@ -18,9 +18,11 @@ The repo is a curriculum, not a SaaS app. The lessons are the product. Every rul
 phases/
   NN-phase-slug/
     NN-lesson-slug/
-      docs/en.md              # lesson explainer
+      docs/en.md              # canonical English lesson explainer
+      docs/vi.md              # Vietnamese translation (same structure/code fences)
       code/                   # implementation + tests
-      quiz.json               # 6 questions
+      quiz.json               # 6 canonical English questions
+      quiz.vi.json            # Vietnamese copy; answers/schema unchanged
       outputs/                # reusable artifact (skill / prompt / agent / MCP server)
 README.md                     # public face; lesson counts auto-synced
 ROADMAP.md                    # phase/lesson status
@@ -43,7 +45,8 @@ scripts/                      # automation
 4. **Every fenced code block needs a language tag.** Use `text`, `json`, `python`, `typescript`, `rust`, `julia`, `bash`, `console`, `mermaid`, `yaml` as appropriate.
 5. **Original implementations only.** Don't cite external curriculum repos in docs, code comments, or commit text. Cite RFCs, official specs, and academic papers when they are the canonical source.
 6. **Dependency allowlist** (see `Dependencies` below). Stdlib-first.
-7. **Never commit generated files**: `catalog.json` is gitignored, `site/data.js` is rebuilt by CI, `package-lock.json` is never tracked.
+7. **Vietnamese parity.** Every completed lesson keeps `docs/vi.md` and `quiz.vi.json` aligned with the English source. Preserve code, formulas, commands, URLs, API names, and established AI terms verbatim.
+8. **Never commit generated files**: `catalog.json` is gitignored, `site/data.js` is rebuilt by CI, `package-lock.json` is never tracked.
 
 ---
 
@@ -80,6 +83,10 @@ If a finding suggests a banned dep, skip it with the reason "stays stdlib-first 
 
 The `**Languages:**` field must match the languages with a `main.*` file in `code/`.
 
+### docs/vi.md
+
+`docs/vi.md` mirrors the heading order, links, diagrams, and fenced code of `docs/en.md`. Translate learner-facing prose naturally; keep established AI terms in English when that is clearer and more idiomatic for practitioners.
+
 ### quiz.json schema
 
 ```json
@@ -98,6 +105,8 @@ The `**Languages:**` field must match the languages with a `main.*` file in `cod
 ```
 
 Exactly 6 questions: 1 pre + 3 check + 2 post. `correct` is zero-indexed. The site renderer only understands this shape — legacy `q/choices/answer` schemas crash silently.
+
+`quiz.vi.json` uses the identical schema, stages, option order, and `correct` indexes. Only `title`, `question`, `options`, and `explanation` are translated.
 
 ### code/
 
@@ -118,6 +127,7 @@ Run locally before pushing:
 
 ```bash
 python3 scripts/audit_lessons.py
+python3 scripts/audit_translations.py --require-quizzes
 python3 scripts/check_readme_counts.py        # advisory — CI fixes on merge
 
 # For each lesson touched:
@@ -192,19 +202,20 @@ Avoid `git push --force` to a branch with open review comments. Force-push detac
 mkdir -p phases/NN-phase-slug/MM-new-lesson/{docs,code/tests,outputs}
 
 # 1. Write docs/en.md with the frontmatter above.
-# 2. Write code/main.<lang> with the 4-6 line header.
-# 3. Write code/tests/test_main.* with 5+ tests.
-# 4. Write quiz.json with the schema above.
-# 5. (Optional) Add outputs/skill-<slug>.md if the lesson ships a skill.
+# 2. Translate docs/en.md to docs/vi.md without changing code fences or links.
+# 3. Write code/main.<lang> with the 4-6 line header.
+# 4. Write code/tests/test_main.* with 5+ tests.
+# 5. Write quiz.json and quiz.vi.json with identical answer metadata.
+# 6. (Optional) Add outputs/skill-<slug>.md if the lesson ships a skill.
 
-# 6. Add to README.md:
+# 7. Add to README.md:
 #    | MM | [Lesson Title](phases/NN-phase-slug/MM-new-lesson/) | Type | Lang |
 
-# 7. Update ROADMAP.md status row.
+# 8. Update ROADMAP.md status row.
 
-# 8. Validate locally.
+# 9. Validate locally.
 
-# 9. Atomic commit:
+# 10. Atomic commit:
 git add phases/NN-phase-slug/MM-new-lesson README.md ROADMAP.md
 git commit -m "feat(phase-NN/MM): add <slug>"
 git push -u origin <your-branch>

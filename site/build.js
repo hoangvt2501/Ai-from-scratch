@@ -244,8 +244,8 @@ function parseReadme(content, roadmapStatuses) {
  * Both fields are empty strings when the file is absent or has no
  * matching content — expected for planned lessons with no docs yet.
  */
-function extractLessonMeta(relPath) {
-  const docPath = path.join(REPO_ROOT, relPath, 'docs', 'en.md');
+function extractLessonMeta(relPath, language = 'en') {
+  const docPath = path.join(REPO_ROOT, relPath, 'docs', `${language}.md`);
   const result = { summary: '', keywords: '' };
   try {
     const lines = fs.readFileSync(docPath, 'utf8').split(/\r?\n/);
@@ -436,15 +436,18 @@ function build() {
   console.log('🔍 Discovering outputs + Phase 14 missions...');
   const artifacts = discoverArtifacts();
 
-  console.log('📚 Extracting lesson summaries + keywords from docs/en.md...');
+  console.log('📚 Extracting lesson summaries + keywords from docs/en.md + docs/vi.md...');
   let summarized = 0, withKeywords = 0;
   for (const phase of phases) {
     for (const lesson of phase.lessons) {
       if (lesson.url) {
         const relPath = lesson.url.replace(GITHUB_BASE, '').replace(/\/+$/, '');
-        const meta = extractLessonMeta(relPath);
-        if (meta.summary)  { lesson.summary  = meta.summary;  summarized++;   }
-        if (meta.keywords) { lesson.keywords = meta.keywords; withKeywords++; }
+        const meta = extractLessonMeta(relPath, 'en');
+        const metaVi = extractLessonMeta(relPath, 'vi');
+        if (meta.summary)     { lesson.summary    = meta.summary; summarized++; }
+        if (meta.keywords)    { lesson.keywords   = meta.keywords; withKeywords++; }
+        if (metaVi.summary)   { lesson.summaryVi  = metaVi.summary; }
+        if (metaVi.keywords)  { lesson.keywordsVi = metaVi.keywords; }
       }
     }
   }
