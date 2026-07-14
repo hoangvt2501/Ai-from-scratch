@@ -1,0 +1,78 @@
+{
+  "lesson": "74-leaderboard-aggregation",
+  "title": "Tổng hợp bảng xếp hạng",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao công cụ tổng hợp yêu cầu mọi điểm đầu vào phải nằm trong [0, 1]?",
+      "options": [
+        "Đây là phạm vi thùng cho ECE",
+        "Nếu không có thang đo chung, một chỉ số duy nhất có phạm vi 0-100 chiếm ưu thế trong giá trị trung bình trên model",
+        "Numpy yêu cầu nó",
+        "Kết xuất Markdown mong đợi hai chữ số thập phân"
+      ],
+      "correct": 1,
+      "explanation": "Nếu tỷ lệ đậu nằm trong [0,1] và BLEU nằm trong [0,100], thì tỷ lệ sau sẽ lấn át mức trung bình. Chuẩn hóa thuộc về lớp hệ mét và được kiểm tra ở đây."
+    },
+    {
+      "stage": "pre",
+      "question": "Thông tin gì có nghĩa là điểm ẩn mà tỷ lệ thắng tiết lộ?",
+      "options": [
+        "Liệu model có được hiệu chỉnh tốt hay không",
+        "Mỗi nhiệm vụ chiến thắng chống lại các ngoại lệ và thay đổi tỷ lệ; trung bình nhạy cảm với cả hai",
+        "Số lượng nhiệm vụ đã hoàn thành",
+        "Khoảng thời gian bootstrap"
+      ],
+      "correct": 1,
+      "explanation": "Tỷ lệ thắng đếm từng nhiệm vụ chiến thắng. Một model có thể có giá trị trung bình cao từ một nhiệm vụ dễ dàng và vẫn thua hầu hết các so sánh theo cặp."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để bootstrap_mean_ci ước tính khoảng tin cậy?",
+      "options": [
+        "Bằng cách giả định một phân phối chuẩn trên giá trị trung bình",
+        "Bằng cách lấy mẫu lại điểm nhiệm vụ bằng cách thay thế, tính giá trị trung bình trên mỗi mẫu, sau đó lấy alpha/2 và 1 - alpha/2 phần trăm",
+        "Bằng cách tính toán độ lệch chuẩn một cách phân tích",
+        "Bằng cách gọi scipy.stats.bootstrap"
+      ],
+      "correct": 1,
+      "explanation": "Bootstrap phần trăm không tham số trên điểm số cho mỗi nhiệm vụ; không có giả định phân phối, không có scipy."
+    },
+    {
+      "stage": "check",
+      "question": "Khi nào sự khác biệt theo cặp CI báo cáo `significant`?",
+      "options": [
+        "Khi CI không chứa số không",
+        "Khi chênh lệch trung bình lớn hơn 0,1",
+        "Khi cả hai models đều có hơn ba mươi nhiệm vụ",
+        "Khi tỷ lệ thắng không bằng nhau"
+      ],
+      "correct": 0,
+      "explanation": "Một CI loại trừ hoàn toàn số không có nghĩa là sự khác biệt không có khả năng bằng không ở mức đã chọn; đó là định nghĩa hoạt động mà bài học sử dụng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bootstrap theo cặp được ghép nối thay vì độc lập?",
+      "options": [
+        "Bootstrap độc lập là bất hợp pháp ở Python",
+        "Bootstrap được ghép nối tôn trọng rằng cùng một tác vụ cung cấp cho cả models; sự khác biệt được tính toán theo từng tác vụ trước khi lấy mẫu lại",
+        "Bootstrap được ghép nối chạy nhanh hơn",
+        "Bootstrap được ghép nối là cái duy nhất numpy hỗ trợ"
+      ],
+      "correct": 1,
+      "explanation": "Bootstrap được ghép nối làm giảm nhiễu: chúng tôi lấy mẫu qua các tác vụ, không phải trên models, vì vậy so sánh trên cùng một bộ tác vụ mỗi lần lặp."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao công cụ tổng hợp trả về phương tiện mỗi danh mục cùng với số dòng tiêu đề?",
+      "options": [
+        "Nó được yêu cầu bởi JSON Schema",
+        "Ý nghĩa tiêu đề có thể che giấu điểm yếu ở cấp danh mục (nhìn chung tốt, mã kém); mỗi danh mục cho thấy điều đó",
+        "Mỗi danh mục có nghĩa là chạy nhanh hơn giá trị trung bình tổng thể",
+        "Kết xuất Markdown yêu cầu nó"
+      ],
+      "correct": 1,
+      "explanation": "Một model có thể giành chiến thắng về tổng thể bằng cách ổn ở mọi nơi hoặc bằng cách thống trị một danh mục. Phân tích mỗi danh mục cho phép người tiêu dùng xem danh mục nào."
+    }
+  ]
+}
