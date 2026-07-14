@@ -1,0 +1,78 @@
+{
+  "lesson": "60-projection-layer-modality-align",
+  "title": "Lớp chiếu cho phương thức Alignment",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao tầm nhìn encoder tạo ra tokens mà văn bản decoder không thể tiêu thụ trực tiếp?",
+      "options": [
+        "Chúng ở một định dạng tệp khác",
+        "Hình ảnh tokens sống trên cơ sở encoder học được trong quá trình thị giác pretraining không tương ứng với lời của decoder vectors",
+        "tokens hình ảnh được mã hóa",
+        "Hình ảnh tokens quá ngắn"
+      ],
+      "correct": 1,
+      "explanation": "Hai encoders học các cơ sở độc lập; một mô-đun cầu nối được yêu cầu để căn chỉnh chúng trong một không gian chung."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao MLP hai lớp đủ để alignment phương thức trong thực tế?",
+      "options": [
+        "PyTorch yêu cầu hai lớp",
+        "Một uốn cong phi tuyến tính (GELU) giữa hai phép chiếu tuyến tính đủ theo kinh nghiệm để căn chỉnh features kiểu CLIP với embeddings văn bản",
+        "Phép chiếu một lớp bị cấm",
+        "Dự đoán sâu hơn là bất hợp pháp"
+      ],
+      "correct": 1,
+      "explanation": "LLaVA và hậu duệ của nó ship MLP hai lớp này vì độ cong không tuyến tính sửa chữa không phù hợp với một tuyến tính duy nhất không thể."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao thị lực encoder đóng băng trong giai đoạn alignment này?",
+      "options": [
+        "Đông lạnh có nghĩa là thời gian tường nhanh hơn",
+        "86M-parameter encoder không thể được huấn luyện lại trên một kho dữ liệu giả nhỏ; chỉ riêng phép chiếu 1.3M-parameter là đủ nhẹ để căn chỉnh trong vài phút",
+        "PyTorch không hỗ trợ training encoder",
+        "encoder trống rỗng"
+      ],
+      "correct": 1,
+      "explanation": "Đóng băng bảng encoder và văn bản làm cho phép chiếu trở thành thứ duy nhất học hỏi, đó là hình dạng hoạt động của mọi VLM dựa trên bộ chuyển đổi."
+    },
+    {
+      "stage": "check",
+      "question": "cosine_alignment_loss(image_emb, text_emb) trả về điều gì khi hai vectors chỉ theo hướng ngược nhau?",
+      "options": [
+        "0.0",
+        "2.0",
+        "1.0",
+        "Vô cực"
+      ],
+      "correct": 1,
+      "explanation": "Loss là 1 - cos (góc). vectors ngược song song có cos = -1, vì vậy loss là 1 - (-1) = 2.0."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao CLS pooling được sử dụng để tạo ra một vector cấp hình ảnh duy nhất từ 197 tokens?",
+      "options": [
+        "PyTorch tổng tokens tự động",
+        "Chú thích là một vector cho mỗi mẫu, vì vậy phía hình ảnh cũng cần một vector; CLS token là bản tóm tắt hình ảnh tích hợp của encoder",
+        "Nó tiết kiệm dung lượng đĩa",
+        "Bản vá tokens không được sử dụng"
+      ],
+      "correct": 1,
+      "explanation": "Alignment là một hình ảnh vector với một chú thích vector; CLS gộp tạo ra vector hình ảnh đó mà không cần thêm parameters."
+    },
+    {
+      "stage": "post",
+      "question": "Hệ thống production nào ánh xạ trực tiếp nhất với mẫu bài 60?",
+      "options": [
+        "PaLM",
+        "LLaVA 1.5: encoder tầm nhìn đóng băng, LLM đóng băng, chỉ huấn luyện phép chiếu MLP hai lớp",
+        "AlphaFold",
+        "Khuếch tán ổn định"
+      ],
+      "correct": 1,
+      "explanation": "training giai đoạn một của LLaVA chính xác là thế này: một encoder đông lạnh và LM với cầu MLP hai lớp là mảnh duy nhất có thể huấn luyện."
+    }
+  ]
+}
