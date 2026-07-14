@@ -1,0 +1,102 @@
+{
+  "lesson": "28-long-context-evaluation",
+  "title": "Đánh giá ngữ cảnh dài - NIAH, RULER, LongBench, MRCR",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "NIAH ban đầu benchmark đo lường điều gì?",
+      "options": [
+        "Tokenizer khả năng sinh sản",
+        "Liệu model có thể truy xuất một thực tế được trồng ở độ sâu được kiểm soát trong một bối cảnh dài hay không",
+        "Embedding trôi cosin",
+        "Chỉ suy luận nhiều bước nhảy"
+      ],
+      "correct": 1,
+      "explanation": "NIAH = kim trong đống cỏ khô: trồng một sự thật, yêu cầu model lấy nó, quét độ sâu và chiều dài."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao context window quảng cáo thường rất khác với ngữ cảnh có thể sử dụng?",
+      "options": [
+        "Attention xuống cấp theo độ dài và nhiệm vụ; Mức tối đa của bảng thông số kỹ thuật hiếm khi được giữ dưới tải nhiều bước hoặc suy luận",
+        "Tokenizers cắt bớt",
+        "Embeddings tràn",
+        "Beam search chậm lại"
+      ],
+      "correct": 0,
+      "explanation": "Bối cảnh hiệu quả để suy luận thường là 25-50% mức tối đa được quảng cáo."
+    },
+    {
+      "stage": "check",
+      "question": "RULER thêm gì so với NIAH?",
+      "options": [
+        "Nhiệm vụ dịch thuật",
+        "inference nhanh hơn",
+        "Các logprobs trên mỗi token",
+        "Mười ba loại tác vụ trên truy xuất, theo dõi nhiều bước nhảy, tổng hợp và QA ở nhiều độ dài ngữ cảnh"
+      ],
+      "correct": 3,
+      "explanation": "RULER mở rộng NIAH thành một bối cảnh dài đa nhiệm benchmark bắt models bão hòa NIAH nhưng thất bại ở nơi khác."
+    },
+    {
+      "stage": "check",
+      "question": "Hiệu ứng 'mất giữa chừng' là gì?",
+      "options": [
+        "Models không quan tâm đến nội dung được đặt ở giữa các đầu vào dài; chiều sâu = 0,5 thường hoạt động kém hơn độ sâu = 0 hoặc 1",
+        "Models sắp xếp lại tokens",
+        "Models quên token đầu tiên",
+        "Models mất dấu câu"
+      ],
+      "correct": 0,
+      "explanation": "Nội dung ngữ cảnh giữa ít được tham gia nhất; độ sâu quét để lộ đường cong accuracy hình chữ U."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao đánh giá chỉ NIAH phải được bổ sung bằng các xét nghiệm nhiều bước nhảy?",
+      "options": [
+        "Nhiều bước nhảy nhanh hơn",
+        "NIAH thiếu ground truth",
+        "NIAH không thể chạy trên bối cảnh dài",
+        "Frontier models có thể truy xuất một kim nhưng vẫn không thành công trong các tác vụ tổng hợp hoặc theo dõi biến nhiều bước"
+      ],
+      "correct": 3,
+      "explanation": "Truy xuất vượt qua không có nghĩa là vượt qua lý luận; nhiều bước nhảy benchmarks để lộ trần nhà thực."
+    },
+    {
+      "stage": "post",
+      "question": "NoLiMa nhấn mạnh điều gì?",
+      "options": [
+        "Streaming đầu ra",
+        "Độ trễ",
+        "Tokenization",
+        "Các kim không chia sẻ tokens nghĩa đen với truy vấn, vì vậy việc truy xuất yêu cầu một bước suy luận ngữ nghĩa"
+      ],
+      "correct": 3,
+      "explanation": "NoLiMa loại bỏ sự chồng chéo từ vựng để model phải lý luận thay vì khớp các từ khóa."
+    },
+    {
+      "stage": "post",
+      "question": "Bảng thông số kỹ thuật ngữ cảnh dài nên báo cáo hai con số nào?",
+      "options": [
+        "Độ dài truy xuất hiệu quả (ví dụ: vượt qua 90% NIAH) và độ dài suy luận hiệu quả (ví dụ: 70% vượt qua nhiều bước nhảy)",
+        "Chỉ GPU bộ nhớ và độ trễ",
+        "Chỉ mức tối đa được quảng cáo",
+        "Chỉ Tokens mỗi giây"
+      ],
+      "correct": 0,
+      "explanation": "Phân biệt độ dài hiệu quả truy xuất và độ dài hiệu quả lý luận là điều cần thiết cho các tuyên bố trong thế giới thực."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao phải đo thời gian đến token đầu tiên ở độ dài ngữ cảnh dài?",
+      "options": [
+        "1M-token điền trước có thể mất hàng chục giây; Chỉ riêng accuracy đã che giấu độ trễ ảnh hưởng đến sản phẩm",
+        "Tokenization chậm",
+        "Yêu cầu của RAG",
+        "Beam search phụ thuộc vào nó"
+      ],
+      "correct": 0,
+      "explanation": "Long prompts có chi phí nạp trước rất lớn; độ trễ phải được theo dõi cùng với accuracy."
+    }
+  ]
+}
