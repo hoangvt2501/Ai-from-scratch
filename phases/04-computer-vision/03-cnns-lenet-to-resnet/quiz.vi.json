@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "AlexNet (2012) đã giới thiệu ý tưởng kiến trúc duy nhất nào khiến CNN sâu sắc training trở nên thực tế trên GPUs?",
+      "options": [
+        "Kết nối còn lại",
+        "Thay thế tánh bằng ReLU, không bão hòa và tăng tốc độ hội tụ khoảng 6 lần",
+        "Batch chuẩn hóa",
+        "Tích chập có thể tách rời theo chiều sâu"
+      ],
+      "correct": 1,
+      "explanation": "Tăng tốc training lớn nhất của AlexNet đến từ ReLU. Tánh bão hòa cho các đầu vào tích cực hoặc tiêu cực lớn, điều này giết chết gradients và giới hạn độ sâu bạn có thể tập luyện. ReLU là tuyến tính từng phần, không bão hòa cho các đầu vào tích cực và là sự thay đổi duy nhất khiến training mất từ vài tuần đến vài ngày. Dropout và GPU song song rất quan trọng, nhưng ReLU là điều mở ra chiều sâu."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao VGG thích stacks tích chập 3x3 hơn một hạt nhân lớn hơn?",
+      "options": [
+        "Các hạt nhân nhỏ hơn chạy nhanh hơn trên CPU",
+        "Hai convs 3x3 bao phủ cùng một trường tiếp nhận 5x5 với ít parameters hơn (18C^2 so với 25C^2) và thêm một ReLU giữa chúng",
+        "3x3 convs là bất biến quay; 5x5 không phải là",
+        "Các hạt nhân lớn hơn không thể được huấn luyện bằng SGD"
+      ],
+      "correct": 1,
+      "explanation": "Hai convs 3x3 xếp chồng lên nhau thấy cùng một bản vá 5x5 như một conv 5x5, nhưng sử dụng ít parameters hơn (2 * 3 * 3 * C^2 = 18C^2 so với 25C^2) và bao gồm một tính phi tuyến tính bổ sung. ReLU bổ sung đó làm tăng sức mạnh biểu cảm. VGG đã biến quan sát này thành một kiến trúc toàn bộ với chính xác một loại khối được lặp lại."
+    },
+    {
+      "stage": "post",
+      "question": "ResNet giới thiệu các kết nối còn lại là y = F(x) + x. Điều này giải quyết vấn đề gì?",
+      "options": [
+        "Overfitting trong đầu bộ phân loại",
+        "Kích hoạt biến mất trong các lớp với ReLU",
+        "Vấn đề suy thoái - vượt qua ~ 20 lớp conv đơn giản, training loss bắt đầu trở nên tồi tệ hơn vì các optimizer phải vật lộn để tìm hiểu một bản đồ nhận dạng thông qua nhiều lớp phi tuyến tính",
+        "Tiêu thụ bộ nhớ trong quá trình backprop"
+      ],
+      "correct": 2,
+      "explanation": "Trước ResNet, training loss bắt đầu tăng qua khoảng 20 lớp mặc dù mạng có nhiều dung lượng hơn - vấn đề xuống cấp. Một khối dư có thể biểu thị danh tính một cách tầm thường bằng cách đưa F về không, mang lại cho optimizer mặc định an toàn. Với lối thoát đó, mỗi khối bổ sung có thể làm cho mạng tốt hơn một chút, đó là cách 100+ mạng lớp trở nên có thể huấn luyện được."
+    },
+    {
+      "stage": "post",
+      "question": "Trong ResNet BasicBlock với in_channels=64, out_channels=128, sải chân=2, vai trò của branch phím tắt là gì?",
+      "options": [
+        "Nó luôn là bản sắc; branch chính xử lý việc thay đổi hình dạng",
+        "Đó là một chuyển đổi 1x1 với sải chân 2 phù hợp với các kênh đầu ra và kích thước không gian của branch chính để có thể thêm cả hai",
+        "Nó là một nhóm tối đa giúp giảm một nửa chiều không gian",
+        "Nó là một trình giữ chỗ bị xóa tại inference thời điểm"
+      ],
+      "correct": 1,
+      "explanation": "Khi một khối thay đổi số lượng kênh hoặc sải chân không gian, đường dẫn nhận dạng không thể được thêm trực tiếp vào branch chính vì các hình dạng khác nhau. Phím tắt trở thành một chuyển đổi 1x1 với sải chân = 2 và C_out các kênh đầu ra, tùy chọn theo sau là batch chuẩn. Nhận dạng truyền qua chỉ được sử dụng khi in_c == out_c và sải chân == 1."
+    },
+    {
+      "stage": "post",
+      "question": "ResNet-18 có ~11,7 triệu parameters và phù hợp hoặc đánh bại VGG-16 (138 triệu tham số) trên ImageNet. Điều này ngụ ý gì về VGG?",
+      "options": [
+        "Các hạt nhân của VGG quá nhỏ để học tốt features",
+        "Hầu hết các parameters của VGG bị lãng phí ở đầu kết nối hoàn toàn và độ sâu dư thừa vượt qua điểm mà các kết nối còn lại sẽ cho phép mỗi lớp đóng góp",
+        "VGG được huấn luyện với optimizer kém hơn",
+        "accuracy của VGG trên ImageNet đã được đo lường không chính xác"
+      ],
+      "correct": 1,
+      "explanation": "Số lượng parameter của VGG-16 bị chi phối bởi bộ phân loại khổng lồ được kết nối hoàn toàn (ba lớp dày đặc trên 25088 lần kích hoạt) và stack sâu đơn giản của nó không thể thêm các lớp hiệu quả như stack dư. ResNet-18 thay thế đầu FC bằng nhóm trung bình toàn cầu cộng với một lớp tuyến tính và sử dụng các khối dư, cùng nhau mang lại hiệu suất parameter khoảng 12 lần ở accuracy tương tự."
+    }
+  ]
+}
