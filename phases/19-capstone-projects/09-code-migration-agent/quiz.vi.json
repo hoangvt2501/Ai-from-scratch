@@ -1,0 +1,90 @@
+{
+  "lesson": "09-code-migration-agent",
+  "title": "Capstone 09 — Di chuyển mã Agent (Ngôn ngữ cấp Repo / Nâng cấp Runtime)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao pipeline kết hợp chất nền xác định với một lớp agent thay vì chỉ sử dụng một?",
+      "options": [
+        "OpenRewrite hoặc libcst xử lý 70-80% các lần viết lại cơ học một cách an toàn và rẻ tiền, để lại agent cho đuôi dài mơ hồ",
+        "Chỉ riêng Agents đã nhanh hơn công thức nấu ăn",
+        "Công thức xác định chậm hơn LLMs",
+        "Quyết định luận chỉ cần thiết cho hệ thống xây dựng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "pipeline sử dụng tín hiệu nào làm ground truth cho việc di chuyển thành công?",
+      "options": [
+        "Agent tự chấm điểm trên một bảng đánh giá",
+        "Sự chấp thuận của người đánh giá trên PR",
+        "Kích thước khác biệt dưới giới hạn cứng",
+        "Màu xanh lá cây CI trong sandbox không có hồi quy bao phủ vượt quá một ngưỡng nhỏ"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Vòng lặp agent thực thi giới hạn ngân sách nào cho mỗi repo?",
+      "options": [
+        "Không giới hạn thời gian và chi phí; chỉ hủy bỏ khi có lỗi",
+        "Không giới hạn lượt, trần $100",
+        "Đồng hồ treo tường 1 giờ và 100 vòng",
+        "Đồng hồ treo tường 30 phút, chi phí 8 đô la và 20 lượt agent"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cổng nào kích hoạt khi độ phủ giảm hơn khoảng 2% sau khi di chuyển?",
+      "options": [
+        "Người đánh giá bị bỏ qua",
+        "repo được nộp theo class thất bại coverage_regression thay vì mở một PR sạch",
+        "Chất nền xác định phát lại các công thức nấu ăn của nó",
+        "agent tự động đẩy một bản sửa lỗi"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao phân loại thất bại được coi là một sản phẩm phân phối chứ không phải là một artifact phụ?",
+      "options": [
+        "Nó thay thế bộ kiểm tra",
+        "Nó nhóm thất bại repos class để các tác giả công thức trong tương lai có thể nhắm mục tiêu các chế độ thất bại hàng đầu",
+        "Nó được yêu cầu bởi GitHub branch bảo vệ",
+        "Nó đáp ứng một danh sách kiểm tra tuân thủ"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Capstone nhắm mục tiêu benchmark công khai nào cho việc di chuyển Java 8 đến 17?",
+      "options": [
+        "MigrationBench từ Amazon",
+        "SWE-bench Pro",
+        "MMLU-Chuyên nghiệp",
+        "ViDoRe phiên bản 3"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bảng đánh giá tích hợp agent đo lường gì về phân phối fix?",
+      "options": [
+        "Tokenization tốc độ của tệp nguồn",
+        "Số lần đẩy lực mỗi repo",
+        "Số lượng phần phụ thuộc được ghim",
+        "Phần các bản sửa lỗi được xử lý bởi OpenRewrite so với tác giả của lớp agent"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
