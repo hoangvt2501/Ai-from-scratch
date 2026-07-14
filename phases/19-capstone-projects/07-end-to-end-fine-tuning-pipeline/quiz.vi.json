@@ -1,0 +1,90 @@
+{
+  "lesson": "07-end-to-end-fine-tuning-pipeline",
+  "title": "Capstone 07 — Fine-Tuning Pipeline đầu cuối (Dữ liệu đến SFT đến DPO để phân phối)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Kiểm tra ô nhiễm bảo vệ chống lại điều gì trong quá trình chuẩn bị dữ liệu?",
+      "options": [
+        "Tokenizer trôi dạt giữa SFT và DPO giai đoạn",
+        "GPU trình điều khiển không khớp giữa training và giao bóng",
+        "Phiên bản GGUF bị lệch giữa các bản dựng llama.cpp",
+        "Rò rỉ bộ thử nghiệm từ các benchmarks công cộng như MMLU-Pro và MT-Bench-v2 vào dữ liệu training"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao pipeline soạn SFT sau đó DPO (hoặc GRPO) thay vì DPO một mình?",
+      "options": [
+        "Axolotl không thực hiện DPO",
+        "SFT thiết lập hành vi miền trên các lần hoàn thành được gắn nhãn trong khi DPO hoặc GRPO căn chỉnh model với các cặp ưu tiên hoặc phần thưởng có thể xác minh",
+        "DPO yêu cầu kiến trúc cơ sở model riêng biệt",
+        "DPO không thể chạy trên trọng lượng lượng tử hóa"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "EAGLE-3 đóng góp gì vào giai đoạn phục vụ vLLM?",
+      "options": [
+        "Lớp bộ nhớ đệm prompt mới",
+        "Một policy OPA cho các lệnh gọi công cụ",
+        "Bước khử dữ liệu tự động",
+        "Đầu nháp dự đoán N tokens phía trước; mục tiêu xác minh trong một lần vượt qua với thông lượng gấp 2-3 lần"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Số liệu nào báo cáo bản nháp giải mã suy đoán phù hợp với model mục tiêu như thế nào?",
+      "options": [
+        "Tỷ lệ chấp nhận",
+        "Phạm vi phủ sóng delta",
+        "PSI",
+        "Perplexity"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bộ ba định lượng nào pipeline ship tính linh hoạt trong triển khai?",
+      "options": [
+        "ONNX, CoreML, TFLite",
+        "GPTQ-INT4-Marlin, AWQ-INT4 và GGUF-Q4_K_M",
+        "INT8 chỉ trên ba runtimes",
+        "FP32, FP16, BF16"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Thẻ model 2026 tuân theo quy ước framework nào trong capstone này?",
+      "options": [
+        "Bảng dữ liệu cho Datasets",
+        "Mẫu Model Openness Framework (MOF) 2026 bao gồm dữ liệu, training, đánh giá, an toàn, giấy phép và khả năng tái tạo",
+        "HuggingFace chỉ YAML vấn đề phía trước",
+        "Định dạng thẻ model của OpenAI"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Chỉ số HPA nào được sử dụng để tự động thay đổi quy mô các bản sao phân phát?",
+      "options": [
+        "Thời gian chờ đợi",
+        "Sử dụng CPU",
+        "GPU temperature",
+        "Byte đầu ra mạng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
