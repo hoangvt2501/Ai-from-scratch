@@ -1,0 +1,102 @@
+{
+  "lesson": "17-chatbots-rule-to-neural",
+  "title": "Chatbots - Dựa trên quy tắc đến thần kinh để LLM Agents",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Máy trạng thái lấp đầy vị trí làm gì trong chatbot dựa trên quy tắc?",
+      "options": [
+        "Phát hiện sự mỉa mai",
+        "Chọn câu trả lời trôi chảy nhất",
+        "Nhúng tin nhắn người dùng",
+        "Các bản nhạc yêu cầu parameters (ngày, đích, số tiền) vẫn bị thiếu và yêu cầu chúng theo trình tự"
+      ],
+      "correct": 3,
+      "explanation": "Việc điền vào vị trí lặp đi lặp lại thu thập các parameters có cấu trúc mà trình xử lý tác vụ cần."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao trò chuyện dựa trên truy xuất có khả năng chống ảo giác?",
+      "options": [
+        "Nó sử dụng embeddings",
+        "Nó từ chối tất cả các truy vấn",
+        "Nó trả về phản hồi soạn sẵn từ một tập hợp được tuyển chọn thay vì tạo văn bản mới",
+        "Nó sử dụng BM25"
+      ],
+      "correct": 2,
+      "explanation": "Truy xuất hiển thị các câu trả lời được viết sẵn; Không có thế hệ có nghĩa là không có nội dung bịa đặt."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì xác định vòng lặp LLM agent so với cuộc gọi LLM một lần?",
+      "options": [
+        "Sử dụng giải mã tham lam",
+        "Sử dụng softmax",
+        "Một bộ điều khiển xen kẽ các cuộc gọi LLM với các lệnh gọi công cụ cho đến khi model trả về câu trả lời cuối cùng hoặc ngân sách bước bị chạm",
+        "context window lớn hơn"
+      ],
+      "correct": 2,
+      "explanation": "Agents thêm vòng lặp kế hoạch-hành động-quan sát với các lệnh gọi công cụ và điều kiện kết thúc."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao định tuyến kết hợp (quy tắc + truy xuất + LLM agent) là mặc định production 2026?",
+      "options": [
+        "Nó rẻ hơn để duy trì",
+        "Nó loại bỏ nhu cầu đánh giá",
+        "Không có kiến trúc đơn lẻ nào xử lý tốt mọi yêu cầu; quy tắc bao gồm các hành động phá hoại, truy xuất bao gồm Câu hỏi thường gặp agents xử lý các truy vấn mở không rõ ràng",
+        "Nó tránh embeddings"
+      ],
+      "correct": 2,
+      "explanation": "Các hệ thống kết hợp sử dụng các quy tắc xác định cho các hành động rủi ro và dành LLM agents cho các truy vấn mở."
+    },
+    {
+      "stage": "check",
+      "question": "Tiêm prompt là gì?",
+      "options": [
+        "Chỉ một biến thể tiêm SQL",
+        "Một kiểu tấn công tokenizer",
+        "Tiêm tokens vào embeddings",
+        "Văn bản do người dùng cung cấp (trực tiếp) hoặc tài liệu cung cấp (gián tiếp) cố gắng ghi đè system prompt hoặc chiếm quyền điều khiển hành vi của agent"
+      ],
+      "correct": 3,
+      "explanation": "Prompt chèn sẽ viết lại hành vi của agent thông qua văn bản không đáng tin cậy trong đầu vào của người dùng hoặc đầu ra công cụ."
+    },
+    {
+      "stage": "post",
+      "question": "Rủi ro OWASP Top 10 (LLM Apps 2025) nào được xếp hạng LLM01?",
+      "options": [
+        "Tiêm Prompt (trực tiếp và gián tiếp)",
+        "Giải tuần tự hóa không an toàn",
+        "Kiểm soát truy cập bị hỏng",
+        "Tiêm SQL"
+      ],
+      "correct": 0,
+      "explanation": "Prompt tiêm là LLM01 trong Top 10 ứng dụng LLM OWASP (2025)."
+    },
+    {
+      "stage": "post",
+      "question": "Mô hình giảm thiểu nào làm giảm việc bơm prompt gián tiếp bằng cách tách lập kế hoạch khỏi thực hiện?",
+      "options": [
+        "Ngữ cảnh ngắn hơn",
+        "Kế hoạch-Xác minh-Thực hiện: agent lập kế hoạch trước, xác minh từng hành động so với kế hoạch, sau đó thực hiện - ngăn chặn đầu ra của công cụ đưa vào các hành động mới ngoài kế hoạch",
+        "model lớn hơn",
+        "temperature thấp hơn"
+      ],
+      "correct": 1,
+      "explanation": "PVE kiểm tra từng bước so với kế hoạch đã thỏa thuận, vì vậy các hướng dẫn được đưa vào từ đầu ra công cụ sẽ bị từ chối."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao các hành động phá hoại (thanh toán, xóa) phải đi qua một luồng có cấu trúc ngay cả trong hệ thống LLM-agent?",
+      "options": [
+        "LLMs chậm",
+        "Beam search không an toàn",
+        "Công cụ không thể được gọi",
+        "Chế tạo tự tin, tiêm prompt và phạm vi leo thang có nghĩa là LLM không thể là cơ quan duy nhất cho các tác dụng phụ không thể đảo ngược"
+      ],
+      "correct": 3,
+      "explanation": "Ảo giác và tiêm làm cho các hành động không thể đảo ngược thông qua LLM agents thuần túy không an toàn; yêu cầu các luồng xác nhận xác định."
+    }
+  ]
+}
