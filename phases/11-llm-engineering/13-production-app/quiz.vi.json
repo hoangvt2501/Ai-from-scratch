@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Khoảng cách lớn nhất giữa bản demo LLM và ứng dụng production LLM là gì?",
+    "options": [
+      "Chất lượng model",
+      "Cơ sở hạ tầng: xử lý lỗi, streaming, theo dõi chi phí, giới hạn tốc độ, dự phòng, observability và xuống cấp duyên dáng khi tải",
+      "Chất lượng prompt",
+      "Lựa chọn nhà cung cấp API"
+    ],
+    "correct": 1,
+    "explanation": "Bản demo gọi API và in phản hồi. Production phải xử lý timeouts, ngừng hoạt động của nhà cung cấp, người dùng đồng thời, ngân sách chi phí, phân phối streaming, ghi nhật ký và xuống cấp một cách duyên dáng. Sự model là phần dễ dàng.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao phân phối streaming token lại quan trọng trong các ứng dụng production LLM?",
+    "options": [
+      "Nó làm giảm chi phí",
+      "Người dùng cảm nhận token đầu tiên đến nhanh hơn, ngay cả khi tổng thời gian tạo bằng nhau - giảm độ trễ cảm nhận từ vài giây xuống mili giây",
+      "Nó sử dụng ít bộ nhớ hơn",
+      "Nó cải thiện model accuracy"
+    ],
+    "correct": 1,
+    "explanation": "Nếu không có streaming, người dùng đợi 3-10 giây không thấy gì trước khi phản hồi đầy đủ xuất hiện. Với streaming, token đầu tiên đến trong ~200ms và văn bản chảy liên tục, làm cho trải nghiệm cảm thấy phản hồi.",
+    "stage": "pre"
+  },
+  {
+    "question": "Điều gì sẽ xảy ra khi nhà cung cấp dịch vụ LLM API của quý vị bị mất điện?",
+    "options": [
+      "Hiển thị cho người dùng một trang lỗi",
+      "Ứng dụng sẽ tự động quay trở lại nhà cung cấp thay thế hoặc trả về phản hồi xuống cấp duyên dáng",
+      "Thử lại vô thời hạn cho đến khi nhà cung cấp phục hồi",
+      "Chuyển sang model cục bộ"
+    ],
+    "correct": 1,
+    "explanation": "Production hệ thống cần các chiến lược dự phòng: hãy thử Nhà cung cấp B nếu Nhà cung cấp A không thành công, cung cấp phản hồi được lưu trong bộ nhớ đệm cho các truy vấn phổ biến hoặc trả về thông báo 'tạm thời không khả dụng' hữu ích. Không bao giờ để nhà cung cấp ngừng hoạt động làm hỏng ứng dụng của bạn.",
+    "stage": "post"
+  },
+  {
+    "question": "Ứng dụng production LLM nên theo dõi những chỉ số observability nào?",
+    "options": [
+      "Chỉ tính lỗi",
+      "Độ trễ yêu cầu (P50/P95/P99), chi phí trên mỗi yêu cầu, tỷ lệ lỗi, mức sử dụng token, tỷ lệ truy cập bộ nhớ đệm và điểm chất lượng từ đánh giá tự động",
+      "Chỉ model accuracy",
+      "Chỉ chi phí hàng tháng"
+    ],
+    "correct": 1,
+    "explanation": "observability toàn diện bao gồm: phân vị độ trễ (để tuân thủ SLA), theo dõi chi phí (để quản lý ngân sách), tỷ lệ lỗi (về độ tin cậy), mức sử dụng token (để tối ưu hóa) và chỉ số chất lượng (để phát hiện hồi quy).",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao bạn nên triển khai giới hạn tốc độ trong ứng dụng LLM của mình?",
+    "options": [
+      "Để làm cho ứng dụng có vẻ độc quyền",
+      "Để ngăn người dùng cá nhân cạn kiệt ngân sách API của bạn, hãy bảo vệ khỏi lạm dụng và đảm bảo quyền truy cập công bằng khi có lưu lượng truy cập cao",
+      "Để giảm model accuracy",
+      "Giới hạn tốc độ chỉ cần thiết cho các bậc miễn phí"
+    ],
+    "correct": 1,
+    "explanation": "Nếu không có giới hạn tốc độ, một người dùng (hoặc bot) có thể cạn kiệt ngân sách API hàng ngày của bạn trong vài phút. Giới hạn tốc độ bảo vệ chi phí của bạn, ngăn chặn lạm dụng và đảm bảo tất cả người dùng nhận được thời gian phản hồi hợp lý trong thời gian tải cao điểm.",
+    "stage": "post"
+  }
+]
