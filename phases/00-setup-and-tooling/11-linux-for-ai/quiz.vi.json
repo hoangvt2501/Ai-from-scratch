@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Biểu tượng '~' đại diện cho điều gì trong đường dẫn tệp Linux?",
+      "options": [
+        "Thư mục gốc của hệ thống tệp",
+        "Thư mục chính của người dùng hiện tại",
+        "Thư mục tệp tạm thời",
+        "Thư mục nơi các chương trình hệ thống được cài đặt"
+      ],
+      "correct": 1,
+      "explanation": "Dấu ngã (~) là phím tắt cho thư mục chính của người dùng hiện tại, thường là /home/username trên Linux. 'cd ~' đưa bạn về nhà từ bất cứ đâu."
+    },
+    {
+      "stage": "pre",
+      "question": "Mục đích của 'sudo' trước một lệnh là gì?",
+      "options": [
+        "Nó tăng tốc độ thực thi lệnh",
+        "Nó chạy lệnh với đặc quyền root (quản trị viên)",
+        "Nó chạy lệnh trong môi trường sandbox",
+        "Nó ghi lại đầu ra lệnh vào một tệp hệ thống"
+      ],
+      "correct": 1,
+      "explanation": "sudo (superuser do) tạm thời nâng đặc quyền của bạn lên cấp gốc cho một lệnh duy nhất. Bắt buộc cho các hoạt động cấp hệ thống như cài đặt các gói với apt."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn nhận được \"Quyền bị từ chối\" khi cố gắng chạy một script shell. Lệnh nào khắc phục điều này?",
+      "options": [
+        "sudo rm script.sh",
+        "chmod +x script.sh",
+        "script.sh rễ chown",
+        "mv script.sh /usr/bin/"
+      ],
+      "correct": 1,
+      "explanation": "chmod +x thêm quyền thực thi vào tệp. Nếu không đặt bit thực thi, shell từ chối chạy script ngay cả khi bạn sở hữu nó."
+    },
+    {
+      "stage": "post",
+      "question": "Trên hộp GPU từ xa, dữ liệu training của bạn sẽ lấp đầy đĩa. Lệnh nào hiển thị các thư mục lớn nhất sử dụng dung lượng?",
+      "options": [
+        "ls -la /",
+        "du -h --max-depth=1 / | sắp xếp -hr | đầu -20",
+        "mèo / proc/meminfo",
+        "miễn phí -h"
+      ],
+      "correct": 1,
+      "explanation": "du -h hiển thị mức sử dụng đĩa trên mỗi thư mục, --max-depth=1 giới hạn cho các thư mục cấp cao nhất và sắp xếp -hr sắp xếp theo kích thước theo thứ tự giảm dần. Điều này cho thấy thư mục nào đang tiêu tốn nhiều dung lượng nhất."
+    },
+    {
+      "stage": "post",
+      "question": "Sự khác biệt chính giữa phiên bản macOS và Linux của 'sed -i' là gì?",
+      "options": [
+        "Linux sed nhanh hơn macOS sed",
+        "macOS sed yêu cầu một đối số chuỗi rỗng sau -i ('sed -i \"\"'), trong khi Linux thì không",
+        "Linux sed không hỗ trợ biểu thức chính quy",
+        "macOS sed không thể sửa đổi tệp tại chỗ"
+      ],
+      "correct": 1,
+      "explanation": "macOS sử dụng BSD sed yêu cầu 'sed -i \"\" tệp mẫu', trong khi Linux sử dụng GNU sed chấp nhận 'tệp mẫu sed -i'. Đây là một lỗi phổ biến khi di chuyển scripts giữa các hệ thống."
+    }
+  ]
+}
