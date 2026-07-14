@@ -1,0 +1,90 @@
+{
+  "lesson": "05-self-refine-and-critic",
+  "title": "Tự tinh chỉnh và PHÊ BÌNH: Cải thiện đầu ra lặp đi lặp lại",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ba prompts nào tạo nên một vòng lặp Tự tinh chỉnh?",
+      "options": [
+        "Lập kế hoạch, thực hiện, giải quyết",
+        "Tạo, phản hồi, tinh chỉnh",
+        "Diễn viên, người đánh giá, phản xạ",
+        "Tìm kiếm, chấm điểm, tổng hợp"
+      ],
+      "correct": 1,
+      "explanation": "Tự tinh chỉnh sử dụng một model trong ba vai trò: tạo, phản hồi, tinh chỉnh."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao Self-Refine yêu cầu lịch sử ở bước tinh chỉnh?",
+      "options": [
+        "Nhà cung cấp chỉ lưu vào bộ nhớ đệm trên lịch sử",
+        "Nếu không có prior đầu ra và phê bình, bước tinh chỉnh lặp lại những sai lầm trước đó; Cắt bỏ cho thấy chất lượng giảm mạnh",
+        "Lịch sử là cần thiết để thanh toán",
+        "Nó tăng tốc token thế hệ"
+      ],
+      "correct": 1,
+      "explanation": "Việc tinh chỉnh prompt các điều kiện trên lịch sử đầy đủ để model không lặp lại các lỗi trước đó."
+    },
+    {
+      "stage": "check",
+      "question": "CRITIC thay đổi gì so với Self-Refine?",
+      "options": [
+        "Nó loại bỏ bước tinh chỉnh",
+        "Nó thay thế bước tự phản hồi bằng trình xác minh dựa trên công cụ bên ngoài",
+        "Nó sử dụng một model lớn hơn để tạo ra",
+        "Nó chạy song song bước phản hồi"
+      ],
+      "correct": 1,
+      "explanation": "CRITIC hoán đổi tự phê bình cho bước xác minh được định tuyến thông qua tìm kiếm, trình thông dịch mã, máy tính hoặc trình xác minh miền."
+    },
+    {
+      "stage": "check",
+      "question": "Mẫu quy trình làm việc Anthropic nào phù hợp với Self-Refine và CRITIC trong ngôn ngữ thân thiện với Claude?",
+      "options": [
+        "Bộ định tuyến",
+        "Chuỗi Prompt",
+        "Người đánh giá-Optimizer",
+        "sampling song song"
+      ],
+      "correct": 2,
+      "explanation": "Anthropic đặt tên cho mô hình này là Evaluator-Optimizer: một người đánh giá chấm điểm, một optimizer sửa đổi, lặp lại cho đến khi hội tụ."
+    },
+    {
+      "stage": "check",
+      "question": "Vòng lặp tem cao su là gì và bài học khuyên bạn nên tránh nó như thế nào?",
+      "options": [
+        "Một bài kiểm tra luôn vượt qua; Xóa bài kiểm tra",
+        "Cùng một model và cùng một prompt phê bình đầu ra của chính mình và phê duyệt nó; sử dụng các prompts khác về cấu trúc hoặc một nhà phê bình nhỏ hơn riêng biệt",
+        "Thử lại luôn thất bại; Tăng ngân sách",
+        "Một guardrail hết thời gian; mở rộng timeout"
+      ],
+      "correct": 1,
+      "explanation": "Tự phê bình cùng một phong cách hội tụ vào 'trông tốt đối với tôi'; phân biệt người đánh giá với người optimizer."
+    },
+    {
+      "stage": "post",
+      "question": "SDK feature nào trong OpenAI Agents SDK có hình CRITIC?",
+      "options": [
+        "Bàn giao",
+        "Sessions",
+        "Đầu ra guardrails (có thể gọi các công cụ)",
+        "Truy tìm"
+      ],
+      "correct": 2,
+      "explanation": "Đầu ra guardrails xác thực đầu ra agent cuối cùng và có thể gọi các công cụ, phù hợp với vai trò người xác minh của CRITIC."
+    },
+    {
+      "stage": "post",
+      "question": "Bài học khuyến nghị điều kiện dừng nào cho các vòng lặp optimizer đánh giá năm 2026?",
+      "options": [
+        "Chỉ dừng khi trình xác minh vượt qua",
+        "Chỉ dừng lại khi model nói 'ổn'",
+        "Kết hợp: trình xác minh vượt qua OR (model cho biết tốt VÀ lặp lại >= 2) HOẶC lặp lại >= max_iterations",
+        "Không bao giờ dừng lại; Hãy để agent tự cải thiện vô thời hạn"
+      ],
+      "correct": 2,
+      "explanation": "Một điều kiện kết hợp tránh các chế độ hỏng hóc một điều kiện."
+    }
+  ]
+}
