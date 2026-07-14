@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Một parameter model 7B trong FP16 cần bao nhiêu VRAM chỉ cho tạ?",
+    "options": [
+      "7 GB",
+      "14 GB",
+      "28 GB",
+      "56 GB"
+    ],
+    "correct": 1,
+    "explanation": "Mỗi parameter trong FP16 là 2 byte. 7 tỷ * 2 byte = 14 GB. Với Adam optimizer trạng thái (2 bản sao) và gradients, tổng bộ nhớ training là khoảng 56 GB trước khi tính đến kích hoạt.",
+    "stage": "pre"
+  },
+  {
+    "question": "Ba loại song song được sử dụng trong training phân tán là gì?",
+    "options": [
+      "CPU, GPU và TPU song song",
+      "Tính song song dữ liệu, tính song song tensor và tính song song pipeline",
+      "Batch, trình tự và token song song",
+      "Tiến, lùi và optimizer song song"
+    ],
+    "correct": 1,
+    "explanation": "Tính song song dữ liệu sao chép model trên mỗi GPU và phân tách dữ liệu. Tensor song song chia các lớp riêng lẻ trên GPUs. Pipeline song song chia các lớp của model thành các giai đoạn trên GPUs.",
+    "stage": "pre"
+  },
+  {
+    "question": "FSDP (Fully Sharded Data Parallel) làm gì mà DDP tiêu chuẩn không làm?",
+    "options": [
+      "Nó sử dụng một optimizer khác",
+      "Nó phân mảnh các tiểu bang model parameters, gradients và optimizer trên GPUs thay vì sao chép toàn bộ model trên mỗi trạng thái",
+      "Nó processes dữ liệu nhanh hơn",
+      "Nó hỗ trợ nhiều GPUs hơn"
+    ],
+    "correct": 1,
+    "explanation": "DDP tiêu chuẩn sao chép toàn bộ model trên mỗi GPU (lãng phí). FSDP phân đoạn parameters trên GPUs nên mỗi phân đoạn chỉ chứa một phần nhỏ. Parameters được thu thập theo yêu cầu để tính toán và phát hành sau đó.",
+    "stage": "post"
+  },
+  {
+    "question": "DeepSpeed ZeRO Giai đoạn 3 là gì?",
+    "options": [
+      "Một phương pháp quantization",
+      "Nó phân vùng optimizer trạng thái, gradients VÀ model parameters trên GPUs, đạt được hiệu quả bộ nhớ tối đa",
+      "Lịch trình learning rate",
+      "Một pipeline tiền xử lý dữ liệu"
+    ],
+    "correct": 1,
+    "explanation": "ZeRO Giai đoạn 1 phân đoạn optimizer trạng thái, Giai đoạn 2 thêm gradient sharding, Giai đoạn 3 thêm parameter sharding. Giai đoạn 3 giúp tiết kiệm bộ nhớ tối đa, cho phép training models vượt xa bộ nhớ một GPU.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao cần đồng bộ hóa gradient trong training dữ liệu song song?",
+    "options": [
+      "Để ngăn chặn overfitting",
+      "Mỗi GPU tính toán gradients trên các dữ liệu khác nhau; Tính trung bình gradients trên GPUs đảm bảo tất cả các bản sao cập nhật giống hệt nhau",
+      "Để giảm mức sử dụng bộ nhớ",
+      "Để tăng tốc độ forward pass"
+    ],
+    "correct": 1,
+    "explanation": "Trong song song dữ liệu, mỗi GPU processes một batch khác nhau và tính toán các gradients khác nhau. AllReduce tính trung bình các gradients này trên tất cả các GPUs để mọi bản sao áp dụng cùng một bản cập nhật và luôn đồng bộ.",
+    "stage": "post"
+  }
+]
