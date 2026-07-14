@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt chính giữa độ sâu tương đối và độ sâu hệ mét là gì?",
+      "options": [
+        "Độ sâu tương đối luôn có độ phân giải thấp hơn",
+        "Không có sự khác biệt",
+        "Độ sâu hệ mét sử dụng đầu ra thang độ xám; tương đối sử dụng màu sắc",
+        "Độ sâu tương đối chỉ cung cấp khoảng cách có thứ tự mà không có đơn vị trong thế giới thực; Độ sâu hệ mét cho khoảng cách tính bằng mét và yêu cầu model phải học tỷ lệ tuyệt đối từ dữ liệu training"
+      ],
+      "correct": 3,
+      "explanation": "Độ sâu tương đối bảo toàn thứ tự và tỷ lệ nhưng không có neo với các đơn vị trong thế giới thực - dự đoán MiDaS hoặc Depth Anything cần alignment trước khi bạn có thể so sánh nó với phép đo thực tế trên mặt đất tính bằng mét. Khoảng cách hiệu chỉnh đầu ra models độ sâu hệ mét (ZoeDepth, UniDepth, Metric3D) với chi phí là độ nhạy đối với nội tại của máy ảnh và phạm vi phủ sóng dữ liệu training."
+    },
+    {
+      "stage": "pre",
+      "question": "Depth Anything V3 sử dụng encoder DINOv2 đông lạnh cộng với decoder kiểu DPT. Tại sao phải đóng băng encoder?",
+      "options": [
+        "DINOv2 nếu không sẽ học được features xấu",
+        "features tự giám sát của DINOv2 đã mã hóa cấu trúc cảnh, gradients kết cấu và ngữ nghĩa đối tượng tương quan với chiều sâu; Đóng băng chúng cho phép decoder huấn luyện với một cái đầu nhỏ trên dữ liệu được giám sát độ sâu hạn chế trong khi vẫn giữ được sự khái quát hóa mạnh mẽ của encoder",
+        "Tính toán tiết kiệm chỉ training thời gian",
+        "Đóng băng là một yêu cầu pháp lý"
+      ],
+      "correct": 1,
+      "explanation": "Các ViT tự giám sát như DINOv2 / DINOv3 đã có features chuyển sang các tác vụ dày đặc với fine-tuning tối thiểu. Một encoder đóng băng cộng với độ sâu nhẹ decoder có nghĩa là bạn huấn luyện một số lượng nhỏ parameters về dữ liệu độ sâu và bạn kế thừa tính năng tổng quát hóa đa miền của DINOv2 (trong nhà, ngoài trời, y tế, vệ tinh) miễn phí. Fine-tuning xương sống đôi khi bị đau nếu độ sâu dataset hẹp hơn phân bố pretraining của DINOv2."
+    },
+    {
+      "stage": "post",
+      "question": "Để nâng pixel (u, v) với độ sâu dự đoán d lên 3D, bạn sử dụng X = (u - cx) * d / fx, Y = (v - cy) * d / fy, Z = d. fx, fy, cx, cy là gì?",
+      "options": [
+        "Nội tại máy ảnh lỗ kim - độ dài tiêu cự và điểm chính tính bằng pixel, từ siêu dữ liệu EXIF hoặc hiệu chỉnh máy ảnh",
+        "Training loss trọng lượng",
+        "Hằng số chuẩn hóa",
+        "Trọng số học được bằng độ sâu decoder"
+      ],
+      "correct": 0,
+      "explanation": "Công thức máy ảnh lỗ kim cần nội tại của máy ảnh. FX, FY là độ dài tiêu cự tính bằng đơn vị pixel; CX, Cy là điểm chính (thường gần trung tâm hình ảnh). Nếu không có nội tại, bạn chỉ có thể giả định FOV chung (~60 độ) đủ để hình dung nhưng không đủ để đo lường. Nhiều pipelines 2026 ước tính nội tại tự động từ nội dung hình ảnh (Trường phối cảnh, UniDepth)."
+    },
+    {
+      "stage": "post",
+      "question": "Khi đánh giá một model độ sâu tương đối (MiDaS, Depth Anything), tại sao bạn áp dụng alignment tỷ lệ và dịch chuyển trước khi tính toán AbsRel?",
+      "options": [
+        "Để thổi phồng điểm số liệu",
+        "Dự đoán độ sâu tương đối có tỷ lệ và độ lệch tùy ý; Căn chỉnh chúng với ground truth thông qua sự phù hợp bình phương nhỏ nhất của mục tiêu * PRED + B = cho phép đo hợp lý về chất lượng đặt hàng mà models tương đối thực sự được huấn luyện để tạo ra",
+        "Để bật GPU inference",
+        "Pytorch không thể tính toán AbsRel mà không có alignment"
+      ],
+      "correct": 1,
+      "explanation": "models kiểu MiDaS tạo ra đầu ra mà chỉ có thứ tự và tỷ lệ là có ý nghĩa. Tính toán trực tiếp AbsRel mà không có alignment đo lường sự không phù hợp của thang đo, không phải chất lượng thực tế của model. Bình phương nhỏ nhất alignment phù hợp với phép biến đổi tuyến tính giúp giảm thiểu sai số bình phương; phần còn lại sau alignment là những gì bạn báo cáo. Mọi bài báo MiDaS / Depth Anything đều sử dụng giao thức này."
+    },
+    {
+      "stage": "post",
+      "question": "Dự đoán Depth Anything của bạn trên quầy lễ tân mặt trước bằng kính báo cáo độ sâu đáng tin cậy nhưng rõ ràng là sai đối với vùng kính. Tại sao?",
+      "options": [
+        "model bị hỏng",
+        "model được huấn luyện mà không có dữ liệu thủy tinh",
+        "Kính, gương và các bề mặt phản chiếu cao phá vỡ các tín hiệu một mắt mà model dựa vào; Mạng nhìn thấy kết cấu / nội dung đằng sau kính và báo cáo độ sâu hợp lý phù hợp với điều đó, không phải khoảng cách bề mặt kính thực",
+        "Độ phân giải hình ảnh của bạn bị sai"
+      ],
+      "correct": 2,
+      "explanation": "Độ sâu một mắt dựa vào gradients kết cấu, thứ tự tắc nghẽn và tín hiệu phối cảnh. Các bề mặt phản chiếu hoặc trong suốt gây nhầm lẫn cho tất cả chúng: một chiếc gương hiển thị một cảnh với độ sâu riêng của nó; kính hiển thị nội dung đằng sau nó. model lấp đầy một chiều sâu hợp lý và chắc chắn là sai. Đây là giới hạn cơ bản của độ sâu một mắt, không phải là lỗi. Khắc phục bằng cách hợp nhất với camera âm thanh nổi, LiDAR hoặc phân cực khi các vật liệu như thủy tinh quan trọng."
+    }
+  ]
+}
