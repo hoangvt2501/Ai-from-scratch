@@ -1,0 +1,102 @@
+{
+  "lesson": "02-bag-of-words-tfidf",
+  "title": "Túi từ, TF-IDF và biểu diễn văn bản",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bag of Words vứt bỏ gì?",
+      "options": [
+        "Đặt hàng Token",
+        "Cỡ từ vựng",
+        "Độ dài tài liệu",
+        "Dấu câu"
+      ],
+      "correct": 0,
+      "explanation": "BoW đếm tokens cho mỗi tài liệu nhưng loại bỏ trình tự của chúng."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao phải mở rộng TF theo hệ số IDF?",
+      "options": [
+        "Các từ xuất hiện trong mọi tài liệu mang ít tín hiệu phân biệt đối xử và nên được giảm trọng lượng",
+        "Để chuẩn hóa độ dài tài liệu",
+        "Để tăng tốc độ training",
+        "Cách xóa dấu câu"
+      ],
+      "correct": 0,
+      "explanation": "IDF trừng phạt những từ phổ biến và tăng cường những từ hiếm."
+    },
+    {
+      "stage": "check",
+      "question": "Trong công thức IDF được làm mịn log((N+1)/(df+1)) + 1, +1 đuôi đảm bảo điều gì?",
+      "options": [
+        "Tính toán nhanh hơn",
+        "Một từ xuất hiện trong mọi tài liệu vẫn có IDF 1 thay vì 0",
+        "Khả năng tương thích với số lượng thô",
+        "Độ ổn định số cho N lớn"
+      ],
+      "correct": 1,
+      "explanation": "+1 giữ các từ phổ biến ở IDF = 1 để chúng không bị không, phù hợp với mặc định của scikit-learn."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao L2 chuẩn hóa các hàng TF-IDF trước sự tương tự cosin?",
+      "options": [
+        "Để chuyển đổi vectors thưa thớt thành đậm đặc",
+        "Để nén từ vựng",
+        "Để xóa các mục nhập không",
+        "Nếu không, các tài liệu dài hơn sẽ chiếm ưu thế trong điểm tương đồng; Chuẩn hóa đặt tất cả các tài liệu trên siêu quyển đơn vị"
+      ],
+      "correct": 3,
+      "explanation": "Chuẩn hóa L2 loại bỏ bias độ dài tài liệu và biến sự tương tự cosin thành tích chấm."
+    },
+    {
+      "stage": "check",
+      "question": "Cài đặt TfidfVectorizer nào có rủi ro để cho phép phân tích cảm xúc?",
+      "options": [
+        "stop_words='Tiếng Anh'",
+        "ngram_range=(1, 2)",
+        "min_df = 2",
+        "sublinear_tf=Đúng"
+      ],
+      "correct": 0,
+      "explanation": "Danh sách từ dừng tiếng Anh bỏ các từ phủ định như 'not', mang tín hiệu tình cảm."
+    },
+    {
+      "stage": "post",
+      "question": "TF-IDF vẫn giành được nhiệm vụ nào vào năm 2026?",
+      "options": [
+        "Đối thoại kết thúc mở",
+        "Dịch máy",
+        "Phát hiện thư rác, gắn cờ bất thường nhật ký và phân loại hẹp có độ trễ thấp",
+        "Chú thích hình ảnh"
+      ],
+      "correct": 2,
+      "explanation": "TF-IDF đánh bại embeddings khi sự hiện diện của từ là tín hiệu và khả năng giải thích hoặc vấn đề tốc độ."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao TF-IDF thất bại trong cặp 'Phim không hay' và 'Phim xuất sắc'?",
+      "options": [
+        "TF-IDF không thể xử lý các từ dừng",
+        "TF-IDF yêu cầu bigram để hoạt động",
+        "Embeddings chồng chéo quá cao",
+        "Cả hai tài liệu đều chia sẻ hầu hết tokens; bag-of-words không có khái niệm phủ định hoặc trật tự từ"
+      ],
+      "correct": 3,
+      "explanation": "Nếu không có trật tự từ hoặc ngữ cảnh cú pháp, BoW không thể model rằng 'không' lật ngược tình cảm của 'tốt'."
+    },
+    {
+      "stage": "post",
+      "question": "TF-IDF có trọng số embedding hybrid là gì?",
+      "options": [
+        "Sử dụng trọng số TF-IDF làm trọng số gộp trên mỗi token embeddings trước khi tính trung bình",
+        "Chạy PCA trên TF-IDF sau đó embedding lại",
+        "Nối BoW và embeddings dày đặc",
+        "Training BERT trên TF-IDF features"
+      ],
+      "correct": 0,
+      "explanation": "Mô hình lai đánh giá embedding của mỗi token theo điểm TF-IDF và mức trung bình, pha trộn khả năng ngữ nghĩa với sự nhấn mạnh từ hiếm."
+    }
+  ]
+}
