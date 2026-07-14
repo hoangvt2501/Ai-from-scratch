@@ -1,0 +1,78 @@
+{
+  "lesson": "65-hybrid-retrieval-bm25-dense",
+  "title": "Hybrid Retrieval với BM25 và Dense Embeddings",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao một production RAG endpoint cần truy xuất cả từ vựng và ngữ nghĩa cùng một lúc?",
+      "options": [
+        "Truy xuất ngữ nghĩa luôn chính xác hơn",
+        "Pháp luật yêu cầu tìm kiếm từ vựng để tuân thủ",
+        "Phân phối truy vấn kết hợp các truy vấn nhận dạng theo nghĩa đen và diễn giải; một phương thức không thành công trên mỗi class",
+        "Nó giảm một nửa kích thước chỉ số"
+      ],
+      "correct": 2,
+      "explanation": "BM25 chiếm ưu thế về các ký hiệu theo nghĩa đen; dày đặc chiếm ưu thế trong các diễn giải. Một endpoint thực sự nhận được cả hai classes từ cùng một người dùng."
+    },
+    {
+      "stage": "pre",
+      "question": "BM25 parameter b ở mức mặc định 0.75 là gì?",
+      "options": [
+        "Hệ số nhân của IDF",
+        "Núm chuẩn hóa độ dài: các tài liệu dài hơn bị phạt nhưng không tuyến tính",
+        "Một số mũ thời gian truy vấn về sự tương tự cosin",
+        "Số lượng trường trong tài liệu"
+      ],
+      "correct": 1,
+      "explanation": "b nội suy giữa chuẩn hóa không có độ dài (0) và chuẩn hóa hoàn toàn (1); 0,75 là khuyến nghị đã công bố."
+    },
+    {
+      "stage": "check",
+      "question": "Reciprocal Rank Fusion tính toán gì cho mỗi ứng viên?",
+      "options": [
+        "Tổng 1 / (k + xếp hạng) trên mỗi danh sách xếp hạng có ứng viên",
+        "Sản phẩm của sự tương đồng cosin giữa các phương thức",
+        "Điểm trung bình của BM25 và dày đặc sau khi chuẩn hóa tối thiểu-tối đa",
+        "Xếp hạng trung bình trên các phương thức"
+      ],
+      "correct": 0,
+      "explanation": "RRF tổng 1 / (k + xếp hạng) đóng góp cho mỗi danh sách được xếp hạng; k = 60 là mặc định được công bố."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao nhiệt hạch dựa trên cấp bậc được ưa chuộng hơn nội suy tuyến tính của BM25 và điểm cosin?",
+      "options": [
+        "Điểm cosin không giới hạn",
+        "Không thể sắp xếp điểm BM25",
+        "Điểm BM25 là không giới hạn và phụ thuộc vào kho dữ liệu; cosin được giới hạn trong -1 đến 1; thang điểm không thể so sánh giữa các kho dữ liệu",
+        "Nội suy tuyến tính yêu cầu hỗ trợ GPU"
+      ],
+      "correct": 2,
+      "explanation": "Nội suy điểm phá vỡ mọi chỉ mục lại vì phân phối điểm thay đổi; xếp hạng có thể so sánh giữa các phương thức theo cấu trúc."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì xảy ra với RRF khi bạn làm cho hằng số k rất nhỏ?",
+      "options": [
+        "Đóng góp top 1 thống trị sự hợp nhất; thứ hạng sâu hầu như không đóng góp gì",
+        "Sự hợp nhất trở nên tương đương với tổng điểm tuyến tính",
+        "Các thuật ngữ ngoài kho dữ liệu nhận được điểm tích cực",
+        "Sự hợp nhất bỏ qua phương thức thứ hai"
+      ],
+      "correct": 0,
+      "explanation": "K nhỏ tập trung đóng góp xếp hạng 1; k lớn làm phẳng đường cong đóng góp và cho phép các ứng cử viên sâu bỏ phiếu."
+    },
+    {
+      "stage": "post",
+      "question": "Trọng số trường thông qua lặp lại token đặc biệt tránh chế độ lỗi nào?",
+      "options": [
+        "Hết từ vựng embeddings",
+        "Thêm bước tổng hợp điểm thứ hai tại thời điểm truy vấn; toán học vẫn giống hệt nhau và logic kết hợp điểm trên mỗi trường là không cần thiết",
+        "BM25 IDF sụp đổ về 0",
+        "Sự tương đồng cosin trở nên âm"
+      ],
+      "correct": 1,
+      "explanation": "Lặp lại tokens tại thời điểm chỉ số nhân tần số số hạn, điều này cho phép toán tính điểm BM25 duy trì một tổng thay vì một tổ hợp điểm trường riêng biệt."
+    }
+  ]
+}
