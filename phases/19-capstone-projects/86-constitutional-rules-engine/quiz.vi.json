@@ -1,0 +1,78 @@
+{
+  "lesson": "86-constitutional-rules-engine",
+  "title": "Capstone 86 — Công cụ quy tắc hiến pháp",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao lại sử dụng hiến pháp YAML khai báo thay vì kiểm tra mã đặc biệt?",
+      "options": [
+        "Bởi vì YAML phân tích cú pháp nhanh hơn Python",
+        "Bởi vì các quy tắc trong YAML có thể được xem xét bởi những người không phải là kỹ sư, tồn tại trong kiểm soát phiên bản và có thể thay thế mà không cần thay đổi mã",
+        "Bởi vì thư viện tiêu chuẩn thích YAML",
+        "Vì YAML hỗ trợ neo"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Tối thiểu mọi quy tắc phải có những trường nào?",
+      "options": [
+        "tên, biểu thức chính quy, sửa chữa",
+        "ID, chủ sở hữu, dấu thời gian",
+        "tên, mức độ nghiêm trọng, phải, giải thích",
+        "vị ngữ, mức độ nghiêm trọng, chủ sở hữu"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để công cụ soạn vị ngữ?",
+      "options": [
+        "Chỉ thông qua một contains_regex duy nhất cho mỗi quy tắc",
+        "Thông qua all_of, any_of và not_ bao bọc đệ quy các vị ngữ nguyên tử",
+        "Bằng cách nhân điểm tin cậy",
+        "Thông qua một bộ phân loại thần kinh"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Vai trò của applies_when là gì?",
+      "options": [
+        "Nó luôn đánh giá đúng",
+        "Nó cổng vị ngữ phải để các quy tắc không áp dụng được ghi lại là not_applicable chứ không phải vi phạm",
+        "Nó ghi đè mức độ nghiêm trọng",
+        "Nó chọn hoạt động sửa chữa"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Fixer làm gì?",
+      "options": [
+        "Nó viết lại tệp quy tắc",
+        "Nó áp dụng bản sửa lỗi khai báo cho mỗi quy tắc (thêm vào, thêm trước, replace_regex) để tạo ra một văn bản sửa đổi",
+        "Nó tính toán mức độ nghiêm trọng từ bản sửa lỗi",
+        "Nó gọi một model từ xa để sửa chữa văn bản"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bản demo chạy động cơ lần thứ hai sau khi sửa chữa?",
+      "options": [
+        "Để tăng kích thước báo cáo",
+        "Để xác minh, văn bản sửa đổi đáp ứng các quy tắc và hiển thị bất kỳ quy tắc nào mà người sửa chữa không thể sửa chữa cục bộ",
+        "Để tải lại hiến pháp",
+        "Bởi vì đường chuyền đầu tiên chỉ là một lần chạy khô"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
