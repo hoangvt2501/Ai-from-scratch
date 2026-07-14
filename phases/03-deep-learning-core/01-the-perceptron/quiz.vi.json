@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Perceptron thực hiện phép toán nào trên đầu vào của nó trước khi áp dụng chức năng kích hoạt?",
+    "options": [
+      "Đảo ngược ma trận",
+      "Tổng trọng số cộng với bias",
+      "Biến đổi Fourier",
+      "Phân hủy giá trị riêng"
+    ],
+    "correct": 1,
+    "explanation": "Một perceptron tính tích chấm của đầu vào và trọng số, thêm một số hạng bias, sau đó truyền kết quả qua một hàm bước. Tổng trọng số này cộng với bias là phép tính cốt lõi.",
+    "stage": "pre"
+  },
+  {
+    "question": "'có thể tách rời tuyến tính' có nghĩa là gì đối với một bài toán phân loại?",
+    "options": [
+      "Dữ liệu có thể được sắp xếp theo thứ tự",
+      "Một đường thẳng duy nhất (hoặc siêu phẳng) có thể ngăn cách hoàn hảo classes",
+      "Các features có mối quan hệ tuyến tính với nhãn",
+      "Dữ liệu chỉ có hai thứ nguyên"
+    ],
+    "correct": 1,
+    "explanation": "Một dataset có thể phân tách tuyến tính khi bạn có thể vẽ một siêu mặt phẳng duy nhất chia hoàn hảo không gian đầu vào thành các classes chính xác. AND và OR có thể tách rời tuyến tính; XOR thì không.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao một perceptron không học được hàm XOR?",
+    "options": [
+      "learning rate quá thấp",
+      "XOR có quá nhiều đầu vào",
+      "XOR không thể tách rời tuyến tính - không có đường đơn nào có thể tách classes",
+      "Chức năng bước ngăn chặn dòng chảy gradient"
+    ],
+    "correct": 2,
+    "explanation": "XOR đặt [0,1] và [1,0] ở một bên và [0,0] và [1,1] ở bên kia. Không có đường thẳng đơn lẻ nào có thể phân tách các nhóm này, vì vậy một perceptron duy nhất, chỉ có thể vẽ một ranh giới tuyến tính, không thể giải XOR.",
+    "stage": "post"
+  },
+  {
+    "question": "Trong quy tắc học perceptron, điều gì xảy ra khi dự đoán khớp với mục tiêu?",
+    "options": [
+      "Trọng lượng được tăng gấp đôi",
+      "Trọng lượng được đặt thành không",
+      "Không có gì thay đổi -- lỗi bằng không nên bản cập nhật bằng không",
+      "learning rate giảm một nửa"
+    ],
+    "correct": 2,
+    "explanation": "Quy tắc cập nhật là w_i = w_i + lr * lỗi * x_i. Khi dự đoán bằng mục tiêu, sai số = 0, vì vậy tất cả các cập nhật trọng số bằng không. Perceptron chỉ điều chỉnh khi nó mắc lỗi.",
+    "stage": "post"
+  },
+  {
+    "question": "XOR được giải quyết như thế nào bằng cách sử dụng nhiều perceptron?",
+    "options": [
+      "Bằng cách sử dụng một learning rate lớn hơn trên một perceptron duy nhất",
+      "Bằng cách kết hợp các perceptron OR, NAND và AND trong hai lớp",
+      "Bằng cách thêm nhiều đầu vào vào một perceptron duy nhất",
+      "Bằng cách loại bỏ thuật ngữ bias"
+    ],
+    "correct": 1,
+    "explanation": "XOR = (x1 HOẶC x2) VÀ KHÔNG (x1 VÀ x2). Một lớp ẩn với một tế bào thần kinh OR và một tế bào thần kinh NAND đưa vào một tế bào thần kinh đầu ra AND, tạo ra một ranh giới quyết định phi tuyến tính từ các thành phần tuyến tính.",
+    "stage": "post"
+  }
+]
