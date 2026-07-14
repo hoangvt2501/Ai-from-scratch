@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Đơn vị ảo mà tôi được xác định bởi là gì?",
+      "options": [
+        "i = sqrt (2)",
+        "i^2 = -1",
+        "Tôi = -1",
+        "i^2 = 1"
+      ],
+      "correct": 1,
+      "explanation": "Đơn vị ảo i được xác định bởi thuộc tính i^2 = -1. Nó mở rộng đường số thực thành một mặt phẳng 2D. Về mặt hình học, nhân với i là một vòng quay 90 độ - hai phép nhân (i ^ 2) cho một vòng quay 180 độ, tức là -1."
+    },
+    {
+      "stage": "pre",
+      "question": "Công thức của Euler e^(i*theta) bằng bao nhiêu?",
+      "options": [
+        "Theta + i",
+        "cos (theta) + i * sin (theta)",
+        "Sin (Theta) + Cos (Theta)",
+        "i^theta"
+      ],
+      "correct": 1,
+      "explanation": "Công thức Euler nêu rõ e^(i*theta) = cos(theta) + i*sin(theta). Điều này kết nối các hàm mũ phức với lượng giác và cho thấy rằng e^(i*theta) traces vòng tròn đơn vị khi theta thay đổi."
+    },
+    {
+      "stage": "post",
+      "question": "Kết quả của (3 + 2i)(1 + 4i) là gì?",
+      "options": [
+        "3 + 8i",
+        "4 + 6i",
+        "-5 + 14i",
+        "5 + 14i"
+      ],
+      "correct": 2,
+      "explanation": "Sử dụng FOIL: (3)(1) + (3)(4i) + (2i)(1) + (2i)(4i) = 3 + 12i + 2i + 8i^2 = 3 + 14i + 8(-1) = 3 + 14i - 8 = -5 + 14i."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao các số phức được sử dụng trong Embedding vị trí quay (RoPE) cho transformers?",
+      "options": [
+        "Các số phức nén mã hóa vị trí để sử dụng ít bộ nhớ hơn",
+        "Nhân query/key vectors với các vòng quay phức hợp mã hóa vị trí tương đối dưới dạng góc quay",
+        "Các số phức được yêu cầu bởi hàm attention softmax",
+        "RoPE sử dụng số ảo để xử lý các vị thế âm"
+      ],
+      "correct": 1,
+      "explanation": "RoPE nhân truy vấn và vectors khóa bằng ma trận quay phức tạp e^(i*m*theta) trong đó m là vị trí. Vị trí tương đối giữa hai tokens trở thành một góc quay, và attention tự nhiên trở nên nhạy cảm với vị trí tương đối (không phải tuyệt đối) thông qua phép nhân phức."
+    },
+    {
+      "stage": "post",
+      "question": "Các căn thứ N của sự thống nhất là N điểm cách đều nhau trên vòng tròn đơn vị. Tổng của họ là bao nhiêu?",
+      "options": [
+        "N",
+        "1",
+        "0",
+        "N/2"
+      ],
+      "correct": 2,
+      "explanation": "N căn của thống nhất là e^(2*pi*i*k/N) cho k = 0, ..., N-1. Chúng được phân bố đối xứng xung quanh vòng tròn đơn vị, vì vậy tổng vector của chúng triệt tiêu về không. Thuộc tính đối xứng này là thứ làm cho DFT có thể đảo ngược."
+    }
+  ]
+}
