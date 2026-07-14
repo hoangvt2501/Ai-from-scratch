@@ -1,0 +1,78 @@
+{
+  "lesson": "07-tensorrt-llm-blackwell",
+  "title": "TensorRT-LLM trên Blackwell với FP8 và NVFP4",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Khoảng cách chi phí trên mỗi triệu tokens là bao nhiêu mà các báo cáo bài học giữa Blackwell + TRT-LLM + Dynamo và H100 + vLLM trên khối lượng công việc 120B-class tương đương là bao nhiêu?",
+      "options": [
+        "Khoảng 100x",
+        "Khoảng 7x",
+        "Khoảng 2x",
+        "Khoảng 1,1x"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bài học khuyên bạn nên giữ KV cache trong FP8 thay vì NVFP4 trên Blackwell?",
+      "options": [
+        "NVFP4 KV cache chưa được hỗ trợ trong bất kỳ công cụ nào",
+        "FP8 là precision duy nhất mà NVLink 5 hỗ trợ",
+        "KV cache spans dải động rộng; FP4 quantization gây ra accuracy loss thảm khốc trong điểm số attention",
+        "FP8 sử dụng ít bộ nhớ hơn FP4"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "TRT-LLM khai thác Blackwell feature nào để có thể tải models mà không cần bước chuyển đổi sau training?",
+      "options": [
+        "Trọng lượng FP0 Day-4 shipped bởi các nhà cung cấp model",
+        "Trọng lượng INT2 thông qua bitsandbyte",
+        "FP64 attention",
+        "BF16 KV cache"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Sự đánh đổi chủ đạo của việc chọn TRT-LLM stack cho mỗi bài học là gì?",
+      "options": [
+        "Nó không thể phục vụ MoE models",
+        "Nó yêu cầu khắc phục hoàn toàn tự động",
+        "Nó khóa bạn vào NVIDIA phần cứng - không AMD, không Intel, không ARM",
+        "Nó chỉ hoạt động ở quy mô nhỏ"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học mô tả sự kết hợp precision nào là config điển hình của Blackwell?",
+      "options": [
+        "Trọng lượng FP4, KV cache FP4, attention trong INT8",
+        "Mọi thứ trong BF16",
+        "Trọng lượng NVFP4, kích hoạt NVFP4, KV cache FP8, attention tích lũy FP32",
+        "Trọng lượng INT8, kích hoạt FP32 KV cache INT4"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Đối với khối lượng công việc nặng về lý luận mà việc chuyển đổi trọng số NVFP4 làm giảm TOÁN accuracy một vài điểm, bài học khuyên gì?",
+      "options": [
+        "Chuyển sang AMD MI300X",
+        "Tắt tính năng giải mã suy đoán",
+        "Xác thực chất lượng nhiệm vụ trên bộ đánh giá của bạn mỗi model; các đội thường sử dụng trọng lượng FP8 + kích hoạt FP4 hoặc duy trì H200 với FP8 trong suốt",
+        "Ship NVFP4 dù sao đi nữa vì chi phí thắng chiếm ưu thế"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
