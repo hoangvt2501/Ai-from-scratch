@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Mục đích của một lớp ẩn trong mạng nhiều lớp là gì?",
+    "options": [
+      "Để lưu trữ dữ liệu training",
+      "Để chuyển đổi đầu vào thành biểu diễn feature mới cho phép ranh giới quyết định phi tuyến",
+      "Để giảm số lượng parameters",
+      "Để áp dụng chức năng loss"
+    ],
+    "correct": 1,
+    "explanation": "Các lớp ẩn áp dụng trọng số, thiên vị và chức năng kích hoạt để tạo các biểu diễn feature mới. Các features trung gian này cho phép mạng học các ánh xạ phi tuyến mà một lớp đơn lẻ không thể.",
+    "stage": "pre"
+  },
+  {
+    "question": "Các forward pass làm gì trong mạng nơ-ron?",
+    "options": [
+      "Cập nhật trọng lượng bằng cách sử dụng gradients",
+      "Tính toán gradients cho backpropagation",
+      "Đẩy đầu vào qua mỗi lớp để tạo ra đầu ra",
+      "Xáo trộn dữ liệu training"
+    ],
+    "correct": 2,
+    "explanation": "forward pass là tính toán thuần túy: đối với mỗi lớp, nhân với trọng số, thêm bias, áp dụng kích hoạt và chuyển kết quả cho lớp tiếp theo. Không có việc học nào xảy ra trong forward pass.",
+    "stage": "pre"
+  },
+  {
+    "question": "Đối với một lớp có 3 tế bào thần kinh nhận đầu vào từ 2 tế bào thần kinh, hình dạng của ma trận trọng lượng là gì?",
+    "options": [
+      "(2, 3)",
+      "(3, 2)",
+      "(3, 3)",
+      "(2, 2)"
+    ],
+    "correct": 1,
+    "explanation": "Ma trận trọng lượng có hình dạng (neurons_in_current_layer, neurons_in_previous_layer) = (3, 2). Mỗi hàng chứa trọng số của một tế bào thần kinh trên tất cả các đầu vào.",
+    "stage": "post"
+  },
+  {
+    "question": "Định lý xấp xỉ phổ quát đảm bảo điều gì?",
+    "options": [
+      "Bất kỳ mạng nào cũng có thể được huấn luyện trong thời gian đa thức",
+      "Một lớp ẩn duy nhất với đủ tế bào thần kinh có thể xấp xỉ bất kỳ chức năng liên tục nào",
+      "Mạng sâu hơn luôn hoạt động tốt hơn những mạng nông",
+      "Mạng nơ-ron có thể giải quyết mọi vấn đề tính toán"
+    ],
+    "correct": 1,
+    "explanation": "Cybenko (1989) đã chứng minh rằng một mạng lưới có một lớp ẩn và đủ tế bào thần kinh có thể xấp xỉ bất kỳ chức năng liên tục nào với bất kỳ accuracy mong muốn nào. Trong thực tế, các mạng lưới sâu hơn đạt được điều tương tự với tổng số parameters ít hơn.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao chức năng kích hoạt sigmoid làm cho việc học trở nên khả thi, không giống như hàm bước được sử dụng trong perceptron?",
+    "options": [
+      "Sigmoid xuất ra các giá trị lớn hơn",
+      "Sigmoid tính toán nhanh hơn",
+      "Sigmoid trơn tru và có thể phân biệt được ở mọi nơi, vì vậy gradients tồn tại cho backpropagation",
+      "Sigmoid xuất ra các giá trị âm"
+    ],
+    "correct": 2,
+    "explanation": "Hàm bước có gradient không ở hầu hết mọi nơi và không xác định gradient ở ngưỡng. Sigmoid trơn tru với đạo hàm được xác định rõ ràng (s * (1-s)) tại mọi điểm, điều này rất cần thiết cho việc học dựa trên gradient.",
+    "stage": "post"
+  }
+]
