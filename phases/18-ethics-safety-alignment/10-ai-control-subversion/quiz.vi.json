@@ -1,0 +1,78 @@
+{
+  "lesson": "10-ai-control-subversion",
+  "title": "Kiểm soát AI - An toàn bất chấp sự lật đổ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Điều khiển nào nắm bắt tốt nhất sự khác biệt giữa điều khiển alignment và AI?",
+      "options": [
+        "Alignment hỏi liệu U có đáng tin cậy hay không; kiểm soát hỏi liệu chúng ta có thể sử dụng U một cách an toàn mà không cần tin tưởng nó hay không",
+        "Điều khiển thay thế chức năng loss trong khi alignment thay đổi optimizer",
+        "Chúng là từ đồng nghĩa",
+        "Kiểm soát là về phần cứng; alignment là về phần mềm"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Mối đe dọa AI Control model giả định điều gì?",
+      "options": [
+        "U không đáng tin cậy mạnh mẽ, T đáng tin cậy yếu, H bị ràng buộc lao động con người đáng tin cậy",
+        "U và T đều là đối thủ",
+        "Cả ba nguồn lực (U, T, H) đều đáng tin cậy",
+        "Chỉ có U tồn tại"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Rủi ro chính trong Giám sát không đáng tin cậy mà Chỉnh sửa đáng tin cậy tránh được là gì?",
+      "options": [
+        "Hai trường hợp bạn có thể thông đồng hoặc chia sẻ priors, vì vậy giao thức phải chi ngân sách cho khả năng chống thông đồng",
+        "Con người không thể được kiểm toán",
+        "Tranh chấp phần cứng",
+        "T không thể chỉnh sửa văn bản"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Trên tác vụ cửa hậu mã của Greenblatt et al. (ICML 2024), Chỉnh sửa đáng tin cậy đạt được điều gì liên quan đến Giám sát không đáng tin cậy?",
+      "options": [
+        "Nó hoàn toàn tồi tệ hơn",
+        "Nó chỉ giành chiến thắng với ngân sách con người bằng không",
+        "Chúng hoàn toàn tương đương",
+        "Nó hoàn toàn thống trị Pareto: tính hữu ích cao hơn ở mọi mức độ an toàn"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Điều nào sau đây KHÔNG phải là một trong ba giới hạn kiểm soát cơ bản của bài học?",
+      "options": [
+        "Đáng tin cậy yếu models cuối cùng tụt hậu U",
+        "Kiểm soát tạo ra models liên kết như một sản phẩm phụ",
+        "Con người không mở rộng quy mô",
+        "Kiểm soát có thể thất bại ở mức khả năng cao hơn nếu bạn có thể thao tác T hoặc lý luận về phân phối kiểm toán của H"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Trường hợp An toàn Kiểm soát tranh luận gì?",
+      "options": [
+        "T đó có khả năng hơn U",
+        "Rằng theo các giả định trong trường hợp xấu nhất về U, giao thức triển khai giới hạn xác suất của một kết quả không thể chấp nhận được",
+        "Rằng U đáng tin cậy",
+        "Rằng model đã vượt qua bài kiểm tra bẻ khóa thủ công"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
