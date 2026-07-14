@@ -1,0 +1,67 @@
+[
+  {
+    "id": "eval-pre-1",
+    "stage": "pre",
+    "question": "Tại sao bạn không bao giờ nên điều chỉnh hyperparameters dựa trên hiệu suất của bộ thử nghiệm?",
+    "options": [
+      "Bộ thử nghiệm quá nhỏ để ước tính đáng tin cậy",
+      "Điều chỉnh model dựa trên kết quả kiểm tra sẽ huấn luyện hiệu quả trên bộ kiểm tra, làm cho hiệu suất được báo cáo trở nên vô nghĩa",
+      "Hyperparameters không thể thay đổi sau training",
+      "Bộ kiểm tra luôn có features khác với bộ training"
+    ],
+    "correct": 1,
+    "explanation": "Mỗi khi bạn điều chỉnh model của mình dựa trên hiệu suất thử nghiệm, bạn sẽ rò rỉ thông tin thử nghiệm vào các quyết định mô hình hóa của mình. Bộ kiểm tra phải được sử dụng chính xác một lần ở cuối để ước tính không thiên vị."
+  },
+  {
+    "id": "eval-pre-2",
+    "stage": "pre",
+    "question": "Một dataset có 95% mẫu âm tính và 5% dương tính. Một model dự đoán 'âm tính' cho mọi mẫu. accuracy của nó là gì?",
+    "options": [
+      "50%",
+      "5%",
+      "95%",
+      "0%"
+    ],
+    "correct": 2,
+    "explanation": "Accuracy = dự đoán chính xác / tổng số = 950/1000 = 95%. Điều này cho thấy lý do tại sao accuracy gây hiểu lầm cho dữ liệu mất cân bằng - một model vô dụng trông rất tuyệt."
+  },
+  {
+    "id": "eval-post-1",
+    "stage": "post",
+    "question": "Trong xác thực chéo K-fold với K=5, mỗi điểm dữ liệu được sử dụng bao nhiêu lần để xác thực?",
+    "options": [
+      "5 lần",
+      "Chính xác một lần",
+      "Nó phụ thuộc vào hạt giống ngẫu nhiên",
+      "Không bao giờ -- tất cả dữ liệu được sử dụng cho training"
+    ],
+    "correct": 1,
+    "explanation": "Trong CV gấp K, dữ liệu được chia thành K gấp bằng nhau. Mỗi nếp gấp được sử dụng làm bộ xác nhận chính xác một lần trong khi các nếp gấp K-1 còn lại được sử dụng cho training."
+  },
+  {
+    "id": "eval-post-2",
+    "stage": "post",
+    "question": "Đường cong học tập cho thấy điểm training = 0,95 và điểm xác thực = 0,60 không cải thiện khi có nhiều dữ liệu hơn. Bạn nên thử gì?",
+    "options": [
+      "Thu thập thêm dữ liệu training",
+      "Sử dụng một model đơn giản hơn hoặc thêm chính quy hóa để giảm variance (overfitting)",
+      "Xóa bộ xác thực để cung cấp cho model nhiều dữ liệu training hơn",
+      "Tăng learning rate"
+    ],
+    "correct": 1,
+    "explanation": "Khoảng cách lớn giữa điểm training (cao) và xác nhận (thấp) là cao variance (overfitting). Việc khắc phục là một model đơn giản hơn, chính quy hóa hơn hoặc các kỹ thuật như dropout - không phải nhiều dữ liệu hơn nếu khoảng cách vẫn tồn tại."
+  },
+  {
+    "id": "eval-post-3",
+    "stage": "post",
+    "question": "AUC-ROC = 0.5 cho bộ phân loại nhị phân. Điều này cho thấy điều gì?",
+    "options": [
+      "Sự model tách biệt hoàn hảo hai classes",
+      "model hoạt động không tốt hơn so với đoán ngẫu nhiên khi xếp hạng tích cực trên tiêu cực",
+      "model có 50% accuracy",
+      "model có precision và recall bằng nhau"
+    ],
+    "correct": 1,
+    "explanation": "AUC-ROC = 0,5 có nghĩa là xếp hạng các ví dụ tích cực và tiêu cực của model không tốt hơn ngẫu nhiên. AUC = 1.0 sẽ là sự tách biệt hoàn hảo. Chỉ số này không phụ thuộc vào ngưỡng."
+  }
+]
