@@ -1,0 +1,62 @@
+[
+  {
+    "question": "GPT sử dụng mục tiêu training nào trong quá trình training trước?",
+    "options": [
+      "Mô hình ngôn ngữ mặt nạ (dự đoán tokens mặt nạ)",
+      "Dự đoán token tiếp theo: đưa ra tokens trước, hãy dự đoán  tiếp theo",
+      "Phân loại câu",
+      "Hình ảnh-văn bản alignment"
+    ],
+    "correct": 1,
+    "explanation": "GPT là một ngôn ngữ nhân quả (tự hồi quy) model được huấn luyện với dự đoán token tiếp theo. Cho tokens [t1, t2, ..., tn], nó học cách dự đoán tn + 1. loss là entropy chéo giữa dự đoán và thực tế vào tokens tới.",
+    "stage": "pre"
+  },
+  {
+    "question": "GPT-2 Small (124M) có bao nhiêu lớp transformer, đầu attention và kích thước embedding?",
+    "options": [
+      "6 lớp, 6 đầu, 512 độ mờ",
+      "12 lớp, 12 đầu, 768 độ mờ",
+      "24 lớp, 16 đầu, 1024 độ mờ",
+      "48 lớp, 25 đầu, 1600 độ mờ"
+    ],
+    "correct": 1,
+    "explanation": "GPT-2 Small có 12 lớp transformer, 12 đầu attention mỗi lớp và embeddings 768 chiều. Kiến trúc này có 124 triệu parameters và có thể được huấn luyện trên một GPU duy nhất trong vài giờ.",
+    "stage": "pre"
+  },
+  {
+    "question": "Vai trò của mặt nạ attention nhân quả trong GPT là gì?",
+    "options": [
+      "Nó ngăn attention đệm tokens",
+      "Nó ngăn không cho mỗi token tham gia vào tokens trong tương lai, đảm bảo model chỉ có thể sử dụng ngữ cảnh trong quá khứ để dự đoán",
+      "Nó che giấu điểm số attention độ tin cậy thấp",
+      "Nó làm giảm việc sử dụng bộ nhớ trong quá trình training"
+    ],
+    "correct": 1,
+    "explanation": "Mặt nạ nhân quả là một ma trận hình tam giác đặt các vị trí trong tương lai thành -vô cực trước softmax. Token ở vị trí 5 có thể tham gia vào các vị trí 1-5 nhưng không phải 6+. Điều này đảm bảo model tạo tokens từ trái sang phải.",
+    "stage": "post"
+  },
+  {
+    "question": "'temperature' kiểm soát điều gì trong quá trình tạo văn bản?",
+    "options": [
+      "Tốc độ tạo",
+      "Tính ngẫu nhiên của lựa chọn token: temperature thấp hơn làm cho đầu ra quyết định hơn, cao hơn làm cho chúng đa dạng hơn",
+      "Số lượng tokens được tạo ra",
+      "Ngưỡng tin cậy của model"
+    ],
+    "correct": 1,
+    "explanation": "Temperature chia logits trước softmax. Temperature = 0,1 làm cho phân phối rất đỉnh (gần như xác định). Temperature = 1.0 là phân phối training. Temperature>1.0 làm phẳng nó, tăng tính ngẫu nhiên.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao pre-training yêu cầu nhiều điện toán hơn đáng kể so với fine-tuning?",
+    "options": [
+      "Pre-training sử dụng kích thước batch lớn hơn",
+      "training processes trước hàng nghìn tỷ tokens từ đầu để học các mẫu ngôn ngữ chung, trong khi fine-tuning điều chỉnh model đã có khả năng trên hàng nghìn ví dụ",
+      "Pre-training sử dụng kiến trúc khác",
+      "Fine-tuning không sử dụng gradients"
+    ],
+    "correct": 1,
+    "explanation": "Pre-training xây dựng tất cả kiến thức ngôn ngữ từ trọng số ngẫu nhiên trên hàng nghìn tỷ tokens. Fine-tuning bắt đầu từ các trọng số đã học này và điều chỉnh chúng trên một dataset nhỏ hơn nhiều (hàng nghìn đến hàng triệu ví dụ).",
+    "stage": "post"
+  }
+]
