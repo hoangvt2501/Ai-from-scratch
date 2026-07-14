@@ -1,0 +1,90 @@
+{
+  "lesson": "02-rag-over-codebase",
+  "title": "Capstone 02 - RAG qua cơ sở mã (Tìm kiếm ngữ nghĩa chéo Repo)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao tìm kiếm cosin ngây thơ trên các đoạn thô không đủ để truy xuất mã chéo repo?",
+      "options": [
+        "Nó đầu độc kết quả trên mã được tạo, trùng lặp monorepo và các ký hiệu hiếm khi được nhập",
+        "Sự tương đồng cosin không được xác định trên mã embeddings",
+        "Vector chỉ mục không thể lưu trữ payloads lớn hơn 1KB",
+        "Embedding models không thấy mã là tokens"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Phân đoạn nhận biết AST có nghĩa là gì trong pipeline nhập?",
+      "options": [
+        "Nén các khối bằng gzip trước khi lưu trữ",
+        "Bỏ bình luận và khoảng trắng trước khi embedding",
+        "Cắt ở ranh giới nút giữ cây như chức năng và class spans",
+        "Tách mã thành cố định 256-token windows"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Mỗi đoạn nhận được ba phương thức có thể truy xuất nào trong pipeline này?",
+      "options": [
+        "Token ID, cây cú pháp và biểu đồ cuộc gọi",
+        "AST, IR và mã byte",
+        "Văn bản thô, gzip và băm",
+        "embedding dày đặc, thuật ngữ BM25 và tóm tắt ngôn ngữ tự nhiên"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Vai trò của trình xếp lại cross-encoder sau bước truy xuất kết hợp là gì?",
+      "options": [
+        "Nó viết lại các đoạn để xóa mã đã tạo",
+        "Nó nhúng lại truy vấn vào một model khác",
+        "Nó nén các khối trước khi gửi đến bộ tổng hợp",
+        "Nó chấm điểm từng cặp truy vấn-ứng cử viên với nhau để có accuracy cao hơn so với cosin đơn thuần"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bộ tổng hợp từ chối câu trả lời không có neo (repo/path:start-end)?",
+      "options": [
+        "Tính trung thực của trích dẫn sẽ đưa ra câu trả lời để người dùng có thể xác minh từng tuyên bố",
+        "Neo giảm chi phí token trong cuộc gọi tổng hợp",
+        "Neo là cần thiết để xếp hạng lại BM25 hạ lưu",
+        "Neo được yêu cầu bởi cơ sở dữ liệu vector schema"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Lập chỉ mục lại gia tăng yêu cầu gì để duy trì dưới 60 giây trên 50 tệp push?",
+      "options": [
+        "Chỉ embedding lại các đoạn có văn bản thay đổi và tính toán lại các cạnh biểu tượng bị ảnh hưởng",
+        "embedding lại toàn bộ kho dữ liệu 2M-LOC trên mỗi commit",
+        "Bỏ hoàn toàn biểu đồ biểu tượng",
+        "Vứt bỏ chỉ số BM25 và xây dựng lại nó từ đầu"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Số liệu nào đo lường liệu các tuyên bố được truy xuất có thể xác minh được trong nguồn hay không?",
+      "options": [
+        "MRR@10",
+        "Trích dẫn trung thành",
+        "nDCG@10",
+        "Độ trễ truy vấn P95"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
