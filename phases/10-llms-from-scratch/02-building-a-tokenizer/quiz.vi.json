@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Tại sao một BPE tokenizer cơ bản gặp lỗi khi nhập đa ngôn ngữ hoặc mã?",
+    "options": [
+      "BPE vốn là đơn ngữ",
+      "Nếu không có cách xử lý Unicode thích hợp, dự phòng byte và biểu thức chính quy trước khi tokenization, nó sẽ tạo ra các chuỗi token không chính xác hoặc không hiệu quả",
+      "Văn bản đa ngôn ngữ không thể được mã hóa",
+      "BPE chỉ hoạt động trên ASCII"
+    ],
+    "correct": 1,
+    "explanation": "Việc triển khai BPE ngây thơ có thể không xử lý các ký tự Unicode nhiều byte, có thể merge qua ranh giới từ không chính xác và có thể không có dự phòng cấp byte cho các ký tự bên ngoài từ vựng được huấn luyện.",
+    "stage": "pre"
+  },
+  {
+    "question": "Vai trò của biểu thức chính quy trước khi tokenization trong production tokenizer là gì?",
+    "options": [
+      "Nó loại bỏ dấu câu",
+      "Nó tách văn bản ở ranh giới từ trước khi BPE merges, ngăn merges qua khoảng trống và ranh giới từ",
+      "Nó nén khoảng trắng",
+      "Nó chuyển đổi văn bản thành chữ thường"
+    ],
+    "correct": 1,
+    "explanation": "Biểu thức chính quy trước tokenization chia văn bản thành các phần (thường là ở ranh giới từ, số và dấu câu) vì vậy BPE merges chỉ xảy ra trong các khối. Nếu không có điều này, BPE có thể merge 'kết thúc' bằng khoảng trắng trước từ tiếp theo.",
+    "stage": "pre"
+  },
+  {
+    "question": "token đặc biệt là gì và tại sao tokenizers được thiết kế để xử lý chúng?",
+    "options": [
+      "Tokens xuất hiện thường xuyên",
+      "Các tokens dành riêng như <|endoftext|> hoặc [PAD] kiểm soát hành vi model và phải được mã hóa dưới dạng ID cụ thể, duy nhất",
+      "Tokens có giá trị embedding cao nhất",
+      "Tokens chỉ được sử dụng trong quá trình đánh giá"
+    ],
+    "correct": 1,
+    "explanation": "tokens đặc biệt phục vụ mục đích cấu trúc: đánh dấu ranh giới tài liệu, trình tự đệm, chỉ ra start/end phát điện. Chúng phải được nhận dạng và mã hóa là ID chính xác của chúng, không được chia thành các từ phụ.",
+    "stage": "post"
+  },
+  {
+    "question": "Làm thế nào để bạn đánh giá xem một tokenizer tùy chỉnh có tốt hay không?",
+    "options": [
+      "Bằng cách kiểm tra xem nó có thể mã hóa tên của bạn hay không",
+      "Bằng cách đo tỷ lệ nén (tokens trên mỗi ký tự) trên các văn bản đa dạng và so sánh với các tokenizers đã được thiết lập như tiktoken",
+      "Bằng cách đếm kích thước từ vựng",
+      "Chỉ bằng cách đo tốc độ mã hóa"
+    ],
+    "correct": 1,
+    "explanation": "Tỷ lệ nén (byte trên token hoặc tokens mỗi từ) đo lường hiệu quả. Một tokenizer tốt tạo ra ít tokens hơn cho cùng một văn bản, có nghĩa là nhiều nội dung phù hợp với context window hơn. So sánh giữa các ngôn ngữ và miền.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao BPE cấp byte được ưa chuộng hơn tokenization cấp từ cho LLMs hiện đại?",
+    "options": [
+      "Nó nhanh hơn",
+      "Nó có thể đại diện cho bất kỳ đầu vào nào mà không có tokens không xác định trong khi vẫn học merges từ phụ hiệu quả cho các mẫu phổ biến",
+      "Nó tạo ra các từ vựng nhỏ hơn",
+      "tokenization cấp từ chính xác hơn"
+    ],
+    "correct": 1,
+    "explanation": "tokenizers cấp từ không thể xử lý các từ không nhìn thấy (tạo ra [UNK] tokens). BPE cấp byte bắt đầu từ byte thô (đảm bảo độ bao phủ của bất kỳ đầu vào nào) và tìm hiểu merges cho các trình tự phổ biến, cân bằng độ bao phủ với hiệu quả.",
+    "stage": "post"
+  }
+]
