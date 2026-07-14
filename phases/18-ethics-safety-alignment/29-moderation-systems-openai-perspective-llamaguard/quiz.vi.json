@@ -1,0 +1,78 @@
+{
+  "lesson": "29-moderation-systems-openai-perspective-llamaguard",
+  "title": "Hệ thống kiểm duyệt - OpenAI, phối cảnh Llama bảo vệ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Omni-moderation-latest (2024) của OpenAI là gì?",
+      "options": [
+        "Phần thưởng RLHF model",
+        "Một model biên giới tập trung vào lý luận",
+        "Một endpoint hình mờ C2PA",
+        "Một công cụ phân loại kiểm duyệt dựa trên GPT-4o xử lý văn bản và hình ảnh trong một cuộc gọi, trả về schema phản hồi gồm 13 danh mục (quấy rối, thù ghét, tự làm hại bản thân, tình dục, bạo lực, bất hợp pháp, với các danh mục phụ), miễn phí cho hầu hết các nhà phát triển"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Danh mục nào trong số này KHÔNG phải là một trong những danh mục cấp cao nhất chính của OpenAI Kiểm duyệt?",
+      "options": [
+        "Bạo lực",
+        "can thiệp bầu cử",
+        "tự làm hại bản thân",
+        "quấy rối"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ba lớp của mô hình kiểm duyệt tiêu chuẩn năm 2026 là gì?",
+      "options": [
+        "Đầu dò / máy dò / harness",
+        "Tokenizer / model / detokenizer",
+        "Kính thiên văn / kính tiềm vọng / kính hiển vi",
+        "Kiểm duyệt đầu vào (tiền tạo), Kiểm duyệt đầu ra (sau thế hệ), Kiểm duyệt tùy chỉnh (quy tắc miền)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Perspective API (Google Jigsaw) được thiết kế chủ yếu để ghi điểm là gì?",
+      "options": [
+        "Độ mạnh hình mờ",
+        "Độc tính (với độc tính nghiêm trọng, lăng mạ, tục tĩu, đe dọa, tấn công danh tính) như một đường cơ sở kiểm duyệt nội dung trước thời kỳ LLM",
+        "Chất lượng lý luận",
+        "Thưởng cho sự hài lòng của người dùng"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Một chế độ lỗi của kiểm duyệt chỉ đầu vào là gì?",
+      "options": [
+        "Nó không thể chạy trên GPUs",
+        "Nó không bắt model lỗi đầu ra hoặc ảo giác; các cuộc tấn công mã hóa (Bài 12-14) có thể bỏ qua hoàn toàn các bộ phân loại đầu vào",
+        "Nó luôn chặn nội dung hợp pháp",
+        "Nó loại bỏ nhu cầu về bộ phân loại đầu ra"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Mục tiêu di chuyển và ngừng sử dụng Azure Content Moderator là gì?",
+      "options": [
+        "Không dùng nữa vào tháng 2 năm 2024, ngừng hoạt động vào ngày 15 tháng 3 năm 2027; mục tiêu di chuyển là Azure AI An toàn nội dung (dựa trên LLM, tích hợp với Azure OpenAI)",
+        "Thay thế bằng Phối cảnh API",
+        "Merged vào Llama Guard 4",
+        "Không dùng nữa ngay lập tức mà không có thay thế"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
