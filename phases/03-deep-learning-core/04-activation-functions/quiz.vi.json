@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Tại sao bạn không thể xây dựng một mạng sâu hữu ích chỉ bằng cách sử dụng các lớp tuyến tính (không có chức năng kích hoạt)?",
+    "options": [
+      "Các lớp tuyến tính quá chậm",
+      "Xếp chồng các lớp tuyến tính thu gọn thành một phép biến đổi tuyến tính duy nhất, không mang lại lợi ích từ chiều sâu",
+      "Các lớp tuyến tính không có thành kiến",
+      "Các lớp tuyến tính không thể xử lý dữ liệu hàng loạt"
+    ],
+    "correct": 1,
+    "explanation": "y = W2 (W1 * x + b1) + b2 đơn giản hóa thành y = Ax + c. Bất kể bạn stack bao nhiêu lớp tuyến tính, kết quả tương đương với một lớp tuyến tính. Các hàm kích hoạt phá vỡ khả năng kết hợp này.",
+    "stage": "pre"
+  },
+  {
+    "question": "Phạm vi đầu ra của chức năng kích hoạt ReLU là gì?",
+    "options": [
+      "(-1, 1)",
+      "(0, 1)",
+      "[0, vô cực)",
+      "(-vô cực, vô cực)"
+    ],
+    "correct": 2,
+    "explanation": "ReLU (x) = tối đa (0, x). Nó xuất ra 0 cho tất cả các đầu vào âm và chuyển các đầu vào dương không thay đổi, cho phạm vi [0, vô cực).",
+    "stage": "pre"
+  },
+  {
+    "question": "Vấn đề 'tế bào thần kinh chết' trong mạng ReLU là gì?",
+    "options": [
+      "Các tế bào thần kinh tính toán quá chậm",
+      "Các tế bào thần kinh có đầu vào âm vĩnh viễn, tạo ra đầu ra bằng không và không gradient mãi mãi",
+      "Các tế bào thần kinh tạo ra giá trị NaN",
+      "Tế bào thần kinh không bias"
+    ],
+    "correct": 1,
+    "explanation": "Nếu đầu vào có trọng số của tế bào thần kinh ReLU luôn âm (do khởi tạo kém hoặc bias âm lớn), nó sẽ xuất ra 0 với gradient 0. Nó không bao giờ có thể khôi phục vì không gradient có nghĩa là không cập nhật.",
+    "stage": "post"
+  },
+  {
+    "question": "Chức năng kích hoạt nào là mặc định cho các lớp ẩn trong các transformers hiện đại như GPT và BERT?",
+    "options": [
+      "Sigmoid",
+      "ReLU",
+      "GELU",
+      "Tín"
+    ],
+    "correct": 2,
+    "explanation": "GELU (Đơn vị tuyến tính lỗi Gaussian) là kích hoạt mặc định trong transformers. Nó cung cấp dòng chảy gradient trơn tru, tránh các tế bào thần kinh chết và đã được chứng minh là vượt trội hơn ReLU về models ngôn ngữ.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao softmax chỉ được sử dụng trong lớp đầu ra và không bao giờ được sử dụng trong các lớp ẩn?",
+    "options": [
+      "Nó quá chậm đối với các lớp ẩn",
+      "Nó chuyển đổi một vector thành một phân phối xác suất (tổng giá trị bằng 1), cần thiết cho đầu ra phân loại nhưng không cần thiết cho các biểu diễn trung gian",
+      "Nó gây nổ gradients",
+      "Nó chỉ hoạt động với hai classes"
+    ],
+    "correct": 1,
+    "explanation": "Softmax chuẩn hóa một vector để tất cả các giá trị nằm trong (0,1) và tổng bằng 1, tạo ra phân phối xác suất. Các lớp ẩn cần bảo tồn và chuyển đổi thông tin, không nén nó thành xác suất.",
+    "stage": "post"
+  }
+]
