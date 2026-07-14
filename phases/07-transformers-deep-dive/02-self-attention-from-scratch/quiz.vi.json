@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao vani self-attention chia tỷ lệ tích chấm theo 1/sqrt(d_k)?",
+      "options": [
+        "Để tạo các giá trị đầu ra từ 0 đến 1",
+        "Để ngăn các sản phẩm chấm phát triển lớn ở kích thước cao, điều này sẽ đẩy softmax vào các vùng có gradients nhỏ",
+        "Để chuẩn hóa truy vấn và vectors khóa theo độ dài đơn vị",
+        "Để giảm chi phí tính toán của phép nhân ma trận"
+      ],
+      "correct": 1,
+      "explanation": "Khi d_k lớn, tích chấm của vectors ngẫu nhiên tăng tỷ lệ thuận với sqrt (d_k). Nếu không mở rộng quy mô, softmax nhận được đầu vào lớn, tạo ra đầu ra gần như một nóng mà gradients biến mất."
+    },
+    {
+      "stage": "pre",
+      "question": "Ba phép chiếu trong self-attention là gì?",
+      "options": [
+        "Đầu vào, ẩn và đầu ra",
+        "Truy vấn, khóa và giá trị -- mỗi phép chiếu tuyến tính đã học của cùng một đầu vào",
+        "Encoder, decoder và cross-attention",
+        "Embedding, vị trí và phân đoạn"
+      ],
+      "correct": 1,
+      "explanation": "Self-attention chiếu đầu vào thông qua ba ma trận trọng số khác nhau để tạo ra các truy vấn (tôi đang tìm kiếm gì?), khóa (tôi chứa gì?) và giá trị (tôi sẽ xuất ra gì nếu khớp?)."
+    },
+    {
+      "stage": "post",
+      "question": "Trong multi-head attention có 8 đầu và d_model = 512, kích thước của mỗi đầu là bao nhiêu?",
+      "options": [
+        "512 -- mỗi cái đầu nhìn thấy toàn bộ chiều kích",
+        "64 -- d_model được chia đều trên các đầu (512/8=64)",
+        "8 - một kích thước mỗi đầu",
+        "4096 -- mỗi đầu mở rộng biểu diễn"
+      ],
+      "correct": 1,
+      "explanation": "Multi-head attention chia d_model thành các đầu H, mỗi đầu hoạt động trên d_k = d_model/h chiều. Với 512/8 = 64 kích thước trên mỗi đầu, tổng chi phí tính toán bằng attention một đầu ở kích thước đầy đủ."
+    },
+    {
+      "stage": "post",
+      "question": "Mặt nạ nhân quả trong attention tự hồi quy ngăn chặn điều gì?",
+      "options": [
+        "Nó ngăn model tham gia vào tokens đệm",
+        "Nó ngăn chặn mỗi vị trí tham gia vào các vị trí trong tương lai, đảm bảo model chỉ có thể sử dụng ngữ cảnh trong quá khứ khi dự đoán token tiếp theo",
+        "Nó ngăn trọng lượng attention trở nên quá lớn",
+        "Nó ngăn cản model quan tâm đến vị trí của chính mình"
+      ],
+      "correct": 1,
+      "explanation": "Trong thế hệ tự hồi quy, token t không được nhìn thấy tokens t+1, t+2, v.v. Mặt nạ nhân quả đặt các vị trí trong tương lai thành -vô cực trước softmax, loại bỏ trọng số attention của chúng."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao self-attention có độ phức tạp O (n ^ 2) trong độ dài dãy n?",
+      "options": [
+        "Bởi vì model có n lớp xếp chồng lên nhau",
+        "Bởi vì mỗi token tính điểm attention với mọi token khác, tạo ra ma trận n x n attention",
+        "Bởi vì các lớp feedforward sau attention là bậc hai",
+        "Bởi vì backpropagation qua attention yêu cầu n^2 gradient tính toán"
+      ],
+      "correct": 1,
+      "explanation": "Phép nhân ma trận QK^T tạo ra ma trận n x n attention trong đó mục nhập (i,j) là attention từ token i đến token j. Cả tính toán và bộ nhớ đều có tỷ lệ O(n^2), đó là lý do tại sao models ngữ cảnh dài cần các kỹ thuật như FlashAttention."
+    }
+  ]
+}
