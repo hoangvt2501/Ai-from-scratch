@@ -1,0 +1,67 @@
+[
+  {
+    "id": "biasvar-pre-1",
+    "stage": "pre",
+    "question": "Một model tuyến tính được sử dụng để phù hợp với mối quan hệ cong rõ ràng (bậc hai). Thành phần lỗi nào chiếm ưu thế?",
+    "options": [
+      "Variance: model thay đổi quá nhiều với dữ liệu training khác nhau",
+      "Bias: model quá cứng để nắm bắt mô hình phi tuyến thực sự",
+      "Nhiễu không thể giảm bớt: dữ liệu quá nhiễu",
+      "Không có: model phải vừa vặn hoàn hảo"
+    ],
+    "correct": 1,
+    "explanation": "Một model tuyến tính không thể chụp được một đường cong bậc hai cho dù nó nhìn thấy bao nhiêu dữ liệu. Lỗi hệ thống này từ các giả định sai model là bias. Các model thiếu trang phục."
+  },
+  {
+    "id": "biasvar-pre-2",
+    "stage": "pre",
+    "question": "Sự phân tách bias-variance của sai số dự kiến có ba số hạng. Cái nào không thể giảm bớt bằng bất kỳ model nào?",
+    "options": [
+      "Bias bình phương",
+      "Variance",
+      "Nhiễu không thể giảm (bình phương sigma)",
+      "Cả ba đều có thể giảm xuống bằng không"
+    ],
+    "correct": 2,
+    "explanation": "Nhiễu không thể giảm đến từ tính ngẫu nhiên trong chính dữ liệu (sai số đo lường, thiếu biến). Không model nào có thể dự đoán nhiễu. Sai số dự kiến = bias^2 + variance + nhiễu không thể giảm bớt."
+  },
+  {
+    "id": "biasvar-post-1",
+    "stage": "post",
+    "question": "Thêm chính quy hóa L2 vào model làm tăng bias và giảm variance. Tại sao điều này lại hữu ích?",
+    "options": [
+      "Nó luôn cải thiện cả training và kiểm tra accuracy",
+      "Việc giảm variance có thể lớn hơn sự gia tăng bias, làm giảm tổng sai số",
+      "Chính quy hóa L2 loại bỏ nhiễu không thể giảm thiểu",
+      "Nó làm cho model huấn luyện nhanh hơn"
+    ],
+    "correct": 1,
+    "explanation": "Chính quy hóa giao dịch một sự gia tăng nhỏ trong bias để giảm variance lớn hơn. Khi model overfitting (variance cao), sự đánh đổi này làm giảm tổng sai số mặc dù tỷ lệ bias tăng nhẹ."
+  },
+  {
+    "id": "biasvar-post-2",
+    "stage": "post",
+    "question": "Một model có sai số training = 2% và lỗi thử nghiệm = 25%. Chẩn đoán khả dĩ nhất là gì?",
+    "options": [
+      "bias cao (underfitting): model quá đơn giản",
+      "variance cao (overfitting): model ghi nhớ dữ liệu training và không khái quát được",
+      "Nhiễu cao không thể giảm bớt: dữ liệu quá nhiễu",
+      "model được hiệu chỉnh hoàn hảo"
+    ],
+    "correct": 1,
+    "explanation": "Sai số training thấp + sai số thử nghiệm cao + khoảng cách lớn = variance cao (overfitting). model phù hợp với nhiễu cụ thể của training. Biện pháp khắc phục: chính quy hóa, giảm độ phức tạp, lấy thêm dữ liệu."
+  },
+  {
+    "id": "biasvar-post-3",
+    "stage": "post",
+    "question": "Bạn huấn luyện cùng một kiến trúc model trên 50 tập con training ngẫu nhiên khác nhau và quan sát thấy rằng các dự đoán rất khác nhau giữa chúng. Điều này cho thấy điều gì?",
+    "options": [
+      "bias cao: model liên tục bỏ lỡ mô hình thực sự",
+      "variance cao: model nhạy cảm với dữ liệu training cụ thể mà nó nhìn thấy",
+      "Nhiễu không thể giảm cao : biến mục tiêu là ngẫu nhiên",
+      "learning rate quá cao"
+    ],
+    "correct": 1,
+    "explanation": "Variance đo lường mức độ thay đổi của dự đoán khi được huấn luyện trên các tập dữ liệu con khác nhau. Các dự đoán hoàn toàn khác nhau giữa các tập con là định nghĩa của variance cao."
+  }
+]
