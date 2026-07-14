@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Thuộc tính xác định của một hàm lồi là gì?",
+      "options": [
+        "Nó có chính xác một điểm quan trọng",
+        "Đoạn thẳng giữa hai điểm bất kỳ trên biểu đồ của nó nằm ở trên hoặc trên biểu đồ",
+        "Dẫn xuất của nó luôn tích cực",
+        "Nó chỉ có thể được xác định trên số thực dương"
+      ],
+      "correct": 1,
+      "explanation": "Một hàm lồi nếu đối với hai điểm x, y và bất kỳ t nào trong [0,1]: f(tx + (1-t)y) <= t*f(x) + (1-t)*f(y). Về mặt hình học, hợp âm giữa hai điểm bất kỳ trên biểu đồ không bao giờ giảm xuống dưới chính biểu đồ."
+    },
+    {
+      "stage": "pre",
+      "question": "Vấn đề nào trong ML này có cảnh quan loss lồi?",
+      "options": [
+        "Training mạng nơ-ron 3 lớp với các kích hoạt ReLU",
+        "Hồi quy logistic với loss entropy chéo",
+        "Phân cụm k-means",
+        "Phân tích ma trận để đề xuất"
+      ],
+      "correct": 1,
+      "explanation": "Hồi quy logistic có loss lồi (log-loss lồi trong trọng lượng). Mạng nơ-ron, k-mean và phân tích ma trận đều không lồi. Đối với các vấn đề lồi, bất kỳ mức tối thiểu cục bộ nào đều là mức tối thiểu toàn cầu."
+    },
+    {
+      "stage": "post",
+      "question": "Phương pháp Newton hội tụ đến mức tối thiểu của f(x) = 5x^2 + 3x + 1 trong bao nhiêu bước?",
+      "options": [
+        "1 bước (chính xác đối với các hàm bậc hai)",
+        "Khoảng 10 bước",
+        "Khoảng 100 bước",
+        "Nó phụ thuộc vào learning rate"
+      ],
+      "correct": 0,
+      "explanation": "Phương pháp Newton phù hợp với xấp xỉ bậc hai cục bộ và nhảy đến mức tối thiểu của nó. Đối với một hàm bậc hai thực tế, xấp xỉ là chính xác, vì vậy phương pháp Newton hội tụ trong một bước duy nhất bất kể điểm bắt đầu."
+    },
+    {
+      "stage": "post",
+      "question": "Trong điều kiện KKT, 'sự chùng xuống bổ sung' (lambda_i * g_i(x) = 0) có nghĩa là gì?",
+      "options": [
+        "Tất cả các ràng buộc phải hoạt động ở mức tối ưu",
+        "Hoặc một ràng buộc đang hoạt động (g_i = 0) hoặc hệ số của nó bằng không (lambda_i = 0) - một ràng buộc không hoạt động không có tác dụng",
+        "gradients của tất cả các ràng buộc phải trực giao",
+        "Lagrangian luôn bằng không ở mức tối ưu"
+      ],
+      "correct": 1,
+      "explanation": "Độ chùng bổ sung có nghĩa là mỗi ràng buộc hoặc ràng buộc (g_i = 0, nằm trên ranh giới) hoặc không liên quan (lambda_i = 0, không ảnh hưởng đến lời giải). Trong SVM, đây là lý do tại sao chỉ hỗ trợ vectors (các ràng buộc hoạt động với lambda_i > 0) xác định ranh giới quyết định."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao SGD tìm ra giải pháp tốt trong bối cảnh mạng nơ-ron không lồi mặc dù thiếu đảm bảo độ lồi?",
+      "options": [
+        "Mạng nơ-ron lồi bí mật ở các chiều cao",
+        "SGD luôn tìm thấy mức tối thiểu toàn cầu",
+        "Ở chiều cao, hầu hết các điểm quan trọng là điểm yên xe (không phải là tối thiểu cục bộ xấu) và nhiễu SGD giúp thoát ra khỏi chúng",
+        "Chức năng loss không liên quan đến hiệu suất model"
+      ],
+      "correct": 2,
+      "explanation": "Trong không gian high-dimensional parameter, các điểm tới hạn ngẫu nhiên là các điểm yên ngựa áp đảo. Một số giá trị tối thiểu cục bộ tồn tại có xu hướng có giá trị loss gần với mức tối thiểu toàn cầu. Nhiễu ngẫu nhiên của SGD giúp thoát khỏi các điểm yên xe và tham số hóa quá mức làm mịn cảnh quan."
+    }
+  ]
+}
