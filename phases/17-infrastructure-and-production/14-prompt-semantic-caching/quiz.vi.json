@@ -1,0 +1,78 @@
+{
+  "lesson": "14-prompt-semantic-caching",
+  "title": "Prompt Bộ nhớ đệm và kinh tế bộ nhớ đệm ngữ nghĩa",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt giữa bộ nhớ đệm ngữ nghĩa L1 và bộ nhớ đệm prompt/prefix L2 là gì?",
+      "options": [
+        "L1 bỏ qua LLM hoàn toàn dựa trên embedding lượt truy cập tương tự; L2 sử dụng lại attention KV tại nhà cung cấp cho các tiền tố lặp lại",
+        "L1 là phía nhà cung cấp và L2 là phía máy khách",
+        "L2 lưu trữ embeddings; Cửa hàng L1 attention KV",
+        "L1 và L2 giống nhau"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cơ chế Anthropic nào đánh dấu các khối là có thể lưu vào bộ nhớ đệm L2 prompt?",
+      "options": [
+        "Thuộc tính cache_control rõ ràng trên các khối yêu cầu",
+        "Một / caches riêng biệt endpoint",
+        "Hậu tố tên tệp trong định nghĩa công cụ",
+        "Ngưỡng độ dài prompt ngầm"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để chống mô hình song song làm tăng hóa đơn?",
+      "options": [
+        "Bỏ qua lô yêu cầu song song",
+        "Song song hóa triggers phí guardrail cho mỗi yêu cầu",
+        "Tất cả các yêu cầu song song sẽ tự động chia sẻ một mục nhập bộ nhớ đệm",
+        "N yêu cầu song song có cùng tiền tố đến trước khi quá trình ghi bộ nhớ đệm đầu tiên hoàn tất, vì vậy mỗi yêu cầu phải trả phí ghi và không được chiết khấu"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Phản mẫu nội dung động trong tiền tố có thể lưu trong bộ nhớ đệm là gì?",
+      "options": [
+        "Đặt schemas dụng cụ vào tiền tố",
+        "Luôn streaming câu trả lời",
+        "Bao gồm nội dung thay đổi mọi yêu cầu (thời gian hiện tại thành phút, ID yêu cầu, thứ tự ví dụ ngẫu nhiên) bên trong tiền tố có thể lưu vào bộ nhớ cache, tỷ lệ truy cập tiêu diệt",
+        "Sử dụng system prompt quá ngắn"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Làm thế nào để batch + đầu vào được lưu trong bộ nhớ cache stack qua đêm để cắt giảm chi phí?",
+      "options": [
+        "Batch chỉ tiết kiệm chi phí đầu ra",
+        "Batch APIs giảm giá 50%; đầu vào được lưu trong bộ nhớ cache thêm ~10x khác; Kết hợp, pipelines qua đêm giảm xuống ~10% chi phí đồng bộ-không lưu bộ nhớ đệm",
+        "Batch không tương thích với bộ nhớ đệm",
+        "Bộ nhớ đệm vô hiệu hóa tính đủ điều kiện batch"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học nói gì về tuyên bố bộ nhớ đệm ngữ nghĩa \"95% accuracy\"?",
+      "options": [
+        "95% là tỷ lệ trúng bộ nhớ đệm mặc định OpenAI",
+        "95% đề cập đến độ chính xác của trận đấu, không phải tỷ lệ trúng đích; Tỷ lệ truy cập production được báo cáo dao động từ ~10% (trò chuyện mở) đến ~70% (Câu hỏi thường gặp có cấu trúc)",
+        "95% là tỷ lệ truy cập cơ bản do nhà cung cấp ghi nhận",
+        "95% có nghĩa là bạn nên mong đợi 95% lượt truy cập bộ nhớ cache"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
