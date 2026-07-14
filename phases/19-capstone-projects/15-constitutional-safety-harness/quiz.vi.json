@@ -1,0 +1,90 @@
+{
+  "lesson": "15-constitutional-safety-harness",
+  "title": "Capstone 15 - Harness An toàn Hiến pháp + Phạm vi Đội đỏ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "An toàn nhiều lớp trong capstone này có nghĩa là gì?",
+      "options": [
+        "Xem lại thủ công mọi câu trả lời",
+        "Chỉ chạy một bộ phân loại mạnh trên đầu vào",
+        "Một biểu thức chính quy dựa trên quy tắc duy nhất trên đầu ra",
+        "Bảo vệ theo chiều sâu trên vệ sinh đầu vào, đường ray policy, cổng phân loại, model, bộ lọc đầu ra và cấp HITL"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Bộ phân loại nào xử lý phạm vi đa ngôn ngữ trên khoảng 132 ngôn ngữ?",
+      "options": [
+        "An toàn nội dung Nemotron 3",
+        "KhiênGemma-2",
+        "Bảo vệ X",
+        "Bảo vệ Llama 4"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao việc từ chối quá mức được đo lường trên một bộ lành tính như XSTest?",
+      "options": [
+        "Để thay thế tính điểm của đội đỏ",
+        "Để benchmark token thông lượng",
+        "Để chứng nhận guardrail framework",
+        "Để theo dõi các khối dương tính giả để model vẫn hữu ích đồng thời cải thiện tính vô hại"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Vòng lặp tự phê bình hiến pháp trong capstone này là gì?",
+      "options": [
+        "Một người xếp hạng lại về việc vượt ngục của ứng cử viên prompts",
+        "Phần thưởng RLHF model được huấn luyện từ đầu",
+        "Một forward pass duy nhất thông qua Llama Guard 4",
+        "Nhà phê bình LLM chấm điểm các bản nháp dựa trên hiến pháp thành văn prompts model viết lại các đầu ra bị phản đối và SFT chạy trên các cặp được cải tiến"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Các lần bẻ khóa thành công được chấm điểm như thế nào về mức độ nghiêm trọng trong các phát hiện?",
+      "options": [
+        "Bởi model đã tạo ra phản hồi",
+        "Sử dụng CVSS 4.0 với vector tấn công, độ phức tạp và tác động, cộng với dòng thời gian tiết lộ",
+        "Theo số lượng token thô của prompt",
+        "Trên thang đo 1-10 được điều chỉnh bằng tay do người vận hành lựa chọn"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Phạm vi đội đỏ chạy sáu họ tấn công nào?",
+      "options": [
+        "BLEU, ROUGE, METEOR, BERTScore, CometKiwi và chrF",
+        "PAIR, TAP, GCG, mã hóa (ASCII/base64/rot13), tính cách nhiều lượt và chuyển đổi mã đa ngôn ngữ",
+        "Brute-force, từ điển, phát lại, MITM, lừa đảo và CSRF",
+        "PSI, KL, MMD, KS, JS và Wasserstein"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao tự động hóa phạm vi (cron + cảnh báo) là một phần của bảng đánh giá?",
+      "options": [
+        "Cron là cách duy nhất để gọi OPA",
+        "Các đầu dò theo lịch trình liên tục phát hiện sự trôi dạt về tỷ lệ tấn công thành công và hồi quy từ chối quá mức theo thời gian",
+        "Chạy thủ công được yêu cầu rõ ràng",
+        "Cần tự động hóa để tắt Llama Guard 4"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
