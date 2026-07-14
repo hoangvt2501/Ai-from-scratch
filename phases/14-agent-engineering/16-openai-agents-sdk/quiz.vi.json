@@ -1,0 +1,90 @@
+{
+  "lesson": "16-openai-agents-sdk",
+  "title": "OpenAI Agents SDK: Bàn giao, Guardrails, Truy tìm",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Năm primitives của OpenAI Agents SDK là gì?",
+      "options": [
+        "Agent, Bàn giao, Guardrail, Session, Truy tìm",
+        "Nút, Cạnh, Giảm tốc, Kiểm tra, Đồ thị con",
+        "Kế hoạch, Worker, Trình giải, Người đánh giá, Phản xạ",
+        "Công cụ, Prompt, Model, Bộ nhớ, Trace"
+      ],
+      "correct": 0,
+      "explanation": "Các SDK ships năm primitives này."
+    },
+    {
+      "stage": "pre",
+      "question": "Làm thế nào để model thấy một bàn giao?",
+      "options": [
+        "Dưới dạng HTTP endpoint tùy chỉnh",
+        "Là một công cụ có tên transfer_to_<agent_name>",
+        "Dưới dạng thông báo hệ thống",
+        "Là một token đặc biệt"
+      ],
+      "correct": 1,
+      "explanation": "Handoffs được hiển thị dưới dạng công cụ có<agent> hình dạng tên transfer_to_."
+    },
+    {
+      "stage": "check",
+      "question": "Ba loại guardrail nào SDK ship?",
+      "options": [
+        "Đầu vào, đầu ra và guardrails công cụ",
+        "guardrails trước, đăng và nội tuyến",
+        "Cứng, mềm và nỗ lực tốt nhất guardrails",
+        "guardrails tĩnh, động và liên kết"
+      ],
+      "correct": 0,
+      "explanation": "Đầu vào (agent đầu tiên), đầu ra (agent cuối cùng) và công cụ (mỗi công cụ chức năng) guardrails."
+    },
+    {
+      "stage": "check",
+      "question": "Sự khác biệt giữa song song và chặn guardrails là gì?",
+      "options": [
+        "Song song chạy dọc theo LLM chính (độ trễ thấp hơn, lãng phí tokens trên chuyến đi); chặn chạy trước (không lãng phí tokens trong chuyến đi)",
+        "Chặn là không đồng bộ; song song là đồng bộ",
+        "Song song luôn tốn nhiều tiền hơn",
+        "Chặn chỉ hoạt động trên đầu ra"
+      ],
+      "correct": 0,
+      "explanation": "Parallel tối ưu hóa độ trễ với chi phí lãng phí tokens khi vấp ngã; Chặn giúp tiết kiệm tokens nhưng tăng thêm độ trễ."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để theo dõi được kích hoạt trong SDK?",
+      "options": [
+        "Tắt theo mặc định; Bật mỗi agent",
+        "Bật theo mặc định; OPENAI_AGENTS_DISABLE_TRACING=1 chọn không tham gia",
+        "Chỉ thông qua bộ thu OpenTelemetry",
+        "Chỉ trên bảng điều khiển được lưu trữ"
+      ],
+      "correct": 1,
+      "explanation": "Spans cho LLM, công cụ, bàn giao và guardrail phát ra theo mặc định; một env var vô hiệu hóa chúng."
+    },
+    {
+      "stage": "post",
+      "question": "Trôi dạt bàn giao là gì và bài học khuyến nghị giảm thiểu nó như thế nào?",
+      "options": [
+        "Truy tìm bị tụt lại phía sau; giảm span volume",
+        "Agent A giao tay cho B mà trao lại cho A trong một vòng lặp; Thêm bộ đếm bước nhảy",
+        "Sessions tràn; Lưu trữ những cái cũ",
+        "Guardrails không đồng bộ; Huấn luyện lại"
+      ],
+      "correct": 1,
+      "explanation": "Bộ đếm bước nhảy giới hạn chuỗi chuyển trước khi chúng lặp lại vô thời hạn."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao các công cụ tích hợp lại là một khoảng trống guardrail?",
+      "options": [
+        "Chúng chậm hơn các công cụ chức năng",
+        "Công cụ chỉ guardrails kích hoạt trên các công cụ chức năng; Các công cụ tích hợp (trình đọc tệp, tìm nạp web) cần policy riêng biệt",
+        "Chúng không thể được truy tìm",
+        "Họ không hỗ trợ bàn giao"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi công cụ guardrails các công cụ chức năng bìa; Các công cụ tích hợp yêu cầu một lớp policy riêng biệt."
+    }
+  ]
+}
