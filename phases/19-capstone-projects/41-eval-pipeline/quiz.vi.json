@@ -1,0 +1,78 @@
+{
+  "lesson": "phase-19/41-eval-pipeline",
+  "title": "Đánh giá đầy đủ Pipeline",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trước khi đọc: một đồng nghiệp báo cáo model của họ đã perplexity 4.2 trên trường quay bị giữ lại. Họ hỏi liệu model có tốt không. Phản ứng có thể bảo vệ được nhất là gì?",
+      "options": [
+        "Có: perplexity dưới 5 có nghĩa là độ model tốt.",
+        "Perplexity cho bạn biết model phù hợp với phân phối ngôn ngữ như thế nào. Nó không nói gì về việc liệu model có tuân theo hướng dẫn hay trả về câu trả lời đúng hay không.",
+        "Perplexity là vô nghĩa nếu không có một prompt rõ ràng.",
+        "Chỉ có thẩm phán models mới có thể trả lời câu hỏi đó."
+      ],
+      "correct": 1,
+      "explanation": "Perplexity là một chiều. Một model có thể có perplexity thấp nhưng vẫn sai trong các nhiệm vụ thực tế, hoặc có perplexity tốt mà vẫn tạo ra câu trả lời chất lượng kém. Bạn cần nhiều đánh giá, mỗi đánh giá đo một chiều khác nhau."
+    },
+    {
+      "stage": "check",
+      "question": "Tỷ lệ đánh giá perplexity tổng likelihood nhật ký âm trên mỗi token trên các vị trí không phải pad và chia cho tổng số token không phải pad. Thay vào đó, tại sao không phải là sự bối rối trung bình trên mỗi batch?",
+      "options": [
+        "Tính trung bình mỗi batch rối là tương đương về mặt toán học.",
+        "Tính trung bình mỗi batch sự bối rối sẽ làm giảm trọng số của các chuỗi ngắn (mỗi batch ppl của chúng mang nhiều variance hơn) và tạo ra một tổng hợp sai lệch.",
+        "Batches chứa tokens đệm phải luôn được tính trung bình.",
+        "Perplexity không được xác định cho dữ liệu hàng loạt."
+      ],
+      "correct": 1,
+      "explanation": "Tổng hợp mỗi token là định nghĩa trong sách giáo khoa và tránh sai lệch về kích thước và độ dài batch. Tính trung bình trên mỗi batch là một lỗi phổ biến; trên một thiết bị cố định có độ dài trình tự khác nhau, nó tạo ra một số khác với số chính xác."
+    },
+    {
+      "stage": "check",
+      "question": "Token F1 trả về 1.0 khi cả dự đoán và tham chiếu đều trống. Trường hợp nào khác phải trả về một giá trị cụ thể?",
+      "options": [
+        "Khi pred trống nhưng tham chiếu không rỗng, F1 phải là 1.0.",
+        "Khi pred không rỗng nhưng tham chiếu trống, F1 phải là undefined.",
+        "Khi chỉ có một trong các pred hoặc tham chiếu trống, F1 phải là 0.0.",
+        "Khi pred chứa chính xác một token phù hợp, F1 phải là 0,5."
+      ],
+      "correct": 2,
+      "explanation": "Trống-trống là một kết hợp trống. Hỗn hợp trống-không rỗng là trường hợp bỏ lỡ rõ ràng: có nội dung ở một bên và không có gì ở bên kia. Quy ước SQuAD là F1 = 0 trong trường hợp đó."
+    },
+    {
+      "stage": "check",
+      "question": "Công cụ tổng hợp chuẩn hóa perplexity với `1 / (1 + log(max(ppl, 1.0)))`. Điều này đảm bảo điều gì về điểm chuẩn hóa?",
+      "options": [
+        "Nó luôn ở trong [0, 1] và giảm đơn điệu khi perplexity thô phát triển.",
+        "Nó luôn ở trong [0, 1] và tăng lên một cách đơn điệu khi perplexity thô phát triển.",
+        "Nó không bị giới hạn ở trên.",
+        "Nó chỉ trả về 0 hoặc 1 (nhị phân)."
+      ],
+      "correct": 0,
+      "explanation": "Perplexity 1 (sàn lý thuyết) ánh xạ đến 1.0. Vô cực ánh xạ thành 0. Điểm số nằm trong [0, 1] và điểm perplexity thấp hơn là tốt hơn, phù hợp với hướng của các chỉ số chuẩn hóa khác."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn hoán đổi thẩm phán giả bằng một thẩm phán model biên giới thực sự. Thay đổi tối thiểu đối với pipeline là gì?",
+      "options": [
+        "Viết lại trình tổng hợp để chấp nhận một phạm vi điểm khác.",
+        "Thay thế đối số `judge_fn` thành `judge_eval` bằng một hàm có cùng chữ ký: (instruction, prediction, reference) -> JudgeVerdict.",
+        "Thêm mục nhập mới vào DEFAULT_WEIGHTS.",
+        "Di chuyển toàn bộ bộ đánh giá sang I/O. không đồng bộ"
+      ],
+      "correct": 1,
+      "explanation": "Giao diện thẩm phán là `(instruction, prediction, reference) -> JudgeVerdict`. Bất kỳ hàm nào có chữ ký đó đều được đưa vào. pipeline được tách rời khỏi việc triển khai thẩm phán bởi ranh giới đó, đó là điểm."
+    },
+    {
+      "stage": "post",
+      "question": "Tổng điểm của bạn là 0,72, nhưng khớp chính xác là 0,40 và trọng tài là 4.5/5. model đánh đổi nào?",
+      "options": [
+        "Người model đánh dây vàng chính xác ít thường xuyên hơn, nhưng giám khảo nghĩ rằng câu trả lời dạng mở là tốt.",
+        "Các model được overfitting trên kho dữ liệu LM.",
+        "Tổng hợp bị tính toán sai.",
+        "Thẩm phán bị sai lệch với khớp chính xác theo định nghĩa."
+      ],
+      "correct": 0,
+      "explanation": "EM thấp với thẩm phán cao gợi ý diễn giải: câu trả lời đúng về bản chất nhưng không phải là từng ký tự với vàng. Đây chính xác là kích thước mà EM bỏ lỡ và giám khảo nắm bắt. Sự đánh đổi là thông tin, không phải lỗi."
+    }
+  ]
+}
