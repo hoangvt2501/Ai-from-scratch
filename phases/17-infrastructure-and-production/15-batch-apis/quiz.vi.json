@@ -1,0 +1,78 @@
+{
+  "lesson": "15-batch-apis",
+  "title": "Batch APIs - Giảm giá 50% theo tiêu chuẩn công nghiệp",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ưu đãi batch-API phổ biến trên OpenAI, Anthropic và Google vào năm 2026 là gì?",
+      "options": [
+        "Giảm giá 10% với thời gian quay vòng 1 giờ",
+        "Giảm giá 90% với thời gian quay vòng 7 ngày",
+        "Miễn phí nếu dưới 1k tokens",
+        "Giảm giá 50% với thời gian quay vòng 24 giờ"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "\"Quay vòng 24 giờ\" thực sự đảm bảo điều gì trong khung bài học?",
+      "options": [
+        "24h là bộ nhớ cache TTL",
+        "Việc batch luôn mất 24 giờ",
+        "Nhà cung cấp hứa hẹn sẽ trở lại trong vòng 24 giờ, với P50 điển hình khoảng 2-6 giờ",
+        "Chỉ batches yêu cầu dưới 1k đủ điều kiện"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để xếp chồng batch với đầu vào được lưu trong bộ nhớ đệm thay đổi hóa đơn so với đồng bộ không được lưu vào bộ nhớ đệm trên khối lượng công việc prompt hệ thống dùng chung?",
+      "options": [
+        "Nó không có tác dụng vì bộ nhớ đệm là tự động",
+        "Nó chỉ hữu ích nếu model ở trên Vertex",
+        "Nó có thể giảm xuống khoảng 10% đường cơ sở đồng bộ-không được lưu trong bộ nhớ đệm",
+        "Nó tăng chi phí lên 50%"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Làn phân loại khối lượng công việc nào sai khi mặc định vào năm 2026 đối với pipelines nội dung và gắn nhãn ngoại tuyến?",
+      "options": [
+        "Tương tác, vì nghe có vẻ khẩn cấp",
+        "Batch, vì người dùng không thấy độ trễ 24h",
+        "batch-and-cache lai",
+        "Bán tương tác với hàng đợi không đồng bộ"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bẫy schema đầu ra giữa các nhà cung cấp là gì?",
+      "options": [
+        "JSONL không được Anthropic hỗ trợ",
+        "Tất cả các nhà cung cấp đều sử dụng cùng một định dạng OpenAI JSONL",
+        "Vertex chỉ yêu cầu sàn gỗ",
+        "Batch định dạng tệp khác nhau tùy theo nhà cung cấp (OpenAI JSONL, Anthropic JSONL, Vertex BigQuery/GCS), vì vậy máy khách di động cần bộ điều hợp cho mỗi nhà cung cấp"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Theo bài học, quy tắc quyết định đơn giản nhất để phân loại khối lượng công việc batch là gì?",
+      "options": [
+        "Nếu prompt dưới 1k tokens, hãy batch nó",
+        "Nếu nó sử dụng các công cụ, hãy batch nó",
+        "Chỉ Batch khi gateway yêu cầu",
+        "Nếu người dùng không nhận thấy giao hàng trong 24 giờ, hãy luôn batch (và stack bộ nhớ đệm)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
