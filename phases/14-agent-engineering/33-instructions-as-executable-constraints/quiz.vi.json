@@ -1,0 +1,90 @@
+{
+  "lesson": "33-instructions-as-executable-constraints",
+  "title": "Agent hướng dẫn dưới dạng ràng buộc thực thi",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt giữa quy tắc khát vọng và quy tắc hoạt động là gì?",
+      "options": [
+        "Các quy tắc khát vọng được trả tiền; Quy tắc hoạt động miễn phí",
+        "Các quy tắc khát vọng không có kiểm tra ('hãy cẩn thận'); Các quy tắc hoạt động mang một chức năng có thể kiểm tra bằng máy mà bàn làm việc có thể chạy",
+        "Quy tắc hoạt động dài hơn",
+        "Các quy tắc khát vọng yêu cầu người quản lý"
+      ],
+      "correct": 1,
+      "explanation": "Các quy tắc hoạt động có thể kiểm tra được; Quy tắc khát vọng là mong muốn."
+    },
+    {
+      "stage": "pre",
+      "question": "Bài học bao gồm năm loại nào bao gồm hầu hết các quy tắc?",
+      "options": [
+        "Khởi động, bị cấm, định nghĩa đã hoàn thành, không chắc chắn, phê duyệt",
+        "Đọc, ghi, điều hành, fork, thoát",
+        "Lập kế hoạch, hành động, suy ngẫm, tinh chỉnh ship",
+        "Thấp, trung bình, cao, nguy kịch, tử vong"
+      ],
+      "correct": 0,
+      "explanation": "Khởi động, bị cấm, định nghĩa đã hoàn thành, xử lý không chắc chắn, ranh giới phê duyệt là năm."
+    },
+    {
+      "stage": "check",
+      "question": "Thẻ mức độ nghiêm trọng nào dừng thực thi và yêu cầu người vận hành ghi đè?",
+      "options": [
+        "Thông tin",
+        "Cảnh báo",
+        "khối",
+        "mềm mại"
+      ],
+      "correct": 2,
+      "explanation": "khối là thất bại khó khăn; cảnh báo chú thích; báo cáo thông tin."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bài học khuyến nghị gắn thẻ mức độ nghiêm trọng tại thời điểm viết?",
+      "options": [
+        "Nó trông đẹp hơn khi giảm giá",
+        "Các đội phóng đại mức độ nghiêm trọng sớm và làm suy yếu nó dưới áp lực thời hạn; Mức độ nghiêm trọng của việc viết trước buộc phải hiệu chuẩn",
+        "Linters yêu cầu nó",
+        "Nó tiết kiệm tokens"
+      ],
+      "correct": 1,
+      "explanation": "Hiệu chuẩn mức độ nghiêm trọng phải có chủ ý, không được trang bị thêm dưới áp lực."
+    },
+    {
+      "stage": "check",
+      "question": "Mô hình đánh dấu dưới dạng nguồn, JSON dưới dạng bộ nhớ đệm làm gì?",
+      "options": [
+        "Thay thế giảm giá",
+        "agent-rules.md là tệp tác giả; agent-rules.lock.json là một bộ nhớ đệm đường dẫn nóng được tạo lại bởi một commit hook trước (cùng hình dạng với gói. json + khóa)",
+        "Mã hóa các quy tắc",
+        "Vô hiệu hóa đánh giá"
+      ],
+      "correct": 1,
+      "explanation": "Markdown vẫn có thể xem xét được; JSON phân tích cú pháp nằm ngoài đường dẫn nóng."
+    },
+    {
+      "stage": "post",
+      "question": "Hết hạn quy tắc như một hàm cưỡng bức là gì?",
+      "options": [
+        "Quy tắc trong 24 giờ không thành công đã đóng",
+        "Mỗi quy tắc có một expires_at (mặc định 90 ngày); Các quy tắc chưa sa thải trigger đánh giá hàng quý để biện minh, làm suy yếu hoặc xóa chúng",
+        "Quy tắc hết hạn khi bộ nhớ đệm đầy",
+        "Quy tắc tự động hết hạn; Không cần đánh giá"
+      ],
+      "correct": 1,
+      "explanation": "Dữ liệu của Cloudflare cho thấy các bộ hết hạn vẫn dưới 30 quy tắc; bộ không tăng lên 80+ không sử dụng."
+    },
+    {
+      "stage": "post",
+      "question": "Các quy tắc liên quan đến framework guardrails như thế nào?",
+      "options": [
+        "Quy tắc thay thế guardrails",
+        "Guardrails thực thi các quy tắc tại runtime; bộ quy tắc là hợp đồng mà con người có thể đọc được mà những người guardrails thực hiện",
+        "Guardrails là một giải pháp thay thế cho các quy tắc",
+        "Chỉ cần một trong số chúng"
+      ],
+      "correct": 1,
+      "explanation": "Cả hai đều cần thiết: runtime bắt vi phạm; Bộ quy tắc chứng minh runtime đang làm điều đúng đắn."
+    }
+  ]
+}
