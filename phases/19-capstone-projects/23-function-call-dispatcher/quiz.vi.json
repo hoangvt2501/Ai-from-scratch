@@ -1,0 +1,90 @@
+{
+  "lesson": "23-function-call-dispatcher",
+  "title": "Trình điều phối cuộc gọi chức năng",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao timeout trên một công cụ không idempotent mặc định là không thử lại?",
+      "options": [
+        "Bởi vì trình điều phối không thể đo lường các cuộc gọi không idempotent",
+        "Bởi vì công cụ có thể đã cam kết một phần; thử lại có thể nhân đôi hiệu ứng",
+        "Bởi vì các trình xử lý không idempotent chạy nhanh hơn",
+        "Bởi vì các phím idempotency chậm"
+      ],
+      "correct": 1,
+      "explanation": "Thử lại db.write đã hết thời gian chờ ở 4,9 giây có thể tạo ra lần ghi thứ hai. Trình điều phối từ chối trừ khi trình xử lý nói với nó rằng cuộc gọi là an toàn để lặp lại."
+    },
+    {
+      "stage": "pre",
+      "question": "Idempotency-key dedupe bảo vệ chống lại điều gì?",
+      "options": [
+        "Mạng chậm",
+        "Thử lại kích hoạt trong khi cuộc gọi ban đầu vẫn đang chạy",
+        "Schema lỗi xác thực",
+        "Process khởi động lại"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có tính năng khử trùng lặp, thử lại ở 5 giây sẽ chạy đua với bản gốc chậm vẫn đang chờ xử lý. Bộ nhớ đệm thu gọn cả hai thành một lệnh gọi trình xử lý."
+    },
+    {
+      "stage": "check",
+      "question": "Loại lỗi nào đủ điều kiện để thử lại trong trình điều phối này?",
+      "options": [
+        "schema và not_found",
+        "nội bộ và budget_exceeded",
+        "timeout (nếu idempotent) và thoáng qua",
+        "Tất cả chúng"
+      ],
+      "correct": 2,
+      "explanation": "Schema và not_found là xác định. Nội bộ che giấu một lỗi xử lý không xác định. Vượt quá ngân sách là lợi nhuận. Chỉ thử lại TransientError timeout-on-idempotent và rõ ràng."
+    },
+    {
+      "stage": "check",
+      "question": "Semaphore xung quanh _run_with_retries bảo vệ điều gì?",
+      "options": [
+        "Trình xử lý từ chính nó",
+        "Phần phụ trợ từ quá nhiều cuộc gọi đồng thời được thu thập ()",
+        "Trình xác thực",
+        "Bộ đếm thử lại"
+      ],
+      "correct": 1,
+      "explanation": "Một tập hợp bốn mươi cuộc gọi sẽ mở bốn mươi công văn đồng thời mà không có giới hạn. Semaphore giới hạn sóng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao khóa idempotency được lấy bởi người gọi, không phải bởi người điều phối?",
+      "options": [
+        "Bởi vì hàm băm Python không ổn định",
+        "Bởi vì chỉ dẫn xuất từ args làm cho hai cuộc gọi khác nhau về ngữ nghĩa va chạm nếu chúng tình cờ chia sẻ args",
+        "Bởi vì registry sẽ không có chìa khóa",
+        "Bởi vì bộ nhớ cache không thể lưu trữ chuỗi"
+      ],
+      "correct": 1,
+      "explanation": "Người gọi biết id bước, ý định của người lập kế hoạch, người dùng. Chỉ riêng Args là không đủ ngữ cảnh để loại bỏ trùng lặp một cách an toàn."
+    },
+    {
+      "stage": "post",
+      "question": "Mã lỗi JSON-RPC nào ánh xạ đến lỗi schema khi gửi hàng?",
+      "options": [
+        "-32601",
+        "-32602",
+        "-32603",
+        "-32700"
+      ],
+      "correct": 1,
+      "explanation": "-32602 Tham số không hợp lệ. Trình điều phối trả về nó trước khi bất kỳ trình xử lý nào chạy."
+    },
+    {
+      "stage": "post",
+      "question": "Sau khi đạt được max_attempts với timeouts trên một công cụ idempotent, những gì được trả về?",
+      "options": [
+        "Một ngoại lệ được đưa ra",
+        "DispatchOk không có kết quả",
+        "DispatchError với kind=timeout và attempts==max_attempts",
+        "DispatchError với kind=internal"
+      ],
+      "correct": 2,
+      "explanation": "Trình điều phối trả về một phong bì lỗi đã nhập. Loại phản ánh chế độ thất bại cuối cùng, số lần thử phản ánh số lần thử mà nó đã thực hiện."
+    }
+  ]
+}
