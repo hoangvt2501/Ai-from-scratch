@@ -1,0 +1,78 @@
+{
+  "lesson": "34-transformer-block",
+  "title": "Transformer Chặn từ đầu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Hai lớp con nào nằm bên trong một khối decoder transformer duy nhất?",
+      "options": [
+        "Tích chập và cổng tuần hoàn",
+        "attention nhân quả nhiều đầu và một MLP khôn ngoan về vị trí, mỗi cái được bao bọc trong một kết nối dư",
+        "Embedding tra cứu và softmax",
+        "RNN encoder và decoder"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi khối decoder LLM hiện đại đều attention cộng với MLP, mỗi khối có đường dẫn dư riêng và LayerNorm riêng."
+    },
+    {
+      "stage": "check",
+      "question": "Sự khác biệt chính giữa trước LN và sau LN ở độ sâu là gì?",
+      "options": [
+        "Pre-LN sử dụng các phép toán attention khác nhau",
+        "Pre-LN giữ cho tín hiệu dư không chuẩn hóa để gradients lan truyền sạch sẽ đến embedding; post-LN đặt định mức sau khi thêm dư, làm co lại gradients ở độ sâu và cần khởi động",
+        "Post-LN nhanh hơn trên GPU",
+        "Pre-LN chỉ hoạt động cho encoders"
+      ],
+      "correct": 1,
+      "explanation": "Pre-LN tập luyện ổn định mà không cần khởi động ở tốc độ học tập thông thường; sau LN là những gì bài báo năm 2017 shipped và cần khởi động."
+    },
+    {
+      "stage": "check",
+      "question": "Mặt nạ nhân quả trong attention nhiều đầu có tác dụng gì?",
+      "options": [
+        "Thả tokens ngẫu nhiên",
+        "Đặt tam giác trên của attention logits thành vô cực âm để i token không thể tham gia vào tokens ở các vị trí lớn hơn i",
+        "Chuẩn hóa điểm số attention",
+        "Chọn chuỗi dài nhất trong batch"
+      ],
+      "correct": 1,
+      "explanation": "Quên mặt nạ nhân quả huấn luyện một model có thể đọc tokens trong tương lai; mặt nạ là mảnh ghép duy nhất thực thi quan hệ nhân quả."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao sử dụng phép chiếu QKV hợp nhất thay vì ba tuyến tính riêng biệt?",
+      "options": [
+        "Nó thay đổi model biểu cảm",
+        "Một tuyến tính có chiều rộng gấp 3 lần d_model thu gọn ba lần khởi chạy hạt nhân và ba matmul thành một, nhanh hơn trên mọi bộ tăng tốc và khớp với tham chiếu GPT-2 triển khai",
+        "Nó tránh một softmax",
+        "Nó loại bỏ phần còn lại"
+      ],
+      "correct": 1,
+      "explanation": "Cùng một toán học, ít hạt nhân hơn; các triển khai tham chiếu của GPT-2, LLaMA và Mistral đều ship phép chiếu hợp nhất."
+    },
+    {
+      "stage": "post",
+      "question": "KHÔNG nên đặt dropout ở đâu trong khối transformer?",
+      "options": [
+        "Trên đầu ra attention softmax",
+        "Trên chính con đường nhận dạng dư, vì điều đó phá vỡ bản sắc cộng cho phép gradient chảy ở độ sâu",
+        "Sau MLP tuyến tính thứ hai",
+        "Bên trong mở rộng chuyển tiếp nguồn cấp dữ liệu"
+      ],
+      "correct": 1,
+      "explanation": "Dropout thuộc về đầu ra attention và trên bản cập nhật còn lại MLP, không bao giờ thuộc về branch nhận dạng của phần dư."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao phải đăng ký mặt nạ nhân quả làm bộ đệm thay vì phân bổ nó cho mỗi lệnh gọi chuyển tiếp?",
+      "options": [
+        "Bộ đệm được mã hóa",
+        "Mặt nạ chỉ phụ thuộc vào độ dài ngữ cảnh tối đa, vì vậy việc phân bổ nó một lần khi xây dựng và cắt cửa sổ đang hoạt động cho mỗi lệnh gọi sẽ tránh được điểm nóng của bộ phân bổ ở ngữ cảnh dài",
+        "Bộ đệm chỉ chạy trên GPU",
+        "Bộ đệm cải thiện accuracy số"
+      ],
+      "correct": 1,
+      "explanation": "Phân bổ một lần với register_buffer, lát cắt cho mỗi chuyển tiếp; nếu không, mặt nạ sẽ trở thành chi phí phân bổ cho mỗi cuộc gọi."
+    }
+  ]
+}
