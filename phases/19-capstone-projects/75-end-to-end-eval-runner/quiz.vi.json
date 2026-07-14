@@ -1,0 +1,78 @@
+{
+  "lesson": "75-end-to-end-eval-runner",
+  "title": "Người chạy Eval từ đầu đến cuối",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bề mặt nhỏ nhất có thể cho giao diện ModelAdapter là gì?",
+      "options": [
+        "Generate(prompt, task) trả về văn bản cộng với độ tin cậy tùy chọn và mỗi token nll",
+        "Hoàn thành, nhúng, phân loại, tóm tắt",
+        "init, đăng nhập, tạo, đóng",
+        "load_weights, tạo ra save_weights"
+      ],
+      "correct": 0,
+      "explanation": "Một phương pháp bao gồm bất kỳ bộ chuyển đổi nào. Mọi thứ khác là trang trí tùy chọn. Người chạy không cần một bề mặt phong phú hơn."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao người chạy chấp nhận một lá cờ song song thay vì luôn chạy song song?",
+      "options": [
+        "Khớp lệnh song song không an toàn trong CPython",
+        "Các bài kiểm tra cần thứ tự thực thi xác định; cờ cho phép chúng chuyển sang tuần tự",
+        "Thực thi song song yêu cầu GPU",
+        "ThreadPoolExecutor không phải là stdlib"
+      ],
+      "correct": 1,
+      "explanation": "Các bài kiểm thử muốn có khả năng tái tạo. Production muốn thông lượng. Cờ chia những mối quan tâm đó mà không có hai đường dẫn mã."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để người chạy xác định cờ chính xác cho bộ đệm hiệu chuẩn?",
+      "options": [
+        "Nó gọi bộ điều hợp hai lần và so sánh đầu ra",
+        "Nó sử dụng các chỉ số kiểu exact_match ở ngưỡng 1.0 và các chỉ số được phân loại ở ngưỡng 0.5 theo mặc định",
+        "Nó sử dụng độ tin cậy thùng trung bình",
+        "Nó sử dụng phân hủy Brier"
+      ],
+      "correct": 1,
+      "explanation": "Ngưỡng nhận biết chỉ số: chỉ số kiểu exact_match sử dụng ngưỡng gần 1,0, trong khi chỉ số được phân loại sử dụng 0,5 theo mặc định."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao người chạy lại xây dựng các bản ghi EvalRun và giao chúng cho người tổng hợp thay vì tính toán bảng xếp hạng cùng dòng?",
+      "options": [
+        "EvalRun tiết kiệm bộ nhớ hơn",
+        "Nó giữ cho người chạy bất khả tri với trình tổng hợp và cho phép lớp bảng xếp hạng phát triển mà không cần chạm vào người chạy",
+        "Trình tổng hợp nhanh hơn trên mảng numpy so với các lớp dữ liệu",
+        "EvalRun được yêu cầu bởi JSON Schema"
+      ],
+      "correct": 1,
+      "explanation": "Thành phần trên nội tuyến. Người chạy tạo ra các bản ghi; công cụ tổng hợp sở hữu toán học trên bảng xếp hạng. Mỗi bài học sở hữu một mối quan tâm."
+    },
+    {
+      "stage": "check",
+      "question": "Vai trò của khối perplexity trong phong bì JSON cuối cùng là gì?",
+      "options": [
+        "Nó là bắt buộc để xếp hạng bảng xếp hạng",
+        "Nó là đầu vào cho báo cáo hiệu chuẩn",
+        "Nó mang số lượng mô hình ngôn ngữ được giữ trên mỗi model, độc lập với việc chấm điểm nhiệm vụ",
+        "Nó được tính toán từ bootstrap CI"
+      ],
+      "correct": 2,
+      "explanation": "Perplexity nằm bên cạnh bảng xếp hạng, không phải bên trong nó. Nó sử dụng số lượng NLL và token token mỗi cuộc gọi của bộ điều hợp."
+    },
+    {
+      "stage": "post",
+      "question": "Tiêu chí thoát sạch của bản demo tự kết thúc là gì?",
+      "options": [
+        "Mọi nhiệm vụ được xác thực, mọi nhiệm vụ được chấm điểm, tổng hợp hiệu chuẩn và bộ điều hợp dựa trên quy tắc hoàn toàn cao hơn bộ điều hợp ngẫu nhiên trên bảng xếp hạng",
+        "Mọi nhiệm vụ đều đạt điểm trên 0,9",
+        "ECE dưới 0,05 cho mỗi model",
+        "Bootstrap CI loại trừ số không cho mỗi cặp"
+      ],
+      "correct": 0,
+      "explanation": "Bản demo thực thi hợp đồng từ đầu đến cuối: mọi lớp chạy và bộ điều hợp chính xác nhất được xếp hạng tương ứng."
+    }
+  ]
+}
