@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Tại sao gỡ lỗi mạng nơ-ron khó hơn gỡ lỗi phần mềm truyền thống?",
+    "options": [
+      "Mạng nơ-ron sử dụng các ngôn ngữ lập trình khác nhau",
+      "Mạng có thể tạo ra đầu ra sai mà không có bất kỳ thông báo lỗi hoặc sự cố nào - mã chạy nhưng kết quả âm thầm không chính xác",
+      "Không thể kiểm tra mạng nơ-ron",
+      "Không có công cụ gỡ lỗi cho mạng nơ-ron"
+    ],
+    "correct": 1,
+    "explanation": "Các lỗi truyền thống gặp sự cố hoặc ném các ngoại lệ. Các lỗi mạng nơ-ron tạo ra một con số chỉ sai - một loss không giảm, accuracy ổn định hoặc đầu ra không chính xác một cách tinh tế. Không có thông báo lỗi nào cho bạn biết điều gì đã xảy ra.",
+    "stage": "pre"
+  },
+  {
+    "question": "Kỹ thuật gỡ lỗi 'overfit one batch' là gì?",
+    "options": [
+      "Training dataset đầy đủ cho đến khi nó quá vừa vặn",
+      "Training trên một batch nhỏ duy nhất cho đến khi loss gần bằng không, việc xác minh model có thể ghi nhớ ít nhất một vài ví dụ",
+      "Sử dụng kích thước batch rất lớn",
+      "Overfitting bộ xác thực"
+    ],
+    "correct": 1,
+    "explanation": "Nếu model của bạn không thể ghi nhớ một batch nhỏ (ví dụ: 4-8 mẫu) đến gần loss không, thì về cơ bản có điều gì đó bị hỏng: kiến trúc sai, chức năng loss bị hỏng hoặc vòng lặp training không chính xác. Đây là chẩn đoán đầu tiên chạy.",
+    "stage": "pre"
+  },
+  {
+    "question": "loss của bạn là NaN sau vài bước training. Nguyên nhân có thể xảy ra nhất là gì?",
+    "options": [
+      "dataset quá nhỏ",
+      "Bùng nổ gradients hoặc tràn số, thường là do learning rate quá cao hoặc thiếu gradient cắt",
+      "model có quá ít parameters",
+      "Chức năng kích hoạt bị sai"
+    ],
+    "correct": 1,
+    "explanation": "NaN loss thường xuất phát từ tràn số: gradients bùng nổ, trọng lượng tăng không giới hạn và các phép toán như log(0) hoặc exp(1000) tạo ra infinity/NaN. Hạ learning rate hoặc thêm gradient cắt.",
+    "stage": "post"
+  },
+  {
+    "question": "training loss của bạn giảm nhưng loss xác thực không thay đổi ngay từ đầu. Điều này cho thấy điều gì?",
+    "options": [
+      "model là overfitting",
+      "model đang học các mẫu dữ liệu training nhưng chúng không khái quát hóa - có thể là vấn đề pipeline dữ liệu (train/val dữ liệu không khớp) hoặc overfitting nghiêm trọng",
+      "learning rate quá thấp",
+      "Các model cần nhiều lớp hơn"
+    ],
+    "correct": 1,
+    "explanation": "Nếu xác thực loss không bao giờ được cải thiện, model là ghi nhớ nhiễu training (overfitting) hoặc có lỗi pipeline dữ liệu trong đó phân phối huấn luyện và xác thực về cơ bản khác nhau.",
+    "stage": "post"
+  },
+  {
+    "question": "Bạn nên kiểm tra điều gì đầu tiên khi đường cong loss của bạn hoàn toàn phẳng (loss không giảm chút nào)?",
+    "options": [
+      "Thử một kiến trúc khác",
+      "Xác minh gradients không phải không, learning rate đủ cao và hàm loss thực sự phụ thuộc vào dự đoán của model",
+      "Thêm dữ liệu training",
+      "Chuyển sang optimizer khác"
+    ],
+    "correct": 1,
+    "explanation": "loss phẳng có nghĩa là model không cập nhật. Nguyên nhân phổ biến: không gradients (tế bào thần kinh chết, tensors tách rời), learning rate quá nhỏ hoặc hàm loss không chuyển gradients đến model (ví dụ: sử dụng .item() trước .backward()).",
+    "stage": "post"
+  }
+]
