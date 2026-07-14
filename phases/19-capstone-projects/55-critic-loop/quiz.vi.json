@@ -1,0 +1,78 @@
+{
+  "lesson": "55-critic-loop",
+  "title": "Vòng lặp phê bình",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao nhà phê bình chấm điểm trên năm chiều cố định thay vì trả về một đoạn văn dạng tự do?",
+      "options": [
+        "Bởi vì models không thể tạo đoạn văn một cách đáng tin cậy",
+        "Bởi vì một vector cố định cho phép harness phát hiện hồi quy trên mỗi chiều qua các vòng",
+        "Bởi vì LaTeX yêu cầu trường điểm",
+        "Bởi vì người sửa đổi chỉ chấp nhận JSON"
+      ],
+      "correct": 1,
+      "explanation": "Một thứ nguyên cố định vector biến phê bình thành dữ liệu có cấu trúc mà harness có thể so sánh qua các vòng. Phê bình dạng tự do là không thể kiểm chứng; vectors làm cho hồi quy có thể nhìn thấy được."
+    },
+    {
+      "stage": "pre",
+      "question": "Điều kiện dừng kiểm tra vòng lặp theo thứ tự nào?",
+      "options": [
+        "Ngân sách, sau đó ổn định, sau đó là mục tiêu",
+        "Mục tiêu, sau đó ổn định, sau đó là ngân sách",
+        "Plateau, sau đó là mục tiêu, sau đó là ngân sách",
+        "Cược nào bắn trước bằng tie-break ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Mục tiêu đạt được chiến thắng (công việc đã hoàn thành). Sau đó ổn định (không thể đạt được tiến bộ nữa). Sau đó là ngân sách (giới hạn cứng). Thứ tự làm cho kết quả xác định khi nhiều điều kiện có thể kích hoạt."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao phát hiện cao nguyên yêu cầu hai vòng phẳng liên tiếp thay vì một?",
+      "options": [
+        "Bởi vì lớp dữ liệu yêu cầu một danh sách",
+        "Bởi vì tính điểm xác định vẫn có nhiễu mỗi vòng; một vòng phẳng là không đủ tín hiệu",
+        "Bởi vì model trả về điểm số không xác định",
+        "Bởi vì bảng điều khiển mong đợi hai điểm"
+      ],
+      "correct": 1,
+      "explanation": "Ngay cả đầu ra của một cầu thủ ghi bàn xác định cũng thay đổi từ vòng này sang vòng khác tùy thuộc vào đề xuất nào được áp dụng. Yêu cầu hai vòng phẳng lọc nhiễu đó."
+    },
+    {
+      "stage": "check",
+      "question": "Người sửa đổi nhận được gì dưới dạng đầu vào mỗi vòng?",
+      "options": [
+        "Đối tượng Phê bình đầy đủ bao gồm điểm số",
+        "Bài báo và danh sách hồ sơ Gợi ý",
+        "Đoạn văn do model tạo",
+        "Nguồn LaTeX thô"
+      ],
+      "correct": 1,
+      "explanation": "Reviser.__call__ lấy (giấy, đề xuất). Mỗi Đề xuất mang một thứ nguyên, phần mục tiêu và một hướng dẫn chỉnh sửa. Người sửa đổi không thấy điểm số. Sự tách biệt đó cho phép hoán đổi một trong hai bên mà không chạm vào bên kia."
+    },
+    {
+      "stage": "post",
+      "question": "trace chứa những gì cho mỗi vòng?",
+      "options": [
+        "Chỉ là bản nháp giấy cuối cùng",
+        "Số vòng, vector điểm, trung bình, đề xuất được áp dụng, phán quyết",
+        "Các model prompt và hoàn thiện",
+        "Chỉ có phán quyết hội tụ"
+      ],
+      "correct": 1,
+      "explanation": "trace là nhật ký sự kiện mỗi vòng. Bảng điều khiển hiển thị nó dưới dạng biểu đồ điểm theo thời gian; giai đoạn tiếp theo đọc nó để quyết định xem branch có đáng để giữ hay không."
+    },
+    {
+      "stage": "post",
+      "question": "Một nhà phê bình liên tục đưa ra những gợi ý không bao giờ cải thiện bất kỳ điểm số nào sẽ đưa ra phán quyết cuối cùng nào?",
+      "options": [
+        "target, vì ngân sách ẩn lỗi",
+        "cao nguyên hoặc ngân sách, bởi vì harness sẽ bắt được sự thiếu tiến bộ",
+        "hội tụ, bởi vì các đề xuất đã được áp dụng",
+        "Một ngoại lệ, vì vòng lặp gặp sự cố"
+      ],
+      "correct": 1,
+      "explanation": "Lửa cao nguyên (hai vòng phẳng) hoặc ngân sách (mũ cứng). Cả hai phán quyết đều làm nổi lỗi. Vòng lặp không bao giờ âm thầm thành công."
+    }
+  ]
+}
