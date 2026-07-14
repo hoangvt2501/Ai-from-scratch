@@ -1,0 +1,67 @@
+[
+  {
+    "id": "hptune-pre-1",
+    "stage": "pre",
+    "question": "Sự khác biệt giữa parameter và hyperparameter là gì?",
+    "options": [
+      "Parameters được thiết lập bởi người dùng; hyperparameters được học trong quá trình training",
+      "Parameters được học trong quá trình training (trọng số, thiên vị); hyperparameters được đặt trước khi training bắt đầu (learning rate, độ sâu tối đa)",
+      "Không có sự khác biệt; chúng là từ đồng nghĩa",
+      "Parameters chỉ áp dụng cho mạng nơ-ron; hyperparameters áp dụng cho models cây"
+    ],
+    "correct": 1,
+    "explanation": "Parameters được học bằng thuật toán tối ưu hóa trong quá trình training (ví dụ: trọng số). Hyperparameters được đặt trước training và kiểm soát cách học diễn ra (ví dụ: learning rate, cường độ chính quy hóa)."
+  },
+  {
+    "id": "hptune-pre-2",
+    "stage": "pre",
+    "question": "Tìm kiếm lưới trên 4 hyperparameters với 5 giá trị, mỗi giá trị yêu cầu bao nhiêu lần đánh giá?",
+    "options": [
+      "20",
+      "25",
+      "625",
+      "4"
+    ],
+    "correct": 2,
+    "explanation": "Tìm kiếm lưới đánh giá mọi kết hợp: 5^4 = 625. Tỷ lệ theo cấp số nhân này là lý do tại sao tìm kiếm lưới trở nên không thực tế với nhiều hyperparameters."
+  },
+  {
+    "id": "hptune-post-1",
+    "stage": "post",
+    "question": "Tại sao tìm kiếm ngẫu nhiên thường vượt trội hơn tìm kiếm lưới với cùng ngân sách đánh giá?",
+    "options": [
+      "Tìm kiếm ngẫu nhiên sử dụng thuật toán tối ưu hóa tốt hơn",
+      "Hầu hết các hyperparameters có chiều hiệu quả thấp, vì vậy tìm kiếm ngẫu nhiên bao gồm những thứ quan trọng dày đặc hơn",
+      "Tìm kiếm ngẫu nhiên luôn tìm thấy mức tối ưu toàn cầu",
+      "Tìm kiếm lưới không thể xử lý hyperparameters liên tục"
+    ],
+    "correct": 1,
+    "explanation": "Thông thường chỉ có 1-2 hyperparameters quan trọng đối với một vấn đề nhất định. Tìm kiếm lưới lãng phí các đánh giá khác nhau không quan trọng. Tìm kiếm ngẫu nhiên cung cấp các giá trị duy nhất cho mỗi parameter mỗi thử nghiệm, bao gồm các khía cạnh quan trọng dày đặc hơn."
+  },
+  {
+    "id": "hptune-post-2",
+    "stage": "post",
+    "question": "Trong tối ưu hóa Bayes, hàm thu thập cân bằng điều gì?",
+    "options": [
+      "Training tốc độ và model accuracy",
+      "Khai thác (tìm kiếm gần các điểm tốt đã biết) và thăm dò (tìm kiếm các khu vực không chắc chắn)",
+      "Số lượng features và số lượng mẫu",
+      "Bias và variance trong model thay thế"
+    ],
+    "correct": 1,
+    "explanation": "Hàm thu thập quyết định nơi đánh giá tiếp theo bằng cách cân bằng khai thác (gần như kết quả tốt đã biết) và thăm dò (khi model thay thế không chắc chắn). Điều này hướng dẫn tìm kiếm hiệu quả hơn so với ngẫu nhiên."
+  },
+  {
+    "id": "hptune-post-3",
+    "stage": "post",
+    "question": "Bạn điều chỉnh hyperparameters bằng cách sử dụng bộ thử nghiệm và báo cáo hiệu suất thử nghiệm tốt nhất. Có gì sai với cách tiếp cận này?",
+    "options": [
+      "Không có gì - đây là thông lệ tiêu chuẩn",
+      "Bạn đã quá phù hợp với bộ thử nghiệm; Hiệu suất được báo cáo là lạc quan và sẽ không khái quát hóa",
+      "Bộ thử nghiệm nên được sử dụng để training, không điều chỉnh",
+      "Hyperparameters chỉ nên là số nguyên"
+    ],
+    "correct": 1,
+    "explanation": "Điều chỉnh trên bộ thử nghiệm có nghĩa là bạn đã chọn hyperparameters hoạt động tốt trên các mẫu cụ thể đó. Đây là overfitting của bộ kiểm tra. Sử dụng bộ xác nhận để điều chỉnh và dành bộ kiểm tra để đánh giá cuối cùng."
+  }
+]
