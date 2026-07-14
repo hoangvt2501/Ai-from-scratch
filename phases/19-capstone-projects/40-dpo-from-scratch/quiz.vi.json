@@ -1,0 +1,78 @@
+{
+  "lesson": "phase-19/40-dpo-from-scratch",
+  "title": "Tối ưu hóa tùy chọn trực tiếp từ đầu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trước khi đọc: theo model ưu tiên Bradley-Terry, xác suất một con người thích hoàn thành y_w hơn y_l cho prompt x là sigmoid (r (x, y_w) - r (x, y_l)). Ngụ ý là gì?",
+      "options": [
+        "Bạn phải lắp r trước khi training policy.",
+        "Chỉ có sự khác biệt về phần thưởng mới quan trọng; bất kỳ hàm nào được thêm vào cả r(x, y_w) và r(x, y_l) đều bị hủy.",
+        "Bradley-Terry yêu cầu một hằng số chuẩn hóa Z (x) không biến mất.",
+        "Sigmoid không tương thích với likelihood tối đa."
+      ],
+      "correct": 1,
+      "explanation": "Ưu tiên Bradley-Terry chỉ phụ thuộc vào chênh lệch phần thưởng. Bất cứ điều gì chung cho cả hai lần hoàn thành đều bị hủy. Đây là lý do cấu trúc DPO có thể tránh model phần thưởng rõ ràng: thuật ngữ chỉ prompt trong công thức policy tối ưu sẽ hủy bỏ."
+    },
+    {
+      "stage": "check",
+      "question": "DPO loss cho một bộ ba duy nhất là -log sigmoid( beta * ( (logp_w_pol - logp_w_ref) - (logp_l_pol - logp_l_ref) ) ). Nếu logp_w_pol = logp_w_ref và logp_l_pol = logp_l_ref thì loss bằng?",
+      "options": [
+        "0.",
+        "log(2).",
+        "beta.",
+        "-1."
+      ],
+      "correct": 1,
+      "explanation": "Cả hai sự khác biệt đều bằng không, vì vậy đối số sigmoid là không, giá trị sigmoid là 0,5 và -log(0,5) = log(2). Đây là loss khi policy hoàn toàn không di chuyển khỏi tham chiếu."
+    },
+    {
+      "stage": "check",
+      "question": "Trong quá trình DPO training, xác suất log được chọn dưới tham chiếu model thay đổi giữa epochs vì policy khác với nó. Đúng hay sai?",
+      "options": [
+        "Đúng: tham chiếu trôi khi policy cập nhật.",
+        "Sai: tham chiếu bị đóng băng; các đầu mối nhật ký tham chiếu được tính toán một lần và được sử dụng lại.",
+        "Chỉ đúng khi beta không phải bằng không.",
+        "Sai trừ khi gradients bị vô hiệu hóa rõ ràng với no_grad."
+      ],
+      "correct": 1,
+      "explanation": "Tham chiếu bị đóng băng trong toàn bộ quá trình chạy DPO. parameters của nó không bao giờ cập nhật. Việc triển khai ảnh chụp nhanh tham chiếu log-probs một lần hoặc bao bọc các forward pass tham chiếu trong no_grad với requires_grad=False được đặt trên parameters của nó."
+    },
+    {
+      "stage": "check",
+      "question": "Lấy gradient của L_DPO liên quan đến logp_w_pol (xác suất log-xác suất của policy về việc hoàn thành đã chọn), dấu hiệu là?",
+      "options": [
+        "Tích cực (loss tăng khi log-prob đã chọn tăng lên).",
+        "Âm (loss giảm khi log-prob đã chọn tăng lên).",
+        "Zero (loss độc lập với policy log-probs).",
+        "Không xác định (phụ thuộc vào tham chiếu)."
+      ],
+      "correct": 1,
+      "explanation": "gradient là -beta * (1 - sigmoid(z)), không dương. Tăng xác suất log đã chọn sẽ làm giảm loss, đây chính xác là tín hiệu training mà chúng ta muốn."
+    },
+    {
+      "stage": "post",
+      "question": "Trên lịch thi đấu của bạn, DPO loss giảm nhưng policy bắt đầu thích hoàn thành ngắn hơn trên bảng, ngay cả khi ngắn hơn là tồi tệ hơn. Nguyên nhân có khả năng nhất?",
+      "options": [
+        "Beta quá thấp.",
+        "Độ dài bias: các dãy dài hơn tích lũy nhiều số hạng xác suất log hơn (mỗi số âm), vì vậy tổng của log-probs phạt độ dài về mặt cấu trúc.",
+        "Tài liệu tham khảo không được đóng băng đúng cách.",
+        "Trình tối ưu hóa đang sử dụng sai learning rate."
+      ],
+      "correct": 1,
+      "explanation": "Xác suất tổng log thiên về các chuỗi ngắn hơn vì mỗi token bổ sung thêm một thuật ngữ xác suất log âm. Bản sửa lỗi tiêu chuẩn là chuẩn hóa log-probs theo độ dài hoàn thành khi training và đánh giá."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn muốn thay thế loss sigmoid + log bằng biến thể IPO (z - 1) ^ 2. Ảnh hưởng thực tế đến động lực training là gì?",
+      "options": [
+        "Nó không bão hòa theo cách của loss sigmoid, điều này giữ được tốt hơn dưới các nhãn ưu tiên ồn ào.",
+        "Nó tương đương về mặt toán học ở tất cả các điểm.",
+        "Nó loại bỏ hoàn toàn nhu cầu về model tham chiếu.",
+        "Nó không yêu cầu parameter beta."
+      ],
+      "correct": 0,
+      "explanation": "loss bình phương của IPO không bão hòa theo cách sigmoid, điều này giúp ích khi nhãn ưu tiên bị nhiễu hoặc khi một số bộ ba bị dán nhãn sai. Về mặt kinh nghiệm, nó làm giảm tối ưu hóa quá mức đối với các datasets ưu tiên nhỏ."
+    }
+  ]
+}
