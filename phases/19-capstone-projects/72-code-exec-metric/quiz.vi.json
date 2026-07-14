@@ -1,0 +1,78 @@
+{
+  "lesson": "72-code-exec-metric",
+  "title": "Mã Exec Metric",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao người chạy lại tạo ra một quy trình con Python mới cho mỗi ứng cử viên thay vì gọi giám đốc điều hành nội tuyến?",
+      "options": [
+        "Nó nhanh hơn điều hành",
+        "Nó tránh gây ô nhiễm tích hợp",
+        "Nó cách ly timeouts, vượt quá đầu ra và imports nguy hiểm khỏi process đánh giá máy chủ",
+        "Exec không được dùng nữa trong Python hiện đại"
+      ],
+      "correct": 2,
+      "explanation": "Một vòng lặp vô hạn hoặc phân bổ bộ nhớ chạy trong mã ứng cử viên chỉ làm hỏng quá trình con. Đánh giá máy chủ tiếp tục tiến triển."
+    },
+    {
+      "stage": "pre",
+      "question": "Điểm số cho một nhiệm vụ có ba khẳng định khi hai đạt và một thất bại là bao nhiêu?",
+      "options": [
+        "1.0",
+        "0.667",
+        "0.0",
+        "0.5"
+      ],
+      "correct": 1,
+      "explanation": "Điểm được thông qua chia cho tổng. Hai trong ba là 0.667. Mã thoát là assertion_fail."
+    },
+    {
+      "stage": "check",
+      "question": "Người chạy trả về mã thoát nào khi mã ứng cử viên không phân tích cú pháp?",
+      "options": [
+        "lỗi",
+        "assertion_fail",
+        "timeout",
+        "syntax_error"
+      ],
+      "correct": 3,
+      "explanation": "compile() nâng SyntaxError bên trong trình chạy, script bên trong bắt nó và viết exit_code=syntax_error."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao đồng hồ treo tường timeout điều khiển chịu tải hơn là danh sách từ chối import?",
+      "options": [
+        "Imports không thể bị từ chối trong Python",
+        "Hầu hết các thất bại là vòng lặp vô hạn và một đối thủ kiên quyết có thể bỏ qua bất kỳ danh sách từ chối nào trong process",
+        "subprocess.run không hỗ trợ danh sách từ chối",
+        "Đồng hồ treo tường được kiểm tra tại thời điểm biên dịch"
+      ],
+      "correct": 1,
+      "explanation": "Những người từ chối bắt được mã lười biếng, timeouts bắt được các vòng lặp vô hạn. Người từ chối là một điểm tựa, timeout là sàn."
+    },
+    {
+      "stage": "check",
+      "question": "pass_at_k(n, c, k) trả về bao nhiêu khi n - c < k?",
+      "options": [
+        "Zero, vì mẫu không được xác định",
+        "Một, vì mẫu phải chứa ít nhất một dung dịch đi qua",
+        "c/n, tỷ lệ đậu theo kinh nghiệm",
+        "Tăng ValueError"
+      ],
+      "correct": 1,
+      "explanation": "Nếu có ít lần thất bại hơn cỡ mẫu, mỗi mẫu có kích thước k nhất thiết phải bao gồm ít nhất một lần đạt, vì vậy xác suất là 1."
+    },
+    {
+      "stage": "post",
+      "question": "Làm thế nào để người chạy xuất hiện tràn đầu ra và tại sao giới hạn lại là 256 KB?",
+      "options": [
+        "Stdout từ quá trình con được phát trực tuyến; khi vượt qua tổng số 256 KB đang chạy, con sẽ bị giết và tác vụ được ghi lại là exit_code=lỗi với chi tiết \"tràn đầu ra\"",
+        "Chỉ stderr; kích thước phù hợp với mặc định của đường ống hệ điều hành",
+        "Kích thước nguồn ứng viên, được giới hạn để mã được tạo vẫn nhỏ",
+        "Giá trị điểm, được biểu thị dưới dạng phần trăm với hai chữ số thập phân"
+      ],
+      "correct": 0,
+      "explanation": "Nắp bảo vệ máy chủ. Mã ứng cử viên làm ngập stdout bị giết giữa dòng; người chạy chuẩn hóa kết quả trong exit_code=error với chi tiết \"tràn đầu ra\" thay vì đúc mã thoát mới."
+    }
+  ]
+}
