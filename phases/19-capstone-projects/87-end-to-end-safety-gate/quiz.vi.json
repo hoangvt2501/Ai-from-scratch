@@ -1,0 +1,78 @@
+{
+  "lesson": "87-end-to-end-safety-gate",
+  "title": "Capstone 87 — Cổng an toàn từ đầu đến cuối",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ba checkpoints nằm ở đâu trong vòng đời yêu cầu?",
+      "options": [
+        "Cả ba đều chạy sau khi kết thúc model",
+        "Pre-gen chạy trên prompt trước model, trong quá trình gen lọc luồng, sau thế hệ chạy trên đầu ra đã hoàn thành",
+        "Cả ba đều chạy trước khi model được gọi",
+        "Chỉ chạy sau thế hệ; Pre-gen và during-gen là bí danh"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Mục tiêu của lọc trong thế hệ là gì?",
+      "options": [
+        "Cách dịch đầu ra sang ngôn ngữ khác",
+        "Để đệm các khối và kết thúc luồng sớm khi xuất hiện phần tiếp tục có hại đã biết, trước khi người dùng nhìn thấy",
+        "Để tăng thông lượng token",
+        "Để thay thế prompt bằng một sự từ chối"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để công cụ tổng hợp quyết định hành động cuối cùng?",
+      "options": [
+        "Bằng cách tính trung bình độ tin cậy của mọi tín hiệu",
+        "Bằng cách lấy mức độ nghiêm trọng tối đa trên các tín hiệu máy dò, bộ lọc token, bộ phân loại và quy tắc và ánh xạ nó để chặn, biên tập, cảnh báo hoặc cho phép",
+        "Bằng cách gọi cho model lần thứ hai",
+        "Chỉ bằng cách nhìn vào công cụ quy tắc"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao cổng phát ra RequestTrace có cấu trúc cho mỗi yêu cầu?",
+      "options": [
+        "Để làm chậm hệ thống",
+        "Để cung cấp cho người đánh giá một dấu vết kiểm tra trên mỗi checkpoint để có thể truy xuất hồi quy trong bất kỳ lớp nào đến đúng mô-đun",
+        "Để thay thế ghi nhật ký",
+        "Để sao chép trace vào prompt"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì xảy ra khi độ tin cậy trước thế hệ vượt quá ngưỡng khối?",
+      "options": [
+        "model vẫn được kêu gọi hoàn chỉnh",
+        "Cổng trả về policy từ chối và bỏ qua hoàn toàn trong thế hệ và sau thế hệ",
+        "Cổng đưa ra một ngoại lệ",
+        "Cổng hạ ngưỡng và thử lại"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bản demo cố tình để một số thủ thuật mã hóa prompts tiếp cận trong quá trình phát triển?",
+      "options": [
+        "Bởi vì thủ thuật mã hóa không phải là các cuộc tấn công thực sự",
+        "Bởi vì pipeline đầu vào không phải lúc nào cũng chuẩn hóa chúng kịp thời; bộ lọc trong quá trình phát điện là bộ lọc phòng thủ theo chiều sâu để bắt phần tiếp theo bị rò rỉ",
+        "Bởi vì dù sao model cũng từ chối họ",
+        "Bởi vì công cụ quy tắc xử lý mã hóa"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
