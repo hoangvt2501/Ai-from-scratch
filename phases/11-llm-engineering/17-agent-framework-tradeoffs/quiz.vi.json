@@ -1,0 +1,65 @@
+{
+  "lesson": "phase-11/17-agent-framework-tradeoffs",
+  "questions": [
+    {
+      "stage": "post",
+      "question": "framework nào là lựa chọn đầu tiên phù hợp cho quy trình làm việc phải tiếp tục sau sự cố, chấp nhận sự chấp thuận của con người giữa chừng và mở rộng song song cho ba tha mồi?",
+      "options": [
+        "Phi hành đoànAI",
+        "Tự động",
+        "Đồ thị LangGraph",
+        "Bất động lực"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao định tuyến do LLM chọn lại tốn nhiều tokens hơn mỗi lượt so với định tuyến rõ ràng?",
+      "options": [
+        "Nó tìm nạp trước nút tiếp theo song song với độ trễ phòng ngừa rủi ro.",
+        "Người lập kế hoạch LLM cuộc gọi chọn bước tiếp theo mỗi lượt, thêm prompt và tokens hoàn thành cho mọi quyết định.",
+        "Nó sao chép danh sách công cụ cho mọi agent trong phi hành đoàn.",
+        "Nó gửi toàn bộ lịch sử cuộc trò chuyện đến một model xác minh."
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Đối thoại giữa người đề xuất và nhà phê bình trong việc xem xét mã tự nhiên ánh xạ đến trừu tượng cốt lõi của framework nào?",
+      "options": [
+        "Phi hành đoàn tuần tự của CrewAI",
+        "StateGraph của LangGraph",
+        "Cặp GroupChat / ConversableAgent của AutoGen",
+        "Agent duy nhất của Agno với các công cụ"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "framework nào có trình điều khiển lưu trữ tích hợp (SQLite, Postgres, Redis, Mongo, DynamoDB) được gắn trực tiếp vào Agent class để session và persistence bộ nhớ?",
+      "options": [
+        "Đồ thị LangGraph",
+        "Phi hành đoànAI",
+        "Tự động",
+        "Bất động lực"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bạn có một trình tóm tắt hai cuộc gọi: tìm nạp văn bản, tóm tắt. Tùy chọn nào là lựa chọn framework phù hợp?",
+      "options": [
+        "LangGraph StateGraph — luôn sử dụng framework để đảm bảo độ tin cậy.",
+        "CrewAI với vai trò nhà nghiên cứu + người tóm tắt - vai trò làm cho nó rõ ràng hơn.",
+        "Đơn giản Python với nhà cung cấp SDK - không có framework nào là framework nhanh nhất cho pipelines nhỏ.",
+        "AutoGen GroupChat — hai agents có thể tranh luận về bản tóm tắt tốt nhất."
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
