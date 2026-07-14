@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao video 2D + pool model không thành công trên dataset Something-Something V2?",
+      "options": [
+        "Hình ảnh quá nhỏ",
+        "Kiến trúc model không tương thích",
+        "Nhãn của dataset được xác định bởi hướng chuyển động ('đẩy thứ gì đó từ trái sang phải'), không phải ngoại hình; Gộp trung bình bất biến thứ tự trên mỗi khung hình features không thể phân biệt hướng chuyển động",
+        "Có quá nhiều classes"
+      ],
+      "correct": 2,
+      "explanation": "Nhãn Something-Something theo nghĩa đen là 'X di chuyển từ trái sang phải' so với 'X di chuyển từ phải sang trái'. Cả hai trông giống hệt nhau trong bất kỳ khung hình đơn lẻ nào và embeddings khung trung bình là bất biến thứ tự nên pool(f1, f2, ..., fT) == pool(fT, ..., f2, f1). Nhãn được xác định theo chuyển động yêu cầu một model tuân theo trật tự thời gian."
+    },
+    {
+      "stage": "pre",
+      "question": "Thủ thuật lạm phát của I3D là gì?",
+      "options": [
+        "Một cách để pretrain nhiều hình ảnh hơn",
+        "Lấy các hạt nhân pretrained của CNN 2D, sao chép từng hạt nhân dọc theo một trục thời gian mới (chia cho kernel_T để duy trì thang kích hoạt) và sử dụng chúng để khởi tạo CNN 3D - cung cấp cho 3D model trọng số mạnh mà không cần pretraining 3D",
+        "Bộ lập lịch cho tỷ lệ học tập",
+        "Một phương pháp nén video"
+      ],
+      "correct": 1,
+      "explanation": "Lạm phát khởi động models video 3D từ trọng số ImageNet 2D mạnh mẽ. Hạt nhân 3x3 2D trở thành hạt nhân 3D 3x3x3 bằng cách sao chép cùng với T với tỷ lệ lại 1/kernel_T. Nó chuyển đối tượng và kết cấu features học được trên ImageNet trực tiếp vào model video, đó là lý do tại sao I3D là model 3D đầu tiên đánh bại các đường cơ sở 2D + pool."
+    },
+    {
+      "stage": "post",
+      "question": "Tích chập nhân số (2 + 1) D chia một conv 3D thành hai phép toán nào?",
+      "options": [
+        "Một conv thời gian theo sau là một conv chiều sâu",
+        "Một conv được nhóm và một conv 1x1",
+        "Hai convs 3D với những bước tiến khác nhau",
+        "Một chuyển đổi không gian 1x3x3 theo sau là một chuyển đổi 3x1x1 thời gian, với BN+ReLU ở giữa để thêm một phi tuyến tính mà các chuyển đổi 3D đầy đủ không có"
+      ],
+      "correct": 3,
+      "explanation": "(2+1)D thực hiện nhân 3x3x3 thành (1x3x3) sau đó (3x1x1). Hai convs có tính phi tuyến tính giữa chúng (BN + ReLU), giúp tăng khả năng biểu đạt trên mỗi parameter. Trên Kinetics, R (2 + 1) D-34 vượt trội hơn R3D-34 tương đương với ít tham số hơn - tính phi tuyến tính bổ sung đang thực hiện công việc thực sự."
+    },
+    {
+      "stage": "post",
+      "question": "Trong một transformer video, 'chia attention' có nghĩa là gì?",
+      "options": [
+        "Attention hơn một nửa số tokens",
+        "Mỗi khối transformer có hai attention mô-đun: một trên tokens ở cùng một vị trí không gian theo thời gian (attention thời gian), sau đó một trên tokens cùng một bước thời gian trên không gian (attention không gian) - phá vỡ O ((T * H*W)^2) full attention into O(T^2) + O((H*W) ^ 2)",
+        "Attention chỉ áp dụng trong thời gian training",
+        "Attention bỏ qua một số lớp"
+      ],
+      "correct": 1,
+      "explanation": "attention không gian-thời gian khớp đầy đủ là O ((T * H*W)^2), which is infeasible for long videos. Divided attention (TimeSformer) alternates temporal and spatial attention within each block, bringing cost to O(T^2 + (H*W) ^ 2). Nó đánh đổi một loss lý thuyết về khả năng biểu đạt cho training dễ xử lý; trong thực tế chia attention trận đấu hoặc đánh bại chung trên hầu hết các benchmarks."
+    },
+    {
+      "stage": "post",
+      "question": "model Kinetics-400 của bạn báo cáo 76% accuracy clip và 82% accuracy video. Khoảng cách cho bạn biết điều gì?",
+      "options": [
+        "Dự đoán mỗi clip rất ồn ào; Dự đoán trung bình trên nhiều clip được lấy mẫu trên mỗi video (Tăng cường thời gian thử nghiệm) sẽ ổn định kết quả. Một khoảng cách lớn cho thấy features của model nhạy cảm với cửa sổ 8 khung hình nào được lấy mẫu và các clip dài hơn hoặc tăng cường không gian mạnh hơn trong training sẽ thu hẹp khoảng cách",
+        "model bị hỏng",
+        "Bộ bài kiểm tra quá nhỏ",
+        "accuracy clip luôn thấp hơn accuracy video theo định nghĩa"
+      ],
+      "correct": 0,
+      "explanation": "Clip accuracy đánh giá model trên một cửa sổ được lấy mẫu; Video accuracy tính trung bình các dự đoán trên nhiều windows. Khoảng cách 6 điểm có nghĩa là model nhạy cảm với cửa sổ bạn lấy mẫu. Thu hẹp khoảng cách có nghĩa là model đã khái quát hóa tốt hơn trên phân phối thời gian của mỗi video — đó là những gì bạn muốn trong quá trình triển khai. Báo cáo cả hai con số luôn luôn."
+    }
+  ]
+}
