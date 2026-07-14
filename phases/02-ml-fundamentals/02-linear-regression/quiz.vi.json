@@ -1,0 +1,67 @@
+[
+  {
+    "id": "linreg-pre-1",
+    "stage": "pre",
+    "question": "learning rate kiểm soát điều gì trong gradient descent?",
+    "options": [
+      "Số lượng features được sử dụng bởi model",
+      "Bao nhiêu epochs tàu model",
+      "Kích thước của mỗi bước cập nhật parameter",
+      "Tỷ lệ training trên dữ liệu thử nghiệm"
+    ],
+    "correct": 2,
+    "explanation": "learning rate là một vô hướng kiểm soát mức độ thay đổi trọng lượng trên mỗi gradient descent bước. Quá lớn gây ra sự phân kỳ, quá nhỏ gây ra sự hội tụ chậm."
+  },
+  {
+    "id": "linreg-pre-2",
+    "stage": "pre",
+    "question": "R-squared = 0 có nghĩa là gì đối với một model hồi quy?",
+    "options": [
+      "model đưa ra dự đoán hoàn hảo",
+      "Điều model không tốt hơn là luôn dự đoán giá trị trung bình của mục tiêu",
+      "model có lỗi âm",
+      "model chưa được huấn luyện"
+    ],
+    "correct": 1,
+    "explanation": "R-squared = 0 có nghĩa là model giải thích không có variance nào trong mục tiêu. Nó hoạt động chính xác cũng như chỉ đơn giản là dự đoán giá trị trung bình mọi lúc."
+  },
+  {
+    "id": "linreg-post-1",
+    "stage": "post",
+    "question": "Tại sao tỷ lệ feature lại quan trọng đối với gradient descent trong hồi quy đa tuyến tính?",
+    "options": [
+      "Nó làm cho model dễ hiểu hơn",
+      "Nó ngăn bề mặt chi phí bị kéo dài, cho phép hội tụ nhanh hơn",
+      "Nó làm giảm số lượng features cần thiết",
+      "Nó đảm bảo model sẽ tìm thấy mức tối thiểu toàn cầu"
+    ],
+    "correct": 1,
+    "explanation": "Khi features có quy mô rất khác nhau, bề mặt chi phí trở nên kéo dài. Gradient descent cần thêm nhiều bước nữa để hội tụ. Tiêu chuẩn hóa features làm cho bề mặt hình cầu hơn."
+  },
+  {
+    "id": "linreg-post-2",
+    "stage": "post",
+    "question": "Phương trình bình thường cho trọng số tối ưu trực tiếp. Tại sao bạn lại thích gradient descent thay thế?",
+    "options": [
+      "Gradient descent luôn cho kết quả chính xác hơn",
+      "Phương trình bình thường không hoạt động đối với hồi quy tuyến tính",
+      "Đảo ngược ma trận trong phương trình chuẩn là O (n ^ 3) trong features, quá chậm đối với hàng nghìn features",
+      "Gradient descent yêu cầu ít bộ nhớ hơn so với lưu trữ dữ liệu"
+    ],
+    "correct": 2,
+    "explanation": "Phương trình bình thường yêu cầu đảo ngược X^T * X, là O(n^3) theo số features. Đối với số lượng feature lớn, gradient descent hiệu quả hơn."
+  },
+  {
+    "id": "linreg-post-3",
+    "stage": "post",
+    "question": "Hồi quy đa thức độ 10 model hoàn toàn phù hợp với dữ liệu training (R^2 = 1,0) nhưng có R^2 = 0,3 trên dữ liệu thử nghiệm. Bạn nên làm gì?",
+    "options": [
+      "Tăng bậc đa thức lên 20 để phù hợp training hơn nữa",
+      "Giảm độ phức tạp của model (mức độ thấp hơn) hoặc thêm chính quy hóa (Ridge) để ngăn chặn overfitting",
+      "Thu thập ít dữ liệu training hơn để model không thể ghi nhớ",
+      "Tháo bộ kiểm tra và chỉ báo cáo training R^2"
+    ],
+    "correct": 1,
+    "explanation": "Phù hợp training hoàn hảo với độ vừa vặn thử nghiệm kém là overfitting. Cách khắc phục là giảm độ phức tạp (bậc đa thức thấp hơn) hoặc thêm chính quy hóa để phạt trọng số lớn."
+  }
+]
