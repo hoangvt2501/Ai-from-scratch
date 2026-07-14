@@ -1,0 +1,90 @@
+{
+  "lesson": "26-failure-modes-agentic",
+  "title": "Chế độ lỗi: Tại sao Agents Break",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tuyên bố trung tâm của MASFT là gì?",
+      "options": [
+        "Thất bại là nhiễu ngẫu nhiên",
+        "Lỗi nhiều agent là lỗi thiết kế cơ bản, không LLM hạn chế cần sửa chữa bằng models cơ bản tốt hơn",
+        "Thất bại biến mất với models lớn hơn",
+        "Lỗi là do mạng ngừng hoạt động"
+      ],
+      "correct": 1,
+      "explanation": "MASFT của Berkeley phân loại lỗi là lỗi thiết kế; Chúng không biến mất bằng cách mở rộng model cơ sở."
+    },
+    {
+      "stage": "pre",
+      "question": "Cái nào KHÔNG phải là một trong năm chế độ thất bại định kỳ của ngành trong danh sách bài học?",
+      "options": [
+        "Hành động ảo giác",
+        "Phạm vi leo",
+        "Lỗi xếp tầng",
+        "Phiên bản Embedding"
+      ],
+      "correct": 3,
+      "explanation": "Năm là hành động ảo giác, phạm vi leo thang, lỗi xếp tầng, loss ngữ cảnh, lạm dụng công cụ."
+    },
+    {
+      "stage": "check",
+      "question": "Lỗi xếp tầng trong bài học này là gì?",
+      "options": [
+        "Dòng thác giới hạn tốc độ LLM",
+        "Một cuộc gọi sai triggers hiệu ứng xuôi dòng trên các hệ thống (một SKU ảo triggers bốn lệnh gọi API xuôi dòng)",
+        "Lỗi cron",
+        "Lỗi trình phân tích cú pháp YAML"
+      ],
+      "correct": 1,
+      "explanation": "Các tầng khuếch đại một cuộc gọi xấu thành một sự cố đa hệ thống; Đặc biệt nghiêm trọng khi agents thành công giả tạo."
+    },
+    {
+      "stage": "check",
+      "question": "Khảo sát ảo giác LLM Agent liệt kê hai biểu hiện nào?",
+      "options": [
+        "tokens nóng và lạnh",
+        "Độ lệch theo hướng dẫn và lạm dụng ngữ cảnh tầm xa",
+        "Tham lam và beam search",
+        "prompts mềm và cứng"
+      ],
+      "correct": 1,
+      "explanation": "Ảo giác xuất hiện dưới dạng bỏ qua system prompt hoặc forgetting/misapplying bối cảnh rẽ trước đó."
+    },
+    {
+      "stage": "check",
+      "question": "Ảo giác thành công có nghĩa là gì?",
+      "options": [
+        "Người model quá tự tin vào benchmarks",
+        "agent trả về thông báo thành công mặc dù trạng thái mục tiêu không thay đổi (thường là trên 400 từ một công cụ)",
+        "Người dùng nghĩ rằng thành công khi không có gì xảy ra",
+        "Một bài kiểm tra đơn vị đã vượt qua"
+      ],
+      "correct": 1,
+      "explanation": "Thăm dò lại trạng thái môi trường; agents thường hoàn thành giả khi họ không thể phân biệt 'Tôi thất bại' với 'không thể'."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao chỉ gắn thẻ sự cố là không đủ?",
+      "options": [
+        "Sự cố chậm",
+        "Hầu hết các lỗi agent tạo ra đầu ra có vẻ hợp lệ và không gặp sự cố; Kiểm tra cấp độ nội dung là cần thiết",
+        "Sự cố rò rỉ PII",
+        "Ghi nhật ký được trả tiền"
+      ],
+      "correct": 1,
+      "explanation": "Giám sát dựa trên sự cố bỏ lỡ phần lớn các lỗi agent, được định hình theo nội dung."
+    },
+    {
+      "stage": "post",
+      "question": "Bài học khuyến nghị giảm thiểu nào ở mỗi bước của chuỗi lý luận?",
+      "options": [
+        "Thêm sleep()",
+        "Cổng xác minh tự động kiểm tra grounding thực tế so với trạng thái môi trường",
+        "Tắt thử lại",
+        "Chỉ temperature thấp hơn"
+      ],
+      "correct": 1,
+      "explanation": "Cổng mỗi bước (bộ phân loại an toàn, xác thực đối số, CRITIC, thăm dò lại trạng thái) bắt lỗi trước khi chúng xếp tầng."
+    }
+  ]
+}
