@@ -1,0 +1,90 @@
+{
+  "lesson": "02-rewoo-plan-and-execute",
+  "title": "ReWOO và Lập kế hoạch và thực hiện: Lập kế hoạch tách rời",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao prompt của ReAct tăng bậc hai với chiều sâu?",
+      "options": [
+        "model tự mã hóa lại trên mỗi bước",
+        "Mỗi bước mang đầy đủ bối cảnh prior bao gồm mọi suy nghĩ và quan sát trước đó",
+        "schemas công cụ được trùng lặp cho mỗi lệnh gọi",
+        "Nhà cung cấp tính phí trên mỗi byte thay vì theo token"
+      ],
+      "correct": 1,
+      "explanation": "ReAct bao gồm lại prior suy nghĩ và quan sát trên mỗi bước, làm cho tổng chiều dài prompt tăng lên theo bình phương của độ sâu."
+    },
+    {
+      "stage": "pre",
+      "question": "Sự phân chia ba vai trò xác định ReWOO là gì?",
+      "options": [
+        "Người đọc, Nhà văn, Người đánh giá",
+        "Lập kế hoạch, Workers, Solver",
+        "Diễn viên, Người đánh giá, Phản xạ",
+        "Máy phát điện, Nhà phê bình, Optimizer"
+      ],
+      "correct": 1,
+      "explanation": "ReWOO tách một Planner phát ra DAG, Workers lấy bằng chứng và một Solver soạn câu trả lời cuối cùng."
+    },
+    {
+      "stage": "check",
+      "question": "Bài báo báo cáo những con số tiêu đề nào cho ReWOO vs ReAct trên HotpotQA?",
+      "options": [
+        "~ tokens ít hơn 5 lần và +4 accuracy tuyệt đối",
+        "~2 lần tokens và +10 accuracy",
+        "Cùng tokens và +1 accuracy",
+        "tokens ít hơn 10 lần và -2 accuracy"
+      ],
+      "correct": 0,
+      "explanation": "ReWOO báo cáo về mức giảm token gấp 5 lần và +4 accuracy tuyệt đối trên HotpotQA so với ReAct."
+    },
+    {
+      "stage": "check",
+      "question": "Trình giữ chỗ như #E1 bên trong nút kế hoạch ReWOO có nghĩa là gì?",
+      "options": [
+        "Mã lỗi do worker 1 trả về",
+        "Tham chiếu được thay thế tại thời điểm điều phối bằng đầu ra của nút worker trước đó",
+        "Bộ đếm thử lại để lấy bằng chứng",
+        "Mã định danh phiên bản lập kế hoạch"
+      ],
+      "correct": 1,
+      "explanation": "Các nút kế hoạch sử dụng các tham chiếu bằng chứng như #E1 #E2 rằng trình thực thi thay thế bằng đầu ra của workers ngược dòng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao ReWOO khoanh vùng các lỗi tốt hơn ReAct?",
+      "options": [
+        "Workers gặp sự cố khi chạy khi có bất kỳ lỗi nào",
+        "Một lỗi trong một worker trở thành một chuỗi mà Solver nhìn thấy cùng với kế hoạch ban đầu, vì vậy sự xuống cấp là trên mỗi nút chứ không phải trên mỗi bước",
+        "ReWOO thử lại mọi cuộc gọi không thành công lên đến mười lần",
+        "Planner phát lại DAG mới sau mỗi lỗi"
+      ],
+      "correct": 1,
+      "explanation": "Lỗi mỗi nút với kế hoạch ban đầu trong ngữ cảnh cho phép Solver xuống cấp một cách duyên dáng thay vì suy luận giữa luồng do lỗi."
+    },
+    {
+      "stage": "post",
+      "question": "Hình dạng nhiệm vụ nào phù hợp nhất với Lập kế hoạch và Hành động so với ReWOO đơn giản?",
+      "options": [
+        "Tra cứu thực tế hai bước",
+        "Quỹ đạo điều hướng web hoặc thiết bị di động 40 bước",
+        "Phân loại một lượt",
+        "Một câu hỏi số học thuần túy"
+      ],
+      "correct": 1,
+      "explanation": "Plan-and-Act được xây dựng cho các agents web và di động dài (hơn 30 bước), nơi một quỹ đạo ReAct duy nhất mất đi tính mạch lạc."
+    },
+    {
+      "stage": "post",
+      "question": "Kết quả distillation kế hoạch của ReWOO ngụ ý gì đối với production agents?",
+      "options": [
+        "Frontier models phải được sử dụng ở mọi bước",
+        "Một người lập kế hoạch nhỏ (khoảng 7B) có thể phù hợp với một giáo viên lớn vì người lập kế hoạch không bao giờ nhìn thấy các quan sát",
+        "Chất lượng quy hoạch giảm xuống dưới 7 tỷ parameters",
+        "Distillation yêu cầu dữ liệu RL dựa trên gradient"
+      ],
+      "correct": 1,
+      "explanation": "Bởi vì người lập kế hoạch không nhìn thấy các quan sát, kế hoạch traces từ một giáo viên lớn chuyển sang một kế hoạch fine-tuned nhỏ."
+    }
+  ]
+}
