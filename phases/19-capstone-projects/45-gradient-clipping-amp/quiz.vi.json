@@ -1,0 +1,78 @@
+{
+  "lesson": "45-gradient-clipping-amp",
+  "title": "Gradient Cắt và Mixed Precision",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cắt gradient L2 toàn cầu giải quyết vấn đề gì?",
+      "options": [
+        "training chậm",
+        "Một batch xấu duy nhất có thể làm tăng tiêu chuẩn gradient theo thứ tự độ lớn; cắt giới hạn trường hợp xấu nhất optimizer bước để một batch không thể đặt lại giờ học",
+        "Trôi từ vựng",
+        "Khởi động lại ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Kẹp là dây đai an toàn giúp batch ồn ào không phá hủy đường cong loss."
+    },
+    {
+      "stage": "check",
+      "question": "Thứ tự chính xác của các hoạt động GradScaler trong một bước là gì?",
+      "options": [
+        "bước, tỷ lệ, mở tỷ lệ, lùi, cập nhật",
+        "scaler.scale(loss).backward(); scaler.unscale_(optimizer); clip_grad_norm_; scaler.bước(optimizer); scaler.update()",
+        "lùi, bước, mở rộng, cập nhật",
+        "Bất kỳ đơn đặt hàng nào; bộ chia tỷ lệ sắp xếp lại nội bộ"
+      ],
+      "correct": 1,
+      "explanation": "Kẹp trên gradients không chia tỷ lệ giữa unscale_ và bước; cập nhật luôn chạy."
+    },
+    {
+      "stage": "check",
+      "question": "scaler.update() làm gì trên bước bị bỏ qua?",
+      "options": [
+        "Không có gì",
+        "Giảm một nửa hệ số tỷ lệ và đặt lại bộ đếm no-inf; quên gọi nó trên đường dẫn bỏ qua là lỗi tạo ra 'hệ số tỷ lệ không bao giờ thay đổi'",
+        "Tăng gấp đôi hệ số tỷ lệ",
+        "Đóng đường chạy"
+      ],
+      "correct": 1,
+      "explanation": "Bộ chia tỷ lệ điều chỉnh hệ số của nó dựa trên tỷ lệ bỏ qua / sạch qua các bước gần đây."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao việc kiểm tra độ hữu hạn loss là cần thiết ngay cả với GradScaler?",
+      "options": [
+        "Vì GradScaler chậm",
+        "GradScaler xử lý tràn truyền ngược nhưng loss không hữu hạn không tạo ra gradients hữu ích; bỏ qua trước khi lùi sẽ tiết kiệm điện toán và tránh làm ô nhiễm trạng thái của trình chia tỷ lệ",
+        "Nó là trang trí",
+        "PyTorch yêu cầu nó"
+      ],
+      "correct": 1,
+      "explanation": "Kiểm tra Loss bao gồm các lỗi chuyển tiếp; scaler bao gồm các lỗi vượt qua ngược."
+    },
+    {
+      "stage": "post",
+      "question": "Tín hiệu production trong tỷ lệ bỏ qua lăn bánh là gì?",
+      "options": [
+        "Luôn trang trên bất kỳ lần bỏ qua nào",
+        "Một số lần bỏ qua mỗi lần chạy là tốt cho sức khỏe; hàng trăm lần bỏ qua mỗi epoch (trên khoảng 5% tỷ lệ lăn bánh) là một cảnh báo khó khăn rằng model đang ở trong chế độ FP16 không thể giữ được",
+        "Tỷ lệ bỏ qua không liên quan",
+        "Chỉ trang khi bỏ qua liên tiếp"
+      ],
+      "correct": 1,
+      "explanation": "Cảnh báo dựa trên tốc độ bắt các chế độ lỗi im lặng mà thỉnh thoảng bỏ qua các trang sẽ không làm được."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao phải chuyển từ FP16 sang BF16 tự động truyền khi thường xuyên bỏ qua?",
+      "options": [
+        "BF16 mới hơn",
+        "BF16 có phạm vi hàm mũ rộng hơn FP16 và hiếm khi cần loss tỷ lệ; tỷ lệ bỏ qua thường giảm xuống không trên cùng một model",
+        "BF16 chậm hơn nên ít bỏ qua hơn",
+        "Truyền thống ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "FP16 ủng hộ bọ ngựa precision trên phạm vi; BF16 giao dịch theo cách khác, loại bỏ hoàn toàn class tràn."
+    }
+  ]
+}
