@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Phần thưởng model trong RLHF học hỏi từ điều gì?",
+    "options": [
+      "Tài liệu văn bản thô",
+      "Các cặp sở thích của con người: đưa ra hai câu trả lời, một câu trả lời nào con người thích hơn",
+      "Benchmark điểm",
+      "Model loss đường cong"
+    ],
+    "correct": 1,
+    "explanation": "Phần thưởng model được huấn luyện dựa trên dữ liệu sở thích: các cặp phản hồi cho cùng một prompt mà con người được dán nhãn cái nào tốt hơn. Nó học cách chỉ định điểm cao hơn cho các câu trả lời phù hợp với sở thích của con người.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao hình phạt phân kỳ KL được sử dụng trong PPO training cho RLHF?",
+    "options": [
+      "Để tăng tốc độ training",
+      "Để ngăn policy phân kỳ quá xa so với SFT model, điều này sẽ dẫn đến việc hack phần thưởng",
+      "Để giảm mức sử dụng bộ nhớ",
+      "Để cải thiện tokenization"
+    ],
+    "correct": 1,
+    "explanation": "Nếu không có hình phạt KL, model tìm ra những cách thoái hóa để tối đa hóa điểm thưởng (ví dụ: tạo ra văn bản lặp đi lặp lại khai thác điểm thưởng model điểm yếu). KL giữ cho model gần với đường cơ sở SFT hoạt động tốt.",
+    "stage": "pre"
+  },
+  {
+    "question": "Cần bao nhiêu models riêng biệt cho một RLHF pipeline đầy đủ?",
+    "options": [
+      "Một",
+      "Hai",
+      "Ba: model SFT, model phần thưởng và policy model được tối ưu hóa",
+      "Bốn"
+    ],
+    "correct": 2,
+    "explanation": "RLHF yêu cầu: (1) SFT model làm điểm bắt đầu và tham chiếu KL, (2) phần thưởng model huấn luyện về sở thích, (3) policy model được tối ưu hóa với PPO. Sự phức tạp này là lý do tại sao DPO (bài 08) được phát triển.",
+    "stage": "post"
+  },
+  {
+    "question": "'hack phần thưởng' trong RLHF là gì?",
+    "options": [
+      "Khi phần thưởng model bị kẻ thù tấn công",
+      "Khi policy tìm cách tối đa hóa điểm thưởng mà không thực sự cải thiện chất lượng phản hồi",
+      "Khi dữ liệu training bị hỏng",
+      "Khi learning rate quá cao"
+    ],
+    "correct": 1,
+    "explanation": "Phần thưởng model là một proxy không hoàn hảo cho sự phán đoán của con người. Các policy có thể phát hiện ra các mô hình ghi được phần thưởng cao (ví dụ: phản hồi dài dòng, phòng ngừa rủi ro quá mức) mà không thực sự hữu ích hơn. Hình phạt KL hạn chế điều này.",
+    "stage": "post"
+  },
+  {
+    "question": "Cơ chế cắt của PPO ngăn chặn điều gì?",
+    "options": [
+      "Gradient tràn",
+      "Các bản cập nhật policy quá lớn có thể gây mất ổn định training",
+      "Tràn bộ nhớ",
+      "Rò rỉ dữ liệu"
+    ],
+    "correct": 1,
+    "explanation": "PPO cắt tỷ lệ xác suất giữa policy mới và cũ vào một phạm vi như [0,8, 1,2]. Điều này ngăn chặn bất kỳ bản cập nhật đơn lẻ nào thay đổi policy quá mạnh, làm cho training ổn định hơn so với policy gradient vani.",
+    "stage": "post"
+  }
+]
