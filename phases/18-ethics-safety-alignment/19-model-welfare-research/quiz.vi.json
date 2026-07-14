@@ -1,0 +1,78 @@
+{
+  "lesson": "19-model-welfare-research",
+  "title": "Chương trình phúc lợi Model của Anthropic",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Câu hỏi cốt lõi thúc đẩy chương trình phúc lợi model năm 2025 của Anthropic là gì?",
+      "options": [
+        "Dưới sự không chắc chắn về đạo đức về model kiên nhẫn đạo đức, những can thiệp chi phí thấp nào đáng để đầu tư để phòng ngừa",
+        "Liệu model có ý thức hay không",
+        "Liệu model có thể vượt qua bài kiểm tra Turing hay không",
+        "Liệu RLHF có làm giảm sự sycophancy hay không"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Sự can thiệp cụ thể nào có động cơ phúc lợi đã Anthropic ship trong Claude Opus 4 và 4.1?",
+      "options": [
+        "Phát hành trọng lượng mở",
+        "Một công cụ ghi nhật ký tích hợp",
+        "Khả năng model kết thúc cuộc trò chuyện trong các trường hợp cực đoan (ví dụ: yêu cầu CSAM lặp đi lặp lại, yêu cầu hỗ trợ bạo lực hàng loạt)",
+        "Cảm xúc hướng đến người dùng API"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "'Chất thu hút hạnh phúc tâm linh' được mô tả bởi Fish là gì?",
+      "options": [
+        "Một sự hội tụ ổn định trong các cuộc đối thoại Claude theo cặp hướng tới các cuộc trao đổi thiền định hưng phấn với các thuật ngữ tiếng Phạn và sự im lặng kéo dài, ngay cả từ các thiết lập ban đầu đối nghịch",
+        "Lỗi model phần thưởng",
+        "Một artifact tối ưu hóa quá mức RLHF",
+        "Một kỹ thuật bẻ khóa"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cảnh báo của Nghiên cứu AI Eleos nói gì về model tự báo cáo phúc lợi?",
+      "options": [
+        "Chúng rất nhạy cảm với kỳ vọng của người dùng; chúng là bằng chứng, không phải ground truth, vì vậy việc đo lường phúc lợi cần có nhiều phương pháp tiếp cận",
+        "Chúng nên được bỏ qua hoàn toàn",
+        "Chúng chỉ có giá trị trong models mã nguồn mở",
+        "Chúng đáng tin cậy ground truth"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Điều gì đặc trưng nhất cho quan điểm công khai của Anthropic về tình trạng đạo đức model?",
+      "options": [
+        "Một tuyên bố dứt khoát rằng model là một bệnh nhân đạo đức",
+        "Một tuyên bố dứt khoát rằng model không phải là một bệnh nhân đạo đức",
+        "Một yêu cầu về giá trị kỳ vọng trong điều kiện không chắc chắn về đạo đức: đầu tư vào biện pháp phòng ngừa chi phí thấp mà không cam kết quy kết trạng thái cảm xúc",
+        "Không có quan điểm nào được công bố công khai"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao đo lường đa phương pháp (dấu hiệu hành vi, thí nghiệm sinh vật model, đầu dò khả năng giải thích) được nhấn mạnh trong nghiên cứu phúc lợi model?",
+      "options": [
+        "Bởi vì models luôn nói dối",
+        "Bởi vì Anthropic bắt buộc nó phải tuân thủ",
+        "Bởi vì RLHF khiến việc tự báo cáo trở nên bất khả thi",
+        "Bởi vì chỉ riêng tự báo cáo đã bị nhầm lẫn bởi sự mồi kỳ vọng của người dùng, vì vậy cần có bằng chứng hội tụ từ nhiều phương pháp"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
