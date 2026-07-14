@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao U-Net cần bỏ qua kết nối giữa encoder và decoder?",
+      "options": [
+        "Để tăng tốc độ training",
+        "encoder nén chi tiết không gian để có được bối cảnh; decoder không thể tái tạo các ranh giới sắc nét nếu không có quyền truy cập vào bản đồ feature độ phân giải cao của encoder và bỏ qua việc cung cấp chính xác điều đó",
+        "Bởi vì các tích chập chuyển vị yêu cầu thêm đầu vào",
+        "Để phù hợp với quy ước hình dạng PyTorch"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không bỏ qua, decoder của U-Net đang tạo ra các dự đoán H x W từ một nút cổ chai có độ phân giải rất thấp, không thể giải quyết các cạnh sắc nét. Kết nối bỏ qua ghép các features có độ phân giải cao, ngữ nghĩa thấp của encoder vào features ngữ nghĩa cao, độ phân giải thấp của decoder để cả ngữ cảnh và chi tiết đều có sẵn ở mọi giai đoạn đầu ra."
+    },
+    {
+      "stage": "pre",
+      "question": "Một tác vụ phân đoạn có 99% pixel nền và 1% pixel khối u. Bạn luyện tập với entropy chéo đơn giản và đạt 99% pixel accuracy. Chuyện gì đã xảy ra?",
+      "options": [
+        "model hội tụ",
+        "Các model học cách dự đoán nền cho mọi pixel; Pixel accuracy bị chi phối bởi đa số class và bỏ qua class bạn thực sự quan tâm",
+        "Hàm loss được triển khai không chính xác",
+        "optimizer thất bại"
+      ],
+      "correct": 1,
+      "explanation": "Pixel accuracy trên dataset mất cân bằng là một chỉ số vô dụng. Mạng thu thập 99% dễ dàng bằng cách luôn dự đoán nền và tạo ra mặt nạ khối u rỗng. Cách khắc phục: kết hợp entropy chéo với loss xúc xắc (dựa trên chồng chéo, không có tỷ lệ) và báo cáo IoU/Dice cho mỗi class nền trước."
+    },
+    {
+      "stage": "post",
+      "question": "Loại nhiệm vụ nào tách các ô tô riêng lẻ có cùng class với nhau?",
+      "options": [
+        "Phân đoạn ngữ nghĩa",
+        "Phân đoạn phiên bản",
+        "Cả hai đều tạo ra cùng một đầu ra",
+        "Cả hai đều không - điều đó yêu cầu một model phát hiện thay vào đó"
+      ],
+      "correct": 1,
+      "explanation": "Phân đoạn ngữ nghĩa gắn nhãn mọi pixel bằng một class nhưng merges các trường hợp chạm vào cùng một class vào một đốm màu. Phân đoạn phiên bản giữ ID phiên bản, vì vậy mỗi chiếc xe, mỗi người, mỗi quả táo là một mặt nạ dự đoán riêng biệt. Phân đoạn toàn cảnh thống nhất cả hai: nhãn ngữ nghĩa cho nội dung, ID phiên bản cho mọi thứ."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn hoán đổi upsample hai tuyến tính + 3x3 conv của U-Net cho ConvTranspose2d với kernel_size=2, sải chân=2 và xem artifacts bàn cờ trong đầu ra. Tại sao?",
+      "options": [
+        "Chuyển đổi chuyển vị bị hỏng trong PyTorch",
+        "Khi kernel_size không chia đều theo sải chân, các pixel đầu ra nhận được sự đóng góp không bằng nhau từ các pixel đầu vào, tạo ra một mô hình định kỳ trong đầu ra trông giống như một bàn cờ",
+        "learning rate quá thấp",
+        "Batch định mức phải được thêm vào trước khi chuyển đổi"
+      ],
+      "correct": 1,
+      "explanation": "Bàn cờ artifacts đến từ sự chồng chéo không đồng đều của trường tiếp nhận của tích chập chuyển vị trên các vị trí đầu ra. Sử dụng kernel_size = sải chân * n (ví dụ: hạt nhân 4, sải chân 2) hoặc thay thế conv chuyển vị bằng upsample lưỡng tuyến + conv sẽ loại bỏ artifacts. Mặc định hiện đại là bilinear + conv vì lý do này."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn báo cáo mIoU = 0,78 trên tác vụ phân đoạn 10 class. Tại sao bạn cũng nên xuất bản IoU theo class?",
+      "options": [
+        "PyTorch yêu cầu IoU trên mỗi class",
+        "Mean IoU che giấu các lỗi class cá nhân; mIoU là 0,78 phù hợp với tám classes ở 0,9 và hai ở 0,3, đây là một câu chuyện triển khai rất khác so với tất cả các classes gần 0,78",
+        "IoU trên mỗi class luôn cao hơn mIoU",
+        "Nó chỉ cần thiết cho hình ảnh y tế"
+      ],
+      "correct": 1,
+      "explanation": "Giá trị trung bình tổng hợp nén sự phân phối điểm số trên class, đó chính xác là những gì người đọc cần để quyết định xem model đã sẵn sàng để ship hay chưa. Hai classes yếu trong một model mạnh khác có thể làm cho hệ thống không thể sử dụng được cho nhiệm vụ đã định; Cấu hình phẳng có nghĩa là model cần nâng cấp dữ liệu thống nhất. Luôn xuất bản các chỉ số trên mỗi class cùng với giá trị trung bình."
+    }
+  ]
+}
