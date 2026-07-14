@@ -1,0 +1,78 @@
+{
+  "lesson": "26-model-system-dataset-cards",
+  "title": "Thẻ Model, Hệ thống và Dataset",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cái nào mô tả tốt nhất Mitchell et al. (2019) Model Card?",
+      "options": [
+        "Đặc tả OpenAPI",
+        "'Nhãn dinh dưỡng' cho ML models: dữ liệu training, mục đích sử dụng, các yếu tố, số liệu, dữ liệu đánh giá, phân tích phân tách định lượng, cân nhắc đạo đức, cảnh báo",
+        "Chỉ một bản kê khai model checkpoint",
+        "Hợp đồng pháp lý theo quy định"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Oreamuno et al. (2023) đã tìm thấy gì về việc áp dụng cân nhắc đạo đức trong thẻ Hugging Face model?",
+      "options": [
+        "Khoảng 0,3% ghi lại các cân nhắc về đạo đức",
+        "Khoảng 80% tài liệu cân nhắc đạo đức",
+        "Không có thẻ model nào có bất kỳ văn bản nào",
+        "Tất cả các thẻ model đều ghi lại chúng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Pushkarna et al. (Google 2022) Phân lớp kính thiên văn / kính tiềm vọng / kính hiển vi của Thẻ dữ liệu cung cấp những gì?",
+      "options": [
+        "Một khung đối tượng ranh giới trong đó cùng một tài liệu phục vụ các độc giả khác nhau (không phải chuyên gia, ML học viên, kiểm toán viên) thông qua ba mức thu phóng chi tiết",
+        "Danh sách kiểm tra đánh giá trước khi RLHF",
+        "Thư viện trực quan theo chủ đề kính viễn vọng",
+        "Giao diện truy vấn bảo vệ quyền riêng tư"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Thẻ Hệ thống bao gồm phạm vi nào mà Thẻ Model không có?",
+      "options": [
+        "Hệ thống AI đầu cuối: model + an toàn stack + bối cảnh triển khai, bao gồm khả năng bảo mật, bảo vệ prompt-injection, phát hiện lấy cắp dữ liệu, alignment và ứng phó sự cố",
+        "Chỉ có dataset",
+        "Chỉ bản mẫu prompt",
+        "Chỉ có tokenizer"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Liang et al. (2024) đã báo cáo gì về chi tiết thẻ model và tỷ lệ tải xuống Hugging Face?",
+      "options": [
+        "Thẻ model chi tiết thúc đẩy mức tăng tải xuống +29,0% hàng tuần trên HF đối với nhóm điều trị so với nhóm đối chứng (diff-in-diff); áp lực áp dụng hiện do thị trường định hướng, không chỉ dựa trên tuân thủ",
+        "Chỉ các phần cân nhắc về đạo đức mới ảnh hưởng đến lượt tải xuống",
+        "Chi tiết không ảnh hưởng đến lượt tải xuống",
+        "Chi tiết giảm tỷ lệ tải xuống"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Laminator (Duddu et al. 2024) đóng góp gì vào tài liệu?",
+      "options": [
+        "Một harness đo điểm chuẩn tự động",
+        "Chứng thực có thể xác minh thông qua TEE phần cứng / chữ ký mật mã, vì vậy thẻ có thể mang bằng chứng yêu cầu thay vì chỉ yêu cầu bồi thường",
+        "Thay thế cho tiêu chuẩn Bảng dữ liệu",
+        "Trình tạo tóm tắt dựa trên LLM"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
