@@ -1,0 +1,78 @@
+{
+  "lesson": "47-checkpoint-save-resume",
+  "title": "Checkpoint Lưu và Tiếp tục",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tập hợp nào mô tả chính xác nhất một training checkpoint hoàn chỉnh?",
+      "options": [
+        "Chỉ Model trọng lượng",
+        "Trạng thái Model, trạng thái optimizer, trạng thái lập lịch, bộ đếm bước, lịch sử loss và trạng thái RNG cho python, numpy, CPU ngọn đuốc, CUDA ngọn đuốc",
+        "Chỉ là lịch sử loss",
+        "Bất cứ thứ gì torch.save() đều có thể tuần tự hóa"
+      ],
+      "correct": 1,
+      "explanation": "Sơ yếu lý lịch phải đi theo cùng một quỹ đạo. Nếu không có optimizer khoảnh khắc, vị trí của bộ lập lịch và trạng thái RNG thì loss tiếp tục là một đường cong khác."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao trình tiết kiệm ghi vào một tệp tạm thời và sau đó đổi tên thay vì viết trực tiếp tên đích?",
+      "options": [
+        "I/O nhanh hơn",
+        "Đổi tên POSIX trong cùng một thư mục là nguyên tử, vì vậy sự cố giữa quá trình ghi sẽ giữ nguyên tệp tốt trước đó thay vì một tệp được ghi một nửa ở tên đích",
+        "Nó loại bỏ tệp",
+        "Nó bỏ qua fsync"
+      ],
+      "correct": 1,
+      "explanation": "atomic_save gọi os.replace từ một tệp tạm thời trong cùng một thư mục. Đổi tên trên nhiều thiết bị sẽ mất tính nguyên tử, đó là lý do tại sao tệp tạm thời phải nằm trong thư mục đích."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao checkpoint phân đoạn lưu trữ sha256 trong chỉ mục. json cho mỗi phân đoạn?",
+      "options": [
+        "Đối với SEO",
+        "Vì vậy, bộ tải có thể phát hiện một phân đoạn bị cắt ngắn hoặc giả mạo tại thời điểm tải thay vì âm thầm hợp nhất một state_dict xấu",
+        "Để nén tệp",
+        "Bởi vì ngọn đuốc đòi hỏi nó"
+      ],
+      "correct": 1,
+      "explanation": "load_sharded_checkpoint khẳng định hàm băm thực tế của mỗi phân đoạn khớp với hàm băm đã ghi và hàm băm của tệp meta. Hỏng im lặng là chế độ thất bại tồi tệ nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để tiếp tục tiếp tục ở độ lệch bên phải bên trong epoch hiện tại?",
+      "options": [
+        "Nó chuyển sang ranh giới epoch tiếp theo",
+        "TrainState (epoch, batch_in_epoch) và trạng thái RNG được khôi phục, vì vậy bộ tải tua nhanh máy phát qua batches đã tiêu thụ trước khi tiếp tục",
+        "Nó sử dụng một cơ sở dữ liệu đặc biệt",
+        "Nó luôn khởi động lại từ bước 0"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có (epoch, batch_in_epoch), bạn sẽ chuyển sang ranh giới epoch tiếp theo và lãng phí công việc. Nếu không có RNG, bạn sẽ thấy các batches khác nhau. Cả hai đều là bắt buộc."
+    },
+    {
+      "stage": "check",
+      "question": "Trường schema trên payload mua cho bạn điều gì?",
+      "options": [
+        "Không có gì",
+        "Một hook di chuyển: các thay đổi định dạng trong tương lai sẽ làm tăng chuỗi schema và trình tải có thể gửi trên đó thay vì phá vỡ các lần chạy cũ",
+        "Tên tập tin đẹp",
+        "Nén"
+      ],
+      "correct": 1,
+      "explanation": "Bài học sử dụng ckpt.v1; phiên bản tiếp theo là ckpt.v2 với chức năng di chuyển. Nếu không có trường, quá trình phát triển định dạng yêu cầu phá vỡ."
+    },
+    {
+      "stage": "post",
+      "question": "Đọc tóm tắt bản demo sơ yếu lý lịch, max_loss_diff_after_resume gần 0 chứng minh điều gì?",
+      "options": [
+        "Không có gì hữu ích",
+        "Quỹ đạo loss sau khi tiếp tục khớp với đường cơ sở không bị gián đoạn trong nhiễu dấu phẩy động, có nghĩa là trạng thái RNG và trạng thái optimizer đều được khôi phục trung thực",
+        "Rằng model là tốt",
+        "Rằng đĩa nhanh"
+      ],
+      "correct": 1,
+      "explanation": "Nếu bạn quên RNG, bạn sẽ thấy một đường cong khác và một sự khác biệt không tầm thường. Nếu bạn quên trạng thái optimizer thì sự khác biệt là rất lớn. Số gần bằng không là hợp đồng."
+    }
+  ]
+}
