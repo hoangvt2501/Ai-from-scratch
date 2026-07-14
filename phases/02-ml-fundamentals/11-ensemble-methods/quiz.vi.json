@@ -1,0 +1,67 @@
+[
+  {
+    "id": "ensemble-pre-1",
+    "stage": "pre",
+    "question": "Tại sao việc kết hợp nhiều bộ phân loại yếu thành một tập hợp lại cải thiện accuracy?",
+    "options": [
+      "Mỗi bộ phân loại yếu ghi nhớ một phần khác nhau của bộ kiểm tra",
+      "Nếu các bộ phân loại mắc các lỗi khác nhau, đa số bỏ phiếu sẽ loại bỏ các lỗi riêng lẻ",
+      "Quần thể luôn sử dụng nhiều dữ liệu training hơn so với một models",
+      "Bộ phân loại yếu luôn nhanh hơn bộ phân loại mạnh"
+    ],
+    "correct": 1,
+    "explanation": "Chìa khóa là sự đa dạng. Nếu bộ phân loại mắc lỗi độc lập, bỏ phiếu đa số có nghĩa là một câu trả lời sai phải đánh lừa hơn một nửa số models. Lỗi hủy bỏ và tổng hợp accuracy vượt quá bất kỳ cá nhân nào."
+  },
+  {
+    "id": "ensemble-pre-2",
+    "stage": "pre",
+    "question": "Sự khác biệt chính giữa đóng bao và tăng cường là gì?",
+    "options": [
+      "Các đoàn tàu đóng bao models song song trên các tập con ngẫu nhiên; tăng cường các đoàn tàu models tuần tự, tập trung vào các lỗi trước đó",
+      "Đóng bao sử dụng mạng nơ-ron sâu; tăng cường sử dụng cây quyết định",
+      "Đóng bao làm giảm bias; Tăng cường làm giảm variance",
+      "Đóng gói yêu cầu dữ liệu được dán nhãn; thúc đẩy công việc mà không cần giám sát"
+    ],
+    "correct": 0,
+    "explanation": "Đóng bao models độc lập trên các mẫu bootstrap (song song, giảm variance). Tăng cường các đoàn tàu models tuần tự, với mỗi model mới tập trung vào những sai lầm của nhóm cho đến nay (giảm bias)."
+  },
+  {
+    "id": "ensemble-post-1",
+    "stage": "post",
+    "question": "Trong AdaBoost, điều gì xảy ra với trọng lượng mẫu của điểm training bị phân loại sai sau mỗi vòng?",
+    "options": [
+      "Nó vẫn giữ nguyên",
+      "Nó tăng lên, vì vậy người học yếu tiếp theo tập trung nhiều hơn vào ví dụ khó này",
+      "Nó giảm, vì vậy người học tiếp theo bỏ qua nó",
+      "Nó được xóa khỏi bộ training"
+    ],
+    "correct": 1,
+    "explanation": "AdaBoost tăng trọng lượng của các mẫu được phân loại sai sau mỗi vòng. Điều này buộc người học yếu tiếp theo phải trả nhiều attention hơn cho các ví dụ mà nhóm hiện đang sai."
+  },
+  {
+    "id": "ensemble-post-2",
+    "stage": "post",
+    "question": "Một khu rừng ngẫu nhiên với 100 cây có cùng accuracy thử nghiệm với 200 cây. Thêm nhiều cây hơn vào 500 cây cũng không cho thấy sự cải thiện. Tại sao?",
+    "options": [
+      "Rừng ngẫu nhiên underfitting và cần một thuật toán khác",
+      "Sau khi có đủ cây, variance giảm cao nguyên và thêm nhiều cây sẽ mang lại lợi nhuận giảm dần mà không làm tăng overfitting",
+      "500 cây là tối đa cho phép",
+      "Các cây đều giống hệt nhau nên thêm nhiều hơn không có tác dụng"
+    ],
+    "correct": 1,
+    "explanation": "Các khu rừng ngẫu nhiên không quá phù hợp với nhiều cây hơn (không giống như tăng cường). Tuy nhiên, cao nguyên giảm variance khi đã có đủ cây đa dạng được tính trung bình. Nhiều cây hơn chỉ làm tăng chi phí điện toán mà không cải thiện accuracy."
+  },
+  {
+    "id": "ensemble-post-3",
+    "stage": "post",
+    "question": "Tăng cường Gradient phù hợp với mỗi cây mới với số lượng bao nhiêu?",
+    "options": [
+      "Giá trị mục tiêu ban đầu",
+      "Số dư (lỗi) của dự đoán của tập hợp hiện tại",
+      "Tập con ngẫu nhiên của features",
+      "Dự đoán của cây trước"
+    ],
+    "correct": 1,
+    "explanation": "Trong gradient tăng cường, mỗi cây mới được huấn luyện để dự đoán số dư (gradient âm của loss) của tập hợp hiện tại. Điều này làm giảm tuần tự lỗi còn lại."
+  }
+]
