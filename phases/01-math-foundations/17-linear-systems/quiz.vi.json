@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Nó có nghĩa là gì về mặt hình học khi một hệ thống Ax = b không có lời giải chính xác?",
+      "options": [
+        "Ma trận A có tất cả các mục nhập bằng không",
+        "vector b không nằm trong không gian cột của A",
+        "Hệ thống có nhiều ẩn số hơn phương trình",
+        "Ma trận A đối xứng"
+      ],
+      "correct": 1,
+      "explanation": "Trong hình cột, Ax = b hỏi: tổ hợp tuyến tính nào của các cột của A tạo ra b? Nếu b không nằm trong không gian cột (span cột của A), không có lời giải chính xác nào tồn tại. Điều này xảy ra khi hệ thống được xác định quá mức (nhiều phương trình hơn là phương trình chưa biết)."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao trục một phần được sử dụng trong loại bỏ Gaussian?",
+      "options": [
+        "Nó làm giảm độ phức tạp thời gian từ O (n ^ 3) đến O (n ^ 2)",
+        "Nó chọn trục lớn nhất có sẵn để giảm thiểu sự khuếch đại lỗi chia cho các số nhỏ",
+        "Nó đảm bảo kết quả luôn là một số nguyên",
+        "Nó loại bỏ nhu cầu thay thế lưng"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không xoay, chia cho một trục nhỏ sẽ khuếch đại sai số làm tròn. Xoay một phần hoán đổi các hàng để đặt giá trị tuyệt đối lớn nhất ở vị trí trục, giữ cho hệ số nhân nhỏ và tính toán ổn định về mặt số."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao phân hủy Cholesky được ưu tiên hơn LU để giải (X^T X + lambda I) w = X^T y trong hồi quy sườn núi?",
+      "options": [
+        "Cholesky hoạt động trên bất kỳ ma trận nào trong khi LU yêu cầu ma trận vuông",
+        "Ma trận X^T X + lambda I là xác định dương đối xứng, vì vậy Cholesky nhanh gấp đôi LU và cần một nửa dung lượng lưu trữ",
+        "Cholesky đưa ra câu trả lời chính xác hơn LU",
+        "Phân tách LU không thể xử lý các thuật ngữ chính quy hóa"
+      ],
+      "correct": 1,
+      "explanation": "Khi lambda > 0, X^T X + lambda I luôn là xác định dương đối xứng. Các thừa số Cholesky A = LL^T trong phép toán O(n^3/3) - khoảng một nửa O(2n^3/3) của LU - và chỉ cần tam giác dưới. Nó khai thác sự đối xứng mà LU không có."
+    },
+    {
+      "stage": "post",
+      "question": "Một ma trận có số điều kiện kappa = 10^8. Bạn đang sử dụng float64 (~15 chữ số của precision). Bạn có thể tin tưởng bao nhiêu chữ số của giải pháp?",
+      "options": [
+        "Khoảng 15 chữ số",
+        "Khoảng 7 chữ số (15 - log10(10^8) = 15 - 8)",
+        "Khoảng 8 chữ số",
+        "Không chữ số - giải pháp là vô nghĩa"
+      ],
+      "correct": 1,
+      "explanation": "Bạn mất khoảng log10 (kappa) chữ số precision. Với kappa = 10^8, bạn mất khoảng 8 chữ số từ ~15 chữ số của float64, để lại khoảng 7 chữ số đáng tin cậy. Nếu kappa tiếp cận 10^16, lời giải trở nên vô nghĩa trong float64."
+    },
+    {
+      "stage": "post",
+      "question": "Ưu điểm chính của phân hủy LU so với loại trừ Gaussian là gì khi bạn cần giải Ax = b cho nhiều b vectors khác nhau?",
+      "options": [
+        "Phân hủy LU ổn định hơn về số",
+        "Thừa số O (n ^ 3) được thực hiện một lần; mỗi lần giải tiếp theo với một b mới chỉ tốn O (n ^ 2)",
+        "Phân hủy LU hoạt động trên ma trận hình chữ nhật",
+        "LU luôn tạo ra một giải pháp độc đáo"
+      ],
+      "correct": 1,
+      "explanation": "Các yếu tố LU A = LU một lần trong O (n ^ 3). Sau đó, đối với mỗi b mới, bạn giải Ly = b (thay thế thuận) và Ux = y (thay thế trở lại), mỗi O (n ^ 2). Loại bỏ Gaussian sẽ làm lại đầy đủ O(n^3) cho mỗi b mới."
+    }
+  ]
+}
