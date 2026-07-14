@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Hạn chế của tìm kiếm ngữ nghĩa top-k cơ bản trong RAG là gì?",
+    "options": [
+      "Nó quá chậm",
+      "Nó truy xuất các đoạn tương tự về mặt ngữ nghĩa với truy vấn nhưng có thể không chứa câu trả lời thực tế, đặc biệt là đối với các câu hỏi mơ hồ hoặc nhiều bước nhảy",
+      "Nó không thể xử lý các tài liệu lớn",
+      "Nó yêu cầu GPU"
+    ],
+    "correct": 1,
+    "explanation": "Tìm kiếm ngữ nghĩa cơ bản phù hợp với ý nghĩa ở cấp độ bề mặt. 'Doanh thu quý trước là bao nhiêu?' truy xuất các phần về 'chiến lược doanh thu' (tương tự về mặt ngữ nghĩa) thay vì phần nói '47,2 triệu đô la trong quý 3 năm 2025' (sử dụng 'thu nhập').",
+    "stage": "pre"
+  },
+  {
+    "question": "Tìm kiếm kết hợp trong bối cảnh RAG là gì?",
+    "options": [
+      "Sử dụng hai LLMs khác nhau",
+      "Kết hợp khớp từ khóa BM25 với tìm kiếm vector ngữ nghĩa để nắm bắt cả cụm từ chính xác và mức độ liên quan dựa trên ý nghĩa",
+      "Tìm kiếm trên nhiều cơ sở dữ liệu",
+      "Sử dụng cả CPU và GPU để tìm kiếm"
+    ],
+    "correct": 1,
+    "explanation": "BM25 nắm bắt các từ khóa khớp chính xác (ví dụ: \"47,2 triệu đô la\" hoặc \"quý 3\"). Tìm kiếm ngữ nghĩa bắt ý nghĩa trùng khớp. Kết hợp chúng với một trình xếp hạng lại mang lại những điều tốt nhất của cả hai thế giới: precision về các thuật ngữ cụ thể cộng với recall về các biến thể ngữ nghĩa.",
+    "stage": "pre"
+  },
+  {
+    "question": "Người xếp hạng lại encoder chéo làm gì trong RAG pipeline nâng cao?",
+    "options": [
+      "Nó tạo ra câu trả lời cuối cùng",
+      "Nó lấy các cặp (truy vấn, tài liệu) và chấm điểm mức độ liên quan của chúng với accuracy cao hơn embedding giống nhau, sắp xếp lại các kết quả truy xuất ban đầu",
+      "Nó mã hóa tài liệu thành vectors",
+      "Nó chia tài liệu thành các phần"
+    ],
+    "correct": 1,
+    "explanation": "Sự tương đồng hai encoder (được sử dụng để truy xuất ban đầu) là nhanh nhưng gần đúng. Một encoder processes chéo cặp tài liệu truy vấn đầy đủ với cross-attention, cho điểm liên quan chính xác hơn nhiều để xếp hạng lại các ứng cử viên hàng đầu.",
+    "stage": "post"
+  },
+  {
+    "question": "Kỹ thuật chuyển đổi truy vấn HyDE (Tài liệu giả định Embedding) là gì?",
+    "options": [
+      "Ẩn truy vấn khỏi model",
+      "Sử dụng LLM để tạo câu trả lời giả định, sau đó embedding câu trả lời đó làm truy vấn tìm kiếm thay vì câu hỏi ban đầu",
+      "Mã hóa truy vấn về quyền riêng tư",
+      "Mở rộng các từ viết tắt trong truy vấn"
+    ],
+    "correct": 1,
+    "explanation": "Truy vấn ban đầu 'Doanh thu quý 3 là bao nhiêu?' có thể không được nhúng gần phần câu trả lời. HyDE yêu cầu LLM tạo ra một câu trả lời giả định ('Doanh thu quý 3 xấp xỉ...'), sau đó sử dụng câu trả lời đó làm truy vấn tìm kiếm, nhúng gần hơn với các phần chứa câu trả lời thực tế.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao việc chia nhỏ của cha mẹ và con cái cải thiện RAG so với việc chia nhỏ phẳng?",
+    "options": [
+      "Lập chỉ mục nhanh hơn",
+      "Các đoạn con nhỏ được sử dụng để truy xuất chính xác, nhưng đoạn cha lớn hơn được trả về cho ngữ cảnh, ngăn chặn vấn đề 'ngữ cảnh bị mất'",
+      "Nó làm giảm số lượng khối",
+      "Nó loại bỏ nhu cầu embeddings"
+    ],
+    "correct": 1,
+    "explanation": "Các đoạn nhỏ (200 tokens) được nhúng chính xác nhưng thiếu ngữ cảnh. Các đoạn lớn (2000 tokens) có ngữ cảnh nhưng nhúng không chính xác. Parent-child sử dụng các chunk nhỏ cho accuracy tìm kiếm nhưng trả về chunk cha cho ngữ cảnh thế hệ.",
+    "stage": "post"
+  }
+]
