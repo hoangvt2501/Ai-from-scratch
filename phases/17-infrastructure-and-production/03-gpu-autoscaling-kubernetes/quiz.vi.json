@@ -1,0 +1,78 @@
+{
+  "lesson": "03-gpu-autoscaling-kubernetes",
+  "title": "GPU Tự động thay đổi quy mô trên Kubernetes — Karpenter, KAI Scheduler, Gang Scheduling",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "HPA thường mở rộng theo mặc định tín hiệu nào mà lệnh gọi bài học bị hỏng để phân phát kiểu vLLM?",
+      "options": [
+        "Độ sâu hàng đợi",
+        "P99 TTFT",
+        "Sử dụng KV cache",
+        "DCGM_FI_DEV_GPU_UTIL chu kỳ nhiệm vụ"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Lập lịch băng đảng trong KAI Scheduler chủ yếu ngăn chặn vấn đề nào?",
+      "options": [
+        "GPU phân mảnh bộ nhớ",
+        "Tokenizer Tranh chấp GIL",
+        "Bẫy phân bổ một phần nơi 7 trong số 8 GPUs ngồi nhàn rỗi chờ đợi vào thứ tám",
+        "Độ trễ khởi động nguội"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao hợp nhất mặc định của KarpenterChính sách khi rỗng hoặc chưa được sử dụng đầy đủ nguy hiểm đối với các nhóm inference GPU?",
+      "options": [
+        "Nó từ chối mở rộng quy mô khi bùng nổ",
+        "Nó chỉ hợp nhất các phiên bản spot",
+        "Nó chấm dứt việc chạy các nút GPU để di chuyển các pod, loại bỏ các yêu cầu đang chạy và tải lại trọng lượng",
+        "Nó ngăn Karpenter cung cấp các nút mới"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Karpenter cung cấp một nút GPU nhanh hơn bao nhiêu so với Cluster Autoscaler?",
+      "options": [
+        "Nhanh hơn khoảng 40% (~45-60 giây so với ~90-120 giây)",
+        "Chậm hơn khoảng 10 lần",
+        "Giống nhau",
+        "Nhanh hơn khoảng 5%"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Đối với các nhóm điền trước / giải mã phân tách (Giai đoạn 17 · 17), bài học khuyến nghị tín hiệu tỷ lệ nào?",
+      "options": [
+        "Chỉ mở rộng quy mô thủ công",
+        "Một HPA duy nhất trong chu kỳ làm việc bao gồm cả classes pod",
+        "Độ sâu hàng đợi cho các nhóm điền trước và áp lực KV cache cho các nhóm giải mã, dưới dạng HPA riêng biệt cho mỗi vai trò",
+        "Cluster Autoscaler cho cả hai"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học đề xuất cài đặt gián đoạn Karpenter nào cho nhóm inference GPU để tránh loại bỏ các công việc đang chạy?",
+      "options": [
+        "consolidationChính sách: Khi nào trống rỗng hoặc chưa được sử dụng với consolidateSau: 0 giây",
+        "consolidationChính sách: Khi nàoEmpty với consolidateSau: 1h",
+        "Luôn chạy với các phiên bản spot và không hợp nhất",
+        "Vô hiệu hóa hoàn toàn Karpenter"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
