@@ -1,0 +1,78 @@
+{
+  "lesson": "44-cosine-lr-warmup",
+  "title": "Cosine LR với Khởi động tuyến tính",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao lịch trình cosine-with-warmup bắt đầu từ 0 thay vì lr_max?",
+      "options": [
+        "Bởi vì lr_max là bất hợp pháp ở bước số không",
+        "Hàng nghìn bản cập nhật đầu tiên là nhiễu; một đoạn đường dốc tuyến tính từ không đến lr_max cung cấp cho optimizer một kích thước bước hiệu quả nhỏ trong khi các ước tính đang chạy ổn định",
+        "Bởi vì Adam yêu cầu nó",
+        "Truyền thống ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Khởi động giữ cho các bản cập nhật sớm giòn nhỏ; model nếu không thì phân kỳ hoặc ổn định."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao lịch trình được thực hiện như một chức năng duy nhất qua từng bước thay vì ba phân đoạn dán?",
+      "options": [
+        "Các chức năng đơn lẻ nhỏ hơn",
+        "Một lịch trình dán mất một ranh giới trong lần đầu tiên lr_max được thay đổi; hàm đơn đánh giá cùng một biểu thức dạng đóng và duy trì tính liên tục khi khởi động và tổng endpoints",
+        "Linters yêu cầu nó",
+        "Ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Tính liên tục ở lr (warmup_steps) và lr (total_steps) theo sau dạng đóng."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì xảy ra đối với bước > total_steps trong lịch trình?",
+      "options": [
+        "Nó ném một ngoại lệ",
+        "Nó ghim ở lr_min; lịch trình không ngoại suy và các huấn luyện viên cần gia hạn training thay đổi total_steps một cách rõ ràng",
+        "Nó trả về nan",
+        "Nó quấn quanh"
+      ],
+      "correct": 1,
+      "explanation": "Sàn bị ghim giữ cho một huấn luyện viên quá tốc độ ở trạng thái được ghi lại thay vì va chạm."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao ghi gradient định mức L2 bên cạnh learning rate?",
+      "options": [
+        "Nó trông đẹp",
+        "Tiêu chuẩn là một nửa còn lại của sức khỏe training: một cuộc chạy phân kỳ tăng đột biến tiêu chuẩn của nó trước loss; một đỉnh quá hung hăng xuất hiện như một tiêu chuẩn duy trì ở mức cao sau khi khởi động",
+        "Adam yêu cầu nó",
+        "Truyền thống"
+      ],
+      "correct": 1,
+      "explanation": "Đồng ghi nhật ký làm cho lịch trình bệnh lý hiển thị tại thời gian chạy, không phải sau khi thực tế."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao định cấu hình warmup_steps dưới dạng một phần của total_steps trong production?",
+      "options": [
+        "Phân số sạch hơn",
+        "Số lần khởi động cố định phù hợp với lần chạy 20k bước về cơ bản không phải là khởi động trong lần chạy 200M bước; phân số (điển hình 1-3 phần trăm) theo thời lượng training",
+        "Tùy chọn ngẫu nhiên",
+        "Yêu cầu phần cứng"
+      ],
+      "correct": 1,
+      "explanation": "Số lượng khởi động tuyệt đối hoạt động sai trên các thang đo training thời gian."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao lr_min không lại điển hình trong production?",
+      "options": [
+        "Adam yêu cầu không phải bằng không",
+        "Sàn gần 10% lr_max giữ cho optimizer học trong suốt đuôi dài; lr_min bằng không tạo ra một đường cong trông đẹp và một model chưa hoàn thành training",
+        "Độ ổn định số",
+        "Khả năng tương thích ngược"
+      ],
+      "correct": 1,
+      "explanation": "Đuôi của lịch trình là nơi các cải tiến giai đoạn cuối hạ cánh; zeroing nó lãng phí tín hiệu đó."
+    }
+  ]
+}
