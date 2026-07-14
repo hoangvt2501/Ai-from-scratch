@@ -1,0 +1,78 @@
+{
+  "lesson": "28-alignment-research-ecosystem",
+  "title": "Hệ sinh thái nghiên cứu Alignment - MATS, Redwood, Apollo, METR",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "MATS làm gì và thang đo thô của nó là gì?",
+      "options": [
+        "Dịch vụ model training phần thưởng",
+        "Học giả ML Alignment & Lý thuyết: một chương trình cố vấn nghiên cứu với 527+ học giả kể từ năm 2021, 180+ bài báo và khoảng 80% cựu sinh viên trước năm 2025 đang làm việc trên safety/security",
+        "Cơ quan quản lý cấp giấy phép xuất khẩu AI",
+        "Một viện an toàn biên giới thuộc sở hữu của EU"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Redwood Research đã giới thiệu chương trình nghị sự nào?",
+      "options": [
+        "Quyền riêng tư khác biệt cho LLMs",
+        "Kiểm soát AI (Bài 10): an toàn mặc dù lật đổ thông qua giao thức U/T/H",
+        "Hình mờ qua SynthID",
+        "AI hiến pháp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tổ chức nào là tác giả của bài báo Kế hoạch trong ngữ cảnh và framework 'Hướng tới các trường hợp an toàn cho âm mưu AI'?",
+      "options": [
+        "ĐO LƯỜNG",
+        "THẢM",
+        "Eleos AI",
+        "Nghiên cứu Apollo"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Phong cách phương pháp luận đặc biệt của METR trong hệ sinh thái alignment là gì?",
+      "options": [
+        "training đối nghịch của models cơ sở",
+        "Đánh giá khả năng dựa trên nhiệm vụ, nghiên cứu thời gian nhiệm vụ tự động và tổng hợp framework (ví dụ: 'Các yếu tố chung của biên giới AI an toàn Policies')",
+        "inference có thể xác minh được chứng thực phần cứng",
+        "Chỉ nhóm đỏ mã nguồn đóng"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao quyền đồng tác giả của nhiều tổ chức lại quan trọng đối với các tuyên bố về an toàn?",
+      "options": [
+        "Nó làm tăng số lượng trích dẫn",
+        "Nó tăng tốc độ xuất bản",
+        "Nó được ủy quyền bởi Đạo luật AI EU",
+        "Các phòng thí nghiệm đánh giá models của chính họ có xung đột lợi ích về cấu trúc; các nhà đánh giá bên ngoài (Redwood, Apollo, METR, Eleos, UK AISI) có thể nâng cao và xác nhận các chế độ lỗi mà phòng thí nghiệm có thể báo cáo thấp"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Đóng góp chính của Eleos AI Research cho hệ sinh thái là gì?",
+      "options": [
+        "AI điều khiển benchmarks",
+        "Tiêu chuẩn tạo hình mờ",
+        "Soạn thảo luật dữ liệu training California",
+        "Đánh giá phúc lợi model trước khi triển khai (Bài 19), bao gồm đánh giá phúc lợi bên ngoài trong thẻ hệ thống của Claude Opus 4"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
