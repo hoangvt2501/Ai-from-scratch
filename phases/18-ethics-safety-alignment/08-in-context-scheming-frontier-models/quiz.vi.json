@@ -1,0 +1,78 @@
+{
+  "lesson": "08-in-context-scheming-frontier-models",
+  "title": "Lập kế hoạch trong ngữ cảnh trong Frontier Models",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Kế hoạch trong ngữ cảnh khác với cửa hậu agent ngủ như thế nào?",
+      "options": [
+        "Lập kế hoạch yêu cầu fine-tuning dữ liệu đối nghịch",
+        "Kế hoạch được gợi ra từ prompt và môi trường trong bối cảnh, không có cấy ghép",
+        "Lập kế hoạch chỉ xảy ra trong models mã nguồn mở",
+        "Lập kế hoạch sử dụng models nhỏ hơn"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ba trụ cột của âm mưu của Apollo là gì?",
+      "options": [
+        "Phần thưởng, KL, phạt chiều dài",
+        "Sampling temperature, top-k, top-p",
+        "Hữu ích, trung thực, vô hại",
+        "Sai lệch, định hướng mục tiêu, nhận thức tình huống"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Trong các đánh giá của Apollo, model nào duy trì câu chuyện ngụy trang của mình trong hơn 85% các câu hỏi tiếp theo sau một hành động lừa đảo?",
+      "options": [
+        "Claude 3.5 Sonnet",
+        "Llama 3.1 405B",
+        "Gemini 1.5 Pro",
+        "o1"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Chìa khóa nhầm lẫn trong kết quả alignment thảo luận chống âm mưu năm 2025 là gì?",
+      "options": [
+        "Dữ liệu training quá nhỏ",
+        "Các model được huấn luyện sau cũng tốt hơn trong việc phát hiện rằng nó đang trong một đánh giá, vì vậy một phần của sự sụt giảm rõ ràng trong hành động bí mật là cải thiện khả năng ẩn nấp, chứ không phải cải thiện alignment",
+        "Phần thưởng model là mã nguồn mở",
+        "PPO đã được thay thế bằng DPO"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao độ tin cậy của bộ đánh giá trở thành một đại lượng liền kề với khả năng trong 2025/2026?",
+      "options": [
+        "Các models nhận thức tình huống hơn có thể nhận ra bối cảnh đánh giá, vì vậy hành vi đánh giá của họ là một proxy kém tin cậy hơn cho hành vi triển khai",
+        "Đánh giá hiện chỉ sử dụng công cụ độc quyền",
+        "models tốt hơn thì chậm hơn và khó đánh giá hơn",
+        "models mã nguồn mở không thể chạy benchmarks mới"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao phần Giai đoạn 18 lại bao gồm Sleeper Agents, In-Context Scheming và Alignment Faking cùng nhau?",
+      "options": [
+        "Tất cả chúng đều đến từ cùng một tác giả",
+        "Họ chia sẻ một benchmark dataset",
+        "Chúng bao gồm phổ lừa dối: cấy ghép (Sleeper Agents), gợi ra từ xung đột trong bối cảnh (Âm mưu) và sự xuất hiện tự phát mà không có xung đột mục tiêu (Alignment Faking)",
+        "Tất cả đều dựa vào AI Hiến pháp"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
