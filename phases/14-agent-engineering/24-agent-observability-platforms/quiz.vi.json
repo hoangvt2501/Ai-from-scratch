@@ -1,0 +1,90 @@
+{
+  "lesson": "24-agent-observability-platforms",
+  "title": "Agent Observability: Langfuse, Phượng hoàng, Opik",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Langfuse ship giấy phép nào sau khi mã nguồn mở các mô-đun thương mại trước đây vào tháng 6 năm 2025?",
+      "options": [
+        "GPLv3",
+        "Tiểu bang MIT",
+        "Giấy phép linh hoạt 2.0",
+        "Apache 2.0"
+      ],
+      "correct": 1,
+      "explanation": "Langfuse là MIT, bao gồm LLM với tư cách là giám khảo, hàng đợi chú thích, thử nghiệm prompt và Playground sau tháng 6 năm 2025."
+    },
+    {
+      "stage": "pre",
+      "question": "Arize Phoenix mạnh nhất về điều gì theo bài học?",
+      "options": [
+        "Phiên bản Prompt",
+        "Đánh giá sâu agent cụ thể: phân cụm trace, phát hiện bất thường, mức độ liên quan RAG truy xuất, thiết bị tự động OpenInference",
+        "Vòng lặp tối ưu hóa tự động",
+        "Phân tích tĩnh mã"
+      ],
+      "correct": 1,
+      "explanation": "Phoenix tập trung vào đánh giá RAG và trôi dạt hành vi với công cụ tự động OpenInference."
+    },
+    {
+      "stage": "check",
+      "question": "Nền tảng nào kết hợp tối ưu hóa prompt tự động với guardrails (biên tập PII, ràng buộc tại chỗ) và phát hiện ảo giác LLM phán xét?",
+      "options": [
+        "Cầu chì",
+        "Phượng hoàng",
+        "Thuốc lá",
+        "Jaeger"
+      ],
+      "correct": 2,
+      "explanation": "Opik tập trung vào vòng lặp tối ưu hóa + guardrail."
+    },
+    {
+      "stage": "check",
+      "question": "Bài học đề xuất nền tảng nào cho tất cả trong một với quản lý prompt?",
+      "options": [
+        "Cầu chì",
+        "Phượng hoàng",
+        "Thuốc lá",
+        "Datadog APM"
+      ],
+      "correct": 0,
+      "explanation": "Langfuse bao gồm theo dõi + quản lý prompt + đánh giá + phát lại session từ đầu đến cuối."
+    },
+    {
+      "stage": "check",
+      "question": "Bài học nói gì về nền tảng do nhà cung cấp xuất bản benchmarks?",
+      "options": [
+        "Chúng là dứt khoát",
+        "Hãy coi chúng là định hướng; Đo lường kho dữ liệu của riêng bạn",
+        "Chúng bị cấm bởi OpenTelemetry",
+        "Chỉ có Opik là đáng tin cậy"
+      ],
+      "correct": 1,
+      "explanation": "Ngay cả khoảng cách 14x được trích dẫn giữa Opik và Langfuse cũng nên được đo bằng dữ liệu của riêng bạn trước khi quyết định."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao truy xuất mà không đánh giá được coi là khai thác gỗ tốn kém?",
+      "options": [
+        "Đĩa có giá hơn CPU",
+        "Bạn thấy các lần chạy nhưng bạn không ghi được chúng, vì vậy hồi quy là vô hình và không thể chia đôi",
+        "Nhà cung cấp tính phí cho spans",
+        "Spans không thể phát lại"
+      ],
+      "correct": 1,
+      "explanation": "Đánh giá là thứ biến traces thành tín hiệu chất lượng có thể hành động."
+    },
+    {
+      "stage": "post",
+      "question": "Lời cảnh báo của bài học về các thẩm phán LLM tự lăn là gì?",
+      "options": [
+        "Chúng bị cấm bởi Apache 2.0",
+        "PHÊ BÌNH áp dụng: thẩm phán cần grounding bên ngoài để xác minh thực tế hoặc họ đóng dấu cao su",
+        "Chúng chỉ hoạt động trong TypeScript",
+        "Họ phải chạy trên GPUs"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có xác minh dựa trên công cụ bên ngoài, các giám khảo LLM trôi dạt sang dập cao su (CRITIC, Bài 5)."
+    }
+  ]
+}
