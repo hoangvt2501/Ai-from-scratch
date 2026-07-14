@@ -1,0 +1,78 @@
+{
+  "lesson": "67-query-rewriting-hyde",
+  "title": "Viết lại truy vấn: HyDE, đa truy vấn và phân tách",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cơ chế cốt lõi của HyDE (Tài liệu giả thuyết Embeddings) là gì?",
+      "options": [
+        "Nhúng truy vấn người dùng thông qua một model lớn hơn",
+        "Tạo một câu trả lời giả với một LLM, nhúng tài liệu giả định đó và truy xuất dựa trên vector của nó thay vì truy vấn vector",
+        "Chạy truy vấn qua nhiều trình truy xuất và chọn một trong những tốt nhất",
+        "Băm truy vấn và tra cứu nó trong bộ nhớ cache"
+      ],
+      "correct": 1,
+      "explanation": "HyDE viết một đoạn văn có hình tài liệu bằng giọng ngữ liệu và truy xuất trên embedding đó; truy vấn vector được thay thế."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao tài liệu giả thuyết do LLM tạo ra ở HyDE có thể chấp nhận được là sai thực tế?",
+      "options": [
+        "Trình xếp hạng lại sửa chữa các lỗi thực tế",
+        "Chó tha mồi quan tâm đến sự phân bố token, không phải tính đúng đắn thực tế; vector của giả thuyết hạ cánh gần lối đi thực",
+        "Người dùng không bao giờ nhìn thấy giả thuyết",
+        "Cuộc gọi LLM bị quay lại khi sai"
+      ],
+      "correct": 1,
+      "explanation": "Truy xuất là sự tương đồng trong không gian embedding; nếu từ vựng của giả thuyết khớp với kho dữ liệu, vector sẽ hạ cánh đúng vùng."
+    },
+    {
+      "stage": "check",
+      "question": "Sự khác biệt giữa mở rộng nhiều truy vấn và phân tách truy vấn là gì?",
+      "options": [
+        "Multi-query tạo ra N diễn giải của cùng một câu hỏi; phân hủy tạo ra các câu hỏi phụ cùng bao gồm một câu hỏi nhiều chủ đề",
+        "Đa truy vấn sử dụng cosin; phân hủy sử dụng BM25",
+        "Phân hủy chạy cục bộ; Multi-Query yêu cầu model từ xa",
+        "Chúng giống hệt nhau"
+      ],
+      "correct": 0,
+      "explanation": "Diễn giải duy trì ý định; các câu hỏi phụ chia một truy vấn nhiều chủ đề thành các phần có thể trả lời độc lập."
+    },
+    {
+      "stage": "check",
+      "question": "Khi nào phân tách truy vấn phân chia quá mức và truy xuất bị tổn thương?",
+      "options": [
+        "Khi truy vấn là nguyên tử (một chủ đề), trình phân tách sẽ phát minh ra các câu hỏi phụ giả mạo và tất cả các truy xuất đều trả về cùng một tài liệu với thứ hạng giảm",
+        "Khi truy vấn quá dài so với LLM",
+        "Khi kho dữ liệu quá nhỏ",
+        "Khi BM25 bị vô hiệu hóa"
+      ],
+      "correct": 0,
+      "explanation": "Phân tách một truy vấn nguyên tử sẽ chia nó thành các câu hỏi phụ giả mạo; truy xuất của chúng làm loãng merge để tài liệu phù hợp xếp hạng thấp hơn."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao ba chiến lược viết lại hợp nhất với RRF thay vì nội suy điểm?",
+      "options": [
+        "RRF là hoạt động duy nhất được Python hỗ trợ",
+        "Nội suy điểm yêu cầu hiệu chuẩn theo kho dữ liệu; RRF kết hợp các đóng góp dựa trên thứ hạng mà không cần hiệu chuẩn, điều này được yêu cầu khi hợp nhất N truy xuất từ các lần viết lại khác nhau",
+        "RRF chạy trên GPUs và nội suy điểm số không",
+        "Nội suy điểm số không thể xử lý nhiều hơn hai danh sách"
+      ],
+      "correct": 1,
+      "explanation": "Lập luận tương tự như bài 65; hợp nhất dựa trên xếp hạng không cần điều chỉnh alpha cho mỗi kho dữ liệu và vẫn ổn định trên các đầu ra của trình viết lại."
+    },
+    {
+      "stage": "post",
+      "question": "Sàn độ trễ khi chạy song song cả ba trình viết lại là bao nhiêu?",
+      "options": [
+        "Truy xuất một lần chậm nhất",
+        "Một cuộc gọi LLM (các trình viết lại và truy xuất chạy song song; cuộc gọi LLM là sàn)",
+        "Ba cuộc gọi LLM nối tiếp",
+        "Zero, bởi vì những người viết lại lưu trữ mọi thứ"
+      ],
+      "correct": 1,
+      "explanation": "Cả ba người viết lại đều có một cuộc gọi model; nếu chúng chạy song song, sàn là một model độ trễ cuộc gọi, thì việc truy xuất sẽ chạy song song sau đó."
+    }
+  ]
+}
