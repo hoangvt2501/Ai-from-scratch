@@ -1,0 +1,78 @@
+{
+  "lesson": "26-compliance-frameworks",
+  "title": "Tuân thủ - SOC 2, HIPAA, GDPR, PCI-DSS, Đạo luật AI của EU, ISO 42001",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Khi nào thì việc thực thi Đạo luật AI của EU đối với các hệ thống có rủi ro cao bắt đầu?",
+      "options": [
+        "Tháng Hai 2, 2025",
+        "Tháng Tám 2, 2026",
+        "Đã được thực thi đầy đủ vào năm 2024",
+        "Tháng Một 1, 2030"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Đạo luật AI EU xác định mức trần phạt hai cấp nào?",
+      "options": [
+        "Lên đến € 1 triệu cố định cho bất kỳ vi phạm nào",
+        "Lên đến €100K cho bất kỳ vi phạm nào",
+        "Lên đến 15 triệu euro hoặc 3% doanh thu hàng năm toàn cầu cho các nghĩa vụ hệ thống rủi ro cao (Điều 99(4)); lên đến 35 triệu euro hoặc 7% đối với các hành vi AI bị cấm (Điều 99(3))",
+        "Không có hình phạt tài chính, chỉ có lệnh gỡ bỏ"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao dọn dẹp PII sau xử lý không phải là một tư thế GDPR có thể bảo vệ được?",
+      "options": [
+        "Nó quá chậm trên quy mô",
+        "GDPR cấm chỉnh sửa hoàn toàn",
+        "Xử lý hậu kỳ giống hệt với thời gian thực",
+        "model đã xem dữ liệu, vì vậy biên tập inference lớp theo thời gian thực (trước cuộc gọi LLM) là tiêu chuẩn có thể bảo vệ được vào năm 2026"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Sự khác biệt thực tế giữa SOC 2 Loại I và Loại II là gì?",
+      "options": [
+        "Loại I yêu cầu HIPAA BAA",
+        "Loại I nghiêm ngặt hơn Loại II",
+        "Loại I chứng thực các biện pháp kiểm soát được thiết kế và ghi lại; Loại II chứng thực các đối chứng hoạt động hiệu quả trong 6-12 tháng",
+        "Loại II chỉ dành cho các công ty khởi nghiệp"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Ánh xạ điều khiển đa framework nhằm mục đích cung cấp điều gì?",
+      "options": [
+        "Một policy kiểm soát đáp ứng nhiều yêu cầu framework (ví dụ: bản đồ ghi nhật ký truy cập theo ISO 27001 A.5.15-5.18, GDPR Điều 32, HIPAA §164.312(a))",
+        "Loại bỏ kiểm toán",
+        "Thay thế tất cả các frameworks bằng ISO 42001",
+        "Các điều khiển khác biệt hơn trên mỗi framework"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học đề xuất gì cho khối lượng công việc HIPAA + LLM?",
+      "options": [
+        "HIPAA không áp dụng cho LLMs",
+        "Không bao giờ gửi PHI đến dịch vụ AI bên ngoài mà không có BAA đã ký; cả ba nhà cung cấp siêu quy mô và nhà cung cấp LLM API lớn đều cung cấp BAA",
+        "Chỉ sử dụng models tại chỗ, không bao giờ được quản lý",
+        "Ship PHI cho bất kỳ nhà cung cấp nào; BAA là tùy chọn"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
