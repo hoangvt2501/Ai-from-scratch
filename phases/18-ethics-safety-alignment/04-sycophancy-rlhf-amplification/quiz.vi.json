@@ -1,0 +1,78 @@
+{
+  "lesson": "04-sycophancy-rlhf-amplification",
+  "title": "Sycophancy như khuếch đại RLHF",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cái nào mô tả tốt nhất về sự sycophancy trong một model ngôn ngữ?",
+      "options": [
+        "Đồng ý với một tiền đề của người dùng đã nêu bất kể sự thật của nó là gì",
+        "Chuyển đổi ngôn ngữ giữa cuộc trò chuyện",
+        "Từ chối trả lời bất kỳ câu hỏi nào về niềm tin của người dùng",
+        "Trích dẫn nguồn cho mọi tuyên bố"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Shapira et al. (2026) chính thức hóa khuếch đại sycophancy như một cơ chế hai giai đoạn. Giai đoạn 1 là gì?",
+      "options": [
+        "Người dán nhãn chọn rõ ràng đầu ra sycophantic trong 100% cặp",
+        "Các lần hoàn thành sycophantic được đại diện quá mức trong số các kết quả phần thưởng cao của policy cơ sở",
+        "Sycophancy được mã hóa trong tokenizer",
+        "optimizer thêm một thuật ngữ sycophancy vào loss trực tiếp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao sycophancy được coi là tỷ lệ nghịch đảo trong bài học?",
+      "options": [
+        "Nó chỉ được quan sát thấy ở models dưới 1B parameters",
+        "Nó theo dõi training loss nghịch đảo",
+        "Nó giảm khi kích thước model tăng lên",
+        "Nó tăng lên với kích thước model và RLHF training dài hơn, không giống như hầu hết các khả năng"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cheng, Tramel và cộng sự (Khoa học, tháng 3 năm 2026) tách rời sự đồng tính khỏi sự trung thực bằng cách:",
+      "options": [
+        "Đo lường khung niềm tin của người dùng so với niềm tin của bên thứ ba đối với cùng một tuyên bố thực tế",
+        "Chỉ sử dụng câu hỏi trắc nghiệm",
+        "Yêu cầu models xem xét nội tâm về lý do của riêng họ",
+        "Chỉ kiểm tra các bài toán"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Điều chỉnh hình phạt thỏa thuận mà Shapira và cộng sự đề xuất là gì?",
+      "options": [
+        "Phạt policy khi KL của nó dưới ngưỡng",
+        "Chỉ xếp hạng lại đầu ra theo độ dài",
+        "Thả các cặp khi người dùng sai",
+        "Trừ điểm thỏa thuận do bộ phân loại đo lường từ phần thưởng proxy: r'(x, y) = r(x, y) - alpha * đồng ý(x, y)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Hình phạt thỏa thuận tạo ra sự đánh đổi nào khi alpha tăng lên?",
+      "options": [
+        "Nó luôn cải thiện nghiêm ngặt cả tính hợp lý và hữu ích",
+        "Sycophancy tăng lên vì bộ phân loại ồn ào",
+        "Sycophancy giảm, nhưng sự đồng thuận hợp pháp (model trái ngược hơn một chút về niềm tin đúng đắn của người dùng) cũng giảm",
+        "Chỉ có sự hữu ích thay đổi, sycophancy không bị ảnh hưởng"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
