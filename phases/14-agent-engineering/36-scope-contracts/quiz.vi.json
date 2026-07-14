@@ -1,0 +1,90 @@
+{
+  "lesson": "36-scope-contracts",
+  "title": "Phạm vi, hợp đồng và ranh giới nhiệm vụ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao phạm vi creep được gọi là chế độ lỗi ít được giám sát nhất?",
+      "options": [
+        "Nó đập mạnh agent",
+        "Mỗi lần chạm đều có một lý do hợp lý trong khoảnh khắc; chúng cùng nhau tạo thành một thay đổi khác với đã được xem xét",
+        "Nó quá hiếm để theo dõi",
+        "Các bài kiểm tra tự động bắt nó"
+      ],
+      "correct": 1,
+      "explanation": "Agents thuật lại từng bước một cách thiện chí; Tổng số im lặng là creep."
+    },
+    {
+      "stage": "pre",
+      "question": "Bài học gọi một nửa hợp đồng là trường hợp đồng nào?",
+      "options": [
+        "Mục tiêu",
+        "forbidden_files (không gian âm)",
+        "task_id",
+        "approvals_required"
+      ],
+      "correct": 1,
+      "explanation": "Hợp đồng không có forbidden_files là không đầy đủ; không gian âm bằng một nửa hợp đồng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao ghim allowed/forbidden vào các quả cầu thay vì đường dẫn thô?",
+      "options": [
+        "Globs nhanh hơn",
+        "Thực repos di chuyển tệp; Các quả cầu tồn tại trong quá trình tái cấu trúc giữa sessions",
+        "Globs mã hóa tốt hơn",
+        "Đường dẫn thô không thể JSON tuần tự hóa"
+      ],
+      "correct": 1,
+      "explanation": "Globs (app/**/*.py) giữ cho hợp đồng có hiệu lực thông qua tái cấu trúc."
+    },
+    {
+      "stage": "check",
+      "question": "Mô hình 'ngân sách vi phạm' làm gì?",
+      "options": [
+        "Đặt ngân sách hàng tháng cho agent",
+        "Cho phép trượt phạm vi nhỏ làm cảnh báo trong phạm vi ngân sách; chỉ vượt quá triggers từ chối merge - sự khác biệt giữa cổng ships và cổng bị vô hiệu hóa",
+        "Điều tiết model cuộc gọi",
+        "Phí cho mỗi vi phạm"
+      ],
+      "correct": 1,
+      "explanation": "agent-guardrails sử dụng violationBudget để cổng có thể sử dụng được trong quy trình hàng ngày."
+    },
+    {
+      "stage": "check",
+      "question": "Học viên specsmaxxing đã báo cáo gì?",
+      "options": [
+        "Độ trễ giảm 90%",
+        "Tỷ lệ lỗ thỏ giảm từ 52% xuống 21% trong ba tuần mà không thay đổi agent; hợp đồng đã làm việc chứ không phải model",
+        "Chi phí tăng gấp 5 lần",
+        "Các bài kiểm tra chậm lại"
+      ],
+      "correct": 1,
+      "explanation": "Các hợp đồng phạm vi trong YAML trước khi gọi agent đã giảm một nửa tỷ lệ lỗ thỏ mà không có thay đổi model."
+    },
+    {
+      "stage": "post",
+      "question": "Ngữ nghĩa merge nhiều hợp đồng (đặc quyền tối thiểu) là gì?",
+      "options": [
+        "Hợp đồng cuối cùng thắng",
+        "Giao nhau allowed_files; forbidden_files công đoàn; time_budget phút; tích lũy phê duyệt; từ chối tất cả gậy; merge of None trì hoãn sang phía bên kia",
+        "Hợp đồng đầu tiên thắng",
+        "Tie-break ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "merge đặc quyền tối thiểu: giao nhau khi cho phép, liên minh về các lệnh cấm, thời gian hạn chế nhất, phê duyệt tích lũy."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao thời gian và ngân sách mạng cũng nằm trong hợp đồng?",
+      "options": [
+        "Đồng hồ treo tường và truy cập máy chủ bên ngoài là kích thước phạm vi; Chỉ có file globs là cần thiết nhưng không đủ",
+        "Các nhà cung cấp yêu cầu chúng",
+        "Chúng làm cho JSON nhỏ hơn",
+        "Chúng được yêu cầu bởi Apache 2.0"
+      ],
+      "correct": 0,
+      "explanation": "Danh sách cho phép time_budget_minutes và network_egress là thứ nguyên phạm vi trên đầu các khối tệp."
+    }
+  ]
+}
