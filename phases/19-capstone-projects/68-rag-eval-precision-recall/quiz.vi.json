@@ -1,0 +1,78 @@
+{
+  "lesson": "68-rag-eval-precision-recall",
+  "title": "Đánh giá RAG: Precision, Recall, MRR, nDCG, Trung thực, Mức độ liên quan của câu trả lời",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao recall@k thường là chỉ số truy xuất tiêu đề trong production RAG?",
+      "options": [
+        "Recall bỏ qua xếp hạng",
+        "Thế hệ có thể loại bỏ các phần không liên quan nhưng không thể phát minh ra câu trả lời từ một phần mà nó chưa bao giờ nhìn thấy, vì vậy bỏ lỡ phần phù hợp là thất bại tốn kém hơn",
+        "Recall được yêu cầu bởi thông số kỹ thuật OpenAPI",
+        "Recall giống như precision trong RAG"
+      ],
+      "correct": 1,
+      "explanation": "Một tha mồi bỏ lỡ đoạn bên phải không thể sửa chữa được ở hạ lưu; những khối dư thừa lãng phí tokens nhưng hiếm khi đầu độc câu trả lời."
+    },
+    {
+      "stage": "pre",
+      "question": "MRR tính toán gì?",
+      "options": [
+        "Giá trị trung bình của 1 / position-of-first-relevant-document trên các truy vấn",
+        "Giá trị trung bình hình học của sự tương tự cosin",
+        "Xếp hạng trung bình của tài liệu liên quan thứ hai",
+        "Token số lượng câu trả lời"
+      ],
+      "correct": 0,
+      "explanation": "MRR bị thống trị bởi vị trí đầu bảng: hạng 1 đóng góp 1.0, hạng 2 đóng góp 0.5, hạng 10 đóng góp 0.1."
+    },
+    {
+      "stage": "check",
+      "question": "Khi nào bạn nên sử dụng nDCG thay vì recall@k?",
+      "options": [
+        "Khi kho dữ liệu nhỏ",
+        "Khi nhãn vàng có mức độ liên quan được phân loại (e.g. doc A là 3, tài liệu B là 2, tài liệu C là 1) và số liệu nhị phân mất thông tin",
+        "Khi người truy xuất không trả điểm",
+        "Không bao giờ"
+      ],
+      "correct": 1,
+      "explanation": "nDCG sử dụng lợi nhuận được phân loại và chiết khấu vị thế; recall làm phẳng mọi thứ thành nhị phân."
+    },
+    {
+      "stage": "check",
+      "question": "Sự khác biệt giữa trung thực và mức độ liên quan của câu trả lời là gì?",
+      "options": [
+        "Sự trung thành hỏi 'câu trả lời có dựa trên ngữ cảnh được truy xuất không'; mức độ liên quan của câu trả lời hỏi 'câu trả lời có giải quyết câu hỏi không'",
+        "Các biện pháp trung thực precision; các biện pháp liên quan recall",
+        "Độ trung thực là một chỉ số truy xuất và mức độ liên quan là một chỉ số phân khúc",
+        "Chúng là cùng một số liệu với hai tên"
+      ],
+      "correct": 0,
+      "explanation": "Một câu trả lời trung thực nhưng lạc đề đạt điểm cao về độ trung thực, mức độ liên quan thấp; một câu trả lời có liên quan nhưng không có cơ sở đạt điểm cao về mức độ liên quan, thấp về độ trung thực."
+    },
+    {
+      "stage": "check",
+      "question": "Một pipeline cho thấy MRR recall@5 tốt nhưng thấp. Bạn nên điều tra giai đoạn nào trước?",
+      "options": [
+        "Máy chunker",
+        "Trình xếp hạng lại, bởi vì phần bên phải nằm trong top-k nhưng không ở trên cùng",
+        "Máy phát điện",
+        "Trình nhập kho dữ liệu"
+      ],
+      "correct": 1,
+      "explanation": "Recall@5 có nghĩa là vàng nằm trong top 5; MRR thấp có nghĩa là nó không đứng đầu danh sách. Đó là công việc của giai đoạn xếp hạng lại."
+    },
+    {
+      "stage": "post",
+      "question": "Mối nguy hiểm production nào khiến tệp qrels bị đóng băng trở nên nguy hiểm theo thời gian?",
+      "options": [
+        "tha mồi ngừng hoạt động sau sáu tháng",
+        "Qrels thối rữa: kho dữ liệu thay đổi và một tài liệu là câu trả lời vàng trong quý trước không còn là câu trả lời đúng nữa; số liệu được báo cáo dựa trên các nhãn cũ",
+        "Embedding vectors hết hạn",
+        "Bộ đánh giá sử dụng hết dung lượng đĩa"
+      ],
+      "correct": 1,
+      "explanation": "Lên lịch đánh giá qrels hàng quý, nếu không số liệu của bạn sẽ đo lường sai khi kho dữ liệu phát triển."
+    }
+  ]
+}
