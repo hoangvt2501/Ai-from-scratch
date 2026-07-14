@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Giá trị p 0.03 có nghĩa là gì trong kiểm tra giả thuyết?",
+      "options": [
+        "Có 3% xác suất giả thuyết không là đúng",
+        "Có 3% xác suất nhìn thấy dữ liệu cực đoan này nếu giả thuyết không là đúng",
+        "model cải thiện 3%",
+        "97% dữ liệu ủng hộ giả thuyết thay thế"
+      ],
+      "correct": 1,
+      "explanation": "Giá trị p là xác suất quan sát dữ liệu cực đoan như những gì bạn nhận được, giả sử giả thuyết không là đúng. KHÔNG phải xác suất H0 là đúng - đây là sự hiểu lầm phổ biến nhất trong thống kê."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao bạn chia cho (n-1) thay vì n khi tính variance mẫu?",
+      "options": [
+        "Nó làm cho tính toán nhanh hơn",
+        "Nó giải thích thực tế là giá trị trung bình mẫu không phải là giá trị trung bình dân thực (hiệu chỉnh của Bessel)",
+        "Nó chuyển đổi variance sang độ lệch chuẩn",
+        "Nó chỉ áp dụng khi kích thước mẫu lẻ"
+      ],
+      "correct": 1,
+      "explanation": "Hiệu chỉnh Bessel (chia cho n-1) bù cho bias được đưa ra bằng cách sử dụng giá trị trung bình mẫu thay vì giá trị trung bình dân thực. Nếu không có nó, mẫu variance đánh giá thấp dân số thực sự variance một cách có hệ thống."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn kiểm tra 20 cấu hình model khác nhau ở alpha = 0,05. Xác suất gần đúng của ít nhất một dương tính giả là bao nhiêu?",
+      "options": [
+        "5%",
+        "25%",
+        "64%",
+        "95%"
+      ],
+      "correct": 2,
+      "explanation": "P (ít nhất một dương tính giả) = 1 - (1 - 0,05) ^ 20 = 1 - 0,95 ^ 20 ≈ 0,64 (64%). Đây là bài toán so sánh bội số. Hiệu chỉnh Bonferroni giải quyết vấn đề này bằng cách kiểm tra mỗi mức ở alpha/20 = 0,0025."
+    },
+    {
+      "stage": "post",
+      "question": "Model A đạt 0,9234 và điểm Model B 0,9237 trên 1 triệu mẫu thử nghiệm với giá trị p = 0,001. Bạn nên kết luận gì?",
+      "options": [
+        "Model B tốt hơn đáng kể và nên được triển khai ngay lập tức",
+        "Sự khác biệt có ý nghĩa thống kê nhưng sự cải thiện 0,03% có thể không đáng kể trên thực tế",
+        "Xét nghiệm không hợp lệ vì cỡ mẫu quá lớn",
+        "Model A tốt hơn vì nó đã được thử nghiệm trước"
+      ],
+      "correct": 1,
+      "explanation": "Với 1 triệu mẫu, ngay cả những khác biệt nhỏ cũng trở nên có ý nghĩa thống kê. Giá trị p xác nhận sự khác biệt là có thật, nhưng kích thước hiệu ứng (0,03% accuracy tăng) có thể không biện minh cho chi phí kỹ thuật triển khai. Luôn báo cáo cả giá trị p và kích thước hiệu ứng."
+    },
+    {
+      "stage": "post",
+      "question": "Bootstrap có lợi thế gì so với t-test được ghép nối để so sánh hai ML models?",
+      "options": [
+        "Bootstrap luôn tạo ra các giá trị p nhỏ hơn",
+        "Bootstrap không yêu cầu giả định phân phối và hoạt động cho bất kỳ chỉ số nào (AUC, F1, trung bình)",
+        "Bootstrap cần ít mẫu hơn để đạt được tầm quan trọng",
+        "Bootstrap chỉ có thể được sử dụng với mạng nơ-ron"
+      ],
+      "correct": 1,
+      "explanation": "Lấy mẫu lại bootstrap ước tính sự phân bố sampling của bất kỳ thống kê nào bằng cách lấy mẫu lại với thay thế. Không giống như t-test, nó không giả định tính bình thường. Nó hoạt động cho bất kỳ chỉ số nào - AUC, F1, precision@k, trung bình - mà không cần công thức dạng đóng."
+    }
+  ]
+}
