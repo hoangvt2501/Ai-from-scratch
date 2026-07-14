@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao OCR sử dụng CTC loss thay vì entropy chéo đơn giản?",
+      "options": [
+        "CTC nhanh hơn",
+        "OCR ánh xạ một dãy feature có độ dài cố định với một chuỗi ký tự có độ dài thay đổi mà không có alignment theo từng bước thời gian; CTC loss bên lề trên tất cả các căn chỉnh giảm xuống mục tiêu sau khi loại bỏ lặp lại và khoảng trống, vì vậy bạn có thể huấn luyện mà không cần nhãn thời gian cấp ký tự",
+        "CTC được yêu cầu bởi PyTorch",
+        "Tràn entropy chéo cho các chuỗi dài"
+      ],
+      "correct": 1,
+      "explanation": "Nhận dạng tạo ra một phân phối cho mỗi bước thời gian, nhưng văn bản đích không có alignment cho mỗi bước. CTC xử lý điều đó bằng cách tổng hợp mọi alignment giảm xuống mục tiêu thông qua thao tác merge-lặp lại và-loại bỏ-khoảng trống. Đây là lý do tại sao CRNN có thể được huấn luyện chỉ trên các cặp (hình ảnh, văn bản) mà không biết mỗi ký tự bắt đầu và kết thúc ở đâu trong hình ảnh."
+    },
+    {
+      "stage": "pre",
+      "question": "Trong giải mã CTC, token trống làm gì?",
+      "options": [
+        "Đệm trình tự đến một độ dài cố định",
+        "Tách các ký tự giống hệt nhau liền kề để các đầu ra như 'xin chào' với chữ L kép có thể được tạo ra bởi model phát ra 'h e l _ l o' — nếu không có chỗ trống, 'l l' sẽ thu gọn thành một 'l'",
+        "Mặt nạ vùng ồn ào",
+        "Cho biết kết thúc trình tự"
+      ],
+      "correct": 1,
+      "explanation": "Khoảng trống là cơ chế cho phép CTC mã hóa các ký tự kép. 'll' cần một khoảng trống giữa hai chữ L để bước 'merge lặp lại' giữ cho chúng khác biệt: 'L _ L' tồn tại khi hợp nhất, 'L L' thì không. Nếu không có chỗ trống, CTC không thể đại diện cho bất kỳ từ nào chứa các ký tự giống hệt liền kề."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao giải mã CTC tham lam đôi khi tốt hơn beam search trên các datasets đơn giản?",
+      "options": [
+        "Tham lam luôn tốt hơn",
+        "Khi model tự tin ở mọi bước (chữ viết tay sạch, phông chữ in), argmax của tham lam thường là người chiến thắng chùm tia; beam search thêm độ trễ mà không tăng accuracy. Đối với các đầu vào nhiễu hoặc mơ hồ, beam search giúp ích",
+        "Beam search yêu cầu model ngôn ngữ",
+        "Tham lam dễ thực hiện hơn"
+      ],
+      "correct": 1,
+      "explanation": "Beam search chỉ thắng khi argmax trên mỗi bước không đáng tin cậy - các ký tự mơ hồ, chữ cái chồng chéo, quét xuống cấp. Đối với văn bản in sạch, model tự tin ở mỗi bước và tham lam nằm trong phạm vi 1% CER của chùm tia. Luôn benchmark cả hai; Giao dịch có độ trễ là có thật."
+    },
+    {
+      "stage": "post",
+      "question": "Donut bỏ qua tính năng phát hiện văn bản khiêu dâm và nhận dạng ký tự. Làm sao?",
+      "options": [
+        "Nó sử dụng một động cơ OCR bên ngoài bên trong",
+        "Nó là một encoder + văn bản ViT decoder được huấn luyện để tạo chuỗi đầu ra cuối cùng (thường JSON) trực tiếp từ hình ảnh; model học cả bản địa hóa và nhận biết một cách ngầm thông qua mục tiêu training",
+        "Nó được giới hạn ở các danh mục tài liệu có bố cục cố định",
+        "Nó xử lý trước hình ảnh bằng máy dò văn bản CNN"
+      ],
+      "correct": 1,
+      "explanation": "Donut là một model đầu cuối: ViT encoder nhìn thấy toàn bộ tài liệu, transformer decoder phát ra văn bản đích hoặc JSON tự động hồi quy. Không có pipeline của máy dò + bộ nhận dạng + mô-đun bố trí. Điều này bỏ qua sự tích lũy lỗi qua các giai đoạn nhưng yêu cầu bộ training được gắn nhãn lớn cho các loại tài liệu cụ thể mà bạn quan tâm."
+    },
+    {
+      "stage": "post",
+      "question": "Để trích xuất `invoice_total` từ biên lai, cách tiếp cận nào thường là tốt nhất vào năm 2026?",
+      "options": [
+        "Biểu thức chính quy thủ công trên đầu ra Tesseract",
+        "Fine-tuned Bánh rán hoặc một VLM trên một bộ nhỏ có nhãn của các biên lai mục tiêu; Cả hai đều xử lý bố cục và trích xuất ngữ nghĩa trong một model và khái quát hóa trên các biến thể biên nhận tốt hơn so với các phương pháp dựa trên pipeline",
+        "Chỉ có OCR cổ điển là đủ đáng tin cậy",
+        "Một CNN riêng biệt cho từng lĩnh vực"
+      ],
+      "correct": 1,
+      "explanation": "Trích xuất trường có cấu trúc từng là lĩnh vực của LayoutLM + heuristics. End-to-end models (Donut, Qwen-VL-OCR) đã vượt qua con đường đó: họ chấp nhận một hình ảnh và tạo ra JSON trực tiếp. Đối với một bộ hóa đơn nhỏ có dán nhãn (100-1000), fine-tuning Donut đạt F1 cao hơn bất kỳ pipeline quy tắc OCR + nào."
+    }
+  ]
+}
