@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao GAN training sử dụng trình tạo không bão hòa loss -log(D(G(z))) thay vì log(1 - D(G(z))))?",
+      "options": [
+        "Chúng khác nhau về mặt toán học và tạo ra trạng thái cân bằng tốt hơn",
+        "Đầu training D(G(z)) gần bằng không, vì vậy log(1 - D(G(z))) có gradient biến mất; -log(D(G(z))) có gradient lớn ở đó nên G nhận được tín hiệu hữu ích",
+        "Nó tăng tốc độ phân biệt",
+        "Nó được yêu cầu bởi PyTorch"
+      ],
+      "correct": 1,
+      "explanation": "Hai tổn thất có cùng hướng gradient nhưng độ lớn rất khác nhau khi D(G(z)) nhỏ. log(1 - D(G(z))) cao nguyên ở độ không gradient ở đó. Hình thức không bão hòa vẫn cung cấp thông tin trên toàn bộ phạm vi. Goodfellow đã lưu ý điều chỉnh này trong bài báo gốc và mọi GAN hiện đại đều sử dụng nó."
+    },
+    {
+      "stage": "pre",
+      "question": "Các quy tắc của DCGAN nói rằng sử dụng các tích chập sải thay vì gộp. Tại sao?",
+      "options": [
+        "Gộp chậm hơn trên GPUs",
+        "Gộp là không thể học được và vứt bỏ thông tin mà người tạo có thể cần; Convs Strided cho phép mạng học cách lấy mẫu xuống của riêng nó, theo kinh nghiệm tạo ra hình ảnh được tạo ra sắc nét hơn",
+        "Gộp phá vỡ dòng chảy gradient",
+        "Gộp không tương thích với tiêu chuẩn batch"
+      ],
+      "correct": 1,
+      "explanation": "Max-pool là một phương pháp lấy mẫu được lựa chọn thủ công, loại bỏ mọi thứ ngoại trừ mức tối đa. Trong môi trường tổng quát, model được hưởng lợi từ việc lấy mẫu giảm đã học được có thể bảo toàn thông tin trong suốt quá trình thực hiện. Các chập chập trong D và các chập chuyển vị trong G là sự thay đổi kiến trúc khiến DCGAN có thể huấn luyện được."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn huấn luyện GAN và nhận thấy G tạo ra các mẫu gần như giống hệt nhau bất kể nhiễu đầu vào. Đây là thất bại nào?",
+      "options": [
+        "Biến mất gradients",
+        "Thu gọn chế độ - G đã tìm thấy một vùng hẹp của phân phối dữ liệu liên tục đánh lừa D và không có động lực để khám phá; Các bản sửa lỗi bao gồm định mức quang phổ, phân biệt lô nhỏ hoặc một batch lớn hơn",
+        "Dao động",
+        "dataset quá nhỏ"
+      ],
+      "correct": 1,
+      "explanation": "Sự sụp đổ chế độ là lỗi GAN đặc trưng trong đó các mẫu thiếu sự đa dạng. Chẩn đoán rất rõ ràng: nhiễu vào, cùng một hình ảnh ra. Sửa tất cả đều nhắm vào khả năng của người phân biệt để trừng phạt sự thiếu đa dạng, bằng cách làm cho D biểu cảm hơn (định mức quang phổ, phân biệt lô nhỏ) hoặc bằng cách cho G ít chỗ hơn để sụp đổ (batch lớn hơn, nhãn có điều kiện)."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao DCGAN training scripts sử dụng Adam với beta = (0.5, 0.999) thay vì mặc định (0.9, 0.999)?",
+      "options": [
+        "Mặc định bị hỏng",
+        "beta1 thấp hơn làm giảm động lượng; Trong một trò chơi đối thủ, động lượng nặng nề giữ cho mỗi optimizer đi sai hướng quá lâu khi hành vi của mạng kia thay đổi, gây ra sự bất ổn",
+        "Adam chỉ được hỗ trợ với beta1 = 0,5 trên CUDA",
+        "Đó là một lỗi chính tả được lan truyền thông qua các hướng dẫn"
+      ],
+      "correct": 1,
+      "explanation": "Trung bình beta1 = 0,9 mặc định của Adam gradients trong khoảng 10 bước. Trong một mục tiêu cố định điều đó rất hữu ích. Trong một trò chơi đối nghịch mà bối cảnh loss thay đổi mỗi bản cập nhật D và G, tính trung bình đó làm chậm phản ứng của optimizer và gây ra dao động. Radford et al. nhận thấy beta1 = 0,5 ổn định hơn nhiều và bây giờ nó là mặc định GAN."
+    },
+    {
+      "stage": "post",
+      "question": "Một đồng nghiệp báo cáo GAN với D loss gần bằng không và G loss tăng hơn training. Điều gì đang xảy ra và làm thế nào để bạn khắc phục nó?",
+      "options": [
+        "Cả hai lưới đều đang cải thiện chính xác",
+        "Bộ phân biệt đã trở nên quá mạnh và đẩy gradient của G về không; các bản sửa lỗi bao gồm D nhỏ hơn, định mức quang phổ, làm mịn nhãn trên nhãn thực (0,9 thay vì 1,0) hoặc chuyển sang WGAN-GP",
+        "Máy phát điện được overfitting chính xác",
+        "Không có gì - đây là trạng thái cân bằng"
+      ],
+      "correct": 1,
+      "explanation": "D loss gần bằng không có nghĩa là D hoàn hảo trên cả hàng thật và giả. Tại thời điểm đó, gradient BCE với G biến mất: G nhìn thấy tín hiệu gần bằng không bất kể nó phát ra gì. Cách khắc phục là làm suy yếu D hoặc sử dụng loss không bão hòa. Chuẩn quang phổ (giới hạn hằng số Lipschitz của D) và WGAN-GP (sử dụng khoảng cách Động cơ Trái đất thay vì BCE) là hai giải cứu tiêu chuẩn."
+    }
+  ]
+}
