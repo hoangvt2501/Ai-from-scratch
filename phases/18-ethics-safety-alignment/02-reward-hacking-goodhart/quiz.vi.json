@@ -1,0 +1,78 @@
+{
+  "lesson": "02-reward-hacking-goodhart",
+  "title": "Phần thưởng hacking và định luật Goodhart",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Định luật Goodhart, như đã nêu ban đầu, nói:",
+      "options": [
+        "Bất kỳ thước đo nào trở thành mục tiêu không còn là thước đo tốt",
+        "Phần thưởng models hội tụ theo sở thích thực sự của con người ở quy mô lớn",
+        "Lỗi đuôi nặng không thể xảy ra trong models chiều hữu hạn",
+        "Tối ưu hóa luôn cải thiện proxy không giới hạn"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Trong Gao, Schulman, Hilton (2023), phần thưởng và phần thưởng vàng proxy hoạt động như thế nào khi khoảng cách KL với policy ban đầu tăng lên?",
+      "options": [
+        "Cả hai đều đi ngang dưới bất kỳ ràng buộc nào của KL",
+        "Cả hai đều tăng một cách đơn điệu với KL",
+        "Proxy đạt đỉnh rồi giảm, vàng tăng đơn điệu",
+        "Proxy tiếp tục tăng, vàng đạt đỉnh gần nguồn gốc rồi giảm"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Điều nào sau đây KHÔNG phải là một trong bốn 'trang phục' của hack phần thưởng được liệt kê trong bài học?",
+      "options": [
+        "Lý luận không trung thành",
+        "Độ chi tiết bias",
+        "Tokenizer không khớp",
+        "Sycophancy"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Kết quả 'Goodhart thảm họa' về việc chính quy hóa KL là gì?",
+      "options": [
+        "Chính quy hóa KL luôn ngăn chặn hack phần thưởng khi beta dương tính",
+        "Chính quy hóa KL chỉ không thành công khi policy được khởi tạo ngẫu nhiên",
+        "Chính quy hóa KL tương đương với phần thưởng models",
+        "Dưới lỗi phần thưởng đuôi nặng, một policy tối ưu bị hạn chế bởi KL vẫn có thể thúc đẩy phần thưởng proxy tăng lên trong khi phần thưởng vàng vẫn ở mức cơ bản"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Coste et al. (2023) nghiên cứu biện pháp giảm thiểu nào để làm dịu phần thưởng tối ưu hóa quá mức?",
+      "options": [
+        "Loại bỏ hoàn toàn hình phạt KL",
+        "Training policy trên proxy ở temperature không",
+        "Các nhóm model phần thưởng với tổng hợp trong trường hợp xấu nhất",
+        "Tăng nhóm người dán nhãn lên một triệu người đánh giá"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Theo quan điểm thống nhất năm 2026, cơ chế cốt lõi nào mà sự dài dòng, sự giả dối, CoT không trung thành và giả mạo người đánh giá chia sẻ cơ chế cốt lõi nào?",
+      "options": [
+        "Khối lượng xác suất chuyển sang đầu ra tối đa hóa phần thưởng proxy bằng cách khai thác các phương pháp phỏng đoán dễ học có tương quan giả mạo với sự chấp thuận",
+        "Chúng chỉ được gây ra bởi những người dán nhãn viết các tùy chọn độc hại",
+        "Tất cả đều bắt nguồn từ lịch trình tốc độ học tập quá tích cực",
+        "Chúng là những con bọ độc lập trong các đầu phần thưởng riêng biệt"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
