@@ -1,0 +1,67 @@
+[
+  {
+    "id": "pipeline-pre-1",
+    "stage": "pre",
+    "question": "Rò rỉ dữ liệu trong bối cảnh ML pipelines là gì?",
+    "options": [
+      "Dữ liệu vô tình bị xóa trong quá trình tiền xử lý",
+      "Thông tin từ bộ thử nghiệm hoặc dữ liệu trong tương lai làm ô nhiễm training process",
+      "model quá chậm để process dữ liệu",
+      "Features bị loại bỏ trong quá trình mã hóa"
+    ],
+    "correct": 1,
+    "explanation": "Rò rỉ dữ liệu xảy ra khi thông tin không có sẵn tại thời điểm dự đoán được sử dụng trong quá trình training. Ví dụ: tính toán mean/std của trình chia tỷ lệ trên toàn bộ các dataset bao gồm cả dữ liệu thử nghiệm."
+  },
+  {
+    "id": "pipeline-pre-2",
+    "stage": "pre",
+    "question": "Tại sao việc lắp một máy cạo vôi trên toàn bộ dataset trước khi tách thành train/test được coi là rò rỉ?",
+    "options": [
+      "Thay đổi tỷ lệ phân phối dữ liệu",
+      "Thống kê của công cụ chia tỷ lệ (trung bình, tiêu chuẩn) bao gồm dữ liệu thử nghiệm, vì vậy model gián tiếp nhìn thấy thông tin thử nghiệm trong quá trình training",
+      "Việc mở rộng quy mô chỉ nên được thực hiện trên tập thử nghiệm",
+      "Việc lắp máy cạo vôi mất quá nhiều thời gian trên datasets lớn"
+    ],
+    "correct": 1,
+    "explanation": "Khi bộ chia tỷ lệ phù hợp với tất cả dữ liệu, giá trị trung bình và độ lệch chuẩn của nó sẽ mã hóa thông tin từ các mẫu thử nghiệm. Training features sau đó được thay đổi bằng cách sử dụng thống kê thử nghiệm, rò rỉ thông tin trong tương lai vào training."
+  },
+  {
+    "id": "pipeline-post-1",
+    "stage": "post",
+    "question": "Trong sklearn, sự khác biệt giữa calling fit_transform và transform on a pipeline step là gì?",
+    "options": [
+      "Chúng giống hệt nhau - vừa vừa vừa vặn vừa biến đổi",
+      "fit_transform học parameters từ dữ liệu và áp dụng phép biến đổi; transform chỉ áp dụng parameters đã học trước đó",
+      "transform dành cho dữ liệu training; fit_transform dành cho dữ liệu thử nghiệm",
+      "fit_transform chậm hơn nhưng chính xác hơn"
+    ],
+    "correct": 1,
+    "explanation": "fit_transform tính toán số liệu thống kê (ví dụ: trung bình, std) từ dữ liệu VÀ chuyển đổi nó. transform áp dụng các số liệu thống kê đã học mà không cần tính toán lại. Trên dữ liệu thử nghiệm, bạn phải sử dụng transform để tránh rò rỉ."
+  },
+  {
+    "id": "pipeline-post-2",
+    "stage": "post",
+    "question": "Tại sao ColumnTransformer lại cần thiết cho datasets trong thế giới thực?",
+    "options": [
+      "Nó làm cho pipeline chạy song song trên nhiều CPUs",
+      "Nó áp dụng các bước tiền xử lý khác nhau cho các cột số và phân loại trong cùng một pipeline",
+      "Nó tự động xóa các cột có giá trị bị thiếu",
+      "Nó chuyển đổi tất cả các cột thành cùng một loại dữ liệu"
+    ],
+    "correct": 1,
+    "explanation": "datasets thực có các loại hỗn hợp. Cột số cần chia tỷ lệ, cột phân loại cần mã hóa. ColumnTransformer định tuyến mỗi tập hợp con cột đến transformer thích hợp trong một pipeline."
+  },
+  {
+    "id": "pipeline-post-3",
+    "stage": "post",
+    "question": "Một production model nhận được một giá trị phân loại mà nó chưa từng thấy trong quá trình training ('new_category'). Người pipeline nên xử lý những gì?",
+    "options": [
+      "Bỏ qua hoàn toàn hàng và không trả về dự đoán",
+      "Huấn luyện lại toàn bộ model từ đầu",
+      "Xử lý các danh mục không xác định một cách dễ dàng, ví dụ: bằng cách sử dụng vùng lưu trữ 'không xác định' hoặc giá trị trung bình toàn cục trong mã hóa mục tiêu",
+      "Chuyển đổi danh mục không xác định thành số không"
+    ],
+    "correct": 2,
+    "explanation": "Mạnh mẽ pipelines dự đoán các danh mục chưa từng thấy trong production. Các giải pháp bao gồm dự phòng 'không xác định' cho mã hóa một nóng hoặc mặc định về giá trị trung bình toàn cầu cho mã hóa mục tiêu."
+  }
+]
