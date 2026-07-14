@@ -1,0 +1,78 @@
+{
+  "lesson": "42-large-corpus-downloader",
+  "title": "Trình tải xuống kho dữ liệu lớn",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao trình tải xuống giữ một .partial riêng biệt. json checkpoint cho mỗi phân đoạn?",
+      "options": [
+        "Để làm cho thư mục bộ nhớ cache trông có tổ chức",
+        "Vì vậy, quá trình tải xuống được tiếp tục có thể xác minh tiền tố sha256 trên các byte đã được xác minh trước khi thêm vào, khiến việc hỏng hóc im lặng không thể xảy ra",
+        "Bởi vì urllib yêu cầu nó",
+        "Để lưu trữ URL trong trường hợp tệp phân đoạn di chuyển"
+      ],
+      "correct": 1,
+      "explanation": "checkpoint ghi lại verified_bytes và sha256 của các byte đó; tiếp tục chỉ tiến hành khi hàm băm trên đĩa khớp với nhau."
+    },
+    {
+      "stage": "check",
+      "question": "Sơ đồ dải LSH mua gì mà chính xác băm không có?",
+      "options": [
+        "Sử dụng bộ nhớ liên tục",
+        "Tra cứu tuyến tính phụ gắn cờ gần như trùng lặp với độ giống Jaccard cao ngay cả khi các tài liệu khác nhau một vài tokens",
+        "Nén không mất dữ liệu",
+        "Tính toán sha256 nhanh hơn"
+      ],
+      "correct": 1,
+      "explanation": "MinHash cộng với LSH bắt các diễn giải và các biến thể soạn sẵn mà chính xác là băm đi qua."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao checkpoint được viết trước khi các byte được thêm vào, không phải sau?",
+      "options": [
+        "Nó là thuận tiện",
+        "Nếu process chết giữa quá trình ghi và cập nhật checkpoint, sơ yếu lý lịch tiếp theo sẽ đọc một checkpoint ở phía sau các byte và âm thầm nối lại, làm hỏng tệp",
+        "Nó nhanh hơn",
+        "Nó tiết kiệm dung lượng đĩa"
+      ],
+      "correct": 1,
+      "explanation": "Checkpoint đầu tiên khớp với nhật ký ghi trước: sự cố để lại phần bù đã xác minh ở phía sau hoặc bằng tệp, không bao giờ ở phía trước."
+    },
+    {
+      "stage": "check",
+      "question": "Vai trò của tệp khóa tệp kê khai sha256 là gì?",
+      "options": [
+        "Nó tăng tốc độ đọc",
+        "Các giai đoạn xuôi dòng từ chối bắt đầu trừ khi nội dung kê khai khớp với hàm băm đã ghim, đóng bề mặt tấn công im lặng nơi kẻ tấn công chỉnh sửa một tệp",
+        "Nó ghi lại ngày tháng",
+        "Nó là một bản sao lưu của tệp kê khai"
+      ],
+      "correct": 1,
+      "explanation": "Việc ghim hàm băm kê khai làm cho liên kết giữa mã và dữ liệu trở thành một hợp đồng có địa chỉ nội dung."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao dedup được đặt ngược dòng của tokenization chứ không phải sau?",
+      "options": [
+        "tokenizer không thể đọc JSONL",
+        "Tokenization rất đắt; chạy nó hai lần trên cùng một tài liệu sẽ tăng gấp đôi chi phí mà không có lợi ích loss cong, vì vậy việc bỏ các bản sao trước sẽ rẻ hơn",
+        "Tokenizers từ chối các bản sao",
+        "Người tokenizer cần một vốn từ vựng trước"
+      ],
+      "correct": 1,
+      "explanation": "Dedup là giai đoạn đầu tiên trong đó mỗi tài liệu trùng lặp sẽ lưu tokenizer một lần."
+    },
+    {
+      "stage": "post",
+      "question": "Việc xóa một bản sao bị bỏ rơi bảo tồn điều gì mà việc xóa im lặng thì không?",
+      "options": [
+        "Dung lượng ổ đĩa",
+        "Mối liên hệ giữa bản sao và người giữ mà nó va chạm, cộng với một dấu vết kiểm tra tồn tại sau khi thay đổi ngưỡng sau đó",
+        "Tỷ số nén",
+        "Tệp kê khai sha256 ổn định"
+      ],
+      "correct": 1,
+      "explanation": "Bia mộ cho phép một tương lai trôi qua xem lại ngưỡng bỏ đi; xóa mất bằng chứng."
+    }
+  ]
+}
