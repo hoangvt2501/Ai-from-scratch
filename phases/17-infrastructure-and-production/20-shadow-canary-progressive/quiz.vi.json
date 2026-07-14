@@ -1,0 +1,78 @@
+{
+  "lesson": "20-shadow-canary-progressive",
+  "title": "Lưu lượng truy cập bóng, Canary Rollout và triển khai lũy tiến cho LLMs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cách đúng để đặt hàng kiểm tra bóng, canary và A/B cho một LLM rollout là gì?",
+      "options": [
+        "Shadow (so sánh không tác động), sau đó canary (lưu lượng truy cập trực tiếp lũy tiến với cổng), sau đó A/B cho các lựa chọn thay thế riêng biệt sau khi độ ổn định được xác nhận",
+        "Bỏ qua hoàn toàn bóng",
+        "Canary trước, sau đó là bóng, sau đó A/B",
+        "A/B trước, sau đó là bóng, sau đó canary"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cổng bài học canary tiến trình dựa trên bộ năm chỉ số nào?",
+      "options": [
+        "Nhiệt độ GPU, tốc độ quạt, độ sâu hàng đợi, chi phí, độ trễ",
+        "Chỉ Accuracy khi đánh giá ngoại tuyến",
+        "Phần trăm độ trễ, chi phí cho mỗi yêu cầu, tỷ lệ error/refusal, phân bổ độ dài đầu ra, tỷ lệ phản hồi của người dùng",
+        "Chỉ thông lượng"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học trích dẫn bao nhiêu accuracy variance chạy cho các đầu vào giống hệt nhau trên LLMs?",
+      "options": [
+        "Dưới 0,1%",
+        "Đầu ra giống hệt nhau chạy đến chạy",
+        "Luôn luôn 50%",
+        "Lên đến khoảng 15%, do GPU FP không liên kết cộng với variance kích thước batch"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Chế độ bóng để làm gì, trong khung của bài học?",
+      "options": [
+        "Thay thế cho rollback",
+        "Một bài kiểm tra chất lượng hoàn chỉnh thay thế các đánh giá",
+        "Bước production rollout cuối cùng",
+        "Thử nghiệm khói bắt chi phí tăng lên, hồi quy độ dài, thay đổi từ chối và lỗi cứng - không đảm bảo chất lượng"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Thiết kế rollback chính xác cho mỗi bài học là gì?",
+      "options": [
+        "Chờ cửa sổ phát hành tiếp theo",
+        "Triển khai lại với thông báo model mới, mất hàng giờ",
+        "Lật cờ policy và hoàn nguyên thông báo model đã ghim trong vài giây — không cần triển khai lại",
+        "SSH thủ công cho mỗi nhóm"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao chi phí được liệt kê như một cổng cùng với độ trễ và chất lượng?",
+      "options": [
+        "Một model tốt hơn 20% có thể đắt hơn gấp 3 lần cho mỗi cuộc gọi; shipping rằng nếu không có cổng chi phí sẽ phá vỡ kinh tế đơn vị",
+        "Chi phí được tự động giới hạn bởi mọi nhà cung cấp",
+        "Chi phí là một thước đo phù phiếm",
+        "Chi phí là như nhau giữa các nhà cung cấp"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
