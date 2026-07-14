@@ -1,0 +1,78 @@
+{
+  "lesson": "16-model-routing",
+  "title": "Định tuyến Model như một Primitive giảm chi phí",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ý tưởng cốt lõi của model xếp tầng là gì?",
+      "options": [
+        "Chạy song song hai models và tính trung bình các đầu ra",
+        "Luôn định tuyến theo trọng lượng ngẫu nhiên",
+        "Chạy mọi yêu cầu trên model đắt nhất trước",
+        "Chạy một model rẻ tiền trước, leo thang lên biên giới model chỉ khi có sự tự tin hoặc từ chối thấp"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bốn tín hiệu nào trong danh sách bài học cho các quyết định định tuyến?",
+      "options": [
+        "Phân loại nhiệm vụ, độ dài prompt embedding sự tương đồng với tập cứng đã biết và sự tự tin ngay từ lần vượt qua đầu tiên",
+        "Chỉ tính Token",
+        "Chỉ cấp người dùng",
+        "GPU temperature, tốc độ quạt, độ ẩm phòng, thời gian trong ngày"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cấu hình độ trễ dự kiến của bộ định tuyến xếp tầng là gì?",
+      "options": [
+        "Luôn chậm hơn 10 lần",
+        "Giống hệt với model biên giới",
+        "Độ trễ trung bình khoảng 1,2 lần (chạy rẻ cộng với xác minh), khoảng 2 lần đối với các yêu cầu leo thang (~10% lưu lượng truy cập)",
+        "Luôn nhanh hơn so với đường bay trước"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Mẫu định tuyến nào tăng thêm độ trễ 5-10ms trước và nhanh nhất về tổng thể?",
+      "options": [
+        "Lộ trình trước với bộ phân loại",
+        "Lộ trình hòa tấu",
+        "Xếp tầng",
+        "Vòng tròn ngẫu nhiên"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Trôi model giá rẻ trong định tuyến là gì?",
+      "options": [
+        "model giá rẻ trở nên đắt hơn",
+        "Cascade rơi xuống biên giới 100% thời gian",
+        "Phân phối tác vụ thay đổi nhưng bộ định tuyến được huấn luyện tiếp tục gửi yêu cầu đến model giá rẻ, âm thầm làm giảm chất lượng",
+        "Độ trễ trôi dạt trong model giá rẻ"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học đề xuất bảo vệ nào để bắt trôi định tuyến?",
+      "options": [
+        "Chỉ các bộ đánh giá ngoại tuyến",
+        "Tắt định tuyến trong production",
+        "Chỉ đánh giá kỹ thuật hàng quý",
+        "Các chỉ số chất lượng trực tuyến - thumbs-up/down trên mỗi tuyến đường, đánh giá LLM trên các mẫu bị giữ lại, tỷ lệ leo thang, tỷ lệ từ chối"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
