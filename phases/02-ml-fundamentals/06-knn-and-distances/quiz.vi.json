@@ -1,0 +1,67 @@
+[
+  {
+    "id": "knn-pre-1",
+    "stage": "pre",
+    "question": "KNN được gọi là 'người học lười biếng'. Điều đó có nghĩa là gì?",
+    "options": [
+      "Nó hội tụ chậm trong training",
+      "Nó không tính toán tại training thời điểm và tính toán mọi thứ tại thời điểm dự đoán",
+      "Nó sử dụng một phiên bản đơn giản hóa của chức năng loss",
+      "Nó chỉ hoạt động trên datasets nhỏ"
+    ],
+    "correct": 1,
+    "explanation": "Học lười có nghĩa là KNN lưu trữ dữ liệu training và không hoạt động trong quá trình 'training'. Tất cả các tính toán (tính toán khoảng cách, bỏ phiếu) xảy ra khi một dự đoán được yêu cầu."
+  },
+  {
+    "id": "knn-pre-2",
+    "stage": "pre",
+    "question": "Tại sao feature mở rộng quy mô lại quan trọng đối với KNN?",
+    "options": [
+      "KNN không thể xử lý các số âm mà không chia tỷ lệ",
+      "Tính toán khoảng cách bị chi phối bởi features có phạm vi lớn hơn, làm cho việc chia tỷ lệ cần thiết để so sánh công bằng",
+      "Feature mở rộng quy mô làm giảm số lượng hàng xóm cần thiết",
+      "KNN sử dụng gradient descent yêu cầu đầu vào chuẩn hóa"
+    ],
+    "correct": 1,
+    "explanation": "KNN dựa vào khoảng cách. Một feature nằm trong khoảng 0-1000 sẽ thống trị một feature nằm trong khoảng 0-1 trong tính toán khoảng cách. Tỷ lệ đặt tất cả features vào các phạm vi tương đương."
+  },
+  {
+    "id": "knn-post-1",
+    "stage": "post",
+    "question": "Trong 100 chiều với các điểm ngẫu nhiên đồng nhất, điều gì xảy ra với tỷ lệ giữa khoảng cách tối đa với khoảng cách tối thiểu?",
+    "options": [
+      "Nó tăng lên đáng kể, làm cho hàng xóm khác biệt hơn",
+      "Nó tiếp cận 1, làm cho tất cả các điểm gần như cách nhau bằng nhau",
+      "Nó vẫn giống như trong 2 chiều",
+      "Nó trở nên âm do tràn số"
+    ],
+    "correct": 1,
+    "explanation": "Đây là lời nguyền của không gian. Ở chiều cao, khoảng cách hội tụ: max_dist / min_dist tiếp cận 1. Khi tất cả các điểm đều cách nhau, 'gần nhất' trở nên vô nghĩa."
+  },
+  {
+    "id": "knn-post-2",
+    "stage": "post",
+    "question": "Số liệu khoảng cách nào thích hợp nhất để so sánh các tài liệu văn bản được biểu thị dưới dạng TF-IDF vectors?",
+    "options": [
+      "Khoảng cách L2 (Euclid)",
+      "Khoảng cách L1 (Manhattan)",
+      "Khoảng cách cosin",
+      "Khỏang cách Chebyshev"
+    ],
+    "correct": 2,
+    "explanation": "Khoảng cách cosin đo góc giữa vectors, bỏ qua độ lớn. Đối với văn bản, độ dài tài liệu (độ lớn) là nhiễu - hướng nắm bắt ý nghĩa. Cosin luôn vượt trội hơn L1/L2 cho văn bản."
+  },
+  {
+    "id": "knn-post-3",
+    "stage": "post",
+    "question": "Điều gì xảy ra với ranh giới quyết định KNN khi K tăng từ 1 đến N (kích thước dataset đầy đủ)?",
+    "options": [
+      "Ranh giới trở nên phức tạp và chi tiết hơn",
+      "Ranh giới vẫn giữ nguyên bất kể K",
+      "Ranh giới trở nên mịn màng, cuối cùng dự đoán đa số class cho mỗi điểm",
+      "Ranh giới trở thành hình tròn"
+    ],
+    "correct": 2,
+    "explanation": "K = 1 tạo ra các ranh giới lởm chởm theo sau mọi điểm (overfitting). Khi K tăng lên, ranh giới trở nên mịn màng. K=N có nghĩa là mọi truy vấn xem xét tất cả các điểm, luôn dự đoán phần lớn class (bias tối đa)."
+  }
+]
