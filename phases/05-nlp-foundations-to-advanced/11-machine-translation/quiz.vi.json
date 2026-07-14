@@ -1,0 +1,102 @@
+{
+  "lesson": "11-machine-translation",
+  "title": "Dịch máy",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "BLEU đo lường điều gì?",
+      "options": [
+        "Nhận dạng ngôn ngữ accuracy",
+        "N-gram precision (thường là 1-4) giữa giả thuyết và tham chiếu, với hình phạt ngắn gọn",
+        "Điểm F cấp nhân vật",
+        "Embedding sự tương đồng cosin"
+      ],
+      "correct": 1,
+      "explanation": "BLEU là giá trị trung bình hình học của precision 1-4 gam so với tham chiếu, cộng với hình phạt ngắn gọn."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao sử dụng sacrebleu thay vì cuộn BLEU của riêng bạn?",
+      "options": [
+        "Nó chính xác hơn",
+        "Nó chạy trên GPU",
+        "Nó chuẩn hóa tokenization để điểm số có thể so sánh giữa các bài báo và lần chạy",
+        "Nó hỗ trợ streaming"
+      ],
+      "correct": 2,
+      "explanation": "sacrebleu đóng băng tokenization, loại bỏ một nguồn phổ biến của các số BLEU có một không hai."
+    },
+    {
+      "stage": "check",
+      "question": "Cài đặt dành riêng cho NLLB nào kiểm soát ngôn ngữ đích trong quá trình giải mã?",
+      "options": [
+        "length_penalty",
+        "forced_bos_token_id đặt thành mã token của mã ngôn ngữ đích",
+        "num_beams",
+        "src_lang"
+      ],
+      "correct": 1,
+      "explanation": "NLLB buộc token được giải mã đầu tiên thành mã ngôn ngữ đích thông qua forced_bos_token_id."
+    },
+    {
+      "stage": "check",
+      "question": "Họ chỉ số nào là mặc định năm 2026 cho chất lượng MT production nơi có dữ liệu được gắn nhãn?",
+      "options": [
+        "Một mình BLEU",
+        "Token chỉnh sửa khoảng cách",
+        "Các số liệu đã học như COMET (và BERTScore/BLEURT) được huấn luyện dựa trên phán đoán của con người",
+        "Độ trễ"
+      ],
+      "correct": 2,
+      "explanation": "Các số liệu đã học như COMET tương quan chặt chẽ hơn với phán đoán của con người so với BLEU/chrF đơn thuần."
+    },
+    {
+      "stage": "check",
+      "question": "Khi nào chrF có xu hướng cung cấp nhiều thông tin hơn BLEU?",
+      "options": [
+        "Đối với các ngôn ngữ giàu hình thái trong đó các kết quả khớp cấp ký tự bắt được các biến thể biến tấu, BLEU bỏ lỡ",
+        "Khi sử dụng beam search",
+        "Trên những câu rất ngắn",
+        "Bất cứ khi nào có tham chiếu"
+      ],
+      "correct": 0,
+      "explanation": "Điểm F của ký tự nắm bắt các kết quả trùng khớp hình thái một phần mà BLEU cấp độ từ tính thấp."
+    },
+    {
+      "stage": "post",
+      "question": "Thế hệ ngoài mục tiêu trong MT đa ngôn ngữ là gì?",
+      "options": [
+        "Đầu ra loại bỏ các thực thể được đặt tên",
+        "Đầu ra thiếu dấu câu",
+        "model giải mã thành sai ngôn ngữ đích (ví dụ: NLLB xuất tiếng Tây Ban Nha khi tiếng Pháp được yêu cầu)",
+        "Đầu ra quá ngắn"
+      ],
+      "correct": 2,
+      "explanation": "Việc tạo ra ngoài mục tiêu là phổ biến trên các cặp ngôn ngữ hiếm; kiểm tra ID ngôn ngữ sau khi dịch sẽ phát hiện ra nó."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao fine-tuning trên vài nghìn cặp tên miền chất lượng cao thường đánh bại dữ liệu web nhiễu lớn hơn nhiều?",
+      "options": [
+        "Tràn dữ liệu lớn hơn GPU bộ nhớ",
+        "datasets nhỏ hơn huấn luyện nhanh hơn",
+        "Dữ liệu web là bất hợp pháp để sử dụng",
+        "Chất lượng và tên miền phù hợp thống trị volume; Dữ liệu song song ồn ào gây ra sự trôi dạt và ảo giác"
+      ],
+      "correct": 3,
+      "explanation": "Các cặp căn chỉnh miền sạch là đòn bẩy production lớn nhất; Dữ liệu nhiễu làm giảm khả năng thích ứng."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào một LLM (ví dụ: GPT-4) có khả năng vượt trội hơn một model MT chuyên biệt vào năm 2026?",
+      "options": [
+        "Thông lượng dịch thuật batch cao nhất",
+        "Bản dịch trình duyệt quan trọng về độ trễ",
+        "Nội dung thành ngữ, ngữ cảnh dài, điều chỉnh phong cách thông qua prompting hoặc nội dung yêu cầu kiểm soát giọng điệu",
+        "Các cặp ngôn ngữ nhỏ với hàng triệu câu song song"
+      ],
+      "correct": 2,
+      "explanation": "LLMs giành chiến thắng về bản dịch thành ngữ, ngữ cảnh dài hoặc kiểm soát phong cách; MT chuyên biệt giành chiến thắng về thông lượng và độ trễ."
+    }
+  ]
+}
