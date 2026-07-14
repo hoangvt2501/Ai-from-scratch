@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Sai lầm phổ biến nhất mà mọi người mắc phải khi viết prompts cho LLMs là gì?",
+    "options": [
+      "Sử dụng quá nhiều tokens",
+      "Viết các hướng dẫn mơ hồ, không được xác định cụ thể khiến model đoán về định dạng, phạm vi và ràng buộc",
+      "Sử dụng sai API",
+      "Không sử dụng đủ ví dụ"
+    ],
+    "correct": 1,
+    "explanation": "LLMs làm theo hướng dẫn theo đúng nghĩa đen. 'Viết cho tôi một email tiếp thị' mang lại cho model không có ràng buộc. Chỉ định giọng điệu, khán giả, độ dài, định dạng và ràng buộc tạo ra kết quả tốt hơn đáng kể.",
+    "stage": "pre"
+  },
+  {
+    "question": "Bốn thành phần cốt lõi của một prompt hiệu quả là gì?",
+    "options": [
+      "Đầu vào, đầu ra, model, temperature",
+      "Vai trò, ngữ cảnh, ràng buộc và định dạng đầu ra",
+      "Hệ thống, người dùng, trợ lý, chức năng",
+      "Truy vấn, tài liệu, trả lời, điểm số"
+    ],
+    "correct": 1,
+    "explanation": "Hiệu quả prompts chỉ định: model nên là ai (vai trò), những gì nó nên biết (ngữ cảnh), những gì nó nên và không nên làm (ràng buộc) và cách cấu trúc phản hồi (định dạng đầu ra).",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao bạn nên bao gồm hướng dẫn định dạng đầu ra trong prompts của mình?",
+    "options": [
+      "Nó làm cho prompt ngắn hơn",
+      "Nếu không có hướng dẫn định dạng, model chọn cấu trúc riêng của nó, cấu trúc này thay đổi giữa các cuộc gọi và khó phân tích cú pháp theo chương trình",
+      "Nó làm giảm chi phí API",
+      "Nó ngăn ngừa ảo giác"
+    ],
+    "correct": 1,
+    "explanation": "LLMs là không xác định. Nếu không có hướng dẫn định dạng rõ ràng, một lệnh gọi có thể trả về gạch đầu dòng, văn xuôi tiếp theo, đánh dấu tiếp theo. Chỉ định định dạng đảm bảo đầu ra nhất quán, có thể phân tích cú pháp.",
+    "stage": "post"
+  },
+  {
+    "question": "Mục đích của system prompt là gì?",
+    "options": [
+      "Để xác thực cuộc gọi API",
+      "Để thiết lập các quy tắc, vai trò và ràng buộc hành vi liên tục áp dụng cho toàn bộ cuộc trò chuyện",
+      "Để xác định kiến trúc của model",
+      "Cách nén lịch sử cuộc trò chuyện"
+    ],
+    "correct": 1,
+    "explanation": "system prompt thiết lập tính cách, quy tắc và ràng buộc của model cho toàn bộ session. Nó chạy trước mỗi lượt người dùng và là cơ chế chính để kiểm soát hành vi model trong production.",
+    "stage": "post"
+  },
+  {
+    "question": "Làm thế nào bạn nên kiểm tra xem một thay đổi prompt có thực sự cải thiện chất lượng đầu ra hay không?",
+    "options": [
+      "Đọc một vài kết quả đầu ra và đưa ra phán đoán",
+      "Chạy prompt trên một tập thử nghiệm đa dạng và đo lường các thay đổi trong các chỉ số đã xác định (accuracy, tuân thủ định dạng, mức độ liên quan)",
+      "Hỏi model xem nó có hoạt động tốt hơn không",
+      "Kiểm tra thời gian phản hồi API"
+    ],
+    "correct": 1,
+    "explanation": "Đánh giá prompt thay đổi trên một số ví dụ là không đáng tin cậy. Một harness đánh giá có hệ thống với các trường hợp thử nghiệm đa dạng và số liệu xác định cho thấy liệu các thay đổi có giúp ích cho toàn bộ phân phối hay không, không chỉ là các ví dụ được chọn lọc.",
+    "stage": "post"
+  }
+]
