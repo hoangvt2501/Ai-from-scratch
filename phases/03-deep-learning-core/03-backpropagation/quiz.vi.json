@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Quy tắc chuỗi trong bối cảnh mạng nơ-ron là gì?",
+    "options": [
+      "Quy tắc để xâu chuỗi các lớp với nhau",
+      "Nếu y = f(g(x)), thì dy/dx = f'(g(x)) * g'(x) -- nhân đạo hàm dọc theo đường đi",
+      "Phương pháp khởi tạo trọng số",
+      "Một kỹ thuật để phân lô dữ liệu"
+    ],
+    "correct": 1,
+    "explanation": "Quy tắc chuỗi cho phép bạn tính đạo hàm của một hàm tổng hợp bằng cách nhân đạo hàm cục bộ ở mỗi bước. Backpropagation áp dụng điều này một cách có hệ thống thông qua đồ thị tính toán.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao backpropagation hiệu quả hơn tính toán từng gradient một cách độc lập?",
+    "options": [
+      "Nó sử dụng ít bộ nhớ hơn",
+      "Nó tính toán tất cả gradients trong một backward pass thay vì một forward pass mỗi parameter",
+      "Nó chỉ hoạt động trên các mạng nhỏ",
+      "Nó tránh sử dụng quy tắc chuỗi"
+    ],
+    "correct": 1,
+    "explanation": "Tính toán gradients độc lập yêu cầu một forward pass mỗi parameter (hàng triệu lần vượt qua cho một mạng lớn). Backpropagation tính toán tất cả các gradients trong một backward pass bằng cách sử dụng lại các giá trị trung gian được lưu trữ trong quá trình forward pass.",
+    "stage": "pre"
+  },
+  {
+    "question": "Trong backward pass, tại sao chúng ta sử dụng '+=' thay vì '=' khi tích lũy gradients?",
+    "options": [
+      "Đó là một quy ước Python",
+      "Một giá trị có thể được sử dụng trong nhiều hoạt động, vì vậy giá trị gradient của nó là tổng gradients từ tất cả các đường dẫn",
+      "Nó ngăn chặn tràn",
+      "Nó làm cho mã chạy nhanh hơn"
+    ],
+    "correct": 1,
+    "explanation": "Khi một Giá trị được sử dụng làm đầu vào cho nhiều hoạt động (ví dụ: x được sử dụng trong cả x * w1 và x * w2), tổng gradient của nó là tổng của gradients chảy ngược từ mỗi hoạt động. Sử dụng += tích lũy chúng một cách chính xác.",
+    "stage": "post"
+  },
+  {
+    "question": "Điều gì gây ra sự cố biến mất gradient trong mạng sigmoid sâu?",
+    "options": [
+      "learning rate quá nhỏ",
+      "Dẫn xuất của Sigmoid có tối đa là 0,25, vì vậy gradients co lại theo cấp số nhân thông qua các lớp",
+      "Mạng có quá nhiều parameters",
+      "Chức năng loss được lựa chọn kém"
+    ],
+    "correct": 1,
+    "explanation": "Đạo hàm sigmoid đạt đỉnh ở 0,25 (khi z = 0). Mỗi lớp nhân gradient với tối đa 0,25, vì vậy sau 10 lớp, gradient tối đa là 0,25 ^ 10 = ~ 0,000001 tín hiệu ban đầu.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao sắp xếp tô pô lại quan trọng trong backward pass?",
+    "options": [
+      "Nó làm cho mã sạch hơn",
+      "Nó đảm bảo gradient của mỗi nút được tích lũy đầy đủ trước khi lan truyền đến các nút con của nó",
+      "Nó tăng tốc độ forward pass",
+      "Nó làm giảm việc sử dụng bộ nhớ"
+    ],
+    "correct": 1,
+    "explanation": "Sắp xếp tô pô đảm bảo chúng ta process các nút theo đúng thứ tự: gradient của một nút phải được tích lũy đầy đủ từ tất cả các đường dẫn xuôi dòng trước khi chúng ta lan truyền qua nó. Nếu không có thứ tự này, gradients sẽ không đầy đủ.",
+    "stage": "post"
+  }
+]
