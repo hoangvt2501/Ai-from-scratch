@@ -1,0 +1,67 @@
+[
+  {
+    "id": "anomaly-pre-1",
+    "stage": "pre",
+    "question": "Tại sao phát hiện bất thường thường được đóng khung như một vấn đề không được giám sát thay vì phân loại?",
+    "options": [
+      "Phát hiện bất thường không yêu cầu bất kỳ dữ liệu nào",
+      "Các dị thể được dán nhãn là cực kỳ hiếm và các loại dị thể mới khác với các dị thể đã thấy trước đây",
+      "Phân loại có giám sát luôn kém chính xác hơn",
+      "Phát hiện bất thường chỉ hoạt động trên dữ liệu chuỗi thời gian"
+    ],
+    "correct": 1,
+    "explanation": "Sự bất thường rất hiếm (thường <0,1% dữ liệu), vì vậy có quá ít ví dụ được gắn nhãn để huấn luyện bộ phân loại. Ngoài ra, các dị thể trong tương lai có thể thuộc loại chưa từng thấy trước đây. Mô hình hóa độ lệch 'bình thường' và gắn cờ xử lý cả hai vấn đề."
+  },
+  {
+    "id": "anomaly-pre-2",
+    "stage": "pre",
+    "question": "temperature 90F là bình thường vào mùa hè nhưng bất thường vào mùa đông. Đây là loại dị thể nào?",
+    "options": [
+      "Điểm bất thường",
+      "Dị thường theo ngữ cảnh",
+      "Dị thể tập thể",
+      "Bất thường thống kê"
+    ],
+    "correct": 1,
+    "explanation": "Bất thường theo ngữ cảnh là một giá trị bất thường dựa trên bối cảnh của nó (thời gian, địa điểm). Bản thân giá trị có thể bình thường trong một bối cảnh khác. Cùng một điểm dữ liệu, cách giải thích khác nhau dựa trên điều kiện xung quanh."
+  },
+  {
+    "id": "anomaly-post-1",
+    "stage": "post",
+    "question": "Phương pháp điểm Z gắn cờ các điểm nhiều hơn 3 độ lệch chuẩn so với giá trị trung bình. Khi nào cách tiếp cận này thất bại?",
+    "options": [
+      "Khi dữ liệu được phân phối hoàn toàn bình thường",
+      "Khi dữ liệu là đa phương thức, sai lệch hoặc khi các giá trị ngoại lệ trong dữ liệu training làm tăng giá trị trung bình và tiêu chuẩn",
+      "Khi có chính xác 3 dị thể trong dataset",
+      "Khi features được chuẩn hóa"
+    ],
+    "correct": 1,
+    "explanation": "Điểm Z giả định một phân phối Gaussian duy nhất. Nó không thành công trên dữ liệu đa phương thức (nhiều cụm), phân phối sai lệch và khi các ngoại lệ trong dữ liệu training dịch chuyển mean/std, khiến các điểm bất thường thực sự khó phát hiện hơn."
+  },
+  {
+    "id": "anomaly-post-2",
+    "stage": "post",
+    "question": "Làm thế nào để Isolation Forest phát hiện các điểm bất thường khác với các phương pháp dựa trên khoảng cách?",
+    "options": [
+      "Nó sử dụng mạng nơ-ron thay vì cây",
+      "Nó cô lập các điểm bằng cách sử dụng các phân tách ngẫu nhiên; Các dị thể yêu cầu ít phân tách hơn để cô lập vì chúng ít và khác nhau",
+      "Nó tính toán khoảng cách đến mọi điểm khác trong dataset",
+      "Nó chỉ hoạt động trên dữ liệu văn bản"
+    ],
+    "correct": 1,
+    "explanation": "Isolation Forest phân vùng dữ liệu ngẫu nhiên bằng cách phân tách cây. Các dị thể, hiếm và khác biệt, cuối cùng bị cô lập (trong lá của chính chúng) với ít vết tách hơn. Chiều dài đường đi trung bình ngắn = dị thường hơn."
+  },
+  {
+    "id": "anomaly-post-3",
+    "stage": "post",
+    "question": "Bạn xây dựng cả trình phát hiện bất thường không giám sát và bộ phân loại gian lận có giám sát. Khi nào bạn nên thích cách tiếp cận không giám sát?",
+    "options": [
+      "Luôn luôn - không giám sát luôn tốt hơn để phát hiện bất thường",
+      "Khi bạn cần phát hiện các mẫu gian lận mới khác với các ví dụ được gắn nhãn trong quá khứ",
+      "Khi bạn có hàng triệu ví dụ gian lận được gắn nhãn",
+      "Khi bạn chỉ quan tâm đến precision chứ không quan tâm recall"
+    ],
+    "correct": 1,
+    "explanation": "Bộ phân loại được giám sát chỉ phát hiện các loại gian lận có trong dữ liệu training. Máy dò không giám sát gắn cờ bất kỳ sai lệch nào so với bình thường, phát hiện các kế hoạch gian lận mới. Sự đánh đổi là tỷ lệ dương tính giả cao hơn."
+  }
+]
