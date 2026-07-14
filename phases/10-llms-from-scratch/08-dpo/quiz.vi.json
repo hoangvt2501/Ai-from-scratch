@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Ưu điểm chính của DPO so với RLHF là gì?",
+    "options": [
+      "DPO tạo ra models tốt hơn",
+      "DPO loại bỏ nhu cầu về model và PPO phần thưởng riêng biệt, training trực tiếp vào các cặp ưu tiên trong một vòng lặp duy nhất",
+      "DPO sử dụng ít dữ liệu training hơn",
+      "DPO hoạt động mà không có bất kỳ dữ liệu ưu tiên nào"
+    ],
+    "correct": 1,
+    "explanation": "RLHF yêu cầu training một phần thưởng model riêng biệt, sau đó chạy PPO tối ưu hóa. DPO gấp cả hai bước thành một mục tiêu training duy nhất để trực tiếp tối ưu hóa model ngôn ngữ trên các cặp tùy chọn.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tham chiếu model đóng vai trò gì trong DPO?",
+    "options": [
+      "Nó tạo ra dữ liệu training",
+      "Nó đóng vai trò là mỏ neo ngăn model được huấn luyện phân kỳ quá xa, tương tự như hình phạt KL ở RLHF",
+      "Nó đánh giá chất lượng model",
+      "Nó xử lý tokenization"
+    ],
+    "correct": 1,
+    "explanation": "DPO loss so sánh log probabilities dưới policy được huấn luyện và model tham chiếu (thường là SFT). Tham chiếu model hạn chế policy có thể trôi dạt bao xa, ngăn chặn việc hack phần thưởng mà không cần điều chỉnh KL rõ ràng.",
+    "stage": "pre"
+  },
+  {
+    "question": "Bản beta parameter gì trong DPO kiểm soát?",
+    "options": [
+      "Các learning rate",
+      "Mức độ hạn chế của policy để giữ gần với model tham chiếu -- beta cao hơn có nghĩa là các bản cập nhật thận trọng hơn",
+      "Kích thước batch",
+      "Số lượng training epochs"
+    ],
+    "correct": 1,
+    "explanation": "Beta mở rộng hình phạt phân kỳ KL ngầm. Beta = 0,1 cho phép model phân kỳ đáng kể so với tham chiếu (có khả năng tốt hơn nhưng rủi ro hơn). Beta = 0,5 giữ cho nó gần (an toàn hơn nhưng ít học hơn).",
+    "stage": "post"
+  },
+  {
+    "question": "Làm thế nào để DPO ngầm đại diện cho một phần thưởng model?",
+    "options": [
+      "Nó không -- DPO không có khái niệm về phần thưởng",
+      "Hàm DPO loss có thể được suy ra bằng cách chỉ ra rằng policy tối ưu dưới hàm phần thưởng có thể biểu thị trực tiếp thông qua policy log probabilities",
+      "Nó huấn luyện một phần thưởng ẩn model bên trong model ngôn ngữ",
+      "DPO sử dụng hàm loss làm phần thưởng"
+    ],
+    "correct": 1,
+    "explanation": "Rafailov và cộng sự đã chỉ ra rằng giải pháp dạng đóng của vật kính RLHF thể hiện phần thưởng như một hàm của xác suất log của policy so với tham chiếu. DPO tối ưu hóa điều này một cách trực tiếp, ngầm học phần thưởng.",
+    "stage": "post"
+  },
+  {
+    "question": "Khi nào RLHF vẫn có thể được ưu tiên hơn DPO?",
+    "options": [
+      "Luôn luôn -- RLHF hoàn toàn tốt hơn",
+      "Khi bạn cần một phần thưởng có thể tái sử dụng model để đánh giá nhiều policies hoặc khi thu thập dữ liệu trực tuyến có lợi",
+      "Khi bạn có ít dữ liệu ưu tiên hơn",
+      "Khi training nhỏ hơn models"
+    ],
+    "correct": 1,
+    "explanation": "DPO ngoại tuyến (dữ liệu tùy chọn cố định). RLHF cho phép thu thập dữ liệu trực tuyến trong đó phần thưởng model điểm cho các thế hệ mới, khám phá các mô hình hack phần thưởng. Một model phần thưởng độc lập cũng hữu ích cho việc đánh giá và các policies khác.",
+    "stage": "post"
+  }
+]
