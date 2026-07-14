@@ -1,0 +1,78 @@
+{
+  "lesson": "76-collective-ops-from-scratch",
+  "title": "Hoạt động tập thể từ đầu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Chi phí băng thông cho mỗi cấp bậc của ring allreduce cho một tensor T byte trên N hạng là bao nhiêu?",
+      "options": [
+        "T byte",
+        "N * T byte",
+        "2T (N-1) / N byte",
+        "T log2 (N) byte"
+      ],
+      "correct": 2,
+      "explanation": "Ring allreduce di chuyển N-1 các khối có kích thước T/N hai lần (giảm-tán xạ sau đó thu thập tất cả); tổng số mỗi cấp là 2T (N-1) / N, không phụ thuộc vào kích thước cụm."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao lưới hàng đợi trong bài học này lại là một sự thay thế trung thực cho NCCL trên một cụm thực sự?",
+      "options": [
+        "Nó chạy trên CUDA lõi",
+        "Nó giảm tải phần cứng",
+        "Nó thực hiện cùng một mẫu dây (trật tự điểm-điểm gửi xung quanh một vòng), chỉ có phương tiện khác nhau",
+        "Nó nén tin nhắn"
+      ],
+      "correct": 2,
+      "explanation": "Tính đúng đắn của thuật toán phụ thuộc vào mẫu dây, không phải phương tiện; vòng xếp hàng hiển thị các hình dạng cuộc đua và lịch trình khối giống như vòng NCCL allreduce."
+    },
+    {
+      "stage": "check",
+      "question": "Sau khi giảm một nửa tán xạ của vòng allreduce, xếp hạng r giữ gì?",
+      "options": [
+        "Không có gì",
+        "Toàn bộ tensor không giảm",
+        "Số tiền giảm cho một khối (một phần N của tensor)",
+        "Số tiền giảm cho hai khối"
+      ],
+      "correct": 2,
+      "explanation": "Giảm phân tán đỗ tổng của một khối trên một cấp bậc; một nửa allgather sau đó xoay các khối đã hoàn thành đó xung quanh vòng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao sử dụng phát sóng cây thay vì gửi trực tiếp N-1 từ nguồn?",
+      "options": [
+        "Cây sử dụng ít bộ nhớ hơn",
+        "Cây tăng gấp đôi giá đỡ được đặt mỗi vòng; độ sâu là log2 (N) vì vậy độ trễ chia tỷ lệ như log không phải N",
+        "Cây cối là bắt buộc trong PyTorch",
+        "Gửi trực tiếp các gói thả"
+      ],
+      "correct": 1,
+      "explanation": "log2 (N) hops chiếm ưu thế khi độ trễ trên mỗi bước nhảy là nút thắt cổ chai; N-1 tuần tự gửi thanh toán sàn độ trễ đó N lần."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao phải xác minh dựa trên torch.distributed gloo trên cùng một đầu vào?",
+      "options": [
+        "Gloo nhanh hơn",
+        "Gloo là tài liệu tham khảo pháp lý cho ngữ nghĩa tập thể; đầu ra bằng byte chứng minh thuật toán của bạn đồng ý với thông số kỹ thuật trước khi nó chạy trên một cụm thực",
+        "Gloo viết JSONL tự động",
+        "Gloo không yêu cầu thiết lập"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có tham chiếu, primitive có vẻ chính xác cho đến bước 10000 của một lần chạy training thực; gloo cho ground truth bằng byte trên CPU."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào tree allreduce chiến thắng chiếc nhẫn allreduce?",
+      "options": [
+        "Luôn luôn",
+        "Khi tin nhắn lớn",
+        "Tin nhắn nhỏ hoặc liên kết có độ trễ cao; số bước nhảy log2 (N) đánh bại thuật ngữ băng thông 2T (N-1) / N bên dưới bộ phân tần",
+        "Không bao giờ"
+      ],
+      "correct": 2,
+      "explanation": "NCCL chọn vòng trên ~ 1 MB và cây bên dưới; sự giao nhau là băng thông so với độ trễ trên cấu trúc liên kết cụm nhất định."
+    }
+  ]
+}
