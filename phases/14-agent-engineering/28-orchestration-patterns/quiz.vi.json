@@ -1,0 +1,90 @@
+{
+  "lesson": "28-orchestration-patterns",
+  "title": "Orchestration mẫu: Giám sát, Swarm, Phân cấp",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bốn mẫu orchestration nào được liệt kê trong bài học?",
+      "options": [
+        "Giám sát-worker, swarm/peer-to-peer, phân cấp, tranh luận",
+        "Tuần tự, song song, phân tán, liên kết",
+        "Lập kế hoạch, hành động, phản ánh, tinh chỉnh",
+        "Đẩy, kéo, batch, luồng"
+      ],
+      "correct": 0,
+      "explanation": "Người giám sát worker, swarm, phân cấp và tranh luận lặp đi lặp lại trong frameworks năm 2026."
+    },
+    {
+      "stage": "pre",
+      "question": "Khuyến nghị của LangChain năm 2026 liên quan đến giám sát là gì?",
+      "options": [
+        "Luôn sử dụng create_supervisor",
+        "Ưu tiên các lệnh gọi công cụ trực tiếp hơn create_supervisor để kiểm soát kỹ thuật ngữ cảnh tốt hơn",
+        "Tránh hoàn toàn sự giám sát",
+        "Chạy giám sát trên GPUs"
+      ],
+      "correct": 1,
+      "explanation": "Giám sát dựa trên cuộc gọi công cụ cho phép bạn kiểm soát chính xác những gì mỗi chuyên gia nhìn thấy."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì phân biệt swarm với cấu trúc liên kết worker giám sát?",
+      "options": [
+        "Swarm sử dụng GPUs",
+        "Swarm không có bộ định tuyến trung tâm; agents chuyển giao trực tiếp qua bề mặt dụng cụ dùng chung",
+        "Swarm là một agent",
+        "Swarm chỉ chạy trên cron"
+      ],
+      "correct": 1,
+      "explanation": "Swarm là ngang hàng; giám sát tập trung định tuyến thông qua một LLM."
+    },
+    {
+      "stage": "check",
+      "question": "Khi nào orchestration phân cấp được biện minh?",
+      "options": [
+        "Luôn luôn; Nó mở rộng quy mô miễn phí",
+        "Khi ngân sách ngữ cảnh của một người giám sát không thể chứa mô tả của tất cả các chuyên gia",
+        "Chỉ với GPUs",
+        "Không bao giờ; nó là một phản mẫu"
+      ],
+      "correct": 1,
+      "explanation": "Người giám sát lồng nhau dành cho các nhóm chuyên gia lớn vượt quá ngân sách của một người giám sát."
+    },
+    {
+      "stage": "check",
+      "question": "Thứ tự quyết định được đề xuất Anthropic hỗ trợ là gì?",
+      "options": [
+        "Luôn bắt đầu với nhiều agent phân cấp",
+        "Bắt đầu với một agent duy nhất cộng với các mẫu quy trình làm việc; chỉ thêm cấu trúc liên kết khi cần thiết; giám sát trước swarm trước khi phân cấp; tranh luận khi accuracy đánh bại chi phí",
+        "Bắt đầu bằng tranh luận",
+        "Bắt đầu với swarm và thu hẹp về phía độc thân"
+      ],
+      "correct": 1,
+      "explanation": "Hướng dẫn của Anthropic là xây dựng hệ thống phù hợp với nhu cầu của bạn chứ không phải phức tạp nhất."
+    },
+    {
+      "stage": "post",
+      "question": "Hệ thống phân cấp giả trong bài học này là gì?",
+      "options": [
+        "Dán nhãn sai YAML",
+        "Ba lớp giám sát viên vì 'doanh nghiệp' khi chỉ có hai nhóm thực tế; Thu gọn nó",
+        "Một dàn nhạc được viết bằng TypeScript",
+        "Một thiết bị thử nghiệm"
+      ],
+      "correct": 1,
+      "explanation": "Các lớp không tương ứng với các nhóm thực làm tăng thêm sự phức tạp trong hoạt động mà không được đền đáp."
+    },
+    {
+      "stage": "post",
+      "question": "Làm thế nào để bạn giảm thiểu việc chuyển giao nảy trong một swarm (A -> B -> A -> B)?",
+      "options": [
+        "Ghim temperature về 0",
+        "Thêm bộ đếm nhảy và từ chối sau khi chuyển N lần",
+        "Tắt tính năng theo dõi",
+        "Hạ thấp rate limit"
+      ],
+      "correct": 1,
+      "explanation": "Bộ đếm bước nhảy giới hạn swarm chu kỳ trước khi chúng lặp lại vô thời hạn."
+    }
+  ]
+}
