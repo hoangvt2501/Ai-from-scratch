@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ma trận liền kề A [i] [j] = 1 đại diện cho điều gì?",
+      "options": [
+        "Nút i có bậc j",
+        "Có một cạnh từ nút i đến nút j",
+        "Nút i và nút j có cùng nhãn",
+        "Đường đi ngắn nhất từ i đến j có chiều dài 1"
+      ],
+      "correct": 1,
+      "explanation": "Ma trận liền kề là biểu diễn cốt lõi của đồ thị. A [i] [j] = 1 có nghĩa là có một cạnh kết nối nút i với nút j. Đối với đồ thị không định hướng, ma trận đối xứng (A[i][j] = A[j][i])."
+    },
+    {
+      "stage": "pre",
+      "question": "BFS sử dụng cấu trúc dữ liệu nào và nó tìm thấy gì?",
+      "options": [
+        "Stack; Tìm các thành phần được kết nối",
+        "Hàng đợi; Tìm đường dẫn ngắn nhất trong đồ thị không trọng số",
+        "Hàng đợi ưu tiên; Tìm cây kéo dài tối thiểu",
+        "Bản đồ băm; tìm các nút trùng lặp"
+      ],
+      "correct": 1,
+      "explanation": "BFS sử dụng hàng đợi (FIFO) để khám phá tất cả các hàng xóm ở khoảng cách k trước khi di chuyển đến khoảng cách k + 1. Điều này đảm bảo rằng lần đầu tiên một nút được phát hiện, đó là thông qua một đường dẫn ngắn nhất từ nguồn."
+    },
+    {
+      "stage": "post",
+      "question": "Đồ thị Laplacian L = D - A của đồ thị được kết nối có bao nhiêu giá trị riêng bằng không?",
+      "options": [
+        "Không",
+        "Chính xác một",
+        "Bằng số lượng nút",
+        "Bằng số cạnh"
+      ],
+      "correct": 1,
+      "explanation": "Số giá trị riêng bằng không của Laplacian bằng số thành phần được kết nối. Một đồ thị được kết nối có chính xác một thành phần được kết nối, vì vậy chính xác là một giá trị riêng bằng không. Một đồ thị có k mảnh bị ngắt kết nối có k giá trị riêng bằng không."
+    },
+    {
+      "stage": "post",
+      "question": "Trong truyền tin nhắn GNN, h_v^(k+1) = sigma(W * mean({h_u^(k) : u in neighbors(v)})) tính toán gì?",
+      "options": [
+        "Đường dẫn ngắn nhất từ v đến tất cả các nút khác",
+        "Một feature vector mới cho nút v bằng cách tổng hợp features lân cận, chuyển đổi với trọng số đã học và áp dụng tính phi tuyến tính",
+        "Mức độ của nút v tại lớp k + 1",
+        "Điểm PageRank của nút v"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi nút thu thập features từ các hàng xóm của nó (tổng hợp trung bình), nhân với ma trận trọng số đã học W và áp dụng chức năng kích hoạt sigma. Sau k vòng, mỗi nút có thông tin từ vùng lân cận k-hop của nó."
+    },
+    {
+      "stage": "post",
+      "question": "Phân cụm quang phổ sử dụng vector Fiedler (vectơ riêng của giá trị riêng nhỏ thứ hai của L) như thế nào?",
+      "options": [
+        "Các nút có mục Fiedler vector lớn nhất tạo thành một cụm",
+        "Các nút có giá trị Fiedler vector dương nằm trong một nhóm, các nút có giá trị âm nằm trong nhóm kia",
+        "Fiedler vector được sử dụng làm trọng lượng cạnh",
+        "Fiedler vector xác định số lượng cụm"
+      ],
+      "correct": 1,
+      "explanation": "Fiedler vector mã hóa chức năng không tầm thường mượt mà nhất trên biểu đồ. Các nút trong cùng một cụm được kết nối chặt chẽ nhận được các giá trị tương tự, trong khi các nút được ngăn cách bởi nút cổ chai nhận được các giá trị có dấu đối lập. Dấu phân chia phân chia biểu đồ thành hai cụm."
+    }
+  ]
+}
