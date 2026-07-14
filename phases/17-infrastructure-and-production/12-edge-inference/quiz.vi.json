@@ -1,0 +1,78 @@
+{
+  "lesson": "12-edge-inference",
+  "title": "Edge Inference - Apple Neural Engine, Qualcomm Hexagon, WebGPU/WebLLM, Jetson",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Theo bài học, hạn chế cốt lõi khiến LLM inference di động chậm hơn trung tâm dữ liệu là gì?",
+      "options": [
+        "Độ trễ Wi-Fi",
+        "Thông lượng điện toán",
+        "Băng thông bộ nhớ (DRAM di động ở 50-90 GB/s so với HBM3 ở 2-3 TB/s)",
+        "Dung lượng lưu trữ"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao Neural Engine của Apple tránh chi phí sao chép CPU-NPU?",
+      "options": [
+        "Nó sử dụng PCIe 5.0",
+        "Core ML vô hiệu hóa KV cache",
+        "Nó chuyển mã trọng số sang FP4 trước khi sao chép",
+        "Apple Silicon ships bộ nhớ hợp nhất — CPU và ANE chia sẻ cùng một nhóm"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học đề xuất định dạng quantization nào cho WebGPU + WebLLM trong trình duyệt?",
+      "options": [
+        "NVFP4",
+        "FP8",
+        "Quý 4 MLC (q4f16_1) được biên soạn qua mlc_llm convert_weight",
+        "GGUF Q4_K_M"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Báo cáo bài học cho năm 2026 về phạm vi phủ sóng di động WebGPU là bao nhiêu?",
+      "options": [
+        "100% trên tất cả các trình duyệt",
+        "Chỉ iOS Safari",
+        "Dưới 10%",
+        "Khoảng 70-75%, với Firefox Android vẫn bắt kịp"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao việc giữ ngữ cảnh 128K lại không thực tế trên một chiếc điện thoại thông thường?",
+      "options": [
+        "Tokenizers không thành công trên 8K",
+        "Trọng lượng Model cộng với KV cache cho 32K tokens cộng với chi phí hệ điều hành dễ dàng vượt quá ngân sách 8 GB RAM",
+        "WebGPU giới hạn ngữ cảnh ở 4K",
+        "iOS cấm ngữ cảnh dài"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao giọng nói được đánh dấu là ứng dụng sát thủ cho inference biên?",
+      "options": [
+        "agents thoại nhạy cảm với độ trễ (đầu tiên token < 500 ms) và inference cục bộ loại bỏ hoàn toàn độ trễ mạng",
+        "Voice models không cần KV cache",
+        "Voice models luôn phù hợp với 50 MB",
+        "Giọng nói chỉ chạy trong WebAssembly"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
