@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Phạm vi gần đúng của các số mà float32 có thể đại diện là bao nhiêu?",
+      "options": [
+        "+/- 65,504",
+        "+/- 3.4e38",
+        "+/- 1.8e308",
+        "+/- 1.0e10"
+      ],
+      "correct": 1,
+      "explanation": "Float32 có số mũ 8 bit cho phạm vi xấp xỉ +/- 3.4e38. Float16 được giới hạn ở +/- 65.504 và float64 đạt +/- 1.8e308."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao 0.1 + 0.2 không bằng 0.3 trong số học dấu phẩy động?",
+      "options": [
+        "Python làm tròn tất cả các số thập phân thành số nguyên",
+        "0.1 và 0.2 không thể được biểu diễn chính xác trong dấu phẩy động nhị phân",
+        "CPU có một lỗi trong mạch bổ sung của nó",
+        "0.3 không phải là số dấu phẩy động hợp lệ"
+      ],
+      "correct": 1,
+      "explanation": "Số 0.1 là một phân số lặp lại trong nhị phân (giống như 1/3 trong số thập phân). Float32 cắt bớt nó, vì vậy giá trị được lưu trữ là khoảng 0,100000001490116. Sai số tích lũy làm cho tổng khác với 0,3."
+    },
+    {
+      "stage": "post",
+      "question": "Trong triển khai softmax ổn định, tại sao bạn trừ max(logits) trước khi cấp mũ?",
+      "options": [
+        "Nó làm cho xác suất đầu ra đồng đều hơn",
+        "Nó ngăn exp() tràn bằng cách đảm bảo số mũ lớn nhất là 0",
+        "Nó chuyển đổi logits từ float16 sang float32",
+        "Nó chuẩn hóa logits có giá trị trung bình bằng không"
+      ],
+      "correct": 1,
+      "explanation": "Sau khi trừ max (logits), giá trị lớn nhất là 0 và exp (0) = 1, giá trị này không thể tràn. Tất cả các giá trị khác đều âm, vì vậy hàm mũ của chúng nhỏ hơn 1. Xác suất giống hệt nhau về mặt toán học với phiên bản ngây thơ."
+    },
+    {
+      "stage": "post",
+      "question": "Khi sử dụng chênh lệch hữu hạn căn giữa để kiểm tra gradient, điều gì xảy ra nếu kích thước bước h quá nhỏ (ví dụ: 1e-15)?",
+      "options": [
+        "Việc xấp xỉ trở nên chính xác hơn",
+        "Sự hủy bỏ thảm khốc phá hủy kết quả vì f (x + h) và f (xh) gần như giống hệt nhau",
+        "Việc đánh giá chức năng trở nên nhanh hơn",
+        "gradient tự động trở thành số không"
+      ],
+      "correct": 1,
+      "explanation": "Khi h cực kỳ nhỏ, f(x+h) và f(xh) chỉ khác nhau ở một vài chữ số có nghĩa cuối cùng của chúng. Trừ chúng sẽ hủy bỏ các chữ số đứng đầu, để lại phần lớn nhiễu làm tròn. Các giá trị tốt điển hình là h = 1e-5 đến 1e-7."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bfloat16 thường được ưa chuộng hơn float16 cho training mạng nơ-ron?",
+      "options": [
+        "bfloat16 có nhiều bit mantissa hơn, cho precision tốt hơn",
+        "bfloat16 có cùng phạm vi hàm mũ như float32, tránh tràn trên các kích hoạt lớn mà không cần loss tỷ lệ",
+        "bfloat16 sử dụng ít bộ nhớ hơn float16",
+        "bfloat16 được hỗ trợ bởi nhiều kiến trúc GPU hơn float16"
+      ],
+      "correct": 1,
+      "explanation": "bfloat16 có 8 bit hàm mũ (giống như float32, phạm vi lên đến 3.4e38) trong khi float16 chỉ có 5 bit số mũ (tối đa ~65.504). Trong thời gian training, kích hoạt và gradients có thể vượt quá 65.504, gây tràn float16. bfloat16 xử lý điều này mà không loss tỷ lệ."
+    }
+  ]
+}
