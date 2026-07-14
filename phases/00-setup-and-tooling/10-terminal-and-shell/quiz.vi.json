@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Toán tử pipe '|' làm gì trong lệnh shell?",
+      "options": [
+        "Chạy song song hai lệnh",
+        "Gửi đầu ra tiêu chuẩn của một lệnh dưới dạng đầu vào tiêu chuẩn đến lệnh tiếp theo",
+        "Lưu đầu ra của lệnh vào tệp",
+        "Kết hợp hai tệp thành một"
+      ],
+      "correct": 1,
+      "explanation": "Người vận hành đường ống kết nối các lệnh trong một pipeline. Ví dụ: 'cat log.txt | Grep error' gửi nội dung của log.txt dưới dạng đầu vào đến grep, lọc các dòng có chứa 'lỗi'."
+    },
+    {
+      "stage": "pre",
+      "question": "Điều gì xảy ra với process đang chạy khi bạn đóng thiết bị đầu cuối đã khởi động nó?",
+      "options": [
+        "process tiếp tục chạy trong nền",
+        "process nhận được tín hiệu cúp máy (SIGHUP) và thường kết thúc",
+        "process tạm dừng cho đến khi bạn mở một thiết bị đầu cuối mới",
+        "process tự động di chuyển sang dịch vụ hệ thống"
+      ],
+      "correct": 1,
+      "explanation": "Đóng thiết bị đầu cuối sẽ gửi SIGHUP đến processes con, khiến chúng kết thúc theo mặc định. Các công cụ như tmux, nohup hoặc màn hình ngăn chặn điều này."
+    },
+    {
+      "stage": "post",
+      "question": "Ưu điểm chính của tmux so với việc sử dụng 'lệnh nohup &' cho các công việc training chạy dài là gì?",
+      "options": [
+        "TMUX sử dụng ít CPU hơn NOHUP",
+        "TMUX cho phép bạn tháo rời, gắn lại và xem đầu ra trực tiếp với nhiều ngăn",
+        "TMUX tự động khởi động lại processes không thành công",
+        "TMUX nén đầu ra process để tiết kiệm dung lượng đĩa"
+      ],
+      "correct": 1,
+      "explanation": "TMUX tạo sessions liên tục mà bạn có thể tách ra và đính kèm lại sau này, với đầu ra trực tiếp hiển thị trong nhiều ngăn. Nohup chỉ ghi vào một tệp mà không có cách nào để tương tác hoặc đính kèm lại."
+    },
+    {
+      "stage": "post",
+      "question": "'python train.py > output.log 2>&1' đạt được điều gì?",
+      "options": [
+        "Chạy train.py và chỉ lưu lỗi vào output.log",
+        "Chạy train.py và chuyển hướng cả đầu ra tiêu chuẩn và lỗi tiêu chuẩn đến output.log",
+        "Chạy train.py hai lần và ghi lại lần chạy thứ hai",
+        "Chạy train.py với gấp đôi phân bổ bộ nhớ"
+      ],
+      "correct": 1,
+      "explanation": "'> output.log' chuyển hướng stdout đến tệp. '2>&1' gửi stderr đến cùng một vị trí với stdout. Kết quả là cả đầu ra bình thường và lỗi được ghi lại trong một tệp."
+    },
+    {
+      "stage": "post",
+      "question": "Lệnh nào cho phép bạn truy cập sổ ghi chép Jupyter từ xa chạy trên cổng 8888 của hộp GPU từ trình duyệt cục bộ của bạn?",
+      "options": [
+        "scp -P 8888 user@gpu hộp:~/notebook.ipynb",
+        "ssh -L 8888:localhost:8888 user@gpu-box",
+        "rsync -avz user@gpu-box: 8888 localhost: 8888",
+        "Hộp user@gpu SSH - Cổng chuyển tiếp 8888"
+      ],
+      "correct": 1,
+      "explanation": "Chuyển tiếp cổng cục bộ SSH (-L) ánh xạ cổng từ xa đến máy cục bộ của bạn. Sau lệnh này, mở localhost:8888 trong trình duyệt của bạn sẽ truy cập vào Jupyter server từ xa."
+    }
+  ]
+}
