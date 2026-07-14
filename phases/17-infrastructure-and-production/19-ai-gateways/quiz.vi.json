@@ -1,0 +1,78 @@
+{
+  "lesson": "19-ai-gateways",
+  "title": "AI Gateways - LiteLLM, Portkey, Kong AI Gateway, Bifrost",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Vai trò cốt lõi của một AI gateway trong bài học là gì?",
+      "options": [
+        "Dịch vụ model fine-tuning",
+        "Cơ sở dữ liệu vector để truy xuất",
+        "Một chiếc sidecar chỉ ghi nhật ký",
+        "Một process nằm giữa các ứng dụng và nhà cung cấp model hợp nhất định tuyến, dự phòng, thử lại, rate limits, tham chiếu bí mật, observability và guardrails đằng sau một API"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Kong's benchmark báo cáo mức trần quy mô nào cho LiteLLM?",
+      "options": [
+        "Nó đạt đỉnh 50 RPS",
+        "Nó phá vỡ khoảng ~ 2000 RPS với bộ nhớ 8 GB và lỗi xếp tầng khi tải liên tục",
+        "Nó mở rộng tuyến tính vượt quá 10k RPS",
+        "Không thể đo điểm chuẩn LiteLLM"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Theo benchmark Kong trên CPU tương đương, Kong AI Gateway nhanh hơn Portkey và LiteLLM bao nhiêu?",
+      "options": [
+        "Nhanh hơn 228% so với Portkey và nhanh hơn 859% so với LiteLLM",
+        "Nhanh hơn khoảng 10% và 20%",
+        "Giống hệt nhau",
+        "Chậm hơn cả hai"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Vị trí bài học có độ trễ 20-40 ms và tập trung phát hiện bẻ khóa guardrails / PII / bẻ khóa gateway nào?",
+      "options": [
+        "Kong AI Gateway",
+        "LiteLLM",
+        "Cloudflare AI Gateway",
+        "Chìa khóa cổng"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học nói gì là chức năng buộc cho các quyết định tự lưu trữ và gateway được quản lý?",
+      "options": [
+        "Liệu gateway có phải là mã nguồn mở hay không",
+        "Số lượng nhà cung cấp được hỗ trợ",
+        "Chi phí cho mỗi yêu cầu",
+        "Yêu cầu về nơi lưu trữ dữ liệu"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "gateways nào nằm trong ngân sách khi SLA là TTFT P99 < 100 ms?",
+      "options": [
+        "Bất kỳ gateway nào",
+        "Chỉ có chìa khóa cổng",
+        "Chỉ LiteLLM",
+        "Kong (~3-8 ms) hoặc Cloudflare/Vercel cạnh gateways (~1-3 ms); Portkey ở 20-40 ms là quá nặng"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
