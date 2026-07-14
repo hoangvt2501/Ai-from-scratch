@@ -1,0 +1,78 @@
+{
+  "lesson": "09-production-quantization",
+  "title": "Production Quantization — AWQ, GPTQ, GGUF K-quants, FP8, MXFP4/NVFP4",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài học gọi định dạng quantization nào là production mặc định cho phân phối CPU và cạnh?",
+      "options": [
+        "FP8",
+        "GGUF Q4_K_M / Q5_K_M",
+        "AWQ INT4",
+        "NVFP4"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Định dạng nào là lựa chọn của bài học cho trung tâm dữ liệu GPU phục vụ khi yêu cầu đa LoRA trong vLLM?",
+      "options": [
+        "GGUF Q4_K_M",
+        "AWQ",
+        "GPTQ với hạt Marlin",
+        "NVFP4"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bẫy \"model của tôi bây giờ là 4 GB\" với AWQ là gì?",
+      "options": [
+        "AWQ không tương thích với vLLM",
+        "AWQ yêu cầu INT8 KV cache",
+        "AWQ không thực sự thu nhỏ trọng lượng",
+        "AWQ chỉ thu nhỏ trọng lượng; KV cache và kích hoạt riêng biệt và có thể thêm 30-50 GB ở production batch kích thước"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao hiệu chỉnh AWQ trên văn bản web chung lại ảnh hưởng đến models miền?",
+      "options": [
+        "Nó vô hiệu hóa hạt Marlin",
+        "Thuật toán đưa ra quyết định sai về trọng số nào cần bảo vệ, bỏ tên miền accuracy (ví dụ: một số điểm Pass@1 trên HumanEval)",
+        "Nó chỉ hoạt động trên AMD GPUs",
+        "Nó làm tăng kích thước model"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Đối với khối lượng công việc nặng về lý luận, chất lượng không thể thương lượng, bài học đề xuất precision nào theo mặc định?",
+      "options": [
+        "GPTQ INT4",
+        "INT2 GGUF",
+        "Trọng lượng NVFP4",
+        "Trọng lượng FP8"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học kêu gọi giới hạn quantization năm 2026 nào cho NVFP4 vào đầu năm 2026?",
+      "options": [
+        "Chưa có hỗ trợ LoRA",
+        "Không được hỗ trợ trên H100",
+        "Chỉ chạy trên CPU",
+        "Không thể kết hợp với FP8 KV cache"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
