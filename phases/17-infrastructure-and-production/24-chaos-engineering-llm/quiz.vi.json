@@ -1,0 +1,78 @@
+{
+  "lesson": "24-chaos-engineering-llm",
+  "title": "Chaos Engineering cho LLM Production",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài học yêu cầu năm điều kiện tiên quyết nào trước khi chạy hỗn loạn trong production?",
+      "options": [
+        "Kênh Slack, gói nhãn dán, linh vật, hashtag, bài đăng trên blog",
+        "SLI/SLO, observability, rollback tự động, runbook có cấu trúc, on-call",
+        "Chỉ Vector cơ sở dữ liệu",
+        "Ba models biên giới"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Kiến trúc hỗn loạn có bốn mặt phẳng nào, cộng với vòng lặp phản hồi?",
+      "options": [
+        "Nhập, biến đổi, lưu trữ, phục vụ",
+        "Huấn luyện, đánh giá, triển khai, lưu trữ",
+        "Kiểm soát, nhắm mục tiêu, an toàn observability - với phản hồi về điều chỉnh SLO",
+        "Giao diện người dùng, phụ trợ, thiết bị di động, web"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cảnh báo tốc độ đốt cháy guardrail làm gì trong các thí nghiệm hỗn loạn?",
+      "options": [
+        "Vô hiệu hóa observability",
+        "Tự động quảng bá thử nghiệm thành production",
+        "Tăng tốc thử nghiệm",
+        "Tạm dừng thử nghiệm khi số lượng đốt ngân sách lỗi hàng ngày vượt quá khoảng 2 lần dự kiến"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Thí nghiệm hỗn loạn dành riêng cho LLM nào được liệt kê trong bài học?",
+      "options": [
+        "Bỏ tất cả DNS",
+        "Giảm tốc độ quạt ngẫu nhiên",
+        "Cơn bão trục xuất KV buộc vLLM bão hòa ngân sách khối",
+        "Khởi động lại toàn bộ trung tâm dữ liệu"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học đề xuất nhịp nào cho các bài tập hỗn loạn?",
+      "options": [
+        "canary nhỏ hàng tuần, ngày thi đấu hàng tháng với khám nghiệm tử thi, kiểm tra khả năng phục hồi giữa các nhóm hàng quý",
+        "Cúp điện toàn bộ sản phẩm hàng ngày",
+        "Không bao giờ",
+        "Chỉ hàng năm"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Thí nghiệm prompt sai định dạng nào phát hiện ra chế độ thất bại cụ thể LLM?",
+      "options": [
+        "Tokenizer gian hàng khóa worker trên các đầu vào như unicode lồng sâu hoặc các điểm mã UTF-8 khổng lồ",
+        "Tranh chấp I/O đĩa",
+        "GPU điện áp thấp",
+        "loss gói mạng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
