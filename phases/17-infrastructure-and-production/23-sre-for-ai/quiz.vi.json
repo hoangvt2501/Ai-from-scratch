@@ -1,0 +1,78 @@
+{
+  "lesson": "23-sre-for-ai",
+  "title": "SRE for AI — Ứng phó sự cố đa Agent, Runbook, Phát hiện dự đoán",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài học đề xuất hình dạng đa agent nào cho AI SRE?",
+      "options": [
+        "Lựa chọn ngẫu nhiên một trong ba agents",
+        "Hai agents nối tiếp mà không có người giám sát",
+        "Một agent nguyên khối sở hữu mọi thứ",
+        "Giám sát agent chia sự cố thành các truy vấn phụ cho agents nhật ký, số liệu và sổ chạy chuyên biệt, sau đó tổng hợp và trình bày cho con người"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học gọi là an toàn cho bộ tự động khắc phục nào?",
+      "options": [
+        "Cấu trúc lại cấu trúc liên kết dịch vụ",
+        "Thay đổi cơ sở dữ liệu",
+        "Sửa đổi IAM policies",
+        "Khởi động lại pod, hoàn nguyên một triển khai cụ thể, mở rộng quy mô nhóm trong giới hạn đã được phê duyệt trước, bật cờ feature được phê duyệt trước"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "NeuBird Hawkeye sử dụng đánh giá đối nghịch như thế nào để lọc các nguyên nhân gốc rễ bị ảo giác?",
+      "options": [
+        "Hai models phân tích độc lập cùng một sự cố; đồng ý = độ tin cậy cao, bất đồng = leo thang lên con người với cả hai giả thuyết",
+        "Sử dụng training kiểu GAN",
+        "Luôn chọn câu trả lời của model có độ tin cậy cao hơn",
+        "Chạy cùng một model hai lần trên cùng một đầu vào"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bộ nhớ hoạt động giải quyết điều gì trong AI SRE?",
+      "options": [
+        "Cold start vỏ inference",
+        "Lọc đầu ra mạng",
+        "Loss kiến thức của bộ lạc khi các nhóm chuyển giao - sổ chạy và hậu quả sống trong một cơ sở dữ liệu vector agents truy xuất sau mỗi sự cố",
+        "Phân bổ chi phí Token"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học trích dẫn kết quả MIT 2025 nào để dự đoán trước sự cố?",
+      "options": [
+        "Dự đoán 100% với 1 giây dẫn trước",
+        "89% sự cố mất điện được dự đoán sớm 10-15 phút bằng cách sử dụng nhật ký + GPU nhiệt độ + API mẫu lỗi",
+        "Dự đoán vẫn chưa được giải đáp",
+        "10% không có thời gian giao hàng"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học nhấn mạnh ràng buộc hoạt động nào về phát hiện dự đoán?",
+      "options": [
+        "Dự đoán thay thế runbook",
+        "Dự đoán không bao giờ nên được kết nối để hành động",
+        "Dự đoán không có kích hoạt chỉ là bảng điều khiển - câu hỏi hoạt động là hành động nào (trước khi cạn, trang, tự động mở rộng) dự đoán triggers",
+        "Dự đoán luôn chính xác"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
