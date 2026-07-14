@@ -1,0 +1,102 @@
+{
+  "lesson": "24-coreference-resolution",
+  "title": "Độ phân giải đồng tham chiếu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Mục tiêu của độ phân giải đồng tham chiếu là gì?",
+      "options": [
+        "Cụm tất cả các đề cập (được đặt tên, danh nghĩa, đại từ) đề cập đến cùng một thực thể trong thế giới thực",
+        "Gắn thẻ các phần của bài phát biểu",
+        "Trích xuất quan hệ",
+        "Dịch đại từ thành danh từ"
+      ],
+      "correct": 0,
+      "explanation": "Các cụm Coref đề cập đến spans rằng tất cả đều đề cập đến cùng một thực thể."
+    },
+    {
+      "stage": "pre",
+      "question": "Loại biểu thức nào là đề cập 'danh nghĩa'?",
+      "options": [
+        "Chỉ một danh từ riêng",
+        "Một cụm danh từ như 'CEO' hoặc 'the company'",
+        "Một đại từ như 'cô ấy'",
+        "Một động từ"
+      ],
+      "correct": 1,
+      "explanation": "Đề cập danh nghĩa là các cụm danh từ như 'công ty'; đề cập đến đại từ là đại từ."
+    },
+    {
+      "stage": "check",
+      "question": "Kiến trúc coref hiện đại (Lee et al., 2017) là gì?",
+      "options": [
+        "Truy xuất BM25",
+        "Chỉ phân tích cú pháp dựa trên quy tắc",
+        "Cây quyết định",
+        "Dựa trên span từ đầu đến cuối: liệt kê spans, đề cập điểm số, sau đó chấm điểm xác suất tiên nghiệm đó và phân cụm một cách tham lam"
+      ],
+      "correct": 3,
+      "explanation": "Coref thần kinh end-to-end liệt kê các spans và học đề cập + chấm điểm tiền đề cùng nhau."
+    },
+    {
+      "stage": "check",
+      "question": "CoNLL F1 trung bình là bao nhiêu?",
+      "options": [
+        "F1 qua các ngôn ngữ",
+        "Điểm MUC, B-cubed và CEAF-phi4 F1",
+        "Token và span F1",
+        "Precision và recall"
+      ],
+      "correct": 1,
+      "explanation": "CoNLL F1 là giá trị trung bình của các chỉ số MUC, B-cubed và CEAF-phi4."
+    },
+    {
+      "stage": "check",
+      "question": "Cầu nối anaphora là gì?",
+      "options": [
+        "Dịch sai",
+        "Một tham chiếu ngầm như 'bánh xe' ngụ ý bánh xe của một chiếc xe đã đề cập trước đó",
+        "Một đại từ trước đối tượng tham chiếu của nó",
+        "Một đại từ không có tiền đề"
+      ],
+      "correct": 1,
+      "explanation": "Cầu nối liên kết đề cập đến một phần của hoặc thực thể có liên quan đã được ngụ ý nhưng không được nêu rõ ràng."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao coref chỉ LLM không đáng tin cậy trên các tài liệu dài?",
+      "options": [
+        "LLMs không thể đọc văn bản",
+        "Tokenizers thất bại",
+        "Cuộc gọi một lần LLMs quá merge hoặc âm thầm bỏ đề cập trên 50+ đoạn văn; yêu cầu cửa sổ trượt cộng với merge",
+        "Coref yêu cầu CFG"
+      ],
+      "correct": 2,
+      "explanation": "Long-doc LLM coref suy giảm; cửa sổ trượt với các biện pháp giảm thiểu hợp nhất cửa sổ chéo."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao merge các cụm coref thành kết quả NER trước các tác vụ xuôi dòng?",
+      "options": [
+        "Yêu cầu của Wikidata",
+        "Để tăng số lượng token",
+        "Độ trễ thấp hơn",
+        "Vì vậy, các tác vụ xuôi dòng nhìn thấy một thực thể trên mỗi cụm thay vì một thực thể trên mỗi đề cập bề mặt, cải thiện đáng kể phạm vi bao phủ"
+      ],
+      "correct": 3,
+      "explanation": "Không hợp nhất, NER đếm từng dạng bề mặt riêng biệt và bỏ lỡ 60-80% đề cập thực thể."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao các quy tắc giới tính được mã hóa cứng lại là một sự mong manh trong các hệ thống coref?",
+      "options": [
+        "Họ phá vỡ các tham chiếu, tổ chức và động vật phi nhị phân; Chấm điểm học được mạnh mẽ hơn",
+        "Họ yêu cầu GPU",
+        "Chúng chạy quá nhanh",
+        "Họ không thể sử dụng thẻ POS"
+      ],
+      "correct": 0,
+      "explanation": "Phỏng đoán giới tính thất bại trong văn bản đa dạng về nhân khẩu học; models đã học được ưu tiên."
+    }
+  ]
+}
