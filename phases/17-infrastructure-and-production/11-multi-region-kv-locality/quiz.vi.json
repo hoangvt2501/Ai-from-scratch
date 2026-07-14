@@ -1,0 +1,78 @@
+{
+  "lesson": "11-multi-region-kv-locality",
+  "title": "Phục vụ LLM đa vùng và KV Cache địa phương",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao cân bằng tải vòng tròn lại có hại cho LLM inference được lưu trong bộ nhớ đệm?",
+      "options": [
+        "Một yêu cầu không đến nút giữ tiền tố của nó sẽ trả toàn bộ chi phí điền trước thay vì truy cập vào bộ nhớ cache",
+        "Vòng tròn một lượt yêu cầu sessions dính",
+        "Vòng tròn tính điểm phá vỡ TLS",
+        "Round-robin chỉ hợp lệ cho cơ sở dữ liệu có trạng thái"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bộ định tuyến nhận biết bộ nhớ cache tiêu thụ hai đầu vào nào?",
+      "options": [
+        "Xáo trộn ngẫu nhiên và kích thước yêu cầu",
+        "Chỉ có user_id và tenant_id",
+        "Bộ đếm vòng tròn và khóa TLS",
+        "Các sự kiện KV-cache từ bản sao và hàm băm tiền tố trên yêu cầu đến"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Khoảng cách TTFT giữa lần truy cập bộ nhớ đệm và lần nạp trước lạnh trên 2K-token prompt cho Llama 3.3 70B FP8 là bao nhiêu?",
+      "options": [
+        "Giống hệt nhau",
+        "Khoảng 10x (~80 ms so với ~800 ms)",
+        "Khoảng 1,1x",
+        "Khoảng 1000x"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao định tuyến liên khu vực không phải lúc nào cũng đánh bại định tuyến khu vực cho các lần truy cập bộ nhớ đệm?",
+      "options": [
+        "Không thể định tuyến nhận biết bộ nhớ đệm giữa các khu vực",
+        "Nghiên cứu của GORGO cho thấy các lần truy cập bộ nhớ cache không giúp ích gì cho độ trễ",
+        "Định tuyến liên khu vực bị cấm bởi tất cả các siêu quy mô",
+        "Nạp trước đã lưu có thể bị thu hẹp bởi RTT mạng, ví dụ: chuyến đi khứ hồi 440 ms có thể làm giảm mức tiết kiệm nạp trước 800 đến 80 ms"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học trích dẫn điều gì là trình điều khiển lỗi DR 32% LLM?",
+      "options": [
+        "Các bản sao lưu bao gồm trọng số nhưng bỏ lỡ tệp tokenizer hoặc cấu hình quantization",
+        "Hết hạn ngạch khu vực",
+        "Cấu hình sai load balancers",
+        "Sao lưu không được mã hóa"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học nói gì về các dịch vụ inference thương mại xuyên khu vực như Bedrock CRI?",
+      "options": [
+        "Chúng nhận biết bộ nhớ cache KV và thay thế định tuyến lớp ứng dụng",
+        "Chúng chỉ hoạt động ở us-east-1",
+        "Chúng tối ưu hóa tính khả dụng, không phải TTFT và coi inference là mờ đục - bạn vẫn cần một bộ định tuyến nhận biết bộ nhớ cache lớp ứng dụng",
+        "Chúng bị cấm theo GDPR"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
