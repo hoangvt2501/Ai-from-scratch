@@ -1,0 +1,62 @@
+[
+  {
+    "question": "LLMs có thể thực hiện các chức năng hoặc truy cập các hệ thống bên ngoài không?",
+    "options": [
+      "Có, LLMs có thể gọi trực tiếp cho APIs",
+      "Không -- LLMs chỉ tạo văn bản (thường là JSON) mô tả hàm nào cần gọi; mã của bạn phải thực thi nó",
+      "Chỉ GPT-4 mới có thể thực hiện các chức năng",
+      "LLMs thực thi các chức năng thông qua embeddings"
+    ],
+    "correct": 1,
+    "explanation": "LLMs tạo ra tokens. Khi 'gọi một hàm', model xuất ra JSON chỉ định tên hàm và đối số. Mã ứng dụng của bạn phân tích cú pháp JSON này, thực thi hàm thực tế và gửi kết quả trở lại model.",
+    "stage": "pre"
+  },
+  {
+    "question": "Công cụ schema trong ngữ cảnh function calling là gì?",
+    "options": [
+      "Sơ đồ kiến trúc của model",
+      "Mô tả JSON về tên, parameters, loại và mục đích của chức năng cho người model biết những công cụ nào có sẵn",
+      "Một cơ sở dữ liệu schema",
+      "The API endpoint URL"
+    ],
+    "correct": 1,
+    "explanation": "Công cụ schemas mô tả các hàm có sẵn cho model: tên hàm, tên và loại parameter, mô tả về những gì mỗi parameter làm và những gì hàm trả về. model sử dụng chúng để quyết định thời điểm và cách gọi các công cụ.",
+    "stage": "pre"
+  },
+  {
+    "question": "Mẫu tiêu chuẩn cho vòng lặp function calling nhiều lượt là gì?",
+    "options": [
+      "Gọi tất cả các chức năng cùng một lúc",
+      "Gửi tin nhắn -> model yêu cầu công cụ gọi -> thực thi chức năng -> gửi lại kết quả -> model tạo phản hồi cuối cùng (lặp lại nếu cần)",
+      "model thực thi các chức năng nội bộ",
+      "Phân tích cú pháp toàn bộ cuộc trò chuyện dưới dạng batch"
+    ],
+    "correct": 1,
+    "explanation": "Vòng lặp: (1) gửi tin nhắn người dùng + schemas công cụ, (2) model phản hồi bằng yêu cầu gọi công cụ, (3) thực thi hàm, (4) gửi lại kết quả dưới dạng phản hồi công cụ, (5) model tạo phản hồi tiếp theo hoặc một lệnh gọi công cụ khác.",
+    "stage": "post"
+  },
+  {
+    "question": "Làm thế nào để bạn ngăn chặn vòng lặp tool calling vô hạn?",
+    "options": [
+      "Sử dụng model nhanh hơn",
+      "Đặt số lần lặp lại lệnh gọi công cụ tối đa và triển khai timeout, phá vỡ vòng lặp nếu đạt đến giới hạn",
+      "Vòng lặp vô hạn không thể xảy ra với function calling",
+      "Xóa tất cả schemas công cụ sau cuộc gọi đầu tiên"
+    ],
+    "correct": 1,
+    "explanation": "Không có giới hạn, một model có thể liên tục gọi các công cụ (ví dụ: tìm kiếm thông tin mà nó không bao giờ có thể tìm thấy). Số lần lặp tối đa (ví dụ: 10 vòng) và tổng số timeout ngăn chặn các vòng lặp chạy trốn trong production.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao tên và mô tả parameter rõ ràng, mô tả lại quan trọng trong schemas công cụ?",
+    "options": [
+      "Chúng làm cho mã dễ đọc hơn",
+      "model sử dụng mô tả để quyết định công cụ nào sẽ gọi và cách điền vào parameters - mô tả mơ hồ dẫn đến lựa chọn công cụ sai và đối số không chính xác",
+      "Chúng được yêu cầu bởi API",
+      "Chúng cải thiện thời gian phản hồi"
+    ],
+    "correct": 1,
+    "explanation": "model đọc mô tả công cụ để quyết định gọi gì và như thế nào. Một parameter được mô tả là 'q' và 'search_query: Các cụm từ tìm kiếm của người dùng để tra cứu trong cơ sở tri thức' cho kết quả rất khác nhau.",
+    "stage": "post"
+  }
+]
