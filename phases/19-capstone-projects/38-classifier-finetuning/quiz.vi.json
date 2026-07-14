@@ -1,0 +1,78 @@
+{
+  "lesson": "phase-19/38-classifier-finetuning",
+  "title": "Bộ phân loại Fine-Tuning theo Hoán đổi đầu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trước khi đọc: một model ngôn ngữ pretrained có phần thân với 5M parameters và một đầu ra chiếu đến từ vựng 30K. Bạn muốn có một bộ phân loại 2 class. Bước đầu tiên có thể bảo vệ được nhất là gì?",
+      "options": [
+        "Loại bỏ cơ thể và huấn luyện một transformer mới từ đầu trên bộ 800 ví dụ được dán nhãn.",
+        "Chỉ thay thế đầu bằng một lớp tuyến tính 2-class và sau đó quyết định có nên tập luyện cơ thể hay không.",
+        "Giữ nguyên đầu ban đầu nhưng che tất cả trừ hai logits đầu ra.",
+        "Đóng băng đầu và chỉ tập luyện cơ thể."
+      ],
+      "correct": 1,
+      "explanation": "Cơ thể là bộ phận đắt tiền và mã hóa cấu trúc hữu ích từ pretraining. Hoán đổi đầu trước. Có đóng băng phần thân hay không là một quyết định riêng biệt được thúc đẩy bởi kích thước dữ liệu và độ lệch miền."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao việc sử dụng bài học có nghĩa là gộp với trọng số mặt nạ attention thay vì giá trị trung bình đơn giản trên trục dãy?",
+      "options": [
+        "Giá trị trung bình thuần túy không được xác định về mặt toán học cho transformers.",
+        "Các vị trí đệm đóng góp các trạng thái ẩn không liên quan sẽ kéo vector gộp về không.",
+        "Hồ bơi trung bình yêu cầu đeo mặt nạ theo quy ước ngay cả khi không có miếng đệm.",
+        "Giá trị trung bình đơn giản bỏ qua chiều batch."
+      ],
+      "correct": 1,
+      "explanation": "Padding tokens không mang tín hiệu nhưng phần thân vẫn tạo ra các trạng thái ẩn cho chúng. Nếu không có mặt nạ, các vị trí đệm sẽ làm hỏng biểu diễn gộp, đặc biệt là trên các chuỗi ngắn trong một batch đệm cho ví dụ dài nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Trong `train_classifier`, trình tối ưu hóa được xây dựng bằng `[p for p in model.parameters() if p.requires_grad]`. Thành ngữ này thực thi điều gì?",
+      "options": [
+        "Nó lặng lẽ phớt lờ cái đầu khi cơ thể bị đóng băng.",
+        "Dù sao thì nó cũng yêu cầu PyTorch tự động vượt qua các parameters đóng băng.",
+        "Nó xây dựng nhóm tham số chỉ từ tập con có thể huấn luyện, vì vậy các trường hợp head-only và full-FT chia sẻ cùng một đường dẫn mã.",
+        "Nó được yêu cầu bởi hàm khởi tạo Adam."
+      ],
+      "correct": 2,
+      "explanation": "Trình tối ưu hóa chỉ cập nhật parameters trong danh sách tham số của nó. Bằng cách lọc trên `requires_grad`, cùng một chức năng training hoạt động cho cả hai chế độ; nút chuyển đổi là lệnh gọi đóng băng, không phải vòng lặp."
+    },
+    {
+      "stage": "check",
+      "question": "Precision là 0,9 và recall là 0,6 trên class thư rác. F1 là gì?",
+      "options": [
+        "0.75",
+        "0.72",
+        "0.50",
+        "0.30"
+      ],
+      "correct": 1,
+      "explanation": "F1 là giá trị trung bình hài của precision và recall: 2 * 0.9 * 0.6 / (0.9 + 0.6) = 1.08 / 1.5 = 0.72."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn huấn luyện lại model với fine-tuning đầy đủ cùng learning rate với training chỉ đầu. F1 giảm từ 0.90 xuống 0.55. Nguyên nhân có khả năng xảy ra nhất là gì?",
+      "options": [
+        "Cơ thể parameters cần một learning rate nhỏ hơn đầu.",
+        "Adam không tương thích với mục tiêu phân loại.",
+        "loss entropy chéo không được định nghĩa cho các bài toán hai class.",
+        "PyTorch âm thầm vô hiệu hóa gradients trong khi fine-tuning đầy đủ."
+      ],
+      "correct": 0,
+      "explanation": "Một cơ thể pretrained thường cần một learning rate nhỏ hơn một cái đầu mới. Một mô hình phổ biến là hai nhóm parameter: LR cao trên đầu, LR nhỏ hơn trên cơ thể. Cùng một LR cho cả hai phá hủy tín hiệu pretraining."
+    },
+    {
+      "stage": "post",
+      "question": "Nhóm của bạn muốn triển khai bộ phân loại và hỏi làm thế nào để ghi lại chế độ nào đã tạo ra production checkpoint. artifact nào trả lời câu hỏi đó một cách lặp lại?",
+      "options": [
+        "Giá trị loss cuối cùng, vì loss chỉ đánh đầu luôn cao hơn loss FT đầy đủ.",
+        "Số lượng `trainable` tính bằng `TrainReport`, khác nhau theo thứ tự độ lớn giữa các chế độ.",
+        "Ma trận nhầm lẫn, xác định duy nhất chế độ.",
+        "Bộ ba precision-recall-F1."
+      ],
+      "correct": 1,
+      "explanation": "`trainable` ghi lại số lượng parameters nhận được gradients trong training. Head-only có theo thứ tự `hidden * num_classes`; FT đầy đủ có toàn bộ model. Con số là dấu vết kiểm toán."
+    }
+  ]
+}
