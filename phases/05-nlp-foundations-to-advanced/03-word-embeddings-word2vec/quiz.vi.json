@@ -1,0 +1,102 @@
+{
+  "lesson": "03-word-embeddings-word2vec",
+  "title": "Word Embeddings — Word2Vec từ đầu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Giả thuyết phân phối là gì?",
+      "options": [
+        "Bạn sẽ biết một lời bởi công ty mà nó giữ",
+        "Các từ được phân bổ đồng đều trên các tài liệu",
+        "Tất cả các từ có thể được nhúng trong 300 chiều",
+        "Những từ thường gặp mang ý nghĩa nhất"
+      ],
+      "correct": 0,
+      "explanation": "Giả thuyết phân phối của Firth (1957): các ngữ cảnh tương tự ngụ ý ý nghĩa tương tự."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao softmax đơn giản về từ vựng không thực tế trong Word2Vec?",
+      "options": [
+        "Tính toán softmax hơn 100k+ thuật ngữ từ vựng rất tốn kém cho mỗi bước training",
+        "Softmax không thể model xác suất",
+        "Softmax không có gradient",
+        "Nó gây ra gradients biến mất"
+      ],
+      "correct": 0,
+      "explanation": "softmax đầy đủ từ vựng quá đắt; sampling tiêu cực định hình lại nó thành phân loại nhị phân."
+    },
+    {
+      "stage": "check",
+      "question": "Sự khác biệt giữa skip-gram và CBOW là gì?",
+      "options": [
+        "Skip-gram sử dụng bigram; CBOW sử dụng unigram",
+        "Skip-gram dự đoán các từ ngữ cảnh từ trung tâm; CBOW dự đoán trung tâm từ bối cảnh",
+        "Skip-gram dự đoán từ trung tâm từ ngữ cảnh; CBOW làm ngược lại",
+        "Skip-gram huấn luyện một mạng sâu; CBOW nông cạn"
+      ],
+      "correct": 1,
+      "explanation": "Bỏ qua: ngữ cảnh > trung tâm. CBOW: trung tâm > ngữ cảnh."
+    },
+    {
+      "stage": "check",
+      "question": "Trong sampling âm, mục tiêu của cặp dương (trung tâm, ngữ cảnh) là gì?",
+      "options": [
+        "Phóng to sigmoid(W[center] dot W'[context]) để nó gần bằng 1",
+        "Buộc chúng phải trực giao",
+        "Giảm thiểu sản phẩm chấm của họ",
+        "Decorlate the vectors"
+      ],
+      "correct": 0,
+      "explanation": "Các cặp dương huấn luyện sigmoid gần 1; âm tính được lấy mẫu huấn luyện sigmoid gần 0."
+    },
+    {
+      "stage": "check",
+      "question": "Sau training Word2Vec, ma trận trọng số nào trở thành từ embeddings?",
+      "options": [
+        "Một hình chiếu sau training riêng biệt",
+        "Ma trận W đầu vào ẩn (bảng từ giữa)",
+        "Cả hai, nhân với nhau",
+        "Ma trận W' ẩn đến đầu ra"
+      ],
+      "correct": 1,
+      "explanation": "Bảng từ trung tâm W là đầu ra embedding tiêu chuẩn; W' thường bị loại bỏ hoặc tính trung bình."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao Word2Vec không thành công trong đa nghĩa (ví dụ: 'ngân hàng')?",
+      "options": [
+        "Kích thước cửa sổ quá nhỏ",
+        "Nó bỏ qua những từ hiếm",
+        "Tiêu cực sampling giảm ý nghĩa hiếm",
+        "Nó chỉ định một vector tĩnh cho mỗi từ, vì vậy 'bờ sông' và 'ngân hàng tài chính' có chung vector"
+      ],
+      "correct": 3,
+      "explanation": "embeddings tĩnh không thể phân biệt các giác quan; embeddings ngữ cảnh (ELMo/BERT) khắc phục điều này."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn vẫn tiếp cận Word2Vec trong một transformer vào năm 2026?",
+      "options": [
+        "Truy xuất nhẹ, trên thiết bị, theo miền cụ thể trong đó một tra cứu hàng là ngân sách độ trễ",
+        "Khi bạn cần định hướng theo ngữ cảnh",
+        "Khi đầu vào rất dài",
+        "Khi chất lượng hộp thoại quan trọng"
+      ],
+      "correct": 0,
+      "explanation": "Word2Vec chiến thắng nhờ ngân sách độ trễ nhỏ, inference trên thiết bị hoặc training nhanh theo miền cụ thể."
+    },
+    {
+      "stage": "post",
+      "question": "Điều gì cho phép phép so sánh nổi tiếng 'vua - đàn ông + phụ nữ ~ nữ hoàng'?",
+      "options": [
+        "model mã hóa tiền bản quyền dưới dạng một bit cờ",
+        "Skip-gram huấn luyện về từ vựng hoàng gia",
+        "Số học Vector nắm bắt các hướng tuyến tính như 'hoàng gia' chuyển qua các giới tính",
+        "Sự tương đồng cosin là bất biến đối với giới tính"
+      ],
+      "correct": 2,
+      "explanation": "Các hướng trong không gian embedding mã hóa features quan hệ, vì vậy adding/subtracting di chuyển một cách có hệ thống."
+    }
+  ]
+}
