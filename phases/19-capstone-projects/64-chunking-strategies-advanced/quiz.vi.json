@@ -1,0 +1,78 @@
+{
+  "lesson": "64-chunking-strategies-advanced",
+  "title": "So sánh các chiến lược phân đoạn",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao lựa chọn phân đoạn lại là giới hạn trên về chất lượng truy xuất chứ không chỉ là hyperparameter?",
+      "options": [
+        "Bởi vì LLM không bao giờ đọc các đoạn",
+        "Bởi vì embedding model được cố định tại thời điểm training",
+        "Bởi vì không có embedding, reranker hoặc LLM xuôi dòng nào có thể khôi phục một câu trả lời span đã bị cắt thành những mảnh không mạch lạc",
+        "Bởi BM25 không có vai trò trong RAG hiện đại"
+      ],
+      "correct": 2,
+      "explanation": "Nếu đoạn chứa câu trả lời span không mạch lạc, embedding sẽ di chuyển đến sai cụm và các thành phần hạ nguồn không thể sửa chữa hư hỏng."
+    },
+    {
+      "stage": "pre",
+      "question": "Chiến lược nào là mặc định chiến lược đơn mạnh nhất khi bạn không có kiến thức prior về kho dữ liệu?",
+      "options": [
+        "Cửa sổ cố định",
+        "Trình đóng gói câu",
+        "Phân tách đệ quy",
+        "Giảm giá cấu trúc"
+      ],
+      "correct": 2,
+      "explanation": "Phân tách đệ quy thích ứng với từng vùng bằng cách thử dải phân cách mạnh nhất trước và lùi lại, vì vậy nó tồn tại trong cấu trúc không nhất quán."
+    },
+    {
+      "stage": "check",
+      "question": "recall@k đo lường điều gì trong bài học này?",
+      "options": [
+        "Liệu các đoạn top-k có chứa chuỗi truy vấn theo nghĩa đen hay không",
+        "Cho dù bất kỳ phần nào trong số top-k chồng lên câu trả lời vàng span",
+        "Sự tương đồng cosin giữa truy vấn và các đoạn top-k",
+        "Số lượng tài liệu duy nhất trong top-k"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi truy vấn mang bù vàng; recall@k là 1 nếu bất kỳ khối top-k nào chồng lên span vàng, nếu không thì 0; tính trung bình trên các truy vấn."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao phân đoạn cửa sổ cố định lại thất bại nghiêm trọng trên mã hoặc kho dữ liệu YAML?",
+      "options": [
+        "Nó mất các ký tự Unicode",
+        "Nó cắt giảm một nửa số nhận dạng và cặp khóa-giá trị, tạo ra các khối nhúng vào nhiễu",
+        "Nó tạo ra các khối lớn hơn context window của embedding model",
+        "Nó không thể được song song"
+      ],
+      "correct": 1,
+      "explanation": "Các vết cắt cấp nhân vật bên trong biểu tượng phá hủy ý nghĩa mà embedding model được cho là nắm bắt."
+    },
+    {
+      "stage": "check",
+      "question": "Tiêu chí kết thúc trôi dạt tâm trong phân đoạn ngữ nghĩa là gì?",
+      "options": [
+        "Sự tương đồng cosin giữa vector trung bình đang chạy và câu tiếp theo giảm xuống dưới ngưỡng",
+        "Số ký tự vượt quá mức tối đa",
+        "Số lượng câu vượt quá giới hạn được mã hóa cứng",
+        "Chunker đã tiêu tốn toàn bộ ngân sách embedding"
+      ],
+      "correct": 0,
+      "explanation": "Phân đoạn ngữ nghĩa cắt giảm khi trung tâm đang chạy không còn khớp với câu tiếp theo theo theo ngưỡng tương tự được định cấu hình."
+    },
+    {
+      "stage": "post",
+      "question": "Chế độ thất bại embedding cũ nào mà phân đoạn ngữ nghĩa giới thiệu mà bốn chiến lược còn lại không có?",
+      "options": [
+        "Các đoạn quá nhỏ so với ngữ cảnh embedding",
+        "Ranh giới chunk thay đổi bất cứ khi nào bạn thay đổi model khối, yêu cầu xây dựng lại phối hợp",
+        "Các khối không còn có thể lập chỉ mục bởi BM25",
+        "Các khối mất phần bù bắt đầu và kết thúc"
+      ],
+      "correct": 1,
+      "explanation": "Phân cụm ngữ nghĩa phụ thuộc vào một embedding model; hoán đổi model thay đổi ranh giới, vì vậy chunk-model phải được ghim riêng biệt hoặc xây dựng lại cùng với model truy xuất."
+    }
+  ]
+}
