@@ -1,0 +1,78 @@
+{
+  "lesson": "53-result-evaluator",
+  "title": "Công cụ đánh giá kết quả",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao người đánh giá sử dụng kiểm tra t ghép đôi thay vì so sánh hai số đơn?",
+      "options": [
+        "Bởi vì numpy yêu cầu các mảng được ghép nối",
+        "Bởi vì việc ghép nối cùng một hạt giống trên ứng cử viên và đường cơ sở sẽ cô lập sự thay đổi configuration từ nhiễu khởi tạo ngẫu nhiên",
+        "Bởi vì người chạy không thể phát ra một số duy nhất",
+        "Bởi vì các bài kiểm tra t luôn được IRB yêu cầu"
+      ],
+      "correct": 1,
+      "explanation": "Ghép nối theo hạt giống sẽ loại bỏ các hiệu ứng khởi tạo ngẫu nhiên. Sự khác biệt còn lại là do sự thay đổi configuration, đó là những gì thử nghiệm đo lường."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao người đánh giá mang trường hướng trên mọi chỉ số?",
+      "options": [
+        "Bởi vì accuracy và loss chỉ theo những cách ngược lại; dấu hiệu của sự cải thiện phụ thuộc vào hướng nào tốt hơn cho số liệu được so sánh",
+        "Bởi vì người chạy yêu cầu nó",
+        "Bởi vì numpy cần định hướng cho variance",
+        "Bởi vì trình phân tích cú pháp mong đợi nó"
+      ],
+      "correct": 0,
+      "explanation": "Số liệu cao hơn là tốt hơn được cải thiện khi chúng đi lên; số liệu thấp hơn là tốt hơn được cải thiện khi chúng đi xuống. Trường hướng cho hàm cải tiến biết quy ước ký hiệu nào sẽ được áp dụng."
+    },
+    {
+      "stage": "check",
+      "question": "Đường dẫn phán quyết trả về điều gì khi |improvement| thấp hơn ngưỡng ngay cả khi giá trị p là đáng kể?",
+      "options": [
+        "Cải thiện",
+        "thoái lui",
+        "Nhiễu",
+        "không thành công"
+      ],
+      "correct": 2,
+      "explanation": "Một thay đổi có ý nghĩa thống kê quá nhỏ để hành động vẫn là nhiễu từ quan điểm của vòng lặp. Cổng ngưỡng chạy trước cổng ý nghĩa."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao trình đánh giá chuyển đổi các chỉ số được chia tỷ lệ nhật ký trước khi cải thiện tính toán?",
+      "options": [
+        "Bởi vì numpy nhật ký nhanh hơn",
+        "Bởi vì perplexity và các chỉ số tương tự tăng theo cấp số nhân theo loss; chuyển đổi thành log space làm cho ngưỡng như hai phần trăm có ý nghĩa trên các chỉ số tuyến tính và nhật ký",
+        "Bởi vì giá trị p phụ thuộc vào nó",
+        "Bởi vì người chạy chỉ phát ra các chỉ số theo tỷ lệ nhật ký"
+      ],
+      "correct": 1,
+      "explanation": "Perplexity là exp(loss). Một thay đổi nhỏ loss là một thay đổi lớn perplexity. Việc lấy nhật ký giữ cho những cải tiến tương đối có thể so sánh với các chỉ số tuyến tính dưới một ngưỡng."
+    },
+    {
+      "stage": "check",
+      "question": "Khi nào trình trợ giúp kiểm tra t được ghép nối trả về p_value = Không có?",
+      "options": [
+        "Khi các phương tiện bằng nhau",
+        "Khi có ít hơn hai mẫu ghép nối",
+        "Khi variance bằng không",
+        "Khi thang đo hệ mét là nhật ký"
+      ],
+      "correct": 1,
+      "explanation": "Phân phối t cần ít nhất một bậc tự do. Với n nhỏ hơn hai thì không có ước tính variance và trình trợ giúp trả về Không có để đường dẫn phán quyết có thể đánh dấu chạy là nhiễu."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì xảy ra nếu ngay cả một kết quả ứng cử viên có nhãn thiết bị đầu cuối khác với ok?",
+      "options": [
+        "Người đánh giá bỏ hạt giống đó và tiếp tục",
+        "Người đánh giá trả về một phán quyết thất bại và ghi lại các thiết bị đầu cuối xấu trong cơ sở lý luận",
+        "Người đánh giá thử chạy lại",
+        "Người đánh giá quay trở lại thử nghiệm một chiều"
+      ],
+      "correct": 1,
+      "explanation": "Một lần chạy không thành công sẽ làm mất hiệu lực của bộ ứng viên. Người đánh giá làm ngắn mạch đường dẫn phán quyết và trả về không thành công với các thiết bị đầu cuối vi phạm được liệt kê, vì vậy người điều phối không rút ra kết luận từ một lần chạy bị lỗi."
+    }
+  ]
+}
