@@ -1,0 +1,78 @@
+{
+  "lesson": "79-pipeline-parallel",
+  "title": "Pipeline Phân tích song song và bong bóng",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bong bóng pipeline là gì?",
+      "options": [
+        "Một lỗi trong NCCL",
+        "Thời gian nhàn rỗi khi bắt đầu và kết thúc pipeline: các giai đoạn không có công việc cho đến khi vi lô đầu tiên đạt đến chúng và sau khi vi lô cuối cùng rời đi",
+        "Rò rỉ bộ nhớ",
+        "Một gói mạng"
+      ],
+      "correct": 1,
+      "explanation": "Với M microbatch và N stages, bong bóng mỗi giai đoạn là (N-1) / (M + N-1). Chọn M lớn hơn nhiều so với N sẽ thu nhỏ nó."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao bộ nhớ kích hoạt của GPipe tỷ lệ thuận với M?",
+      "options": [
+        "Lỗi",
+        "Tất cả các kích hoạt của M microbatch phải được giữ cho đến khi khớp ngược; không có gì tự do cho đến khi quá trình xả bắt đầu",
+        "Giới hạn trình biên dịch",
+        "Giới hạn phần cứng"
+      ],
+      "correct": 1,
+      "explanation": "GPipe lấp đầy pipeline bằng tất cả các chuyển tiếp trước khi lùi lại. Mỗi vi lô trên chuyến bay thực hiện các kích hoạt của nó cho đến khi bắt đầu lùi."
+    },
+    {
+      "stage": "check",
+      "question": "1F1B cải thiện như thế nào so với GPipe?",
+      "options": [
+        "Bong bóng thấp hơn",
+        "Cùng một bong bóng nhưng bộ nhớ kích hoạt có giới hạn; Khi chuyển tiếp của MB 0 đến giai đoạn cuối cùng, sự lùi của nó bắt đầu và kích hoạt miễn phí",
+        "Thông lượng cao hơn",
+        "model nhỏ hơn"
+      ],
+      "correct": 1,
+      "explanation": "Megatron-LM và PipeDream sử dụng 1F1B để liên kết bộ nhớ kích hoạt theo độ sâu pipeline, không phải số lượng vi mẻ."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao điện toán bằng nhau trên mỗi giai đoạn lại quan trọng hơn số lượng parameter bằng nhau?",
+      "options": [
+        "Thẩm mỹ",
+        "Giai đoạn chậm nhất cổng mỗi chu kỳ; các giai đoạn khác nhàn rỗi chờ đợi nó. Embedding lớp có nhiều parameters nhưng ít tính toán, vì vậy việc phân vùng theo số lượng parameter làm mất cân bằng pipeline",
+        "Bộ nhớ được căn chỉnh",
+        "Dễ viết mã hơn"
+      ],
+      "correct": 1,
+      "explanation": "Megatron-LM hiển thị --num-layers-per-stage dưới dạng danh sách để cho phép số lượng lớp không đồng đều khi chi phí mỗi lớp khác nhau."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì xảy ra nếu mọi cuộc gọi giai đoạn được gửi trước khi thu hồi?",
+      "options": [
+        "Rò rỉ bộ nhớ",
+        "Bế tắc trên dây; Sửa lỗi tiêu chuẩn là xen kẽ cấp chẵn gửi trước và xếp hạng lẻ recv-first",
+        "Chậm",
+        "Bong bóng cao hơn"
+      ],
+      "correct": 1,
+      "explanation": "Các cặp send/recv đồng bộ cần một bên nhận khi bên kia gửi. Lịch học xếp hạng rõ ràng để mẫu có thể nhìn thấy."
+    },
+    {
+      "stage": "post",
+      "question": "Pipeline cộng với ZeRO-1 kết hợp hai bộ nhớ chiến thắng?",
+      "options": [
+        "Nén và lượng tử hóa",
+        "Mỗi giai đoạn parameter sharding (mỗi cấp chỉ có một giai đoạn lớp) cộng với sharding tối ưu hóa mỗi cấp (mỗi cấp chỉ giữ 1/N trạng thái tối ưu hóa cho giai đoạn của nó)",
+        "Chỉ kích hoạt",
+        "Không có gì"
+      ],
+      "correct": 1,
+      "explanation": "Pipeline phân đoạn các lớp trên các cấp bậc; ZeRO phân đoạn trạng thái tối ưu hóa trong nhóm dữ liệu song song ở mỗi pipeline hạng. Cả hai đều thắng kép."
+    }
+  ]
+}
