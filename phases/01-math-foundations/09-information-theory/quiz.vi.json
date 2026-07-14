@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "'entropy' đo lường gì trong lý thuyết thông tin?",
+      "options": [
+        "Năng lượng của một hệ thống vật lý",
+        "Sự ngạc nhiên hoặc không chắc chắn trung bình trong phân phối xác suất",
+        "Số bit trong một thông điệp nhị phân",
+        "Tỷ lệ lỗi của kênh truyền thông"
+      ],
+      "correct": 1,
+      "explanation": "Entropy H(P) = -sum(p(x) * log(p(x))) đo lường mức độ bất ngờ trung bình trên tất cả các kết quả. Entropy cao có nghĩa là độ không đảm bảo cao (phân bố đều). Entropy thấp có nghĩa là kết quả có thể dự đoán được."
+    },
+    {
+      "stage": "pre",
+      "question": "Entropy chéo thường được sử dụng loss trong mạng nơ-ron là gì?",
+      "options": [
+        "Nhiệm vụ hồi quy với đầu ra liên tục",
+        "Các nhiệm vụ phân loại, đo lường khoảng cách xác suất dự đoán so với nhãn thực",
+        "Tạo mẫu dữ liệu mới",
+        "Điều chỉnh trọng lượng model để ngăn ngừa overfitting"
+      ],
+      "correct": 1,
+      "explanation": "Entropy chéo loss H(P,Q) = -sum(p(x)*log(q(x))) đo lường sự khác biệt giữa phân phối thực (nhãn) và phân phối dự đoán của model. Nó là loss tiêu chuẩn để phân loại."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao giảm thiểu entropy chéo tương đương với giảm thiểu phân kỳ KL trong training?",
+      "options": [
+        "Bởi vì phân kỳ KL luôn bằng không trong quá trình training",
+        "Bởi vì entropy chéo = entropy + phân kỳ KL và entropy của các nhãn thực là không đổi, vì vậy việc giảm thiểu entropy chéo sẽ giảm thiểu phân kỳ KL",
+        "Bởi vì entropy chéo và phân kỳ KL là cùng một công thức",
+        "Bởi vì entropy của model bằng không khi hội tụ"
+      ],
+      "correct": 1,
+      "explanation": "H(P,Q) = H(P) + D_KL(P||Vì phân phối thực P không thay đổi trong quá trình training, H(P) là hằng số. Thu nhỏ H(P,Q) cũng giống như thu nhỏ D_KL(P||Q) -- đẩy model về phía phân phối thực sự."
+    },
+    {
+      "stage": "post",
+      "question": "Một model ngôn ngữ có perplexity 50 trong một bộ kiểm tra. Điều này có nghĩa là gì?",
+      "options": [
+        "model mắc 50 lỗi mỗi câu",
+        "Trung bình, model không chắc chắn như thể nó đang chọn đồng nhất từ 50 có thể tokens tiếp theo ở mỗi bước",
+        "model có 50 lớp",
+        "model được huấn luyện trong 50 epochs"
+      ],
+      "correct": 1,
+      "explanation": "Perplexity = e^(entropy chéo). perplexity 50 có nghĩa là độ không chắc chắn của model ở mỗi token tương đương với việc chọn ngẫu nhiên từ 50 tùy chọn có khả năng như nhau. perplexity thấp hơn có nghĩa là dự đoán tốt hơn."
+    },
+    {
+      "stage": "post",
+      "question": "Thông tin lẫn nhau khác với mối tương quan của Pearson đối với lựa chọn feature như thế nào?",
+      "options": [
+        "Thông tin lẫn nhau nhanh hơn để tính toán",
+        "Thông tin lẫn nhau phát hiện bất kỳ sự phụ thuộc thống kê nào (tuyến tính hoặc phi tuyến) trong khi tương quan chỉ phát hiện các mối quan hệ tuyến tính",
+        "Tương quan Pearson hoạt động cho bất kỳ loại dữ liệu nào trong khi thông tin lẫn nhau chỉ hoạt động cho dữ liệu liên tục",
+        "Họ luôn đưa ra feature xếp hạng giống nhau"
+      ],
+      "correct": 1,
+      "explanation": "Thông tin tương hỗ I(X;Y) nắm bắt tất cả các phụ thuộc thống kê giữa các biến, bao gồm cả các biến phi tuyến và không đơn điệu. Tương quan Pearson chỉ đo lường liên kết tuyến tính, thiếu nhiều mối quan hệ quan trọng."
+    }
+  ]
+}
