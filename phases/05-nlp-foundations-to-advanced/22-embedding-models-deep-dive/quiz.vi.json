@@ -1,0 +1,102 @@
+{
+  "lesson": "22-embedding-models-deep-dive",
+  "title": "Embedding Models - Đi sâu vào năm 2026",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "embedding dày đặc là gì?",
+      "options": [
+        "Biểu đồ trên tài liệu",
+        "Trọng lượng thưa thớt cho mỗi token từ vựng",
+        "Ma trận alignment cấp token",
+        "Một vector kích thước cố định cho mỗi văn bản trong đó sự tương đồng cosin xếp hạng các đoạn văn theo khoảng cách ngữ nghĩa"
+      ],
+      "correct": 3,
+      "explanation": "Dày đặc embeddings cung cấp một vector cho mỗi văn bản (thường là 384-3072 mờ); Cosin xếp hạng tương đồng."
+    },
+    {
+      "stage": "pre",
+      "question": "Matryoshka Representation Learning hỗ trợ điều gì?",
+      "options": [
+        "training đa ngôn ngữ",
+        "softmax nhanh hơn",
+        "Cắt bớt một embedding được huấn luyện đến chiều N đầu tiên của nó và nhận được một embedding nhỏ hơn vẫn hữu ích",
+        "Ghi lại encoder chéo"
+      ],
+      "correct": 2,
+      "explanation": "Matryoshka training làm cho N mờ đầu tiên của vector hữu ích độc lập, cho phép cắt bớt giá rẻ."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để đa vector (ColBERT) embeddings điểm các cặp truy vấn-tài liệu?",
+      "options": [
+        "Cosin của token vectors tổng hợp trung bình",
+        "Entropy chéo",
+        "Khoảng cách của người di chuyển trái đất",
+        "MaxSim: đối với mỗi truy vấn token tìm tài liệu tương tự nhất token, sau đó tính tổng số cực đại"
+      ],
+      "correct": 3,
+      "explanation": "Tương tác muộn kiểu ColBERT sử dụng MaxSim trên mỗi token vectors."
+    },
+    {
+      "stage": "check",
+      "question": "BGE-M3 xuất ra đồng thời là gì?",
+      "options": [
+        "Chỉ là một vector thưa thớt",
+        "Chỉ có một vector dày đặc",
+        "Các biểu diễn dày đặc, thưa thớt và đa vector (colbert) từ một model trong một inference",
+        "Chỉ có một colbert vector"
+      ],
+      "correct": 2,
+      "explanation": "BGE-M3 phát ra ba chế độ truy xuất từ một model, hữu ích cho việc chấm điểm lai hợp nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bạn phải chuẩn hóa lại một vector bị cắt ngắn Matryoshka trước khi có sự tương đồng cosin?",
+      "options": [
+        "Cắt bớt training",
+        "Cắt bớt thay đổi định mức vector; Nếu không chuẩn hóa lại, sản phẩm chấm không còn bằng cosin",
+        "Cosine bỏ qua quá trình chuẩn hóa",
+        "Chỉ được yêu cầu bởi FAISS"
+      ],
+      "correct": 1,
+      "explanation": "Chuẩn hóa lại sau khi cắt ngắn khôi phục định mức đơn vị để tích chấm bằng cosin một lần nữa."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao BGE models thường cần chuỗi tiền tố phía truy vấn?",
+      "options": [
+        "Để nén truy vấn",
+        "Yêu cầu của FAISS",
+        "BGE đã được huấn luyện với một truy vấn rõ ràng prompt; bỏ qua nó tốn 3-5 điểm recall",
+        "Tiền tố thay đổi hành vi tokenizer"
+      ],
+      "correct": 2,
+      "explanation": "BGE models mong đợi 'Đại diện câu này để tìm kiếm...' tiền tố trên truy vấn."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao MTEB cần thiết nhưng không đủ để chọn embedding model?",
+      "options": [
+        "MTEB chỉ bao gồm tiếng Anh",
+        "MTEB bỏ qua độ trễ",
+        "Thứ hạng trên bảng xếp hạng ở mức trung bình trên nhiều nhiệm vụ; Tên miền cụ thể của bạn có thể khác nhau, vì vậy hãy luôn benchmark dữ liệu của bạn",
+        "MTEB thưởng cho models lớn hơn"
+      ],
+      "correct": 2,
+      "explanation": "MTEB trung bình trên các nhiệm vụ; đánh giá theo miền cụ thể có thể đảo ngược thứ hạng."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn nên thêm tính năng truy xuất thưa SPLADE cùng với embeddings dày đặc?",
+      "options": [
+        "Bất cứ khi nào encoder đa ngôn ngữ",
+        "Bất cứ khi nào Matryoshka được sử dụng",
+        "Khi truy vấn nặng từ khóa hoặc chứa identifiers/codes dày đặc embeddings mờ",
+        "Chỉ trên kho dữ liệu nhỏ"
+      ],
+      "correct": 2,
+      "explanation": "SPLADE ghi lại lexical/keyword trận đấu mà models dày đặc có thể bỏ lỡ; cầu chì với dày đặc thông qua RRF."
+    }
+  ]
+}
