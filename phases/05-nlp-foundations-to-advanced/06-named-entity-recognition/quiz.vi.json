@@ -1,0 +1,102 @@
+{
+  "lesson": "06-named-entity-recognition",
+  "title": "Nhận dạng thực thể được đặt tên",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Gắn thẻ BIO là gì?",
+      "options": [
+        "Nhãn trên mỗi token: B-TYPE để khởi động thực thể, I-TYPE cho bên trong, O cho bên ngoài",
+        "Sơ đồ thực thể nhị phân so với không thực thể",
+        "Phong cách tokenization",
+        "Biểu diễn cây của các thực thể"
+      ],
+      "correct": 0,
+      "explanation": "BIO biến việc trích xuất span thành phân loại token với tiền tố B/I/O."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao các công báo dựa trên quy tắc lại giòn trong production NER?",
+      "options": [
+        "Họ yêu cầu GPUs",
+        "Họ chậm",
+        "Chúng không có phạm vi bảo hiểm đối với các thực thể mới và không thể phân biệt (ví dụ: Trái cây táo và công ty)",
+        "Chúng không thể xử lý các thực thể đa token"
+      ],
+      "correct": 2,
+      "explanation": "Gazetteers có thể khớp với các chuỗi đã biết nhưng không thể phân biệt ý nghĩa hoặc khái quát hóa thành các tên không nhìn thấy."
+    },
+    {
+      "stage": "check",
+      "question": "Ưu điểm chính của CRF so với HMM cho NER là gì?",
+      "options": [
+        "CRF tránh thuật toán Viterbi",
+        "CRF không bao giờ cần dữ liệu training",
+        "CRF có tính phân biệt đối xử và có thể kết hợp các features tùy ý (hình dạng, viết hoa, hàng xóm)",
+        "CRF nhanh hơn"
+      ],
+      "correct": 2,
+      "explanation": "CRF phân biệt đối xử và cho phép bạn điều kiện về features phong phú, chồng chéo."
+    },
+    {
+      "stage": "check",
+      "question": "Trong kiến trúc BiLSTM-CRF, lớp CRF đóng vai trò gì?",
+      "options": [
+        "Thực hiện tokenization",
+        "Thực thi trình tự thẻ BIO hợp lệ bằng cách mô hình hóa quá trình chuyển đổi từ thẻ này sang thẻ khác trên phát thải LSTM",
+        "Huấn luyện trước LSTM",
+        "Thay thế embeddings"
+      ],
+      "correct": 1,
+      "explanation": "CRF trên LSTM features models phụ thuộc giữa các nhãn và loại trừ các trình tự bất hợp pháp."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao NER phải được đánh giá bằng F1 cấp thực thể, không phải F1 cấp token?",
+      "options": [
+        "F1 cấp thực thể dễ tính toán hơn",
+        "spans dự đoán phải khớp chính xác spans đúng; F1 cấp token phóng đại accuracy bằng cách tính các kết quả khớp một phần",
+        "F1 cấp Token không thể xử lý BIO",
+        "HuggingFace yêu cầu F1 cấp thực thể"
+      ],
+      "correct": 1,
+      "explanation": "Span khớp chính xác là số liệu có ý nghĩa; F1 cấp token thổi phồng điểm số thông qua sự chồng chéo một phần."
+    },
+    {
+      "stage": "post",
+      "question": "aggregation_strategy='simple' làm gì trong pipeline HuggingFace NER?",
+      "options": [
+        "Viết thường đầu ra",
+        "Bỏ qua tokenization",
+        "Merges tokens B-X và I-X liền kề thành một span duy nhất",
+        "Chỉ trả về thực thể tin cậy nhất"
+      ],
+      "correct": 2,
+      "explanation": "Nó merges các tokens BIO liền kề cùng loại thành các thực thể cấp span."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao BIO tiêu chuẩn không thành công trên các thực thể lồng nhau?",
+      "options": [
+        "BIO yêu cầu transformer",
+        "BIO là một sơ đồ phẳng trên mỗi token và không thể biểu thị hai spans chồng chéo thuộc các loại khác nhau",
+        "BIO không thể đại diện cho các thực thể đa token",
+        "BIO bỏ nhãn loại"
+      ],
+      "correct": 1,
+      "explanation": "BIO chỉ định một nhãn cho mỗi token; spans lồng nhau cần models nhiều lần hoặc dựa trên span."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào NER cổ điển (CRF hoặc BiLSTM-CRF) vẫn đánh bại một LLM vào năm 2026?",
+      "options": [
+        "Trên các thực thể lồng nhau",
+        "Bất cứ khi nào đầu vào bằng tiếng Anh",
+        "Trên tường thuật miền mở",
+        "Trong ngân sách độ trễ eo hẹp, nhãn dồi dào, bản thể ổn định hoặc các ràng buộc pháp lý không tạo ra"
+      ],
+      "correct": 3,
+      "explanation": "NER cổ điển giành chiến thắng về độ trễ, chế độ dữ liệu được gắn nhãn, bản thể cố định và các ràng buộc tại chỗ."
+    }
+  ]
+}
