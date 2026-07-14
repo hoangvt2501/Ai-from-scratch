@@ -1,0 +1,67 @@
+[
+  {
+    "id": "unsupervised-pre-1",
+    "stage": "pre",
+    "question": "Điều gì phân biệt học không giám sát với học có giám sát?",
+    "options": [
+      "Học không giám sát sử dụng nhiều dữ liệu hơn",
+      "Học không giám sát không có đầu ra được gắn nhãn - thuật toán tự tìm thấy cấu trúc của nó",
+      "Học không giám sát chỉ hoạt động với dữ liệu văn bản",
+      "Học không giám sát luôn tạo ra kết quả tốt hơn"
+    ],
+    "correct": 1,
+    "explanation": "Trong học không giám sát, không có nhãn. Thuật toán khám phá các mẫu, nhóm hoặc cấu trúc trong dữ liệu mà không được cho biết đầu ra chính xác là gì."
+  },
+  {
+    "id": "unsupervised-pre-2",
+    "stage": "pre",
+    "question": "K-Means yêu cầu bạn chỉ định những gì trước khi training?",
+    "options": [
+      "Các trung tâm cụm chính xác",
+      "Số cụm K",
+      "Nhãn cho từng điểm dữ liệu",
+      "Chỉ số khoảng cách để sử dụng"
+    ],
+    "correct": 1,
+    "explanation": "K-Means yêu cầu số lượng cụm K làm đầu vào. Sau đó, nó lặp đi lặp lại gán các điểm cho tâm gần nhất và tính toán lại các tâm cho đến khi hội tụ."
+  },
+  {
+    "id": "unsupervised-post-1",
+    "stage": "post",
+    "question": "K-Means thất bại trên hai hình bán nguyệt lồng vào nhau nhưng DBSCAN thành công. Tại sao?",
+    "options": [
+      "DBSCAN sử dụng nhiều dữ liệu hơn K-Means",
+      "DBSCAN tìm các cụm dựa trên mật độ, vì vậy nó có thể phát hiện ra các hình dạng tùy ý, trong khi K-Means giả định các cụm hình cầu",
+      "DBSCAN luôn vượt trội hơn K-Means trên mọi dataset",
+      "K-Means không thể xử lý dữ liệu 2D"
+    ],
+    "correct": 1,
+    "explanation": "K-Means gán các điểm đến tâm gần nhất, tạo ra các cụm hình cầu (lồi). DBSCAN phát triển các cụm từ các vùng dày đặc, khám phá bất kỳ hình dạng nào miễn là cụm được kết nối bằng mật độ."
+  },
+  {
+    "id": "unsupervised-post-2",
+    "stage": "post",
+    "question": "Điểm số hình bóng đo lường là gì?",
+    "options": [
+      "Tổng số cụm được tìm thấy",
+      "Mỗi điểm giống nhau như thế nào so với cụm của chính nó so với cụm khác gần nhất",
+      "Tốc độ của thuật toán phân cụm",
+      "Tỷ lệ phần trăm giá trị ngoại lệ trong dữ liệu"
+    ],
+    "correct": 1,
+    "explanation": "Điểm hình bóng = (b - a) / max(a, b), trong đó a là khoảng cách trung bình trong cụm và b là khoảng cách trung bình của cụm gần nhất. Nó nằm trong khoảng từ -1 (sai cụm) đến +1 (phân cụm tốt)."
+  },
+  {
+    "id": "unsupervised-post-3",
+    "stage": "post",
+    "question": "Hỗn hợp Gaussian Model khác với K-Means như thế nào trong việc gán cụm của nó?",
+    "options": [
+      "GMM sử dụng các bài tập cứng trong đó mỗi điểm thuộc chính xác một cụm",
+      "GMM đưa ra các nhiệm vụ mềm (xác suất) trong đó mỗi điểm có xác suất thuộc về mỗi cụm",
+      "GMM hoàn toàn không sử dụng centroid",
+      "GMM chỉ hoạt động với dữ liệu một chiều"
+    ],
+    "correct": 1,
+    "explanation": "K-Means gán mỗi điểm cho chính xác một cụm (cứng). GMM tính xác suất mỗi điểm thuộc về mỗi thành phần Gaussian (mềm) và có thể model các cụm hình elip, chồng lên nhau."
+  }
+]
