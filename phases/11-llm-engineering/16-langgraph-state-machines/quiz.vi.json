@@ -1,0 +1,65 @@
+{
+  "lesson": "phase-11/16-langgraph-state-machines",
+  "questions": [
+    {
+      "stage": "post",
+      "question": "Tại sao trường `messages` trong LangGraph State TypedDict cần `Annotated[list, add_messages]`?",
+      "options": [
+        "Nó cho phép streaming các đồng bằng token từ model.",
+        "Nếu không có bộ giảm tốc, các bản cập nhật nút sẽ ghi đè lên danh sách thay vì thêm vào, vì vậy mỗi lượt sẽ mất lịch sử prior.",
+        "Nó nén danh sách tin nhắn khi checkpoints được ghi vào đĩa.",
+        "Nó chuyển đổi các câu chính tả đơn giản thành các đối tượng tin nhắn LangChain ở runtime."
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Sự khác biệt giữa `interrupt_before=['tools']` và `interrupt_after=['tools']` là gì?",
+      "options": [
+        "Không có sự khác biệt; họ là bí danh.",
+        "`interrupt_before` tạm dừng sau khi model phát ra tool_calls nhưng trước khi các công cụ thực thi; `interrupt_after` tạm dừng sau khi các công cụ đã chạy.",
+        "`interrupt_before` chạy công cụ trong một sandbox trước; `interrupt_after` chạy nó trong production.",
+        "`interrupt_before` dành cho các bài kiểm tra đơn vị; `interrupt_after` dành cho production."
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Với lịch sử checkpoint của một thread, làm thế nào để bạn du hành thời gian đến một trạng thái prior và khám phá một branch khác?",
+      "options": [
+        "Gọi cho `graph.reset(thread_id)` sau đó `graph.invoke(new_input, config)`.",
+        "Xóa thư mục checkpoint và gọi lại bằng cùng một thread_id.",
+        "Gọi biểu đồ với prior `checkpoint_id` mong muốn trong config; Truyền `None` khi đầu vào phát lại từ checkpoint đó, truyền một giá trị mới vào nó trước khi tiếp tục.",
+        "Đặt `graph.rewind = True` và gọi lại."
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Trong biểu đồ ReAct bốn nút (agent, công cụ, cạnh có điều kiện, cạnh tĩnh trở lại agent), cạnh có điều kiện nằm ở đâu?",
+      "options": [
+        "Từ `tools` trở lại `agent`, định tuyến xem đầu ra của công cụ có trống hay không.",
+        "Từ `agent`, định tuyến đến `tools` nếu thư cuối cùng đã tool_calls và `END` khác.",
+        "Từ `START`, định tuyến đến `agent` hoặc `END` dựa trên độ dài đầu vào.",
+        "Không có cạnh có điều kiện; cả hai đều tĩnh."
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn nên sử dụng `Send(node_name, state)` thay vì cạnh trơn?",
+      "options": [
+        "Để thử lại một nút sau khi thất bại.",
+        "Để trì hoãn một nút cho đến khi hết thời gian.",
+        "Để gửi N lần thực thi song song của một nút mục tiêu có đầu ra merge trở lại thông qua bộ giảm trạng thái.",
+        "Để gọi một nút trong một process khác để cách ly."
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
