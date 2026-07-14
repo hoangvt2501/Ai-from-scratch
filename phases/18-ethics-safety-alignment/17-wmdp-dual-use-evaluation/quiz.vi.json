@@ -1,0 +1,78 @@
+{
+  "lesson": "17-wmdp-dual-use-evaluation",
+  "title": "WMDP và đánh giá khả năng sử dụng kép",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tiêu chí 'vùng vàng' mà WMDP sử dụng để lựa chọn câu hỏi là gì?",
+      "options": [
+        "Mở nội dung internet mà không có đánh giá của chuyên gia",
+        "Công thức tổng hợp các hợp chất nguy hiểm",
+        "Gần gũi, cho phép kiến thức về process có hại mà không phải là công thức tổng hợp trực tiếp",
+        "Lý luận toán học đa ngôn ngữ"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "WMDP bao gồm ba miền nào?",
+      "options": [
+        "Quyền riêng tư, bias, hình mờ",
+        "Thị giác, âm thanh, văn bản",
+        "Toán, mã, ngôn ngữ",
+        "An toàn sinh học, an ninh mạng, hóa học"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "RMU (phương pháp đồng hành WMDP) làm gì?",
+      "options": [
+        "Thay thế PPO bằng DPO trong alignment",
+        "Tạo hình ảnh độc hại",
+        "Huấn luyện một tokenizer mới cho nội dung sử dụng kép",
+        "Representation Misdirection for Unlearning: giảm điểm WMDP xuống gần như ngẫu nhiên trong khi vẫn duy trì khả năng chung (ví dụ: MMLU) trong vòng vài điểm"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Báo cáo thử nghiệm mua vũ khí sinh học năm 2025 của Anthropic là con số nào là 'nâng cao' và nó có ý nghĩa gì đối với ASL-3?",
+      "options": [
+        "100 lần; đạt ASL-5",
+        "2,53 lần; không đủ để loại trừ ASL-3",
+        "10 lần; dưới ASL-2",
+        "0,5 lần; ASL-3 bị loại trừ"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Sự khác biệt giữa khả năng nâng cao tương đối của người mới và khả năng tuyệt đối của chuyên gia là gì?",
+      "options": [
+        "Người mới bắt đầu là sự trợ giúp nhân lên so với hiện trạng (ví dụ: tìm kiếm trên internet) cho những người không phải là chuyên gia; chuyên gia-tuyệt đối là thông tin tối đa mà một chuyên gia có động lực có thể trích xuất từ model",
+        "Người mới làm quen là một benchmark; chuyên gia-tuyệt đối là giấy phép",
+        "Chúng là từ đồng nghĩa",
+        "Cả hai đều chỉ được đo thông qua MCQ"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Cái nào KHÔNG phải là cạm bẫy đo lường khi giải thích điểm WMDP là rủi ro triển khai?",
+      "options": [
+        "Rào cản mua sắm và thiết bị",
+        "Điện trở Elicitation (liệu bộ lọc an toàn có chặn chiết xuất hay không)",
+        "Kiến thức ngầm cần thiết để thực thi mà MCQ không nắm bắt được",
+        "Giấy phép mã nguồn mở của model"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
