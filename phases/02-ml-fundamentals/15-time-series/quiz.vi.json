@@ -1,0 +1,67 @@
+[
+  {
+    "id": "timeseries-pre-1",
+    "stage": "pre",
+    "question": "Tại sao phân tách train/test ngẫu nhiên không hợp lệ đối với dữ liệu chuỗi thời gian?",
+    "options": [
+      "Tách ngẫu nhiên làm cho dataset quá nhỏ",
+      "Phân tách ngẫu nhiên rò rỉ thông tin trong tương lai vào bộ training, cho phép model gian lận",
+      "Dữ liệu chuỗi thời gian hoàn toàn không thể được chia nhỏ",
+      "Phân tách ngẫu nhiên chỉ hoạt động cho các bài toán phân loại"
+    ],
+    "correct": 1,
+    "explanation": "Trong một phân tách ngẫu nhiên, các điểm dữ liệu trong tương lai có thể kết thúc trong tập training trong khi các điểm trong quá khứ nằm trong tập thử nghiệm. Sau đó, các model sử dụng thông tin trong tương lai để dự đoán quá khứ, đưa ra kết quả lạc quan sai lầm."
+  },
+  {
+    "id": "timeseries-pre-2",
+    "stage": "pre",
+    "question": "Một chuỗi thời gian đứng yên có nghĩa là gì?",
+    "options": [
+      "Các giá trị không bao giờ thay đổi theo thời gian",
+      "Các thuộc tính thống kê của nó (trung bình, variance, tự tương quan) không thay đổi theo thời gian",
+      "Nó không có mô hình theo mùa",
+      "Nó luôn có xu hướng đi lên"
+    ],
+    "correct": 1,
+    "explanation": "Một chuỗi tĩnh có cấu trúc trung bình, variance và tự tương quan không đổi theo thời gian. Hầu hết các phương pháp dự báo đều giả định tính tĩnh. Loạt không cố định cần khác biệt hoặc giảm xu hướng trước."
+  },
+  {
+    "id": "timeseries-post-1",
+    "stage": "post",
+    "question": "Mục đích của việc phân biệt một chuỗi thời gian là gì?",
+    "options": [
+      "Để tăng số lượng điểm dữ liệu",
+      "Để loại bỏ xu hướng và làm cho chuỗi đứng yên bằng cách mô hình hóa các thay đổi giữa các giá trị liên tiếp",
+      "Để chuyển đổi hồi quy thành phân loại",
+      "Để chuẩn hóa các giá trị từ 0 đến 1"
+    ],
+    "correct": 1,
+    "explanation": "Sự khác biệt thay thế mỗi giá trị bằng sự thay đổi từ giá trị trước đó: diff[t] = value[t] - value[t-1]. Điều này loại bỏ xu hướng, làm cho bộ truyện gần với vị trí đứng yên."
+  },
+  {
+    "id": "timeseries-post-2",
+    "stage": "post",
+    "question": "Độ trễ features chuyển đổi chuỗi thời gian thành bài toán học có giám sát. Độ trễ 3 feature để dự đoán y[t] là gì?",
+    "options": [
+      "Giá trị trung bình của 3 giá trị tiếp theo: (y[t+1] + y[t+2] + y[t+3]) / 3",
+      "Giá trị 3 bước thời gian trước: y[t-3]",
+      "Phái sinh thứ 3 của bộ truyện",
+      "Sự khác biệt giữa giá trị hiện tại và 3 bước trước"
+    ],
+    "correct": 1,
+    "explanation": "Một độ trễ 3 feature là y [t-3]: giá trị 3 bước thời gian trong quá khứ. Sử dụng các giá trị trong quá khứ làm features đầu vào cho phép ML models tiêu chuẩn (hồi quy, cây) đưa ra dự đoán chuỗi thời gian mà không cần thuật toán chuyên biệt."
+  },
+  {
+    "id": "timeseries-post-3",
+    "stage": "post",
+    "question": "Xác thực chuyển tiếp chia dữ liệu thời gian thành windows mở rộng hoặc trượt. Tại sao điều này tốt hơn K-fold CV cho chuỗi thời gian?",
+    "options": [
+      "Chuyển tiếp nhanh hơn để tính toán",
+      "Walk-forward tôn trọng trật tự thời gian, chỉ training dữ liệu trong quá khứ và thử nghiệm trên dữ liệu trong tương lai, ngăn chặn việc nhìn về phía trước bias",
+      "Không thể sử dụng CV gấp K trên dữ liệu số",
+      "Chuyển tiếp sử dụng nhiều dữ liệu hơn để training"
+    ],
+    "correct": 1,
+    "explanation": "Xác thực đi bộ luôn huấn luyện trên dữ liệu trong quá khứ và kiểm tra dữ liệu trong tương lai, bắt chước triển khai trong thế giới thực. K-fold CV xáo trộn dữ liệu, có khả năng training về tương lai để dự đoán quá khứ (rò rỉ thời gian)."
+  }
+]
