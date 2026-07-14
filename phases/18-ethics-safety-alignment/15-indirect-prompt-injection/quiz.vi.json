@@ -1,0 +1,78 @@
+{
+  "lesson": "15-indirect-prompt-injection",
+  "title": "Tiêm Prompt gián tiếp - Bề mặt tấn công Production",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Điều gì phân biệt tiêm prompt gián tiếp (IPI) với tiêm prompt trực tiếp?",
+      "options": [
+        "IPI yêu cầu fine-tuning model mục tiêu",
+        "IPI nhúng các hướng dẫn bên trong nội dung bên ngoài (trang web, email, đầu ra công cụ) mà agent sử dụng trong quá trình hoạt động bình thường mà kẻ tấn công không chạm vào prompt của người dùng",
+        "IPI là một từ đồng nghĩa với bẻ khóa",
+        "IPI chỉ hoạt động trên models đa phương thức"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cái nào trong số này KHÔNG phải là một trong ba vectors phân phối IPI được liệt kê trong bài học?",
+      "options": [
+        "Thế hệ tăng cường truy xuất (truy xuất nhiễm độc)",
+        "Người dùng trực tiếp chỉnh sửa prompt hệ thống",
+        "Đầu ra công cụ",
+        "Hộp thư đến/quy trình làm việc tài liệu"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bộ lọc đầu vào của người dùng bỏ lỡ IPI?",
+      "options": [
+        "Bộ lọc không thể đọc JSON",
+        "Bộ lọc đầu vào của người dùng phân biệt chữ hoa chữ thường",
+        "payload không bao giờ xuất hiện trong đầu vào của người dùng; nó xuất hiện trong nội dung được truy xuất hoặc do công cụ cung cấp",
+        "Bộ lọc chỉ chạy sau khi model phản hồi"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Nguyên tắc trung tâm của Kiểm soát luồng thông tin (IFC) đối với AI agents là gì?",
+      "options": [
+        "Mã hóa tất cả nội dung được truy xuất",
+        "Chỉ sử dụng prompts một lượt",
+        "Tắt tất cả các công cụ theo mặc định",
+        "Gắn nhãn nội dung theo nguồn là đáng tin cậy hoặc không đáng tin cậy; Các hành động được kích hoạt bởi nội dung không đáng tin cậy phải được phê chuẩn bởi đầu vào đáng tin cậy trước khi thực thi"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Nasr et al. (Tháng 10 năm 2025, 'The Attacker Moves Second') đã tìm thấy gì về 12 hệ thống phòng thủ IPI đã xuất bản với các cuộc tấn công thích ứng?",
+      "options": [
+        "Các cuộc tấn công thích ứng quá tốn kém để đánh giá",
+        "Các ASR gần bằng không được báo cáo của họ bị tấn công thích ứng",
+        "Chỉ có một hàng phòng thủ gặp lỗi",
+        "Các cuộc tấn công thích ứng (gradient, RL, tìm kiếm ngẫu nhiên, đội đỏ con người) đã phá vỡ >90% trong số đó mặc dù tuyên bố ASR gần bằng không ban đầu của chúng"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Thuốc tiêm prompt xếp ở đâu trong Top 10 OWASP LLM 2025?",
+      "options": [
+        "Không được liệt kê",
+        "LLM01 (mối đe dọa lớp ứng dụng hàng đầu, #1)",
+        "LLM05",
+        "LLM10 (thấp nhất)"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
