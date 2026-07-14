@@ -1,0 +1,78 @@
+{
+  "lesson": "69-end-to-end-rag-system",
+  "title": "Hệ thống RAG đầu cuối",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao bài kiểm tra tích hợp là điểm trung thực duy nhất của RAG pipeline sáu thành phần?",
+      "options": [
+        "Chunker là thành phần duy nhất quan trọng",
+        "Số liệu cô lập của mỗi giai đoạn không dự đoán chỉ số của hệ thống vì mỗi giai đoạn tương tác với giai đoạn tiếp theo; điểm hợp lệ duy nhất là toàn bộ pipeline chạy từ đầu đến cuối so với cùng một qrel",
+        "Production servers không thể chạy các bài kiểm tra giai đoạn riêng lẻ",
+        "Các thành phần chạy trên các máy khác nhau"
+      ],
+      "correct": 1,
+      "explanation": "Các chiến thắng riêng lẻ không soạn thảo; pipeline được chấm điểm dựa trên đầu ra chung."
+    },
+    {
+      "stage": "pre",
+      "question": "Vai trò của từ chối khi có độ tin cậy thấp trong trình tạo câu trả lời là gì?",
+      "options": [
+        "Nó ghi lại mọi trường hợp từ chối đĩa",
+        "Nó trả về 'Tôi không biết' khi điểm số top-1 của người xếp hạng lại nằm dưới ngưỡng cụ thể của kho dữ liệu, ngăn chặn các câu trả lời ảo giác khi ngữ cảnh được truy xuất không giải quyết truy vấn",
+        "Nó chặn các truy vấn dài hơn 100 tokens",
+        "Nó triggers một lần truy xuất lại với một chunker khác"
+      ],
+      "correct": 1,
+      "explanation": "Điểm xếp hạng 1 thấp liên tục là model cho bạn biết không có gì trong kho dữ liệu trả lời câu hỏi này; từ chối hơn là ảo giác."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bộ ba được xếp hạng lại training được giữ tách rời khỏi các truy vấn đánh giá?",
+      "options": [
+        "Để tiết kiệm bộ nhớ GPU",
+        "Để ngăn chặn rò rỉ bài kiểm tra tàu hỏa; nếu các truy vấn đánh giá trùng lặp với training đặt xếp hạng lại, đánh giá trông kỳ diệu và kiểm tra hồi quy không bắt được sự trôi dạt thực sự",
+        "Bởi vì sự encoder chéo đòi hỏi từ vựng riêng biệt",
+        "Bởi vì RRF không thể hợp nhất các danh sách chồng chéo"
+      ],
+      "correct": 1,
+      "explanation": "Tách biệt nghiêm ngặt là vệ sinh cơ bản; nếu không, số liệu xếp hạng lại không dự đoán hành vi production."
+    },
+    {
+      "stage": "check",
+      "question": "Mục đích của mã thoát của bản demo tự kết thúc là gì?",
+      "options": [
+        "Mỹ phẩm",
+        "Nó mã hóa pass/fail so với ngưỡng hệ mét; thử nghiệm khói CI có thể cắm bản demo vào pipeline và cổng merge trên lối ra không",
+        "Nó được yêu cầu bởi Python",
+        "Trình xếp hạng lại sử dụng nó như một tín hiệu training"
+      ],
+      "correct": 1,
+      "explanation": "Mã thoát 0 có nghĩa là các ngưỡng đã đáp ứng; không phải bằng không có nghĩa là hồi quy. Đó là hợp đồng mà cổng CI tiêu thụ."
+    },
+    {
+      "stage": "check",
+      "question": "Neo trích dẫn trông như thế nào trong pipeline này?",
+      "options": [
+        "[doc_id:chunk_index]",
+        "Liên kết Markdown với URL nguồn",
+        "Phong bì JSON-RPC",
+        "embedding vector theo nghĩa đen"
+      ],
+      "correct": 0,
+      "explanation": "Trình tạo phát ra bộ dữ liệu (doc_id, chunk_index) dưới dạng neo để giao diện người dùng hoặc kiểm toán viên xuôi dòng có thể ánh xạ mọi yêu cầu trở lại phần nguồn của nó."
+    },
+    {
+      "stage": "post",
+      "question": "Chế độ lỗi nào không hiển thị đối với trình tạo giả và phải được kiểm tra với LLM thực trước khi shipping?",
+      "options": [
+        "Độ trễ",
+        "Ảo giác: trình tạo giả chỉ phát ra văn bản từ các đoạn được truy xuất và không thể phát minh ra nội dung; một LLM thực sự có thể bỏ qua các đoạn và tạo ra các câu trả lời vô căn cứ",
+        "Tokenization",
+        "Vector kích thước chỉ mục"
+      ],
+      "correct": 1,
+      "explanation": "Mô phỏng không thể kiểm tra độ an toàn của máy phát điện đối với nội dung ảo giác; chỉ có hoán đổi model thực sự mới có thể."
+    }
+  ]
+}
