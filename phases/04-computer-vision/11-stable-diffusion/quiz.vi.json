@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao Stable Diffusion chạy DDPM của nó trong không gian tiềm ẩn 4x64x64 thay vì trực tiếp trên hình ảnh 3x512x512 pixel?",
+      "options": [
+        "Tiềm ẩn dễ hình dung hơn",
+        "Training và sampling trên 16.384 giá trị tiềm ẩn thay vì 786.432 pixel rẻ hơn khoảng 48 lần; một pretrained VAE xử lý chuyển đổi tiềm ẩn < > hình ảnh và model khuếch tán chỉ phải model đa tạp tiềm ẩn có cấu trúc",
+        "Tiềm ẩn là đầu ra gốc của GPUs",
+        "Để làm cho inference xác định"
+      ],
+      "correct": 1,
+      "explanation": "Khuếch tán tiềm ẩn là sự đổi mới duy nhất giúp chuyển văn bản thành hình ảnh GPU người tiêu dùng trở nên thực tế. VAE nén 48x thông tin không gian và kênh. model khuếch tán có thể dành toàn bộ parameter của nó và tính toán ngân sách để mô hình hóa đa tạp tiềm ẩn, là phần mà người dùng nhìn thấy sau khi giải mã."
+    },
+    {
+      "stage": "pre",
+      "question": "classifier-free guidance (CFG) làm gì tại inference?",
+      "options": [
+        "Chạy hai models riêng biệt và tính trung bình chúng",
+        "Sử dụng một model được huấn luyện để dự đoán cả nhiễu eps_cond có điều kiện và nhiễu eps_uncond vô điều kiện, sau đó kết hợp chúng dưới dạng eps = eps_uncond + w * (eps_cond - eps_uncond) để khuếch đại sự tuân thủ prompt",
+        "Thêm đầu phân loại vào model tại thời điểm kiểm tra",
+        "Sử dụng bộ lập lịch lớn hơn"
+      ],
+      "correct": 1,
+      "explanation": "CFG huấn luyện một model duy nhất với điều hòa giảm 10% thời gian, vì vậy cùng một trọng lượng tạo ra cả dự đoán cond và uncond. Ở inference công thức trên khuếch đại hướng có điều kiện. Thang hướng dẫn w là núm tiêu chuẩn để điều chỉnh prompt tuân thủ so với sự đa dạng; SD mặc định là 7.5."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn hoán đổi bộ lập lịch mặc định của SD cho DPM-Solver ++ 2M Karras và giảm num_inference_steps từ 50 xuống 20. Kết quả mong đợi là gì?",
+      "options": [
+        "Chất lượng kém hơn và runtime lâu hơn",
+        "Chất lượng tương đương trong khoảng một nửa thời gian; DPM-Solver++ là bộ tích hợp ODE bậc hai hội tụ trong ít bước hơn DDIM cho cùng chất lượng mẫu",
+        "Không ổn định về số",
+        "Bạn cũng phải huấn luyện lại model"
+      ],
+      "correct": 1,
+      "explanation": "Bộ lập lịch được tách rời khỏi trọng lượng model. DPM-Solver ++ là một bộ giải bậc cao hơn đạt được chất lượng DDIM-50 trong khoảng 20 bước. Không cần huấn luyện lại và đây là mặc định production nhất vào năm 2026. Đi dưới 8 bước thường cần distilled/consistency-model biến thể như LCM hoặc Turbo."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao LoRA fine-tuning phổ biến cho Khuếch tán ổn định thay vì fine-tuning đầy đủ?",
+      "options": [
+        "LoRA tạo ra hình ảnh đẹp hơn theo mặc định",
+        "LoRA giữ cho U-Net cơ sở 860M bị đóng băng và chèn các ma trận phân hủy xếp hạng nhỏ thành các lớp attention, vì vậy một fine-tune huấn luyện trong vài phút trên phần cứng tiêu dùng, tạo ra bộ điều hợp 10-50 MB và có thể được hoán đổi hoặc trộn lẫn ở inference",
+        "LoRA được yêu cầu bởi bộ khuếch tán",
+        "LoRA ngăn chặn hoàn toàn overfitting"
+      ],
+      "correct": 1,
+      "explanation": "Giá trị của LoRA là training chi phí và phân phối. fine-tuning SD đầy đủ cập nhật 860 triệu + parameters và cần 20+ GB VRAM. LoRA cập nhật ~ 1-10 triệu parameters và phù hợp với 6-8 GB. model cơ sở không thay đổi, vì vậy cùng một LoRA tải vào bất kỳ checkpoint tương thích nào và nhiều LoRA có thể được kết hợp. Hệ sinh thái của CivitAI hoàn toàn là LoRA."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn tạo cùng một prompt với guidance_scale=15 và thấy màu sắc quá bão hòa và đồ tạo tác bị cháy. Chuyện gì đang xảy ra?",
+      "options": [
+        "model bị hỏng",
+        "CFG khuếch đại hướng có điều kiện; vượt qua ngưỡng khoảng 9-12, sự khuếch đại đẩy các dự đoán ra ngoài đa tạp mà VAE có thể giải mã rõ ràng, tạo ra các hiện vật trực quan. Giảm hướng dẫn xuống 7-9 để có kết quả cân bằng",
+        "VAE cần được huấn luyện lại",
+        "Hạt giống sai"
+      ],
+      "correct": 1,
+      "explanation": "Công thức của CFG là không giới hạn: w cao hơn sẽ di chuyển dự đoán xa hơn (eps_cond - eps_uncond). Vượt qua một điểm, bạn rời khỏi phân phối được huấn luyện và VAE decoder tạo ra hình ảnh quá bão hòa, áp phích. Production mặc định là 7-8. Một số bộ lập lịch mới hơn hỗ trợ lập lịch CFG (w thấp hơn ở các bước thời gian cuối cùng) để tránh điều này."
+    }
+  ]
+}
