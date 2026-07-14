@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "'Tối ưu hóa' có nghĩa là gì trong bối cảnh training mạng nơ-ron?",
+      "options": [
+        "Làm cho mã chạy nhanh hơn",
+        "Tìm model trọng số giảm thiểu hàm loss",
+        "Giảm số lượng parameters trong model",
+        "Chọn phần cứng tốt nhất cho training"
+      ],
+      "correct": 1,
+      "explanation": "Training tối ưu hóa IS mạng nơ-ron. Hàm loss đo lường mức độ sai của model và tối ưu hóa tìm các giá trị trọng số làm cho nó càng nhỏ càng tốt."
+    },
+    {
+      "stage": "pre",
+      "question": "Điều gì xảy ra nếu learning rate quá lớn trong quá trình gradient descent?",
+      "options": [
+        "Training hội tụ nhanh hơn đến mức tối thiểu toàn cầu",
+        "optimizer vượt quá mức tối thiểu và loss phân kỳ (bật lên hoặc tăng)",
+        "Các gradients trở thành số không",
+        "model tự động giảm learning rate"
+      ],
+      "correct": 1,
+      "explanation": "Một learning rate quá lớn khiến mỗi bậc thang vượt qua thung lũng, có khả năng nảy giữa các bức tường hoặc phân kỳ hoàn toàn. Sự loss tăng thay vì giảm."
+    },
+    {
+      "stage": "post",
+      "question": "Adam khác với vani gradient descent như thế nào?",
+      "options": [
+        "Adam sử dụng learning rate cố định trong khi GD sử dụng tốc độ thích ứng",
+        "Adam theo dõi các đường chạy trung bình là gradients và bình phương gradients để cung cấp cho mỗi quả cân có learning rate thích ứng riêng",
+        "Adam tính toán chính xác đạo hàm thứ hai trong khi GD sử dụng đạo hàm thứ nhất",
+        "Adam processes đầy đủ dataset mỗi bước trong khi GD sử dụng batches mini"
+      ],
+      "correct": 1,
+      "explanation": "Adam duy trì ước tính mômen đầu tiên (hướng gradient) và mômen thứ hai (cường độ gradient) trên mỗi trọng lượng. Chia cho sqrt (mômen giây) cho các bước nhỏ đối với trọng lượng có gradients lớn và các bước lớn đối với trọng lượng có gradients nhỏ."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao nhiễu trong mini-batch SGD được coi là có lợi hơn là chỉ gây phiền toái?",
+      "options": [
+        "Nhiễu làm giảm mức sử dụng bộ nhớ trong quá trình training",
+        "Nhiễu giúp optimizer thoát khỏi mức tối thiểu cục bộ nông và các điểm yên xe mà optimizer không ồn ào sẽ bị mắc kẹt",
+        "Nhiễu không có lợi; nó luôn làm chậm sự hội tụ",
+        "Nhiễu làm cho chức năng loss lồi"
+      ],
+      "correct": 1,
+      "explanation": "Nhiễu ngẫu nhiên từ mini-batches ngẫu nhiên cung cấp các nhiễu loạn ngẫu nhiên có thể đẩy optimizer ra khỏi điểm tối thiểu cục bộ nông và điểm yên ngựa, dẫn đến khái quát hóa tốt hơn."
+    },
+    {
+      "stage": "post",
+      "question": "Lịch trình ủ cosin learning rate làm gì?",
+      "options": [
+        "Tăng learning rate trong suốt training theo đường cong cosin",
+        "Bắt đầu với learning rate cao và giảm nhẹ nhàng theo đường cong cosin, với khởi động tùy chọn",
+        "Xen kẽ learning rate giữa hai giá trị cố định",
+        "Đặt learning rate thành cosin của số epoch hiện tại"
+      ],
+      "correct": 1,
+      "explanation": "Ủ cosin làm giảm learning rate từ lr_max xuống lr_min một cách trơn tru theo đường cong nửa cosin. Điều này cung cấp các bước lớn sớm để tiến bộ nhanh và các bước nhỏ muộn để hội tụ tốt."
+    }
+  ]
+}
