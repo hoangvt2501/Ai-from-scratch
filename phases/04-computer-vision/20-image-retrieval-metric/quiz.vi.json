@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Đối với một sản phẩm tìm kiếm trực quan trong đó truy vấn là văn bản và các mục thư viện là hình ảnh, bạn chọn xương sống nào đầu tiên?",
+      "options": [
+        "Một ResNet-50 được giám sát",
+        "Một model CLIP hoặc SigLIP - họ học một không gian embedding văn bản-hình ảnh được chia sẻ, vì vậy sự tương đồng giữa truy vấn văn bản và thư viện hình ảnh có ý nghĩa ngay lập tức",
+        "Một model DINOv2 tự giám sát",
+        "Mô tả ORB thủ công"
+      ],
+      "correct": 1,
+      "explanation": "Truy xuất bằng truy vấn văn bản yêu cầu embeddings văn bản và hình ảnh kết thúc trong cùng một không gian. CLIP/SigLIP rèn luyện chính xác điều này với loss tương phản trong Bài 18. features ImageNet được giám sát chỉ có hình ảnh. DINOv2 mạnh nhưng chỉ có hình ảnh. Các truy vấn văn bản yêu cầu một encoder ngôn ngữ thị giác."
+    },
+    {
+      "stage": "pre",
+      "question": "'Khai thác bán cứng' có nghĩa là gì trong loss training bộ ba?",
+      "options": [
+        "Chọn bộ ba ngẫu nhiên",
+        "Đối với mỗi neo, hãy chọn một tiêu cực xa hơn mức dương nhưng vẫn nằm trong biên độ; Âm bản dễ không đóng góp gradient và tiêu cực khó nhất có thể làm mất ổn định training, vì vậy bán cứng là điểm ngọt ngào",
+        "Chỉ sử dụng những tiêu cực khó nhất có thể",
+        "Khai thác tiền điện tử cho training ví dụ"
+      ],
+      "correct": 1,
+      "explanation": "loss gradient bộ ba chỉ không bằng không khi d(a, n) < d(a, p) + lề. Những tiêu cực dễ dàng (đã xa) cho gradient bằng không. Âm bản khó nhất có thể sụp đổ training. Bán cứng — d(a, p) < d(a, n) < d(a, p) + lề — là nơi loss thông tin mà không ổn định. FaceNet đã giới thiệu công thức này vào năm 2015 và nó vẫn là mặc định cho bộ ba fine-tuning."
+    },
+    {
+      "stage": "post",
+      "question": "Hệ thống truy xuất của bạn báo cáo recall@10 = 0,95 nhưng recall@1 = 0,42. Bạn nên kết luận gì?",
+      "options": [
+        "Đánh giá bị hỏng",
+        "Không gian embedding có cấu trúc chính xác - các mục liên quan thường nằm trong top 10 - nhưng xếp hạng trong top 10 rất ồn ào; model xếp hạng lại (encoder chéo, người ghi điểm giai đoạn hai) hoặc fine-tune học số liệu dài hơn sẽ khắc phục recall@1 mà không làm hỏng recall@10",
+        "model là overfitting",
+        "Dữ liệu bị rò rỉ từ thư viện đến các truy vấn"
+      ],
+      "correct": 1,
+      "explanation": "recall@K so với @1 cho bạn biết thông tin nằm ở đâu. recall@10 cao với recall@1 thấp có nghĩa là truy xuất gần đúng nhưng model không tự tin về việc đặt hàng một số ít hàng đầu. Xếp hạng lại - một model riêng biệt chấm điểm cho mọi ứng viên top-K so với truy vấn - là cách khắc phục production và là những gì các công cụ tìm kiếm như Pinterest và Google Photos sử dụng."
+    },
+    {
+      "stage": "post",
+      "question": "Sự tương đồng cosin trên embeddings không chuẩn hóa không phải là sự tương đồng cosin - điều gì xảy ra?",
+      "options": [
+        "Không có gì, không sao",
+        "Nó pha trộn hướng với độ lớn; cos(a, b) chỉ đúng khi cả hai vectors đều được chuẩn hóa L2. Trên embeddings không chuẩn hóa, các mục định mức lớn chiếm ưu thế bất kể hướng, xếp hạng nghiêng về phía vectors với cường độ lớn",
+        "PyTorch gây ra lỗi",
+        "Matmul tràn"
+      ],
+      "correct": 1,
+      "explanation": "cos(a, b) = (a . b) / (||một|| * ||b||). Bỏ qua chuẩn hóa cung cấp cho bạn sản phẩm bên trong thô, xếp hạng theo hướng có trọng số theo độ lớn. Trên các embeddings thần kinh điển hình, độ lớn thay đổi 2-3 lần giữa các mẫu và chỉ riêng điều đó đã thống trị bảng xếp hạng. Luôn chuẩn hóa L2 trước khi tính toán cosin hoặc trước khi lập chỉ mục trong FAISS IndexFlatIP."
+    },
+    {
+      "stage": "post",
+      "question": "Giữa truy xuất cấp phiên bản (tìm chính xác chiếc xe này) và truy xuất cấp danh mục (tìm xe), điều nào yêu cầu fine-tuning học số liệu?",
+      "options": [
+        "Không",
+        "Cấp phiên bản. DINOv2 và CLIP có sẵn embeddings phân biệt tốt giữa các danh mục nhưng không phân biệt giữa các trường hợp tương tự về mặt hình ảnh của cùng một danh mục. Một cặp bộ ba hoặc fine-tune tương phản trên (cùng một cá thể, các cá thể khác nhau) thắt chặt embedding xung quanh mỗi cá thể",
+        "Cấp danh mục",
+        "Cả hai đều yêu cầu cùng một lượng fine-tuning"
+      ],
+      "correct": 1,
+      "explanation": "Truy xuất cấp danh mục là những gì pretrained models đã làm: mèo tụ tập gần mèo, chó gần chó. Cấp phiên bản — cùng một chiếc xe, cùng một khuôn mặt, cùng SKU sản phẩm — cần học số liệu vì hai phiên bản của cùng một sản phẩm trông rất giống nhau trong không gian embedding chung. Fine-tuning với bộ ba hoặc InfoNCE trên các cặp được gắn nhãn phiên bản sẽ thu hẹp khoảng cách trong phiên bản và tăng khoảng cách giữa các phiên bản."
+    }
+  ]
+}
