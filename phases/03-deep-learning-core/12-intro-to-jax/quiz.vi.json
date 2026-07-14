@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Sự khác biệt thiết kế cơ bản giữa PyTorch và JAX là gì?",
+    "options": [
+      "PyTorch nhanh hơn",
+      "PyTorch đột biến tensors háo hức trong khi JAX biên dịch các chức năng thuần túy mà không có tác dụng phụ",
+      "JAX không hỗ trợ GPUs",
+      "PyTorch không hỗ trợ phân biệt tự động"
+    ],
+    "correct": 1,
+    "explanation": "PyTorch sử dụng thực thi háo hức với trạng thái có thể thay đổi (ví dụ: tensor.grad được sửa đổi tại chỗ). JAX bao gồm lập trình hàm: các hàm thuần túy, trạng thái rõ ràng và biên dịch jit tối ưu hóa toàn bộ đồ thị tính toán.",
+    "stage": "pre"
+  },
+  {
+    "question": "jax.jit làm gì?",
+    "options": [
+      "Nó thêm dropout quy tắc hóa",
+      "Nó biên dịch một hàm Python thành mã XLA được tối ưu hóa chạy nhanh hơn nhiều so với Python được thông dịch",
+      "Nó khởi tạo trọng số model",
+      "Nó tính toán gradients"
+    ],
+    "correct": 1,
+    "explanation": "jax.jit traces một hàm và biên dịch nó thành mã máy XLA (Đại số tuyến tính gia tốc). Lệnh gọi đầu tiên chậm (biên dịch), nhưng các lệnh gọi tiếp theo chạy phiên bản biên dịch được tối ưu hóa.",
+    "stage": "pre"
+  },
+  {
+    "question": "jax.vmap làm gì?",
+    "options": [
+      "Vectơ hóa một hàm để chạy trên một chiều batch mà không cần viết các vòng lặp rõ ràng",
+      "Xác thực kiến trúc model",
+      "Quản lý bộ nhớ GPU",
+      "Tính toán gradients bậc hai"
+    ],
+    "correct": 0,
+    "explanation": "jax.vmap tự động vector hóa một hàm được viết cho một ví dụ duy nhất để process toàn bộ batch. Bạn viết mã cho một mẫu và vmap xử lý hàng loạt, thường hiệu quả hơn so với vòng lặp batch thủ công.",
+    "stage": "post"
+  },
+  {
+    "question": "JAX xử lý trạng thái (trọng số) model khác với PyTorch như thế nào?",
+    "options": [
+      "JAX chỉ lưu trữ trọng lượng trên CPU",
+      "JAX yêu cầu truyền trạng thái rõ ràng -- trọng số là đối số hàm, không phải thuộc tính đối tượng có thể thay đổi",
+      "JAX không hỗ trợ tạ có thể tập luyện",
+      "JAX và PyTorch xử lý trạng thái giống hệt nhau"
+    ],
+    "correct": 1,
+    "explanation": "Ở PyTorch, tạ sống bên trong nn. Các đối tượng mô-đun và được thay đổi tại chỗ. Trong JAX, trọng số được truyền rõ ràng dưới dạng đối số hàm và trả về dưới dạng giá trị mới. Không có đột biến, không có trạng thái ẩn.",
+    "stage": "post"
+  },
+  {
+    "question": "Khi nào bạn sẽ chọn JAX thay vì PyTorch?",
+    "options": [
+      "Để tạo mẫu nhanh các models nhỏ",
+      "Khi training ở quy mô lớn trên TPU pod, nơi biên dịch và chuyển đổi chức năng cung cấp tốc độ đáng kể",
+      "Khi bạn cần hệ sinh thái pretrained models lớn nhất",
+      "Để triển khai trên thiết bị di động"
+    ],
+    "correct": 1,
+    "explanation": "JAX vượt trội về quy mô lớn: biên dịch jit loại bỏ chi phí Python, pmap xử lý song song nhiều thiết bị một cách tự nhiên và tối ưu hóa XLA trên biểu đồ tính toán đầy đủ giúp tăng tốc đáng kể trên các cụm TPU.",
+    "stage": "post"
+  }
+]
