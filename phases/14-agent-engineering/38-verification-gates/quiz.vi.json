@@ -1,0 +1,90 @@
+{
+  "lesson": "38-verification-gates",
+  "title": "Cổng xác minh",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cổng xác minh trả lời câu hỏi nào?",
+      "options": [
+        "model có nhanh không?",
+        "Nhiệm vụ này có thực sự hoàn thành không? (phạm vi đọc, quy tắc, phản hồi và artifacts khác biệt)",
+        "prompt có tối ưu không?",
+        "Ngân sách token có lành mạnh không?"
+      ],
+      "correct": 1,
+      "explanation": "Cổng là một chức năng xác định trên bàn làm việc artifacts đưa ra phán quyết pass/fail."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao cổng phải là xác định?",
+      "options": [
+        "Quyết định luận là tự do",
+        "Cùng một bộ artifact phải đưa ra cùng một phán quyết mọi lúc; LLM giám khảo thuộc về người phản biện (định tính), không phải cổng (trạng thái)",
+        "Các nhà cung cấp yêu cầu nó",
+        "Nó tiết kiệm tiền"
+      ],
+      "correct": 1,
+      "explanation": "Trộn lẫn phán đoán model vào cổng sẽ làm sụp đổ sự chia rẽ deterministic/qualitative."
+    },
+    {
+      "stage": "check",
+      "question": "Kỷ luật ghi đè của cổng là gì?",
+      "options": [
+        "Bất kỳ ai cũng có thể ghi đè một cách im lặng",
+        "Các phát hiện về mức độ nghiêm trọng của khối chỉ có thể được ghi đè bởi con người có override_reason được ghi lại và id người dùng overridden_by trong nhật ký kiểm tra đã ký",
+        "Ghi đè yêu cầu email của người quản lý",
+        "Ghi đè bị cấm"
+      ],
+      "correct": 1,
+      "explanation": "Đã ký ghi đè đất ở outputs/verification/overrides.jsonl; agent không thể tự ghi đè."
+    },
+    {
+      "stage": "check",
+      "question": "Cặp Hybrid Norm mà bài học trích dẫn là gì?",
+      "options": [
+        "Hot/cold prompts",
+        "Phần thưởng có thể xác minh (kiểm tra, schemas, mã thoát) trả lời 'nó có giải quyết được vấn đề không?'; LLM bảng đánh giá trả lời 'nó có dễ đọc, an toàn, đúng phong cách không?'",
+        "GPU và CPU tách",
+        "Bộ nhớ cache so với không có bộ nhớ đệm"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic Hướng dẫn năm 2026: Gate chạy class đầu tiên; reviewer (Bài 39) chạy bài thứ hai."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để phòng thủ theo chiều sâu lớp cổng?",
+      "options": [
+        "Cổng đơn tại merge thời điểm",
+        "Kiểm tra trạng thái trước commit hook -> CI -> xác thực trước dụng cụ hook -> cổng merge trước; mỗi lớp là xác định nên thất bại trong một lớp sẽ bị bắt bởi lớp tiếp theo",
+        "Chỉ IDE cảnh báo",
+        "Chỉ một lời nhắc trò chuyện"
+      ],
+      "correct": 1,
+      "explanation": "Nhiều lớp không thể bỏ qua bắt những gì một lớp sẽ bỏ sót."
+    },
+    {
+      "stage": "post",
+      "question": "Kiểm tra coverage_floor bảo vệ chống lại điều gì?",
+      "options": [
+        "Độ trễ đường dẫn nóng",
+        "Agents lặng lẽ xóa các bài kiểm tra không thành công; Cổng bị hỏng nếu phạm vi đo được giảm xuống dưới sàn hoặc merge cuối hơn 1 điểm phần trăm",
+        "Khởi động nguội",
+        "lockfiles lỗi thời"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có sàn, agents có thể âm thầm hạ thấp độ che phủ để giữ cho bản án xanh."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào nên --chế độ nghiêm ngặt thúc đẩy mọi cảnh báo để chặn?",
+      "options": [
+        "Luôn luôn",
+        "Phát hành branches, PR chặn ship, phân loại sau sự cố; Không phải mặc định hàng ngày vì dòng chảy ăn mòn nghiêm ngặt về mọi thứ",
+        "Không bao giờ",
+        "Chỉ vào Chủ nhật"
+      ],
+      "correct": 1,
+      "explanation": "--nghiêm ngặt là chọn tham gia bởi branch; dành cho những khoảnh khắc đặt cược cao."
+    }
+  ]
+}
