@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao SimCLR cần batch kích thước 512-8192 trong khi ImageNet training được giám sát hoạt động với batch 256?",
+      "options": [
+        "SimCLR chậm hơn",
+        "Mỗi mẫu cần nhiều ví dụ tiêu cực để tạo ra một tín hiệu tương phản hữu ích; bản thân batch là vũng tiêu cực. Những batches nhỏ khiến InfoNCE loss tiêu cực và training sụp đổ hoặc đình trệ",
+        "Batch chuẩn yêu cầu nó",
+        "loss tương phản chia cho kích thước batch"
+      ],
+      "correct": 1,
+      "explanation": "InfoNCE loss xếp hạng cặp dương tính so với tất cả các mẫu khác trong batch. batch 32 cho 30 âm tính cho mỗi dương tính; 1024 cho 2046. Âm tính hơn = tín hiệu tương phản sắc nét hơn. MoCo đã giới thiệu một hàng đợi động lượng của features quá khứ để tiêu cực hiệu quả vượt quá quy mô batch; Đây là thủ thuật tiêu chuẩn khi bộ nhớ GPU giới hạn kích thước batch."
+    },
+    {
+      "stage": "pre",
+      "question": "Điều gì ngăn DINO sụp đổ thành đầu ra không đổi?",
+      "options": [
+        "Tăng cường mạnh mẽ một mình",
+        "Sự kết hợp giữa định tâm (trừ trung bình EMA trên mỗi chiều từ đầu ra của giáo viên) và mài sắc (mức temperature giáo viên thấp); Định tâm ngăn một chiều thống trị, mài sắc ngăn đầu ra thu gọn thành đồng nhất",
+        "Kích thước batch lớn",
+        "Lịch trình động lượng"
+      ],
+      "correct": 1,
+      "explanation": "DINO không sử dụng tiêu cực rõ ràng. Nếu không có định tâm, một chiều đầu ra có thể chiếm ưu thế và học sinh học cách luôn dự đoán nó. Nếu không mài sắc (temperature giáo viên thấp), đầu ra của giáo viên trở nên gần như đồng nhất và học sinh học cách phù hợp với đồng phục, điều này cũng là sụp đổ. Cả hai cùng nhau giữ cho đầu ra đa dạng trên các kích thước và đạt đỉnh trên mỗi mẫu."
+    },
+    {
+      "stage": "post",
+      "question": "MAE che 75% miếng dán. BERT khẩu trang 15% tokens. Tại sao lại có sự khác biệt?",
+      "options": [
+        "75% là tùy ý",
+        "Các bản vá hình ảnh có entropy thấp - hàng xóm có mối tương quan cao - vì vậy việc che mặt chỉ 15% sẽ có thể giải quyết được một cách tầm thường bằng phép ngoại suy cục bộ. Mặt nạ 75% buộc encoder phải học features ngữ nghĩa toàn cầu để tái tạo các bản vá bị thiếu",
+        "BERT yêu cầu 15% theo thiết kế",
+        "tokens văn bản lớn hơn bản vá hình ảnh"
+      ],
+      "correct": 1,
+      "explanation": "Tỷ lệ mặt nạ phải phù hợp với mật độ thông tin của phương thức. Văn bản: 15% là đủ vì mỗi token có nhiều hoàn thành hợp lý. Hình ảnh: các pixel lân cận gần như xác định lẫn nhau, vì vậy tỷ lệ mặt nạ thấp có thể giải quyết được mà không cần học đại diện thực sự. 75% của MAE được hiệu chỉnh để buộc hiểu ngữ nghĩa."
+    },
+    {
+      "stage": "post",
+      "question": "Sau pretraining tự giám sát, đánh giá 'đầu dò tuyến tính' chỉ huấn luyện những gì?",
+      "options": [
+        "Toàn bộ encoder",
+        "Một bộ phân loại tuyến tính duy nhất trên đầu encoder features đông lạnh; Điều này cách ly chất lượng feature với động lực fine-tuning",
+        "Đầu phân loại MLP đầy đủ",
+        "Vị trí embedding"
+      ],
+      "correct": 1,
+      "explanation": "Đầu dò tuyến tính đóng băng encoder và phù hợp với Tuyến tính (features -> num_classes) trên một dataset hạ lưu được dán nhãn. accuracy là thước đo trực tiếp về khả năng phân tách tuyến tính của không gian feature - một proxy cho chất lượng feature. Fine-tuning toàn bộ xương sống bổ sung khả năng phi tuyến và thường nâng accuracy một vài điểm, nhưng kết hợp các hiệu ứng tối ưu hóa. Cả hai con số đều được báo cáo trong các bài báo SSL."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao MAE sử dụng thiết kế decoder encoder không đối xứng (encoder lớn trên 25% các bản vá có thể nhìn thấy, nhỏ decoder trên tất cả các tokens)?",
+      "options": [
+        "Hạn chế bộ nhớ",
+        "Người encoder không bao giờ processes mặt nạ tokens; Một decoder nhỏ chỉ xử lý việc tái tạo. Điều này làm cho encoder FLOPs tỷ lệ thuận với các bản vá có thể nhìn thấy (1/4 đầu vào đầy đủ) và cho phép pretraining chạy nhanh hơn gấp 3 lần so với các thiết kế ngây thơ process tất cả tokens qua toàn bộ encoder",
+        "Mặt nạ tokens gây nhầm lẫn self-attention",
+        "decoder cần xương sống riêng"
+      ],
+      "correct": 1,
+      "explanation": "Hiệu quả quan trọng trong MAE: encoder đắt tiền chỉ nhìn thấy các bản vá có thể nhìn thấy, chiếm 25% đầu vào. Mặt nạ chỉ tokens xuất hiện ở decoder nông. Điều này làm cho pretraining nhanh hơn khoảng 3 lần so với BEiT (processes tất cả tokens qua encoder) với accuracy xuôi dòng bằng hoặc tốt hơn."
+    }
+  ]
+}
