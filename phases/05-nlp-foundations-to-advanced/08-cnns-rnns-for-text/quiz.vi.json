@@ -1,0 +1,102 @@
+{
+  "lesson": "08-cnns-rnns-for-text",
+  "title": "CNN và RNN cho văn bản",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bộ lọc tích chập 1D có chiều rộng 3 trên từ embeddings học hiệu quả là gì?",
+      "options": [
+        "Một máy dò bigram có thể học được",
+        "Một vị trí embedding",
+        "Máy dò tam giác (n-gram) có thể học được",
+        "Số lượng unigram"
+      ],
+      "correct": 2,
+      "explanation": "Bộ lọc chiều rộng 3 spans ba tokens liên tiếp, hoạt động như một máy dò tam giác có thể học được."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao LSTM sử dụng trạng thái tế bào với chủ yếu là tương tác cộng thêm?",
+      "options": [
+        "Dòng phụ gia cho phép gradients lan truyền qua các chuỗi dài mà không biến mất hoặc phát nổ",
+        "softmax nhanh hơn",
+        "Nó tiết kiệm bộ nhớ",
+        "Để tránh đảo ngược ma trận"
+      ],
+      "correct": 0,
+      "explanation": "Đường cao tốc trạng thái tế bào giữ gradients ổn định qua hàng trăm bước, khắc phục các vấn đề về gradient biến mất."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao TextCNN sử dụng global max-pooling sau lớp tích chập?",
+      "options": [
+        "Để bật backpropagation",
+        "Để xóa embeddings",
+        "Để giảm vốn từ vựng",
+        "Max-pool cung cấp biểu diễn bất biến vị trí, kích thước cố định bằng cách chọn kích hoạt mạnh nhất cho mỗi bộ lọc"
+      ],
+      "correct": 3,
+      "explanation": "Global max-pool tạo ra một feature vector kích thước cố định bất kể độ dài đầu vào, với vị trí bất biến."
+    },
+    {
+      "stage": "check",
+      "question": "Ưu điểm chính của RNN hai chiều so với RNN một chiều để ghi nhãn trình tự là gì?",
+      "options": [
+        "training nhanh hơn",
+        "Biểu diễn của mỗi token nhìn thấy cả ngữ cảnh trái và phải, điều này rất cần thiết để gắn thẻ",
+        "Tránh embeddings",
+        "Bộ nhớ rẻ hơn"
+      ],
+      "correct": 1,
+      "explanation": "Mạng hai chiều nối các trạng thái ẩn tiến + lùi để nhãn có thể sử dụng ngữ cảnh đầy đủ."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao max-pooling trên đầu ra của LSTM thường đánh bại việc chỉ sử dụng trạng thái ẩn cuối cùng để phân loại?",
+      "options": [
+        "Max-pool có thể phân biệt được; last-state không phải là",
+        "Thông tin ở cuối một chuỗi dài có xu hướng thống trị trạng thái cuối cùng, che giấu bằng chứng trước đó",
+        "Max-pool loại bỏ chữ viết hoa",
+        "Nhóm trạng thái cuối cùng bỏ qua khoảng đệm"
+      ],
+      "correct": 1,
+      "explanation": "Max-pool tổng hợp tín hiệu mạnh nhất trên các vị trí; trạng thái cuối cùng có thể mất bằng chứng trước đó."
+    },
+    {
+      "stage": "post",
+      "question": "Hạn chế nào của LSTM/RNN encoder-decoders đã thúc đẩy attention?",
+      "options": [
+        "Họ yêu cầu tokenizers từ phụ",
+        "Họ không thể sử dụng embeddings",
+        "decoder chỉ thấy trạng thái encoder kích thước cố định, mất chi tiết trên đầu vào dài; lặp lại cũng tuần tự hóa training",
+        "Họ không thể nhúng tokens"
+      ],
+      "correct": 2,
+      "explanation": "Tóm tắt kích thước cố định cộng với training nối tiếp là hai lỗi attention loại bỏ."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào TextCNN hoặc BiLSTM vẫn đánh bại một transformer vào năm 2026?",
+      "options": [
+        "Trên đầu vào hình ảnh",
+        "Đầu vào biên/trên thiết bị, streaming token từng token hoặc đường cơ sở dữ liệu nhỏ",
+        "Bất cứ khi nào dataset đa ngôn ngữ",
+        "Khi yêu cầu về độ trễ cực kỳ lỏng lẻo"
+      ],
+      "correct": 1,
+      "explanation": "Các kiến trúc nhỏ vẫn giành chiến thắng trên inference biên, đầu vào streaming và đường cơ sở nhanh chóng."
+    },
+    {
+      "stage": "post",
+      "question": "Vấn đề gradient biến mất trong RNN đơn giản là gì?",
+      "options": [
+        "Phép nhân lặp lại với trọng số lặp lại nhỏ hơn 1 làm cho gradients hướng tới các bước đầu thu nhỏ về không",
+        "Embedding trận trở thành số ít",
+        "Đầu vào trở thành số không",
+        "Loss trở nên tiêu cực"
+      ],
+      "correct": 0,
+      "explanation": "Sản phẩm dài gradients biến mất (hoặc phát nổ) mà không cần cổng; đây là lý do tại sao LSTM và GRU tồn tại."
+    }
+  ]
+}
