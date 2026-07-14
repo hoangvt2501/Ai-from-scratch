@@ -1,0 +1,102 @@
+{
+  "lesson": "09-sequence-to-sequence",
+  "title": "Trình tự đến trình tự Models",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Vai trò của encoder trong một model seq2seq theo phong cách 2014 là gì?",
+      "options": [
+        "Tính attention trọng số",
+        "Thực hiện beam search",
+        "Đọc nguồn và tạo ngữ cảnh có kích thước cố định vector tóm tắt nó",
+        "Tạo tokens mục tiêu"
+      ],
+      "correct": 2,
+      "explanation": "RNN encoder nén nguồn thành trạng thái ẩn cuối cùng được sử dụng bởi decoder."
+    },
+    {
+      "stage": "pre",
+      "question": "Giáo viên buộc gì trong seq2seq training?",
+      "options": [
+        "Thêm mạng lưới giáo viên trong quá trình inference",
+        "Tăng gấp đôi kích thước batch",
+        "Cung cấp sự thật cơ bản token trước đó (thay vì dự đoán của model) làm đầu vào decoder",
+        "Dán nhãn thủ công từng bước decoder"
+      ],
+      "correct": 2,
+      "explanation": "Buộc giáo viên ổn định training bằng cách sử dụng tokens trước đó thực sự; nếu không có nó lỗi sớm sẽ tầng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao seq2seq cố định vector ngữ cảnh accuracy giảm khi độ dài đầu vào tăng lên?",
+      "options": [
+        "Đệm tokens tích lũy",
+        "Phân kỳ entropy chéo",
+        "Tất cả thông tin về nguồn phải vừa với một trạng thái ẩn encoder kích thước cố định duy nhất, điều này sẽ mất chi tiết về đầu vào dài",
+        "Từ vựng trở nên quá lớn"
+      ],
+      "correct": 2,
+      "explanation": "Tắc nghẽn vector ngữ cảnh cố định có nghĩa là các đầu vào dài không thể được tóm tắt một cách dễ dàng."
+    },
+    {
+      "stage": "check",
+      "question": "Exposure bias là gì?",
+      "options": [
+        "Bias từ class imbalance",
+        "Bias ở encoder embeddings",
+        "Bất đồng của người chú thích",
+        "Khoảng cách train/inference từ training về sự thật cơ bản tokens nhưng được tạo ra từ những dự đoán của chính model tại inference"
+      ],
+      "correct": 3,
+      "explanation": "model chưa bao giờ tập phục hồi sau những sai lầm của chính mình trong training, vì vậy lỗi đổ dồn vào inference."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao beam search thường vượt trội hơn việc giải mã tham lam trong thế hệ?",
+      "options": [
+        "Beam search giữ cho top-k chuỗi từng phần sống động ở mỗi bước thay vì cam kết không thể thay đổi cho một token",
+        "Beam search tránh tiếp xúc bias",
+        "Beam search nhanh hơn",
+        "Beam search hạ thấp loss"
+      ],
+      "correct": 0,
+      "explanation": "Tham lam commits mỗi bước; beam search khám phá nhiều giả thuyết, sau đó chọn ra giả thuyết hoàn chỉnh nhất."
+    },
+    {
+      "stage": "post",
+      "question": "Họ kiến trúc nào thay thế RNN seq2seq cho các nhiệm vụ phát điện chung?",
+      "options": [
+        "Transformer encoder-decoder models (BART, T5, mBART, NLLB)",
+        "Đồ thị mạng nơ-ron",
+        "Bayes ngây thơ",
+        "CNN 1D"
+      ],
+      "correct": 0,
+      "explanation": "Transformer encoder-decoders đã giảm sự lặp lại và hiện đang thống trị các nhiệm vụ phát điện."
+    },
+    {
+      "stage": "post",
+      "question": "sampling theo lịch làm gì?",
+      "options": [
+        "Ủ tỷ lệ ép giáo viên giảm xuống trong quá trình training để model học cách phục hồi từ những dự đoán của chính mình",
+        "Lên lịch suy giảm tỷ lệ học tập",
+        "Sắp xếp lại bộ training",
+        "Thêm nhiễu ngẫu nhiên vào embeddings"
+      ],
+      "correct": 0,
+      "explanation": "Các sampling theo lịch trình dần trộn lẫn các dự đoán model để thu hẹp khoảng cách train/inference."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao chỉ giải mã tham lam thường thất bại đối với việc tạo đối mặt với người dùng?",
+      "options": [
+        "Nó không thể sử dụng embeddings",
+        "Nó luôn chọn <EOS> đầu tiên",
+        "Tham lam có thể lặp lại hoặc lặp lại và không thể quay trở lại với một lựa chọn token tốt ở địa phương nhưng nghèo nàn trên toàn cầu",
+        "Nó đòi hỏi nhiều bộ nhớ hơn"
+      ],
+      "correct": 2,
+      "explanation": "Lựa chọn mỗi bước không thể hủy ngang của giải mã tham lam gây ra các vòng lặp và lặp lại mà không cần beam search hoặc sampling."
+    }
+  ]
+}
