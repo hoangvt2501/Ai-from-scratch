@@ -1,0 +1,78 @@
+{
+  "lesson": "37-loading-pretrained-weights",
+  "title": "Tải trọng lượng Pretrained",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao trình tải cần bản đồ tên?",
+      "options": [
+        "Pretrained tensors và parameters địa phương có cùng tên",
+        "Trọng lượng GPT-2 được xuất bản sử dụng các tên như wte, wpe, h.N.attn.c_attn; các model cục bộ sử dụng các khối tok_embed, pos_embed, khối. N.attn.qkv; trình tải dịch cái này sang cái kia",
+        "Các tệp Safetensors được mã hóa",
+        "Ngọn đuốc yêu cầu nó"
+      ],
+      "correct": 1,
+      "explanation": "Hai quy ước đặt tên là lịch sử khác nhau; bản đồ là một câu lệnh theo nghĩa đen được mở rộng trên mỗi lớp."
+    },
+    {
+      "stage": "check",
+      "question": "Chuyển vị conv1d là gì và tensors nào cần nó?",
+      "options": [
+        "Tất cả trọng lượng tensors",
+        "Được xuất bản GPT-2 lưu trữ trọng số c_attn, c_proj và c_fc trong bố cục tensorflow conv1d, đây là sự chuyển vị của những gì nn. Linear.weight mong đợi; trình tải gọi .t() trên những trọng số trong quá trình gán",
+        "Chỉ có embedding",
+        "Chỉ LayerNorm thang đo"
+      ],
+      "correct": 1,
+      "explanation": "Ba hậu tố cần chuyển vị; thiên vị và LayerNorms đã được định hình chính xác."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao đầu LM không có trong tệp an toàn?",
+      "options": [
+        "Nó được tính toán ở runtime từ logits",
+        "Buộc trọng lượng: đầu LM chia sẻ bộ lưu trữ với token embedding (wte), do đó tải wte và răng cưa lm_head.weight = tok_embed.weight sau khi tải xây dựng lại đầu",
+        "Nó quá lớn",
+        "Nó được tải từ một tệp riêng biệt"
+      ],
+      "correct": 1,
+      "explanation": "Đặt lm_head.weight = tok_embed.weight sau khi wte hạ cánh sẽ khôi phục bí danh; thay vào đó, sao chép sẽ tăng gấp đôi số parameter."
+    },
+    {
+      "stage": "check",
+      "question": "Bộ nạp làm gì khi hình dạng không khớp?",
+      "options": [
+        "Đệm tensor nhỏ hơn",
+        "Ghi lại sự không khớp trong LoadReport.shape_mismatch và từ chối chỉ định, để lại parameter cục bộ không bị ảnh hưởng",
+        "Làm hỏng process",
+        "Cắt bớt tensor lớn hơn"
+      ],
+      "correct": 1,
+      "explanation": "models nửa tải là những cỗ máy thất bại im lặng; từ chối chỉ định giữ cho báo cáo trung thực."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao cố định sơ khai của bản demo không phải là một bản tải xuống GPT-2 thực sự?",
+      "options": [
+        "Các tệp thực không ở định dạng an toàn",
+        "Bản demo phải chạy ngoại tuyến và nhanh chóng; sơ khai sử dụng quy ước đặt tên pretrained chính xác để đường dẫn mã loader giống hệt nhau và việc hoán đổi trong một tệp thực không thay đổi gì về loader",
+        "Trọng lượng thực được mã hóa",
+        "Két sắt không thể lưu trữ tensors lớn"
+      ],
+      "correct": 1,
+      "explanation": "Cùng một đường dẫn mã, payload nhỏ hơn; trình tải hoạt động trên một trong hai."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao tạo mẫu trước và sau khi tải?",
+      "options": [
+        "Để đo tốc độ inference",
+        "Nếu các mẫu sau tải giống với các mẫu tải trước, tải không thay đổi model, có nghĩa là ánh xạ âm thầm bị bỏ lỡ mỗi tensor",
+        "Để khởi động bộ nhớ cache GPU",
+        "Để đặt hạt giống ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Tạo Sanity là cổng rẻ nhất: dấu vân tay mẫu không thay đổi sẽ hiển thị tải bị hỏng mà bản tóm tắt LoadReport sẽ không tự phát hiện."
+    }
+  ]
+}
