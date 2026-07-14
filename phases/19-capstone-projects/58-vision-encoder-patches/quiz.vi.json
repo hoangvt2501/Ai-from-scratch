@@ -1,0 +1,78 @@
+{
+  "lesson": "58-vision-encoder-patches",
+  "title": "Bản vá Encoder tầm nhìn",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao Vision Transformer sử dụng các bản vá thay vì cung cấp một pixel cho mỗi token?",
+      "options": [
+        "Các bản vá lỗi được yêu cầu bởi PyTorch",
+        "Chuỗi pixel trên token phát nổ attention tính toán bậc hai và mất khả năng điều khiển ở độ phân giải điển hình",
+        "Các bản vá cải thiện chất lượng hình ảnh",
+        "Nó tránh sử dụng tokenizer"
+      ],
+      "correct": 1,
+      "explanation": "Hình ảnh 224x224 có tokens 150528 pixel. Attention có chiều dài bậc hai, vì vậy việc vá 16x16 sẽ thu nhỏ trình tự xuống còn 196 tokens và làm cho model dễ xử lý."
+    },
+    {
+      "stage": "pre",
+      "question": "Mối quan hệ giữa Conv2d với hạt nhân = sải chân = patch_size và phẳng rồi tuyến tính là gì?",
+      "options": [
+        "Họ tạo ra các đầu ra khác nhau",
+        "Conv2d là một cách nhanh hơn để đánh vần cùng một phép chiếu tuyến tính trên mỗi bản vá",
+        "Conv2d thêm tính phi tuyến tính",
+        "Làm phẳng sau đó tuyến tính là không thể"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi vị trí đầu ra Conv2d chấm các pixel bản vá với một bộ lọc, giống hệt với làm phẳng sau đó tuyến tính."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao vị trí hình sin 2D embedding xác định thay vì học?",
+      "options": [
+        "Các vị trí đã học là bất hợp pháp",
+        "Tín hiệu sin/cos cố định nội suy rõ ràng vào lưới mà model chưa bao giờ nhìn thấy, rất hữu ích khi độ phân giải thay đổi",
+        "Nó tiết kiệm dung lượng đĩa",
+        "Bắt buộc phải bắt đầu ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Các vị trí hình sin cố định là xác định trên các độ phân giải và cho phép cùng một encoder chạy trên các đầu vào mà nó không được huấn luyện."
+    },
+    {
+      "stage": "check",
+      "question": "Độ dài chuỗi đầu ra của hình ảnh 224x224 với patch_size=16 và một token CLS là bao nhiêu?",
+      "options": [
+        "196",
+        "197",
+        "224",
+        "256"
+      ],
+      "correct": 1,
+      "explanation": "224/16 = 14, vì vậy 14x14 = 196 bản vá, cộng với một token CLS cho tổng cộng 197 tokens."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao việc tái tạo (mở ra sau đó mở phẳng) lại là một kiểm tra sự tỉnh táo hữu ích trên giao diện người dùng của bản vá?",
+      "options": [
+        "Nó cải thiện accuracy",
+        "Các pixel khứ hồi thông qua vá phẳng mà không có phép chiếu phải bằng đầu vào; thất bại có nghĩa là toán học mở ra là sai",
+        "Nó được yêu cầu bởi ONNX",
+        "Nó tăng tốc độ inference"
+      ],
+      "correct": 1,
+      "explanation": "Bước vá có thể đảo ngược mà không cần chiếu. Nếu chuyến đi khứ hồi bị trôi, logic mở ra bị lỗi và rest của encoder không an toàn."
+    },
+    {
+      "stage": "post",
+      "question": "Điều gì thay đổi khi bạn hoán đổi một vị trí đã học embedding cho vị trí hình sin 2D trong bài học này?",
+      "options": [
+        "Không có gì thay đổi",
+        "Các vị trí đã học có thể phù hợp với độ phân giải cố định tốt hơn một chút; các vị trí hình sin chuyển sang độ phân giải mới mà không cần huấn luyện lại",
+        "Vị trí hình sin có giá parameters hơn",
+        "Vị trí hình sin là ngẫu nhiên mỗi bước"
+      ],
+      "correct": 1,
+      "explanation": "Các vị trí đã học linh hoạt ở một độ phân giải. Các vị trí hình sin không tốn parameters phí và tồn tại sau sự thay đổi độ phân giải."
+    }
+  ]
+}
