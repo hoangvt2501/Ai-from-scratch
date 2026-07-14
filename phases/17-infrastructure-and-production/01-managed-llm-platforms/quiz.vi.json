@@ -1,0 +1,90 @@
+{
+  "lesson": "01-managed-llm-platforms",
+  "title": "Nền tảng LLM được quản lý — Bedrock, Vertex AI, Azure OpenAI",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trước bài học này, bạn sẽ tiếp cận nền tảng nào đầu tiên nếu khách hàng cần Claude, Llama và Cohere đằng sau một API?",
+      "options": [
+        "Đỉnh AI",
+        "Nền tảng AWS",
+        "Dịch vụ Azure OpenAI",
+        "Anthropic API trực tiếp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Đặt cược của siêu quy mô nào được mô tả là quan hệ đối tác độc quyền hơn là thị trường?",
+      "options": [
+        "Azure OpenAI",
+        "Đỉnh AI",
+        "Nền tảng AWS",
+        "OCI Generative AI"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Khoảng cách TTFT trung bình đo được giữa Azure OpenAI (với PTU) và Bedrock theo yêu cầu trên Llama tương đương 3.1 405B là bao nhiêu?",
+      "options": [
+        "~100 mili giây",
+        "~5 mili giây",
+        "~250 mili giây",
+        "~25 mili giây"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bedrock 2025 feature nào cung cấp phân bổ chi phí trên mỗi sản phẩm rõ ràng nhất trong CloudWatch?",
+      "options": [
+        "Cơ sở kiến thức nền tảng",
+        "Hồ sơ Inference ứng dụng",
+        "Nền tảng Guardrails",
+        "Nền tảng Agents"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Azure PTU thường hòa vốn so với theo yêu cầu ở mức sử dụng bền vững nào?",
+      "options": [
+        "5-10%",
+        "80-95%",
+        "20-30%",
+        "40-60%"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học được đề xuất vào năm 2026 policy tối thiểu hai nhà cung cấp cho các cuộc gọi LLM quan trọng về sản phẩm?",
+      "options": [
+        "Nó được yêu cầu bởi SOC 2 Loại II",
+        "Lãnh đạo Frontier model luân phiên hàng tháng, vì vậy việc khóa một nhà cung cấp sẽ loại bỏ bạn khỏi hai phần ba biên giới",
+        "Các nhà siêu quy mô từ chối ký BAA trừ khi bạn cũng sử dụng đối thủ cạnh tranh",
+        "Định giá cho một nhà cung cấp luôn đắt hơn"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tuyên bố nào mô tả chính xác nhất bề mặt FinOps trên ba nền tảng?",
+      "options": [
+        "Azure là bản gốc sạch nhất, Bedrock mờ đục",
+        "Vertex hoàn toàn không có bề mặt phân bổ",
+        "Cả ba đều hiển thị phân bổ cho mỗi yêu cầu giống hệt nhau",
+        "Bedrock là bản gốc sạch nhất, Vertex linh hoạt nhất thông qua BigQuery, Azure mờ đục nhất mà không cần thiết bị đo lường"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
