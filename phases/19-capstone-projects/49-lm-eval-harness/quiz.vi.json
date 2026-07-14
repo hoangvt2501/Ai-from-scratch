@@ -1,0 +1,78 @@
+{
+  "lesson": "49-lm-eval-harness",
+  "title": "Đánh giá Model ngôn ngữ Harness",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bốn trường nào xác định một ví dụ nhiệm vụ ở định dạng JSONL của harness?",
+      "options": [
+        "tên, điểm số, payload, nhà cung cấp",
+        "id, prompt, mục tiêu, chỉ số và một chỉ số bổ sung tùy chọn cho dữ liệu phụ mà chỉ số cần",
+        "Đầu vào và đầu ra",
+        "trọng lượng và bias"
+      ],
+      "correct": 1,
+      "explanation": "Dòng JSONL là hợp đồng. Trường bổ sung cho phép chỉ số code_exec vượt qua io_pairs mà không gây ô nhiễm prompt."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao chữ ký hàm chỉ số (dự đoán, mục tiêu, bổ sung) -> float?",
+      "options": [
+        "Lựa chọn ngẫu nhiên",
+        "Đây là chữ ký nhỏ nhất xử lý khớp chuỗi một mục tiêu, đa tham chiếu rouge-l và code_exec với dữ liệu bên, trong khi vẫn giữ điểm số trong phạm vi [0.0, 1.0] có thể so sánh",
+        "Nó trả về một số nguyên",
+        "Nó cần đối tượng model"
+      ],
+      "correct": 1,
+      "explanation": "Floats trong [0,1] trung bình cho mỗi nhiệm vụ và điểm tổng thể là mức trung bình có thể giải thích được. Vị trí bổ sung là cách code_exec nhận được io_pairs của nó."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để chỉ số code_exec chống lại các dự đoán độc hại?",
+      "options": [
+        "Nó không",
+        "Nó chạy dự đoán với một dict __builtins__ bị loại bỏ để không gian tên chỉ hiển thị một vài tên an toàn; import câu lệnh không thành công vì trình nhập khẩu không nằm trong phạm vi",
+        "Nó sử dụng sandbox containers",
+        "Nó từ chối bất cứ thứ gì có chứa def"
+      ],
+      "correct": 1,
+      "explanation": "Không gian tên an toàn của bài học tách các tích hợp thành một số ít tên. Bài kiểm tra khẳng định rằng import hệ điều hành trả về điểm 0.0 thay vì thực thi."
+    },
+    {
+      "stage": "check",
+      "question": "Trừu tượng hóa bộ chuyển đổi model mang lại cho bạn điều gì?",
+      "options": [
+        "Không có gì",
+        "Đây là mã dành riêng cho model duy nhất trong harness; hoán đổi bộ điều hợp để trỏ đến một nhà cung cấp mới và các tác vụ, chỉ số, người chạy và định dạng bảng xếp hạng vẫn giữ nguyên",
+        "Nó làm cho model nhanh hơn",
+        "Nó được yêu cầu bởi ngọn đuốc"
+      ],
+      "correct": 1,
+      "explanation": "ToyAdapter trong bài học là một trình so khớp mẫu xác định. Một HttpAdapter cho một nhà cung cấp thực có cùng bề mặt generate(prompts) -> list[str]."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bảng xếp hạng JSON mang một chuỗi schema như leaderboard.v1?",
+      "options": [
+        "Đối với SEO",
+        "Vì vậy, các thay đổi định dạng trong tương lai sẽ làm tăng phiên bản và bảng điều khiển xuôi dòng có thể gửi trên đó thay vì ngắt một cách âm thầm",
+        "Nó là ngẫu nhiên",
+        "Nó nén tệp"
+      ],
+      "correct": 1,
+      "explanation": "Thủ thuật tương tự như checkpoint payload từ bài 47. Trường schema là di chuyển hook."
+    },
+    {
+      "stage": "post",
+      "question": "Đọc bảng xếp hạng, overall_score được tính như thế nào và bạn nên chú ý điều gì khi so sánh hai lần chạy?",
+      "options": [
+        "Tổng số đếm chính xác",
+        "Điểm trung bình của mỗi nhiệm vụ (mỗi điểm trong [0,1]); khi so sánh, cũng phân biệt dự đoán cho mỗi ví dụ cho các nhiệm vụ có điểm số di chuyển, bởi vì chỉ riêng điểm số đã ẩn ví dụ nào đã thoái lui",
+        "Điểm nhiệm vụ tốt nhất",
+        "Mẫu ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Giá trị trung bình của mỗi nhiệm vụ có nghĩa là trọng số mọi nhiệm vụ bằng nhau. Sử dụng --include-per-example để giữ bằng chứng ở mức dự đoán bên cạnh điểm số để hiển thị hồi quy."
+    }
+  ]
+}
