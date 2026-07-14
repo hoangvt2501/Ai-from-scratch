@@ -1,0 +1,66 @@
+{
+  "lesson": "14-model-context-protocol",
+  "title": "Giao thức ngữ cảnh Model",
+  "questions": [
+    {
+      "stage": "post",
+      "question": "Một MCP server phơi bày ba primitives nào?",
+      "options": [
+        "Chức năng, loại classes",
+        "Công cụ, tài nguyên, prompts",
+        "Endpoints, webhooks, hàng đợi",
+        "Agents, skills, quy trình làm việc"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "MCP sử dụng định dạng dây nào?",
+      "options": [
+        "GraphQL qua HTTP",
+        "gRPC với protobuf",
+        "JSON-RPC 2.0",
+        "REST với OpenAPI"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Trường siêu dữ liệu nào báo hiệu trạng thái thay đổi của công cụ và cần sự chấp thuận của con người?",
+      "options": [
+        "Chỉ đọc: sai",
+        "Đột biến: Đúng",
+        "destructiveGợi ý: đúng",
+        "Yêu cầu Auth: true"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "transport 2025-06-18 đã thay thế transport từ xa chỉ dành cho SSE trước đó là gì?",
+      "options": [
+        "Vận chuyển web",
+        "HTTP có thể phát trực tuyến",
+        "Chỉ WebSocket",
+        "gRPC bidi"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào một công cụ nên được chia thành các MCP server riêng thay vì duy trì nội tuyến?",
+      "options": [
+        "Khi nó được gọi ít hơn 10 lần mỗi ngày",
+        "Khi nó được gọi từ hai hoặc nhiều máy chủ và được read-only/cacheable",
+        "Khi trả về hơn 1KB dữ liệu",
+        "Không bao giờ; MCP chỉ dành cho nhà phát triển địa phương"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
