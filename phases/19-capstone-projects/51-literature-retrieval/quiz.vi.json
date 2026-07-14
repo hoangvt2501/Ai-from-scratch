@@ -1,0 +1,78 @@
+{
+  "lesson": "51-literature-retrieval",
+  "title": "Truy xuất tài liệu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao máy khách truy xuất chạy thẻ BM25 và thẻ biểu đồ trích dẫn?",
+      "options": [
+        "Bởi vì BM25 cần đồ thị để xây dựng chỉ số của nó",
+        "Bởi vì các lần truy cập từ vựng bỏ lỡ các bài báo cơ bản với các từ vựng khác nhau và các lần truy cập đồ thị bỏ lỡ các bài báo không có trích dẫn với hạt giống",
+        "Bởi vì mô phỏng APIs yêu cầu nó",
+        "Bởi vì trình phân tích cú pháp không thành công"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi lần vượt qua nắm bắt những gì người kia bỏ lỡ. Từ vựng bao gồm từ vựng được chia sẻ; biểu đồ bao gồm các giấy tờ tổ tiên và hậu duệ bất kể từ vựng."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao duyệt biểu đồ trích dẫn bị giới hạn ở hai bước nhảy?",
+      "options": [
+        "Bởi vì ngoài hai bước nhảy, bộ kết quả có xu hướng trôi dạt khỏi chủ đề và lấn át thứ hạng hạ nguồn",
+        "Bởi vì giới hạn đệ quy Python cấm ba bước nhảy",
+        "Bởi vì BM25 chỉ ghi được hai bước nhảy",
+        "Bởi vì kho dữ liệu chỉ lưu trữ hai lớp trích dẫn"
+      ],
+      "correct": 0,
+      "explanation": "Hai bước nhảy là trần thực tế. Ba bước nhảy làm nổ tung tập kết quả trên một biểu đồ được kết nối và hiếm khi trả về nhiều hơn trên các bài báo chủ đề."
+    },
+    {
+      "stage": "check",
+      "question": "idf đánh giá điều gì cho một thuật ngữ xuất hiện trong mọi tài liệu?",
+      "options": [
+        "Một giá trị tích cực lớn",
+        "Giá trị gần bằng không",
+        "Vô cực âm",
+        "Không xác định; triển khai BM25 bỏ qua nó"
+      ],
+      "correct": 1,
+      "explanation": "Khi df bằng N, tử số và mẫu số bên trong nhật ký gần nhau, và +1 giữ số hạng không âm nhưng nhỏ. Đóng góp của các số hạng phổ biến phổ biến là gần bằng không."
+    },
+    {
+      "stage": "check",
+      "question": "Bước merge sử dụng phím nào để loại bỏ các lần truy cập từ hai đường chuyền?",
+      "options": [
+        "Văn bản tiêu đề",
+        "ID giấy ổn định",
+        "Năm và tác giả đầu tiên",
+        "Nhóm điểm BM25"
+      ],
+      "correct": 1,
+      "explanation": "Id giấy là tay cầm ổn định. Tiêu đề và tác giả được trùng lặp giữa các phiên bản, chỉ riêng năm là mơ hồ."
+    },
+    {
+      "stage": "check",
+      "question": "graph_score trả lại gì cho một bài báo có hai bước nhảy từ bộ hạt giống?",
+      "options": [
+        "Không",
+        "0.3 theo mặc định",
+        "1.0 theo mặc định",
+        "Điểm BM25 chia cho mười"
+      ],
+      "correct": 1,
+      "explanation": "Lịch trình điểm biểu đồ mặc định là 1.0 ở 0 bước nhảy, 0.6 ở một bước nhảy, 0.3 ở hai bước nhảy và không vượt quá mức đó."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao kho dữ liệu được tải một lần vào RetrievalClient thay vì được nạp lại cho mỗi truy vấn?",
+      "options": [
+        "Bởi vì các APIs giả chậm trong mỗi cuộc gọi",
+        "Bởi vì chỉ mục BM25 và biểu đồ trích dẫn được xây dựng một lần tại thời điểm xây dựng và được sử dụng lại trên các truy vấn",
+        "Bởi vì trình phân tích cú pháp là toàn cầu",
+        "Bởi vì điểm gần đây yêu cầu nó"
+      ],
+      "correct": 1,
+      "explanation": "Xây dựng chỉ mục là bước tốn kém. Việc sử dụng lại chỉ mục sẽ khấu hao chi phí đó trên mọi truy vấn mà khách hàng xử lý."
+    }
+  ]
+}
