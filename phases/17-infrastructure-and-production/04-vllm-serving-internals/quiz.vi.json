@@ -1,0 +1,78 @@
+{
+  "lesson": "04-vllm-serving-internals",
+  "title": "vLLM Phục vụ nội bộ: PagedAttention, Continuous Batching, Chunked Prefill",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Vấn đề chính của lô tĩnh cổ điển gặp phải với các yêu cầu có độ dài hỗn hợp là gì?",
+      "options": [
+        "Nó chỉ hoạt động với FP4",
+        "Nó yêu cầu NVLink giữa mỗi GPU",
+        "Nó hoàn toàn không thể sử dụng GPUs",
+        "Đệm vào đầu ra dài nhất prompt và dài nhất sẽ lãng phí bộ nhớ và làm đình trệ toàn bộ batch trên trình tự chậm nhất"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để PagedAttention giảm sự phân mảnh KV cache từ 60-80% xuống dưới 4%?",
+      "options": [
+        "Bằng cách vô hiệu hóa hoàn toàn KV cache",
+        "Bằng cách nén trọng lượng thành INT4",
+        "Bằng cách phân bổ KV cache trong các khối có kích thước cố định (mặc định là 16 tokens) được tham chiếu thông qua bảng khối cho mỗi trình tự",
+        "Bằng cách giữ toàn bộ prompt trong CPU RAM"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bất biến nào xác định hàng loạt liên tục trong bộ lập lịch V1 của vLLM?",
+      "options": [
+        "Bộ lập lịch chạy một lần cho mỗi yêu cầu và batch không bao giờ thay đổi",
+        "Mỗi yêu cầu có luồng GPU chuyên dụng riêng",
+        "Bộ lập lịch đợi 10 ms windows để lấp đầy batch trước khi chạy",
+        "Bộ lập lịch chạy một lần cho mỗi lần lặp giải mã, chấp nhận các trình tự đã hoàn thành và chờ các trình tự trong"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Chỉ số độ trễ nào mà chiết rót trước theo khối chủ yếu bảo vệ khi tải hỗn hợp?",
+      "options": [
+        "Thông lượng trung bình",
+        "Thời gian khởi động nguội",
+        "RTT mạng",
+        "Độ trễ giữa các token P99 (ITL)"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Trong vLLM v0.18.0, biến thể giải mã suy đoán nào vẫn tương thích với --enable-chunked-prefill?",
+      "options": [
+        "Chỉ EAGLE-1",
+        "N-gram GPU giải mã suy đoán trong bộ lập lịch V1",
+        "Không có giải mã suy đoán nào tương thích",
+        "Giải mã đầu cơ model nháp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao khối điền trước không cô lập tăng thông lượng trung bình?",
+      "options": [
+        "Nó chạy trên một GPU khác với giải mã",
+        "Nó sử dụng giải mã suy đoán dưới mui xe",
+        "Nó nén trọng lượng mạnh mẽ hơn",
+        "Nó chỉ làm giảm sự chập chờn trong thời gian giải mã; Chiến thắng thông lượng trong thực tế đến từ việc giữ cho các chuỗi giải mã tồn tại trong quá trình điền trước dài, không phải từ việc thay đổi công việc đã thực hiện"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
