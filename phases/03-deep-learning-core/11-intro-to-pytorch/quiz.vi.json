@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Autograd trong PyTorch là gì?",
+    "options": [
+      "Thư viện tải dữ liệu",
+      "Một công cụ khác biệt tự động ghi lại các hoạt động và tính toán gradients mà không cần triển khai ngược thủ công",
+      "Một công cụ nén model",
+      "Một framework điều chỉnh hyperparameter"
+    ],
+    "correct": 1,
+    "explanation": "Autograd của PyTorch xây dựng một biểu đồ tính toán trong quá trình tính toán chuyển tiếp và tự động tính toán gradients khi bạn gọi .backward(). Điều này giúp loại bỏ nhu cầu triển khai backward() theo cách thủ công trong mỗi mô-đun.",
+    "stage": "pre"
+  },
+  {
+    "question": "torch.no_grad() làm gì và khi nào bạn nên sử dụng nó?",
+    "options": [
+      "Nó ngăn chặn overfitting",
+      "Nó vô hiệu hóa tính năng theo dõi gradient cho inference, tiết kiệm bộ nhớ và tính toán khi bạn không cần huấn luyện",
+      "Nó đóng băng tất cả các trọng lượng model",
+      "Nó cho phép tăng tốc GPU"
+    ],
+    "correct": 1,
+    "explanation": "Trong quá trình inference, bạn không cần gradients. torch.no_grad() vô hiệu hóa tính năng theo dõi gradient, giúp tiết kiệm bộ nhớ sẽ được sử dụng để lưu trữ biểu đồ tính toán và tăng tốc độ tính toán.",
+    "stage": "pre"
+  },
+  {
+    "question": "Những gì nn. Linear(784, 256) tạo trong PyTorch?",
+    "options": [
+      "Lớp kích hoạt ReLU",
+      "Một lớp được kết nối đầy đủ với ma trận trọng lượng (256, 784) và một (256,) bias vector",
+      "Một lớp dropout với p = 784/256",
+      "Một lớp chuẩn hóa batch"
+    ],
+    "correct": 1,
+    "explanation": "nn. Linear(in_features, out_features) tạo ra một layer tính y = x @ W^T + b, với W của hình dạng (256, 784) và b của hình dạng (256,). Đây là PyTorch tương đương với Layer class bạn đã xây dựng từ đầu.",
+    "stage": "post"
+  },
+  {
+    "question": "Phương pháp PyTorch nào tính toán gradients cho tất cả parameters trong đồ thị tính toán?",
+    "options": [
+      "optimizer.bước()",
+      "model.chuyển tiếp()",
+      "loss.lùi ()",
+      "optimizer.zero_grad()"
+    ],
+    "correct": 2,
+    "explanation": "loss.backward() đi ngược lại biểu đồ tính toán, tính toán dL/dp cho mỗi parameter p yêu cầu gradients. optimizer.step() sau đó sử dụng các gradients này để cập nhật parameters.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao vòng lặp training của PyTorch nhanh hơn đáng kể so với framework mini Python thuần túy?",
+    "options": [
+      "PyTorch sử dụng một thuật toán khác",
+      "PyTorch chạy các hoạt động dưới dạng hạt nhân C++/CUDA được tối ưu hóa trên GPU, trong khi các vòng lặp Python thuần túy được diễn giải từng hoạt động một.",
+      "PyTorch sử dụng các kiểu dữ liệu nhỏ hơn",
+      "PyTorch bỏ qua backward pass"
+    ],
+    "correct": 1,
+    "explanation": "PyTorch ủy quyền các hoạt động ma trận cho các hạt nhân C++ và CUDA được tối ưu hóa cao chạy trên GPU với độ song song lớn. Pure Python thực thi các vòng lặp tuần tự với chi phí thông dịch trên mỗi hoạt động.",
+    "stage": "post"
+  }
+]
