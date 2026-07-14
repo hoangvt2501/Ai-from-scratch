@@ -1,0 +1,78 @@
+{
+  "lesson": "phase-19/27-eval-harness-fixture-tasks",
+  "title": "Đánh giá Harness với các nhiệm vụ cố định",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trước khi đọc bài học: một người xác minh đánh giá agent tốt cần thuộc tính nào hơn tất cả những thuộc tính khác?",
+      "options": [
+        "Tốc độ trong phạm vi mili giây.",
+        "Quyết định luận qua các lần chạy.",
+        "Một lời giải thích bằng ngôn ngữ tự nhiên về phán quyết.",
+        "Phạm vi của mọi dòng mã của ứng viên."
+      ],
+      "correct": 1,
+      "explanation": "Quyết định luận là thứ làm cho hồi quy có thể phát hiện được. Một trình xác minh không xác định biến mọi màu đỏ thành một lần tung đồng xu."
+    },
+    {
+      "stage": "check",
+      "question": "Một thí sinh đạt 3 điểm trong 5 mẫu cho một nhiệm vụ. Công thức pass@5 của bài học trả về giá trị nào (làm tròn đến hai chữ số thập phân)?",
+      "options": [
+        "0.60",
+        "0.99",
+        "0.75",
+        "1.00"
+      ],
+      "correct": 1,
+      "explanation": "pass@k = 1 - (1 - p)^k = 1 - (1 - 0,6)^5 = 1 - 0,4^5 = 1 - 0,01024 = 0,98976, làm tròn thành 0,99. Tỷ lệ thô trên mỗi mẫu (0,6) là tên tùy chọn giá trị (a), nhưng công thức khuếch đại nó trên k mẫu."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bài học bao gồm cả pass@1 và pass@k trong báo cáo?",
+      "options": [
+        "pass@1 là giá trị mà người dùng nhìn thấy trong bảng điều khiển; pass@k là để gỡ lỗi nội bộ.",
+        "pass@k có thể ẩn một model chỉ đúng một trong nhiều mẫu, vì vậy pass@1 neo kết quả vào chất lượng lần thử đầu tiên.",
+        "pass@k và pass@1 giống hệt nhau về mặt toán học đối với k > 1.",
+        "pass@1 là phiên bản được hỗ trợ bởi trình xác minh registry; pass@k được dành riêng cho những người xác minh trong tương lai."
+      ],
+      "correct": 1,
+      "explanation": "pass@k làm cho models nhận được câu trả lời một lần trong nhiều lần thử trông mạnh mẽ; pass@1 là sàn thử đầu tiên. Báo cáo đều ngăn chặn việc xác nhận quá mức."
+    },
+    {
+      "stage": "check",
+      "question": "harness gọi _prepare_scratch trước mỗi mẫu. Tại sao điều đó lại quan trọng đối với pass@k > 1?",
+      "options": [
+        "Nó tránh các điều kiện chạy đua trên các thư mục tạm thời được chia sẻ.",
+        "Nó đảm bảo mỗi mẫu bắt đầu từ thiết lập lỗi, không phải đầu ra của mẫu trước đó.",
+        "Nó hoàn toàn là một tối ưu hóa hiệu suất.",
+        "Nó chỉ liên quan đến người xác minh vỏ."
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có vết xước mới, mẫu N+1 bắt đầu từ đầu ra của mẫu N. harness sẽ đo lường 'lần dọn dẹp lần thứ hai' thay vì thành công lần thử đầu tiên."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn thêm một trình xác minh mới 'pytest_passes' chạy pytest trong dir. Bạn nên dựa vào trình xác minh hiện có nào?",
+      "options": [
+        "file_equals, bởi vì pytest ghi một tệp kết quả.",
+        "regex_match, vì đầu ra pytest chứa từ 'passed'.",
+        "shell_exit_zero, vì tín hiệu pytest đi qua mã thoát 0.",
+        "Không thể thể hiện pytest như một người xác minh."
+      ],
+      "correct": 2,
+      "explanation": "Pytest thoát 0 khi vượt qua và không không bằng không khi thất bại. shell_exit_zero là primitive đúng. Production dây định tuyến cuộc gọi qua sandbox từ bài 26."
+    },
+    {
+      "stage": "post",
+      "question": "Một người đánh giá hỏi: 'Đây là hồi quy trong model hay trong harness?' artifact nào trả lời câu hỏi đó?",
+      "options": [
+        "Bản ghi chain-of-thought của agent.",
+        "SampleResult cho mỗi tác vụ, mỗi mẫu cộng với thông báo chi tiết của trình xác minh.",
+        "Trình xác minh registry mã nguồn.",
+        "Vật cố định JSON các tệp."
+      ],
+      "correct": 1,
+      "explanation": "Độ trễ trên mỗi mẫu, chi tiết trình xác minh và pass/fail cho phép bạn phân loại: cùng một đồ đạc, các phán quyết khác nhau, vì vậy model đã thay đổi; cùng một phán quyết nhưng độ trễ khác nhau, vì vậy một cái gì đó khác đã di chuyển."
+    }
+  ]
+}
