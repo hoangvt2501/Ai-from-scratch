@@ -1,0 +1,78 @@
+{
+  "lesson": "05-constitutional-ai-rlaif",
+  "title": "AI và RLAIF hiến pháp",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự thay thế cốt lõi trong AI hiến pháp so với RLHF tiêu chuẩn là gì?",
+      "options": [
+        "Nó thay thế trình ghi nhãn sở thích của con người bằng một trình ghi nhãn AI đọc danh sách các nguyên tắc",
+        "Nó thay thế PPO bằng DPO",
+        "Nó sử dụng prompts tổng hợp thay vì thật",
+        "Nó loại bỏ hoàn toàn phần thưởng model"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Giai đoạn đầu tiên (SFT) của AI Hiến pháp làm gì?",
+      "options": [
+        "Huấn luyện model phần thưởng chỉ dựa trên tùy chọn do AI tạo",
+        "Tạo ra phản hồi ban đầu, phê bình nó theo nguyên tắc hiến pháp được lấy mẫu, sau đó sửa đổi và sử dụng bản sửa đổi làm mục tiêu SFT",
+        "Tạo ra các nguyên tắc tổng hợp bằng cách phân cụm các nhận xét của người gắn nhãn",
+        "Thực hiện PPO với phần thưởng có nguồn gốc từ hiến pháp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Giai đoạn thứ hai (RLAIF) làm gì?",
+      "options": [
+        "Bỏ qua PPO và áp dụng một loss được giám sát duy nhất",
+        "Yêu cầu con người gắn nhãn lại đầu ra SFT",
+        "Chắt lọc hiến pháp vào tokenizer",
+        "Huấn luyện phần thưởng model tùy chọn do AI tạo từ model phản hồi và chạy PPO chống lại nó"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Thứ tự cấp bậc trong hiến pháp Claude bốn cấp tháng 1 năm 2026 của Anthropic là gì?",
+      "options": [
+        "Các quy tắc của nền tảng > tránh thảm họa > hữu ích > đạo đức rộng rãi",
+        "Quy tắc nền tảng > đạo đức rộng rãi > hữu ích > tránh thảm họa",
+        "Tránh những hậu quả thảm khốc > tuân theo các hướng dẫn Anthropic > đạo đức rộng rãi > hữu ích và thẳng thắn",
+        "Các quy tắc nền tảng hữu ích > đạo đức > rộng rãi > tránh thảm họa"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Chế độ hỏng hóc nào KHÔNG nhất thiết phải được khắc phục bằng cách chuyển từ RLHF sang RLAIF?",
+      "options": [
+        "Sự không nhất quán tâm lý của người dán nhãn",
+        "Hack phần thưởng / Định luật Goodhart",
+        "Chi phí máy dán nhãn",
+        "Khan hiếm máy dán nhãn"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Sự thay đổi tiêu đề giữa Bộ phân loại hiến pháp v1 và v2 (2026) là gì?",
+      "options": [
+        "V2 tăng chi phí điện toán từ 1% lên 23,7%",
+        "V2 đã loại bỏ bộ phân loại và chỉ dựa vào hiến pháp",
+        "V2 chỉ chạy trên đầu vào, không chạy trên đầu ra",
+        "V2 đã giảm chi phí điện toán từ 23,7% xuống còn khoảng 1% với tỷ lệ tấn công thành công thấp"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
