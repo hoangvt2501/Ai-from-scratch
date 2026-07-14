@@ -1,0 +1,67 @@
+[
+  {
+    "id": "logreg-pre-1",
+    "stage": "pre",
+    "question": "Phạm vi đầu ra của hàm sigmoid là bao nhiêu?",
+    "options": [
+      "Vô cực âm đến vô cực dương",
+      "0 đến 1 (độc quyền)",
+      "-1 ăn 1",
+      "0 đến vô cực dương"
+    ],
+    "correct": 1,
+    "explanation": "Hàm sigmoid 1 / (1 + e ^ (-z)) xuất ra các giá trị nghiêm ngặt từ 0 đến 1, có thể được hiểu là xác suất."
+  },
+  {
+    "id": "logreg-pre-2",
+    "stage": "pre",
+    "question": "Tại sao hồi quy logistic được gọi là 'hồi quy' mặc dù nó được sử dụng để phân loại?",
+    "options": [
+      "Nó dự đoán các giá trị liên tục sau đó được làm tròn",
+      "Tên này xuất phát từ hàm logistic (sigmoid) mà nó sử dụng, không phải từ phân tích hồi quy",
+      "Ban đầu nó được thiết kế để hồi quy và sau đó được điều chỉnh",
+      "Nó giảm thiểu sai số bình phương trung bình như hồi quy tuyến tính"
+    ],
+    "correct": 1,
+    "explanation": "Tên này xuất phát từ hàm logistic (sigmoid). Mặc dù tên gọi, hồi quy logistic là một thuật toán phân loại xuất ra class xác suất."
+  },
+  {
+    "id": "logreg-post-1",
+    "stage": "post",
+    "question": "Tại sao entropy chéo nhị phân được sử dụng thay vì MSE cho hồi quy logistic?",
+    "options": [
+      "Entropy chéo tính toán nhanh hơn",
+      "MSE với sigmoid tạo ra bề mặt chi phí không lồi với mức tối thiểu cục bộ, trong khi entropy chéo là lồi",
+      "MSE chỉ có thể được sử dụng với models tuyến tính",
+      "Entropy chéo chỉ hoạt động khi dataset cân bằng"
+    ],
+    "correct": 1,
+    "explanation": "MSE kết hợp với kích hoạt sigmoid tạo ra một bề mặt chi phí không lồi với nhiều mức tối thiểu cục bộ. Entropy chéo nhị phân với sigmoid là lồi, đảm bảo một mức tối thiểu toàn cầu duy nhất."
+  },
+  {
+    "id": "logreg-post-2",
+    "stage": "post",
+    "question": "Bộ lọc thư rác có precision = 0,95 và recall = 0,60. Điều này có nghĩa là gì trong điều kiện thực tế?",
+    "options": [
+      "95% tất cả các email được phân loại chính xác và 60% thư rác bị phát hiện",
+      "Khi nó gắn cờ một email là thư rác, nó chính xác 95% thời gian, nhưng nó chỉ bắt được 60% thư rác thực tế",
+      "60% email bị gắn cờ là thư rác và 95% tất cả thư rác bị phát hiện",
+      "model chính xác 95% trên bộ thử nghiệm và 60% trên bộ training"
+    ],
+    "correct": 1,
+    "explanation": "Precision = 0,95 có nghĩa là 95% email được dự đoán là thư rác thực sự là thư rác (một số báo động giả). Recall = 0,60 có nghĩa là chỉ có 60% thư rác thực tế bị phát hiện (40% lọt qua)."
+  },
+  {
+    "id": "logreg-post-3",
+    "stage": "post",
+    "question": "Trong hồi quy softmax 4 classes, điều gì đúng về xác suất đầu ra?",
+    "options": [
+      "Mỗi class có xác suất độc lập từ 0 đến 1",
+      "Bốn xác suất đầu ra có tổng là 1 và class có xác suất cao nhất là dự đoán",
+      "Chỉ 2 classes hàng đầu mới nhận được xác suất không",
+      "Kết quả đầu ra là điểm thô, không phải xác suất"
+    ],
+    "correct": 1,
+    "explanation": "Softmax chuyển đổi một vector điểm thô thành xác suất có tổng cộng là 1. class được dự đoán là  có xác suất cao nhất."
+  }
+]
