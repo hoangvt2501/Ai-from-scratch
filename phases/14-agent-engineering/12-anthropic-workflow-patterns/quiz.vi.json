@@ -1,0 +1,90 @@
+{
+  "lesson": "12-anthropic-workflow-patterns",
+  "title": "Các mẫu quy trình làm việc của Anthropic: Đơn giản hơn phức tạp",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Làm thế nào để Anthropic phân biệt quy trình làm việc với agent?",
+      "options": [
+        "Quy trình làm việc sử dụng embeddings; agents sử dụng công cụ",
+        "Quy trình làm việc là các biểu đồ được xác định trước do kỹ sư sở hữu; agents là hướng công cụ động thuộc sở hữu của model",
+        "Quy trình làm việc chạy trên CPUs; agents cần GPUs",
+        "Quy trình làm việc không có trạng thái; agents có trạng thái"
+      ],
+      "correct": 1,
+      "explanation": "Quy trình làm việc = đường dẫn mã được xác định trước mà kỹ sư sở hữu; agent = model sở hữu biểu đồ."
+    },
+    {
+      "stage": "pre",
+      "question": "Ba khả năng của LLM tăng cường làm nền tảng cho cả năm mẫu là gì?",
+      "options": [
+        "Tìm kiếm (truy xuất), công cụ (hành động), bộ nhớ (persistence)",
+        "Embeddings, fine-tuning, RAG",
+        "Vector, KV, đồ thị",
+        "Lập kế hoạch, thực hiện, phản ánh"
+      ],
+      "correct": 0,
+      "explanation": "Đơn vị nguyên tử là một LLM có truy xuất, công cụ và bộ nhớ được nối vào."
+    },
+    {
+      "stage": "check",
+      "question": "Cái nào KHÔNG phải là một trong năm mẫu quy trình làm việc Anthropic?",
+      "options": [
+        "Prompt chuỗi",
+        "Định tuyến",
+        "Người đánh giá-optimizer",
+        "Gradient distillation"
+      ],
+      "correct": 3,
+      "explanation": "Năm prompt là chuỗi chuỗi, định tuyến, song song, điều phối workers, đánh giá optimizer. Gradient distillation là một khái niệm training."
+    },
+    {
+      "stage": "check",
+      "question": "Song song hóa có hai hình dạng nào?",
+      "options": [
+        "Đồng bộ hóa và không đồng bộ",
+        "Phân đoạn (các phần khác nhau) và bỏ phiếu (cùng prompt N lần, tổng hợp)",
+        "Nóng và lạnh",
+        "Có trạng thái và không có trạng thái"
+      ],
+      "correct": 1,
+      "explanation": "Song song hóa là phân chia hoặc bỏ phiếu; cả hai đều phát ra N cuộc gọi và tổng hợp."
+    },
+    {
+      "stage": "check",
+      "question": "Mẫu quy trình làm việc nào được khái quát hóa?",
+      "options": [
+        "Prompt chuỗi",
+        "Định tuyến",
+        "Orchestrator-workers",
+        "Người đánh giá-optimizer"
+      ],
+      "correct": 3,
+      "explanation": "Evaluator-optimizer là tên Anthropic của mẫu lặp lại Self-Refine / CRITIC."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào quy trình làm việc đánh bại agents theo bài học?",
+      "options": [
+        "Luôn luôn",
+        "Đối với các tác vụ có thể dự đoán, giới hạn chi phí hoặc giới hạn tuân thủ, trong đó biểu đồ có thể được liệt kê và kiểm tra",
+        "Chỉ dành cho trò chuyện",
+        "Chỉ trên GPUs"
+      ],
+      "correct": 1,
+      "explanation": "Quy trình làm việc rẻ hơn, dễ gỡ lỗi hơn và có thể kiểm tra được; chọn chúng khi các bước có thể biết được."
+    },
+    {
+      "stage": "post",
+      "question": "Điểm bắt đầu mặc định được đề xuất của bài học là gì?",
+      "options": [
+        "Nhiều agent framework",
+        "Cuộc gọi API trực tiếp; chỉ thêm frameworks khi trạng thái bền vững, đồng thời diễn viên hoặc khuôn mẫu vai trò kiếm được chi phí",
+        "Fine-tune the model",
+        "Xây dựng MCTS tùy chỉnh"
+      ],
+      "correct": 1,
+      "explanation": "Schluntz và Zhang: bắt đầu đơn giản; chỉ thêm framework phức tạp khi hợp lý."
+    }
+  ]
+}
