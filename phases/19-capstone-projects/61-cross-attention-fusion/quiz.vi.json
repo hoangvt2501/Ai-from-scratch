@@ -1,0 +1,78 @@
+{
+  "lesson": "61-cross-attention-fusion",
+  "title": "Cross-Attention Hợp nhất",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt hoạt động giữa hợp nhất sớm và hợp nhất muộn trong mô hình ngôn ngữ thị giác là gì?",
+      "options": [
+        "Hợp nhất sớm chạy đầu tiên trong thời gian đồng hồ treo tường",
+        "Hợp nhất sớm nối tokens hình ảnh và văn bản thành một chuỗi; hợp nhất muộn giữ chúng riêng biệt và kết nối qua cross-attention ở mỗi khối",
+        "Nhiệt hạch muộn sử dụng nhiều bộ nhớ hơn",
+        "Hợp nhất sớm là bất hợp pháp"
+      ],
+      "correct": 1,
+      "explanation": "Chameleon và Emu3 là hợp nhất sớm; Flamingo và BLIP-2 là hợp nhất muộn. Lựa chọn kiến trúc thay đổi hình dạng mặt nạ và bộ nhớ đệm KV."
+    },
+    {
+      "stage": "pre",
+      "question": "Trong một khối decoder có cả self-attention và cross-attention, cái nào sử dụng mặt nạ nhân quả?",
+      "options": [
+        "Cả hai",
+        "Chỉ Self-attention; hình ảnh được quan sát đầy đủ và cross-attention không có trật tự thời gian",
+        "Chỉ Cross-attention",
+        "Không"
+      ],
+      "correct": 1,
+      "explanation": "Tạo văn bản là tự hồi quy, vì vậy self-attention văn bản là nhân quả. Tất cả các tokens hình ảnh đều hiển thị trước khi bất kỳ văn bản nào được giải mã."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao cross-attention KV cache được tạo một lần cho mỗi hình ảnh?",
+      "options": [
+        "PyTorch yêu cầu bộ nhớ đệm",
+        "Các khóa và giá trị hình ảnh không thay đổi khi văn bản được giải mã, vì vậy việc chiếu bộ nhớ một lần và sử dụng lại K và V trên tất cả các bước giải mã là toàn bộ tốc độ inference",
+        "Bộ nhớ đệm giúp tiết kiệm dung lượng ổ đĩa",
+        "Nó tránh sử dụng GPU"
+      ],
+      "correct": 1,
+      "explanation": "Tầm nhìn encoder chạy một lần. Phép chiếu KV của nó được tính toán một lần. Mỗi văn bản token sử dụng lại bộ nhớ cache miễn phí."
+    },
+    {
+      "stage": "check",
+      "question": "Hình dạng đầu ra của cross-attention là gì khi độ dài văn bản là Nt = 10 và độ dài hình ảnh là Nv = 197 với ẩn = 256?",
+      "options": [
+        "(B, 197, 256)",
+        "(B, 10, 256)",
+        "(B, 10, 197)",
+        "(B, 207, 256)"
+      ],
+      "correct": 1,
+      "explanation": "Cross-attention hình dạng đầu ra tuân theo luồng truy vấn, vì vậy đầu ra là (B, Nt, ẩn) bất kể độ dài khóa."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao không sử dụng khẩu trang trên cross-attention?",
+      "options": [
+        "Khẩu trang quá đắt",
+        "Hình ảnh được quan sát đầy đủ trước khi bắt đầu tạo văn bản; mọi vị trí văn bản có thể tham gia vào mọi bản vá",
+        "PyTorch không hỗ trợ mặt nạ chéo",
+        "Khẩu trang luôn gây ra NaN"
+      ],
+      "correct": 1,
+      "explanation": "Không có thứ tự thời gian trên các bản vá hình ảnh và không có rò rỉ để ngăn chặn, vì vậy cross-attention nhìn thấy toàn bộ hình ảnh."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn sẽ thêm phần mở rộng nào để khôi phục sự ổn định kiểu Flamingo trong training?",
+      "options": [
+        "Thả layer self-attention",
+        "Chèn một cổng tánh đã học vào phần còn lại của cross-attention để model có thể bắt đầu từ hành vi chỉ có văn bản và phát triển thành luồng hình ảnh",
+        "Xóa FFN",
+        "Chỉ sử dụng một đầu attention"
+      ],
+      "correct": 1,
+      "explanation": "Cổng tanh của Flamingo bắt đầu từ không, khôi phục hành vi chỉ có văn bản khi bắt đầu và cung cấp cho model một đoạn đường dốc mượt mà vào cross-attention."
+    }
+  ]
+}
