@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Hàm loss đại diện cho điều gì trong training mạng nơ-ron?",
+    "options": [
+      "Số lượng dự đoán không chính xác",
+      "Một thước đo có thể phân biệt được mức độ sai của các dự đoán của model, mà optimizer giảm thiểu",
+      "Kích thước của training dataset",
+      "Lịch trình learning rate"
+    ],
+    "correct": 1,
+    "explanation": "Hàm loss ánh xạ các dự đoán và mục tiêu đến một vô hướng duy nhất mà optimizer thu nhỏ thông qua gradient descent. Nó phải có thể phân biệt được để gradients có thể được tính toán.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao entropy chéo được ưa chuộng hơn MSE cho các nhiệm vụ phân loại?",
+    "options": [
+      "Entropy chéo tính toán nhanh hơn",
+      "Entropy chéo trừng phạt các dự đoán sai tự tin theo cấp số nhân thông qua -log(p), trong khi MSE cho gradients yếu gần 0 và 1",
+      "MSE chỉ hoạt động để hồi quy",
+      "Entropy chéo không yêu cầu nhãn"
+    ],
+    "correct": 1,
+    "explanation": "Khi một model tự tin dự đoán sai class (p gần 0 cho class thực), -log(p) tạo ra một loss lớn và gradient mạnh. MSE tạo ra gradients yếu trong cùng một tình huống vì sigmoid phẳng gần 0 và 1.",
+    "stage": "pre"
+  },
+  {
+    "question": "Điều gì xảy ra nếu bạn sử dụng MSE loss để phân loại nhị phân?",
+    "options": [
+      "Training phân kỳ ngay lập tức",
+      "model có thể giảm thiểu loss bằng cách dự đoán 0,5 cho mọi thứ, đạt được MSE = 0,25 mà không cần học",
+      "Các model tàu bình thường",
+      "Gradients phát nổ"
+    ],
+    "correct": 1,
+    "explanation": "Với MSE trên một dataset nhị phân cân bằng, dự đoán 0,5 cho mỗi đầu vào cho MSE = 0,25 - mức tối thiểu có thể đạt được mà không có sự phân biệt. Sự model thỏa mãn loss mà không cần học bất kỳ mẫu hữu ích nào.",
+    "stage": "post"
+  },
+  {
+    "question": "Làm mịn nhãn có tác dụng gì và tại sao nó lại hữu ích?",
+    "options": [
+      "Nó loại bỏ các nhãn ồn ào khỏi dataset",
+      "Nó thay thế các mục tiêu 0/1 cứng bằng các giá trị mềm như 0.1/0.9, ngăn chặn các dự đoán quá tự tin và cải thiện khái quát hóa",
+      "Nó áp dụng đường trung bình động cho loss",
+      "Nó làm trơn tru lịch trình learning rate"
+    ],
+    "correct": 1,
+    "explanation": "Tính năng làm mịn nhãn thay đổi mục tiêu từ [0,0,1,0] đến [0,025,0,025,0,925,0,025] (với alpha=0,1). Điều này ngăn model đẩy logits đến vô hạn để đạt được các mục tiêu khó, giảm sự tự tin thái quá.",
+    "stage": "post"
+  },
+  {
+    "question": "Trong loss ngược lại (InfoNCE), temperature parameter đóng vai trò gì?",
+    "options": [
+      "Nó kiểm soát learning rate",
+      "Nó kiểm soát mức độ phân bố tương tự sắc nét như thế nào - temperature thấp hơn có nghĩa là sự phân tách khó khăn hơn giữa tích cực và tiêu cực",
+      "Nó đặt số lượng mẫu âm tính",
+      "Nó xác định kích thước embedding"
+    ],
+    "correct": 1,
+    "explanation": "Temperature chia điểm tương đồng trước softmax. temperature thấp hơn (ví dụ: 0,07) tạo ra sự phân bố sắc nét hơn, trong đó model phải phân biệt rõ ràng các tích cực với âm tính. temperature cao hơn là dễ tha thứ hơn.",
+    "stage": "post"
+  }
+]
