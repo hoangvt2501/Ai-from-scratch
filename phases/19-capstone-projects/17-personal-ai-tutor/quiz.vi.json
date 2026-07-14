@@ -1,0 +1,90 @@
+{
+  "lesson": "17-personal-ai-tutor",
+  "title": "Capstone 17 — Gia sư AI cá nhân (Thích ứng, Đa phương thức, có bộ nhớ)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Gia sư Socrates policy làm gì khi người học hỏi câu trả lời hoàn toàn?",
+      "options": [
+        "Đặt một câu hỏi dẫn dắt người học hướng tới câu trả lời",
+        "Ghi nhật ký yêu cầu và im lặng",
+        "Cung cấp câu trả lời ngay lập tức và tiếp tục",
+        "Chuyển sang một nút khái niệm khác"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Biểu đồ chương trình giảng dạy mã hóa cấu trúc nào?",
+      "options": [
+        "Một biểu đồ có hướng dẫn của các khái niệm với các cạnh tiên quyết, được đính kèm với nội dung OER",
+        "Một sự xáo trộn ngẫu nhiên của các chủ đề",
+        "Danh sách phẳng các khái niệm không liên quan",
+        "Chỉ nút được nghiên cứu gần đây nhất"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Người học model cập nhật những gì sau mỗi lần tương tác?",
+      "options": [
+        "Trọng lượng của LLM cơ sở",
+        "policy duy trì COPPA",
+        "Biểu đồ chương trình giảng dạy schema",
+        "Xác suất thành thạo mỗi khái niệm thông qua truy tìm kiến thức Bayes hoặc một biến thể tương tự"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bộ nhớ được phân chia như thế nào giữa kho lưu trữ theo tập và ngữ nghĩa?",
+      "options": [
+        "Episodic nắm giữ mọi tương tác; ngữ nghĩa giữ các lỗi và sở thích được nén chặt được thúc đẩy từ từng tập",
+        "Chúng là bản sao của cùng một dữ liệu",
+        "Episodic dành cho cha mẹ; ngữ nghĩa dành cho người học",
+        "Episodic giữ embeddings; ngữ nghĩa giữ âm thanh thô"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hạn chế nào định hình khả năng duy trì trí nhớ cho người học K-12?",
+      "options": [
+        "Lưu giữ dựa trên độ dài ngữ cảnh model",
+        "Lưu giữ vĩnh viễn mà không cần xóa",
+        "Chỉ GDPR",
+        "Lưu giữ nhận biết COPPA với tính năng tự động xóa sau một cửa sổ xác định và quyền truy cập của phụ huynh"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Cấu trúc của nghiên cứu hiệu quả được sử dụng để phân phối sản phẩm là gì?",
+      "options": [
+        "Khảo sát internet ẩn danh",
+        "Xét nghiệm AB 30 giây",
+        "Bài kiểm tra trước và sau bài kiểm tra trong hai tuần với 10 người học, so với nhóm thuần tập cơ sở không thích ứng",
+        "Một session một giờ duy nhất với một người học"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Gia sư tiếp xúc với người học những đường dẫn đầu vào đa phương thức nào?",
+      "options": [
+        "Chỉ văn bản",
+        "Chỉ chụp ảnh qua OCR model tùy chỉnh",
+        "Chỉ giọng nói không có văn bản hoặc ảnh",
+        "Nhập văn bản, giọng nói qua LiveKit + Whisper và toán học ảnh qua dấu chấm. ocr hoặc PaliGemma 2"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
