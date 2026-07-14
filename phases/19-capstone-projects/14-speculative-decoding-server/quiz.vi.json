@@ -1,0 +1,90 @@
+{
+  "lesson": "14-speculative-decoding-server",
+  "title": "Capstone 14 — Inference Server giải mã suy đoán",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cơ chế hai lớp đằng sau giải mã đầu cơ là gì?",
+      "options": [
+        "Hai mục tiêu models luân phiên mỗi token",
+        "Một embedding model và một bộ tổng hợp",
+        "Bộ nhớ đệm truy xuất và trình xếp hạng lại",
+        "Một model dự thảo đề xuất k ứng cử viên tokens; mục tiêu model xác minh chúng trong một lần vượt qua"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "EAGLE-3 làm gì mà bản nháp ngram không làm?",
+      "options": [
+        "Nó thay thế mục tiêu model",
+        "Nó huấn luyện những người đứng đầu dự thảo về các trạng thái ẩn của model mục tiêu để có tỷ lệ chấp nhận cao hơn",
+        "Nó tránh hoàn toàn tokenization",
+        "Nó chỉ chạy trên CPUs"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao độ trễ đuôi p99 được báo cáo trên batch kích thước 1, 8 và 32?",
+      "options": [
+        "Trạng thái ổn định tokens mỗi giây có thể che giấu rằng việc từ chối xác minh đắt hơn giải mã vani",
+        "vLLM không thể phân phát batch kích thước dưới 8",
+        "P99 chỉ quan trọng ở batch cỡ 32",
+        "Độ trễ đuôi không phụ thuộc vào kích thước batch"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao tỷ lệ chấp nhận trôi dạt khi phân phối lưu lượng thay đổi?",
+      "options": [
+        "vLLM xoay vòng models giờ",
+        "alignment nháp phụ thuộc vào phân phối đầu vào: ShareGPT, mã và dữ liệu miền thực hiện các mẫu khác nhau",
+        "Bộ lập lịch hệ điều hành xáo trộn bộ nhớ GPU",
+        "Quantization thay đổi tại runtime"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Việc triển khai mở rộng quy mô dựa trên tín hiệu HPA Kubernetes nào?",
+      "options": [
+        "Các nút tự động thay đổi quy mô cụm",
+        "Sử dụng CPU",
+        "IOPS đĩa",
+        "Thời gian chờ đợi trên các yêu cầu inference"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "P-EAGLE bổ sung gì so với loạt EAGLE-3?",
+      "options": [
+        "Trọng lượng Quantization đến FP4",
+        "Loại bỏ model mục tiêu",
+        "Suy đoán song song trên một cây dự thảo branches xác minh trong một lần vượt qua mục tiêu",
+        "Quản lý dataset tự động"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tiêu chí yêu cầu mục tiêu thông lượng nào so với đường cơ sở không đầu cơ?",
+      "options": [
+        "Ít nhất 2,5 lần ở chất lượng phù hợp trên hai models",
+        "Bất kỳ cải thiện nào trên đường cơ sở",
+        "Khoảng 1,1x ở chất lượng phù hợp",
+        "Thông lượng chính xác gấp 10 lần ở bất kỳ chất lượng nào"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
