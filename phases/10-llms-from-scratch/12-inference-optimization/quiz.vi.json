@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Hai giai đoạn của LLM inference là gì?",
+    "options": [
+      "Training và đánh giá",
+      "Điền trước (processes prompt song song, liên kết điện toán) và giải mã (tạo tokens lần lượt, ràng buộc bộ nhớ)",
+      "Mã hóa và giải mã",
+      "Tiến và lùi"
+    ],
+    "correct": 1,
+    "explanation": "Điền trước processes tất cả prompt tokens song song (bị giới hạn bởi điện toán). Giải mã tạo ra tokens tự hồi quy từng cái một (bị giới hạn bởi băng thông bộ nhớ để tải trọng model). Các tối ưu hóa khác nhau nhắm mục tiêu vào từng giai đoạn.",
+    "stage": "pre"
+  },
+  {
+    "question": "KV-cache loại bỏ điều gì trong quá trình tạo tự hồi quy?",
+    "options": [
+      "Sự cần thiết của khẩu trang attention",
+      "Tính toán lại dự phòng khóa và giá trị vectors cho tất cả các tokens trước đó ở mỗi bước tạo",
+      "Tra cứu embedding",
+      "Tính toán softmax"
+    ],
+    "correct": 1,
+    "explanation": "Nếu không có bộ nhớ đệm KV, việc tạo token N yêu cầu tính toán lại các khóa và giá trị attention cho tất cả các tokens N-1 trước đó. KV-cache lưu trữ các vectors này, vì vậy mỗi token mới chỉ tính toán K và V của riêng nó, tiết kiệm tính toán O(N) cho mỗi bước.",
+    "stage": "pre"
+  },
+  {
+    "question": "Batching liên tục là gì và tại sao nó cải thiện thông lượng?",
+    "options": [
+      "Xử lý tất cả các yêu cầu trong một batch lớn",
+      "Tự động thêm và xóa các yêu cầu khỏi batch đang chạy khi chúng bắt đầu và kết thúc, thay vì đợi toàn bộ batch hoàn tất",
+      "Sử dụng kích thước batch lớn hơn",
+      "Phân lô trên nhiều models"
+    ],
+    "correct": 1,
+    "explanation": "Trong hàng loạt tĩnh, một yêu cầu ngắn sẽ giữ vị trí batch của nó cho đến khi yêu cầu dài nhất kết thúc. Việc phân lô liên tục ngay lập tức lấp đầy các vị trí đã hoàn thành với các yêu cầu mới, giữ cho GPU bận rộn và cải thiện thông lượng tổng thể.",
+    "stage": "post"
+  },
+  {
+    "question": "PagedAttention (được sử dụng trong vLLM) giải quyết vấn đề gì?",
+    "options": [
+      "Nó tăng tốc độ tính toán attention",
+      "Nó quản lý bộ nhớ đệm KV trong các khối có kích thước cố định như bộ nhớ ảo, loại bỏ sự phân mảnh từ các chuỗi có độ dài thay đổi",
+      "Nó làm giảm kích thước model",
+      "Nó cải thiện tốc độ tokenization"
+    ],
+    "correct": 1,
+    "explanation": "KV-cache cho các chuỗi có độ dài thay đổi gây ra phân mảnh bộ nhớ (khoảng cách lãng phí giữa các phân bổ). PagedAttention phân bổ KV-cache trong các khối cố định và ánh xạ chúng với một bảng trang, giống như bộ nhớ ảo của hệ điều hành.",
+    "stage": "post"
+  },
+  {
+    "question": "Giải mã đầu cơ là gì?",
+    "options": [
+      "Tạo nhiều phản hồi và chọn câu trả lời tốt nhất",
+      "Sử dụng một model nháp nhỏ để đề xuất nhiều tokens mà model lớn xác minh song song, tăng tốc độ phát điện",
+      "Dự đoán người dùng muốn tokens nào",
+      "Bộ nhớ đệm trình tự được tạo thường xuyên"
+    ],
+    "correct": 1,
+    "explanation": "Một model nhanh nhỏ tạo ra N tokens ứng cử viên. model lớn xác minh tất cả N trong một forward pass duy nhất (song song). Nếu K tokens được chấp nhận, bạn đã tạo K tokens trong thời gian khoảng 1 bước model lớn.",
+    "stage": "post"
+  }
+]
