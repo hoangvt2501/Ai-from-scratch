@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Tại sao bạn không thể tải tất cả dữ liệu training trước vào bộ nhớ?",
+    "options": [
+      "Python không hỗ trợ mảng lớn",
+      "Kho dữ liệu trước training có kích thước terabyte, vượt xa RAM có sẵn, đòi hỏi streaming pipelines",
+      "Tải dữ liệu vào bộ nhớ chậm hơn",
+      "Bộ nhớ chỉ cần thiết cho trọng lượng model"
+    ],
+    "correct": 1,
+    "explanation": "LLM dữ liệu training trước thường là 1-15 TB văn bản. Ngay cả với 256GB RAM, bạn cũng không thể chứa đầy dataset. Streaming pipelines process dữ liệu nhanh chóng, chỉ tải những gì cần thiết cho batch hiện tại.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao khử trùng lặp dữ liệu lại quan trọng đối với training trước?",
+    "options": [
+      "Nó tiết kiệm dung lượng đĩa",
+      "Tài liệu trùng lặp khiến model ghi nhớ nguyên văn văn bản cụ thể và lãng phí training tính toán trên nội dung lặp đi lặp lại",
+      "Nó tăng tốc độ tokenization",
+      "Nó làm giảm kích thước từ vựng"
+    ],
+    "correct": 1,
+    "explanation": "Nội dung gần như trùng lặp (nguyên mẫu, bản sao bị cạo) khiến model ghi nhớ hơn là khái quát hóa. Tính năng khử trùng lặp giúp giảm lãng phí tính toán training và cải thiện chất lượng model bằng cách đảm bảo tín hiệu training đa dạng.",
+    "stage": "pre"
+  },
+  {
+    "question": "Mục đích của việc tạo chuỗi training có độ dài cố định từ các tài liệu có độ dài thay đổi là gì?",
+    "options": [
+      "Nó làm cho văn bản dễ đọc hơn",
+      "GPU training yêu cầu hình dạng tensor đồng nhất, vì vậy tài liệu phải được đóng gói hoặc đệm thành các trình tự có độ dài cố định",
+      "Trình tự có độ dài cố định chính xác hơn",
+      "Nó làm giảm tổng số tokens"
+    ],
+    "correct": 1,
+    "explanation": "GPUs process batches tensors có hình dạng giống hệt nhau. Các tài liệu có độ dài thay đổi phải được chia thành các trình tự có độ dài cố định (ví dụ: 2048 hoặc 4096 tokens) với mặt nạ attention thích hợp ở ranh giới tài liệu.",
+    "stage": "post"
+  },
+  {
+    "question": "Điều gì xảy ra nếu pipeline dữ liệu chậm hơn tốc độ GPU training?",
+    "options": [
+      "Training tự động giảm tốc độ để khớp",
+      "GPU ngồi nhàn rỗi chờ đợi batches, lãng phí thời gian tính toán tốn kém",
+      "Các model huấn luyện trên cùng một batch lặp đi lặp lại",
+      "Không có gì - pipeline chạy không đồng bộ"
+    ],
+    "correct": 1,
+    "explanation": "Nếu dataloader không thể phục vụ batches đủ nhanh, GPU sẽ dừng lại giữa các bước. Trên các cụm A100 có giá 30 đô la +/giờ, pipeline tắc nghẽn trực tiếp gây lãng phí tiền bạc. Lập hồ sơ thông lượng pipeline là điều cần thiết.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao lọc chất lượng dữ liệu (phát hiện ngôn ngữ, lọc nội dung) được áp dụng trước khi tokenization?",
+    "options": [
+      "Tokenizers không thể xử lý văn bản chất lượng thấp",
+      "Dữ liệu chất lượng thấp (thư rác, nguyên mẫu, nội dung độc hại) làm suy giảm khả năng model tỷ lệ thuận với tỷ lệ chia sẻ dữ liệu training của nó",
+      "Lọc sau tokenization là không thể",
+      "Nó làm giảm thời gian tokenization"
+    ],
+    "correct": 1,
+    "explanation": "model học hỏi từ bất kỳ dữ liệu nào nó nhìn thấy. Nếu 10% dữ liệu training là spam hoặc nội dung chất lượng thấp, model sẽ phân bổ 10% dung lượng của mình để tái tạo các mẫu đó. Lọc sớm đảm bảo chỉ tín hiệu chất lượng cao đến model.",
+    "stage": "post"
+  }
+]
