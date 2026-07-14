@@ -1,0 +1,78 @@
+{
+  "lesson": "78-zero-parameter-sharding",
+  "title": "ZeRO Optimizer Tiểu bang Sharding",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao trình tối ưu hóa phân đoạn ZeRO trạng thái trước thay vì parameters?",
+      "options": [
+        "Trình tối ưu hóa quan trọng hơn",
+        "Trạng thái tối ưu hóa là thuật ngữ bộ nhớ lớn nhất và chỉ được chạm vào trong khi bước chứ không phải tiến hoặc lùi",
+        "Parameters dễ dàng hơn",
+        "DeepSpeed bắt buộc nó"
+      ],
+      "correct": 1,
+      "explanation": "Đối với Adam trong mixed precision fp32 master cộng với hai khoảnh khắc là 12P byte trên mỗi xếp hạng so với 4P đối với fp16 tham số + grads. Sharding thuật ngữ lớn nhất đầu tiên giành được nhiều bộ nhớ nhất trên một đơn vị độ phức tạp."
+    },
+    {
+      "stage": "pre",
+      "question": "Mẫu dây trên mỗi bước của ZeRO giai đoạn 1 là gì?",
+      "options": [
+        "Một allgiảm",
+        "Một reduce_scatter trên gradients cộng với một allgather trên các parameters cập nhật",
+        "Một chương trình phát sóng",
+        "Không có gì"
+      ],
+      "correct": 1,
+      "explanation": "Reduce_scatter chỉ phân phối mỗi thứ hạng gradient phân đoạn của nó; allgather phân phối lại các phân đoạn parameter đã cập nhật. Tổng số byte bằng allreduce, bộ nhớ chia cho N."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao băng thông mỗi bước giống với DDP?",
+      "options": [
+        "Phép thuật",
+        "Allreduce bằng reduce_scatter cộng allgather trong băng thông; ZeRO chia nó thành hai nửa trên các dữ liệu khác nhau",
+        "ZeRO sử dụng nén",
+        "Nó không giống nhau"
+      ],
+      "correct": 1,
+      "explanation": "Ring allreduce được thực hiện dưới dạng reduce_scatter sau đó allgather. ZeRO thực hiện hai thao tác tương tự nhưng allgather xoay parameters cập nhật, không phải gradient tổng hợp."
+    },
+    {
+      "stage": "check",
+      "question": "Đối với một model 7B với Adam trong mixed precision trên 8 hạng, giảm bộ nhớ so với DDP vani là bao nhiêu?",
+      "options": [
+        "10%",
+        "Khoảng 65% (vani 16P so với ZeRO-1 4P + 12P/N = 5.5P)",
+        "99%",
+        "0%"
+      ],
+      "correct": 1,
+      "explanation": "Vani: 2P + 2P + 4P + 4P + 4P = 16P. ZeRO-1: 2P + 2P + (4P + 4P + 4P) / 8 = 5.5P. Giảm là (16-5.5) / 16 = 65.6%."
+    },
+    {
+      "stage": "check",
+      "question": "ZeRO-2 bổ sung gì so với ZeRO-1?",
+      "options": [
+        "Không có gì",
+        "Đồng thời giảm gradients không phân đoạn sau khi reduce_scatter, giải phóng bộ nhớ gradient trên mỗi cấp bậc; băng thông vẫn giữ nguyên",
+        "Chuyển phần phụ trợ sang NCCL",
+        "Xóa trình tối ưu hóa"
+      ],
+      "correct": 1,
+      "explanation": "ZeRO-2 không phần gradient không phân đoạn sau khi reduce_scatter; băng thông tương tự như ZeRO-1 nhưng bộ nhớ gradient thấp hơn."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao ZeRO yêu cầu checkpoint trạng thái tối ưu hóa ghi lại thứ hạng nào sở hữu phân đoạn nào?",
+      "options": [
+        "Mỹ phẩm",
+        "Nếu không có quyền sở hữu theo cấp bậc, trạng thái đã lưu sẽ không thể đọc được khi khởi động lại; tiếp tục trên cùng một kích thước thế giới cần đặt phân đoạn phù hợp trở lại đúng thứ hạng",
+        "Nó không",
+        "Nén"
+      ],
+      "correct": 1,
+      "explanation": "Bài 80 xây dựng biểu hiện checkpoint phân mảnh chính xác để quá trình chạy ZeRO có thể tiếp tục trên cùng một cấu trúc liên kết."
+    }
+  ]
+}
