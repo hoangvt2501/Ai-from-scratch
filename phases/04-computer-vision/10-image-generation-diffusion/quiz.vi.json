@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao khuếch tán training có thể chọn bất kỳ bước thời gian nào trực tiếp thay vì mô phỏng chuỗi Markov chuyển tiếp từng bước?",
+      "options": [
+        "Nó là một xấp xỉ bỏ qua các bước trung gian",
+        "Bởi vì thành phần của nhiều phép cộng Gaussian vẫn mang lại một Gaussian, cho một dạng đóng q(x_t|x_0) = N(sqrt(alpha_bar_t) x_0, (1 - alpha_bar_t) I) mà bạn có thể lấy mẫu trong một bước",
+        "Bởi vì x_t độc lập với x_0",
+        "Nó được yêu cầu bởi autograd của PyTorch"
+      ],
+      "correct": 1,
+      "explanation": "Các bổ sung Gaussian lặp đi lặp lại đóng lại một cách phân tích. Sản phẩm tích lũy alpha_bar_t mã hóa 'lượng tín hiệu còn lại sau t bước' và bạn có thể lấy mẫu x_t trực tiếp mà không cần chạy chuỗi. Đây là lý do tại sao training khuếch tán là O (1) mỗi bước chứ không phải O (T)."
+    },
+    {
+      "stage": "pre",
+      "question": "Mạng nơ-ron của DDPM thực sự dự đoán điều gì?",
+      "options": [
+        "Hình ảnh tiếp theo x_{t-1} trực tiếp",
+        "Nhiễu epsilon được thêm vào ở bước t, từ đó giá trị trung bình của x_{t-1} được suy ra một cách phân tích",
+        "Nhãn class của đầu vào",
+        "Tỷ lệ tín hiệu trên nhiễu"
+      ],
+      "correct": 1,
+      "explanation": "DDPM tham số hóa model để dự đoán epsilon. Với dự đoán nhiễu và lịch trình nhiễu, giá trị trung bình và variance Gaussian của x_{t-1} là dạng đóng. Dự đoán epsilon thay vì x_0 hoặc x_{t-1} đơn giản hóa loss thành MSE đơn giản và cho gradients tốt hơn về mặt số lượng."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao DDIM đạt được chất lượng mẫu tương tự như DDPM với các bước ít hơn ~ 20 lần?",
+      "options": [
+        "DDIM thay đổi mục tiêu training",
+        "DDIM định hình lại sampling như một ODE xác định có quỹ đạo có thể được rời rạc với ít bước hơn nhiều trong khi đánh gần như cùng một endpoint; Không cần huấn luyện lại",
+        "DDIM sử dụng kiến trúc model nhanh hơn",
+        "DDIM tạo ra hình ảnh nhỏ hơn"
+      ],
+      "correct": 1,
+      "explanation": "Quan sát quan trọng của DDIM là process ngược, khi được tham số hóa lại một cách xác định, trở thành một ODE mà một vài bước gần đúng tốt. model (trọng số và loss) không thay đổi so với DDPM; Chỉ có bộ lấy mẫu khác nhau. checkpoint DDPM có thể được sử dụng với bộ lấy mẫu DDIM, DPM-Solver hoặc Euler thay thế cho nhau."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn vẽ biểu đồ `alpha_bar_t` cho một lịch trình beta tuyến tính với T = 1000 và thấy nó giảm xuống gần bằng không bởi t = 600. Tại sao điều này lại quan trọng?",
+      "options": [
+        "Nó không quan trọng",
+        "40% các bước thời gian cuối cùng hầu như không thêm tín hiệu; training các bước thời gian đó dạy mạng khử nhiễu đã xấp xỉ N (0, I), điều này gây lãng phí dung lượng. Lịch trình cosine hoặc sigmoid khắc phục điều này bằng cách phân tán phun nhiễu đồng đều hơn",
+        "alpha_bar_t phải bằng không ở cuối",
+        "PyTorch yêu cầu một lịch trình tuyến tính"
+      ],
+      "correct": 1,
+      "explanation": "Lịch trình beta tuyến tính kết thúc quá trình khuếch tán process quá sớm. Đến t = 600, tín hiệu đã bị phá hủy; training và sampling đến t = 600-1000 không thêm gì. Lịch trình cosin (Nichol & Dhariwal) giữ tín hiệu lâu hơn, đó là lý do tại sao models hiện đại sử dụng chúng, đặc biệt là ở độ phân giải thấp hơn."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao điều kiện thời gian được thêm vào U-Net thông qua embedding hình sin thay vì bước thời gian một nóng?",
+      "options": [
+        "vectors một nóng quá lớn",
+        "Một embedding hình sin là mượt mà trong t, cho phép mạng nội suy giữa các bước thời gian mà nó chưa nhìn thấy chính xác và mã hóa thông tin tỷ lệ mà kiến trúc có thể sử dụng bổ sung ở nhiều độ sâu",
+        "Hình sin được yêu cầu bởi BatchNorm",
+        "One-hot sẽ vi phạm quy tắc chuỗi"
+      ],
+      "correct": 1,
+      "explanation": "embeddings hình sin cung cấp cho mạng một biểu diễn liên tục của t ở nhiều tần số. Bất kỳ bước thời gian nào cũng là một điểm duy nhất trong không gian embedding đó và các bước thời gian gần đó ở gần embeddings. Điều đó cho phép model khái quát hóa tất cả các giá trị T với ít parameters hơn nhiều so với embedding học trên mỗi bước thời gian. Ý tưởng tương tự như transformer mã hóa vị trí."
+    }
+  ]
+}
