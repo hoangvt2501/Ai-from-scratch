@@ -1,0 +1,78 @@
+{
+  "lesson": "02-inference-platform-economics",
+  "title": "Inference Kinh tế nền tảng — Pháo hoa, Cùng nhau, Cơ sở, Phương thức, Sao chép, Mọi quy mô",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài học sử dụng ba phân khúc thị trường nào để tổ chức các nhà cung cấp inference năm 2026?",
+      "options": [
+        "Miễn phí, trả phí, doanh nghiệp",
+        "Một tenant, nhiều tenant, tại chỗ",
+        "Nền tảng silicon, GPU tùy chỉnh, thị trường ưu tiên API",
+        "Mã nguồn mở, thương mại, lai"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Xung quanh mức sử dụng GPU duy trì nào mà thanh toán theo phút (Baseten, Modal) bắt đầu đánh bại thanh toán mỗi token (Fireworks, Together)?",
+      "options": [
+        "60%",
+        "90%",
+        "30%",
+        "5%"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Nền tảng nào được mô tả là phi máy chủ gốc Python với thanh toán theo giây và khởi động nguội 2-4 giây sau khi khởi động trước?",
+      "options": [
+        "Căn cứ",
+        "Phương thức",
+        "Pháo hoa",
+        "Mọi quy mô"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Điểm khác biệt về giá LoRA đáng chú ý của Fireworks là gì?",
+      "options": [
+        "Các yêu cầu LoRA phân phối có giá cao hơn model cơ sở",
+        "LoRA hoàn toàn không được hỗ trợ",
+        "LoRA yêu cầu một hợp đồng GPU chuyên dụng riêng biệt",
+        "Các yêu cầu LoRA phân phát được tính phí theo mức giá trên mỗi token của model cơ bản"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Nền tảng nào phù hợp với khách hàng chăm sóc sức khỏe được quản lý cần SOC 2 Loại II, tư thế sẵn sàng HIPAA và GPUs chuyên dụng?",
+      "options": [
+        "Căn cứ",
+        "Cùng nhau",
+        "Mọi quy mô",
+        "Sao chép"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học cho rằng các tuyên bố công cụ tùy chỉnh chủ yếu là bóng râm tiếp thị ở lớp nền tảng?",
+      "options": [
+        "Định giá theo token là điểm khác biệt thực sự duy nhất",
+        "vLLM và SGLang đại diện cho khoảng 80% inference mã nguồn mở production, vì vậy sự khác biệt của nền tảng đến từ DX, phân bổ và SLA nhiều hơn là công cụ",
+        "Tất cả các công cụ tùy chỉnh đều là nhánh của TensorRT-LLM",
+        "Các công cụ tùy chỉnh không bao giờ vượt trội hơn vLLM"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
