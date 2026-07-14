@@ -1,0 +1,78 @@
+{
+  "lesson": "63-multimodal-eval",
+  "title": "Đánh giá đa phương thức",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao chỉ riêng training loss là thước đo không đủ về chất lượng của model đa phương thức?",
+      "options": [
+        "Loss khó tính toán",
+        "Training loss đo lường phù hợp với phân phối training; bề mặt đánh giá (truy xuất, VQA, phụ đề) đo lường xem model có khái quát hóa cho các nhiệm vụ bị giữ hay không",
+        "Loss giá trị là ngẫu nhiên",
+        "Loss là một chuỗi"
+      ],
+      "correct": 1,
+      "explanation": "Loss giảm thiểu là cần thiết nhưng không đủ. Các chỉ số được đưa ra trên ba bề mặt tác vụ đo lường những gì model thực sự có thể làm."
+    },
+    {
+      "stage": "pre",
+      "question": "Đo R@5 trong đánh giá truy xuất 100 mẫu là gì?",
+      "options": [
+        "Chú thích thứ năm luôn đúng",
+        "Phần truy vấn có kết quả khớp chính xác nằm trong top 5 ứng viên được truy xuất hàng đầu trên 100",
+        "Năm phần trăm accuracy",
+        "Năm truy vấn mỗi giây"
+      ],
+      "correct": 1,
+      "explanation": "R@K = phần truy vấn có mục tiêu trong các ứng viên được xếp hạng K hàng đầu. Cao hơn là tốt hơn."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao BLEU-4 lấy giá trị trung bình hình học của độ chính xác từ 1 đến 4 gam thay vì giá trị trung bình số học?",
+      "options": [
+        "Số học chậm hơn",
+        "Giá trị trung bình hình học bằng không nếu bất kỳ precision n-gram nào bằng không, đây là thuộc tính khớp nghiêm ngặt mà BLEU muốn; làm mịn xử lý trường hợp không",
+        "Giá trị trung bình hình học lớn hơn",
+        "PyTorch chỉ hỗ trợ trung bình hình học"
+      ],
+      "correct": 1,
+      "explanation": "Giá trị trung bình hình học thực thi rằng TẤT CẢ các đơn đặt hàng n-gram đóng góp; precision 4 gram bằng không sẽ thu gọn điểm số trước khi làm mịn."
+    },
+    {
+      "stage": "check",
+      "question": "Hình phạt ngắn gọn trong BLEU-4 bảo vệ chống lại điều gì?",
+      "options": [
+        "Phụ đề dài bị phạt",
+        "Phụ đề ngắn chơi game precision cao bằng cách chỉ phát ra tokens tần số cao an toàn; BP < 1 khi được tạo < độ dài tham chiếu",
+        "Rò rỉ bộ nhớ",
+        "Tokenizer lỗi"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có BP, chú thích một từ khớp với một từ tham khảo sẽ đạt điểm 1.0. BP thu hẹp điểm số cho các thế hệ quá ngắn."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao BLEU đa tham chiếu thường đạt điểm cao hơn BLEU tham chiếu đơn trên cùng một thế hệ?",
+      "options": [
+        "Toán học thì khác",
+        "Mỗi n-gram trong thế hệ có thể khớp với bất kỳ tham chiếu nào, vì vậy số lượng bị cắt sẽ cao hơn khi có nhiều tham chiếu hơn",
+        "Tham chiếu đơn bị hỏng",
+        "Tài liệu tham khảo tốn thêm bộ nhớ"
+      ],
+      "correct": 1,
+      "explanation": "Nhiều tài liệu tham khảo hơn mang lại cho n-gram nhiều cơ hội được khớp hơn; số lượng bị cắt tăng và precision tăng lên."
+    },
+    {
+      "stage": "post",
+      "question": "Bề mặt đánh giá nào không sử dụng model embeddings và chỉ sử dụng đối sánh cấp độ id?",
+      "options": [
+        "Truy xuất",
+        "Đối sánh chính xác VQA: id câu trả lời dự đoán được so sánh trực tiếp với id tham chiếu mà không có bước embedding",
+        "BLEU-4 ·",
+        "Sự tương đồng cosin"
+      ],
+      "correct": 1,
+      "explanation": "Đối sánh chính xác VQA là so sánh số nguyên sau khi model đưa ra câu trả lời token; không có embedding hoặc toán học tương tự liên quan."
+    }
+  ]
+}
