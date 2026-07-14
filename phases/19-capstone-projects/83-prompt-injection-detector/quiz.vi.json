@@ -1,0 +1,78 @@
+{
+  "lesson": "83-prompt-injection-detector",
+  "title": "Capstone 83 - Máy dò tiêm Prompt",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Máy dò trả lại gì cho một prompt?",
+      "options": [
+        "Chỉ quyết định khối boolean",
+        "Danh sách mọi quy tắc trong cơ sở quy tắc",
+        "Một danh mục và sự tự tin vào [0, 1]",
+        "model đầy đủ system prompt"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao chuẩn hóa chạy trước các quy tắc chuỗi con và biểu thức chính quy?",
+      "options": [
+        "Bởi vì regex chậm hơn chuỗi con",
+        "Bởi vì normalize làm giảm kích thước tệp trên đĩa",
+        "Bởi vì chuẩn hóa hiển thị các tokens ẩn như base64, rot13 và chèn chiều rộng bằng không vào các quy tắc xuôi dòng",
+        "Bởi vì thư viện tiêu chuẩn cấm chạy các quy tắc trên văn bản gốc"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Cho dương tính thật = 6, dương tính giả = 2 đối với loại C, precision là gì?",
+      "options": [
+        "0.50",
+        "0.60",
+        "0.75",
+        "0.86"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao kho dữ liệu prompt lành tính là một phần của đánh giá?",
+      "options": [
+        "Để thổi phồng số accuracy",
+        "Để đo lường tỷ lệ dương tính giả trên văn bản an toàn và nắm bắt các quy tắc quá rộng",
+        "Để huấn luyện trước các quy tắc",
+        "Để tính toán recall trên các cuộc tấn công"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Phương pháp phân tích làm gì khi không có quy tắc nào kích hoạt?",
+      "options": [
+        "Trả về danh mục lành tính với độ tin cậy 0.0",
+        "Đưa ra một ngoại lệ",
+        "Trả về danh mục của quy tắc gần đây nhất đã thử",
+        "Trả về một danh mục ngẫu nhiên"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học này cho rằng máy dò không phải là cổng an toàn?",
+      "options": [
+        "Bởi vì máy dò được thực hiện trong Python",
+        "Bởi vì máy dò là một tín hiệu trong số nhiều tín hiệu nên cổng sẽ tạo ra, với mỗi tín hiệu giao dịch precision chống lại recall khác nhau",
+        "Bởi vì máy dò quá nhanh để hữu ích",
+        "Bởi vì các quy tắc được lưu trữ dưới dạng dữ liệu"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
