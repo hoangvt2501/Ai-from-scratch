@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Động lượng giải quyết vấn đề gì trong gradient descent?",
+    "options": [
+      "Nó làm giảm việc sử dụng bộ nhớ",
+      "Nó làm giảm dao động bằng cách tích lũy gradients trong quá khứ, tăng tốc chuyển động theo các hướng nhất quán",
+      "Nó loại bỏ sự cần thiết của một learning rate",
+      "Nó ngăn chặn overfitting"
+    ],
+    "correct": 1,
+    "explanation": "Trong các thung lũng hẹp, gradients dao động qua thung lũng trong khi tiến bộ chậm dọc theo thung lũng. Động lượng tích lũy qua gradients: các hướng nhất quán khuếch đại trong khi các hướng dao động hủy bỏ, mang lại sự hội tụ mượt mà hơn, nhanh hơn.",
+    "stage": "pre"
+  },
+  {
+    "question": "Sự khác biệt chính giữa Adam và AdamW là gì?",
+    "options": [
+      "AdamW sử dụng learning rate cao hơn",
+      "AdamW áp dụng phân rã trọng lượng trực tiếp lên trọng lượng thay vì thông qua gradient, tạo ra sự chính quy hóa thích hợp",
+      "AdamW không sử dụng động lượng",
+      "AdamW chỉ hoạt động với transformers"
+    ],
+    "correct": 1,
+    "explanation": "Trong Adam + L2, learning rate thích ứng chia tỷ lệ thuật ngữ chính quy hóa khác nhau trên mỗi parameter. AdamW tách rời sự phân rã trọng lượng khỏi bản cập nhật gradient, áp dụng độ co ngót đồng đều bất kể số liệu thống kê gradient.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao Adam sử dụng hiệu chỉnh bias trong các bước training đầu?",
+    "options": [
+      "Để ngăn chặn overfitting",
+      "Các ước tính mômen được khởi tạo về không, vì vậy các giá trị ban đầu bị lệch về không; sự điều chỉnh bù đắp cho cold start này",
+      "Để kẹp gradients lớn",
+      "Để tăng tốc độ hội tụ"
+    ],
+    "correct": 1,
+    "explanation": "Ở bước 1 với beta1 = 0,9, m_1 = 0,1 * gradient (quá nhỏ gấp 10 lần). Chia cho (1 - 0,9^1) = 0,1 sẽ sửa điều này thành gradient thực tế. Sự điều chỉnh trở nên không đáng kể sau ~ 50 bước.",
+    "stage": "post"
+  },
+  {
+    "question": "hyperparameters mặc định tiêu chuẩn cho Adam là gì?",
+    "options": [
+      "LR = 0,1, beta1 = 0,5, beta2 = 0,5",
+      "LR = 0,001, beta1 = 0,9, beta2 = 0,999, epsilon = 1e-8",
+      "LR = 0,01, beta1 = 0,99, beta2 = 0,99",
+      "LR = 0,0001, beta1 = 0,8, beta2 = 0,9"
+    ],
+    "correct": 1,
+    "explanation": "Bài báo gốc của Adam (Kingma & Ba, 2014) khuyến nghị lr = 0,001, beta1 = 0,9, beta2 = 0,999, epsilon = 1e-8. Các giá trị mặc định này hoạt động tốt cho hầu hết các vấn đề.",
+    "stage": "post"
+  },
+  {
+    "question": "optimizer nào là mặc định hiện đại cho training transformers và LLMs?",
+    "options": [
+      "Vani SGD",
+      "SGD với động lượng",
+      "RMSProp",
+      "AdamW"
+    ],
+    "correct": 3,
+    "explanation": "AdamW (Adam với phân rã trọng lượng tách rời) được sử dụng để huấn luyện BERT, GPT, LLaMA và hầu như tất cả các transformers hiện đại. Nó kết hợp tốc độ học tập thích ứng với chính quy hóa phân rã trọng lượng thích hợp.",
+    "stage": "post"
+  }
+]
