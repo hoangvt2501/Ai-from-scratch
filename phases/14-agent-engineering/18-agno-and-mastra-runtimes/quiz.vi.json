@@ -1,0 +1,90 @@
+{
+  "lesson": "18-agno-and-mastra-runtimes",
+  "title": "Agno và Mastra: Production Runtimes",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài học đề xuất cặp ngôn ngữ nào cho mỗi runtime?",
+      "options": [
+        "Agno cho TypeScript, Mastra cho Python",
+        "Agno cho Python, Mastra cho TypeScript",
+        "Cả hai đều là Rust đầu tiên",
+        "Cả hai đều là Go-first"
+      ],
+      "correct": 1,
+      "explanation": "Agno là Python (hình FastAPI); Mastra là TypeScript (hình AI SDK Vercel)."
+    },
+    {
+      "stage": "pre",
+      "question": "Hình thức triển khai production được đề xuất của Agno là gì?",
+      "options": [
+        "Một daemon trạng thái lâu dài",
+        "Phần phụ trợ FastAPI có phạm vi session không trạng thái; mỗi yêu cầu bắt đầu một agent mới và trạng thái session nằm trong CSDL",
+        "Chỉ worker cron phi máy chủ",
+        "Một server chỉ dành cho WebSocket"
+      ],
+      "correct": 1,
+      "explanation": "FastAPI không trạng thái cho mỗi yêu cầu; session trạng thái được ngoại hóa thành một DB."
+    },
+    {
+      "stage": "check",
+      "question": "Ba primitives của Mastra là gì?",
+      "options": [
+        "Agents, Công cụ, Quy trình làm việc",
+        "Diễn viên, Tin nhắn, Hộp thư đến",
+        "Lập kế hoạch, Worker, Giải quyết",
+        "Nút, Cạnh, Trạng thái"
+      ],
+      "correct": 0,
+      "explanation": "Agents (LLM + vai trò), Công cụ (kiểu Zod) và Quy trình làm việc là ba primitives của Mastra."
+    },
+    {
+      "stage": "check",
+      "question": "Agno nhắm mục tiêu khoảng bao nhiêu chi phí khởi tạo agent cho mỗi tài liệu của mình?",
+      "options": [
+        "Khoảng 2 micro giây với khoảng 3,75 KiB mỗi agent",
+        "Khoảng 200 mili giây và 100 MiB mỗi agent",
+        "Khoảng 1 giây và 1 GiB mỗi agent",
+        "Khoảng 10 phút và 4 GiB mỗi agent"
+      ],
+      "correct": 0,
+      "explanation": "Các tài liệu của Agno trích dẫn khoảng 2 micro giây và khoảng 3,75 KiB mỗi agent."
+    },
+    {
+      "stage": "check",
+      "question": "Bộ định tuyến Model hợp nhất của Mastra cung cấp gì?",
+      "options": [
+        "Một ứng dụng khách duy nhất hiển thị cho hàng nghìn models trên nhiều nhà cung cấp",
+        "Hàng đợi cho các lệnh gọi công cụ",
+        "Một lớp DB vector",
+        "Một con trỏ kiểm tra đồ thị"
+      ],
+      "correct": 0,
+      "explanation": "Bộ định tuyến Model hợp nhất của Mastra trích dẫn 3.300+ models trên 94 nhà cung cấp."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào là lý do sai lầm để chọn Agno?",
+      "options": [
+        "Khi khối lượng công việc chậm một agent cuộc gọi cho mỗi yêu cầu và chi phí không phải là nút thắt cổ chai",
+        "Khi sử dụng Python 3.13",
+        "Khi triển khai lên AWS",
+        "Khi sử dụng Langfuse"
+      ],
+      "correct": 0,
+      "explanation": "2 micro giây quan trọng ở quy mô người hâm mộ trò chuyện, không phải đối với một cuộc gọi chậm cho mỗi yêu cầu."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn nên đọc kỹ bề mặt cấp phép nào trước khi fork Mastra?",
+      "options": [
+        "Không có tệp giấy phép",
+        "ee/ có sẵn nguồn chứ không phải Apache 2.0 và hạn chế sử dụng thương mại",
+        "Tất cả Mastra đều là GPL",
+        "Mastra yêu cầu CLA nhưng không xem xét giấy phép"
+      ],
+      "correct": 1,
+      "explanation": "Mastra là Apache 2.0 ngoại trừ ee/ có sẵn nguồn; Kiểm tra các hạn chế trước khi phân nhánh."
+    }
+  ]
+}
