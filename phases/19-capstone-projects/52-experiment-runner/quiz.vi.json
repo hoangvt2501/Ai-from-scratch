@@ -1,0 +1,78 @@
+{
+  "lesson": "52-experiment-runner",
+  "title": "Người chạy thử nghiệm",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao người chạy tạo ra một quy trình con thay vì nhập script thử nghiệm trong process?",
+      "options": [
+        "Bởi vì Python không cho phép imports lồng nhau",
+        "Bởi vì một process riêng biệt cung cấp cho người chạy một tay cầm ngắt kết nối trên timeout hoặc giới hạn bộ nhớ và cô lập các sự cố khỏi bộ điều phối",
+        "Bởi vì định dạng số liệu yêu cầu nó",
+        "Bởi vì quá trình con nhanh hơn import"
+      ],
+      "correct": 1,
+      "explanation": "Một process riêng biệt là cách cô lập đơn giản nhất mà ngôn ngữ ships. Cha mẹ giữ lại một handle kill và một không gian địa chỉ độc lập, vì vậy một thử nghiệm crashing không thể sử dụng trình điều phối với nó."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao giới hạn bộ nhớ được mô tả là mềm?",
+      "options": [
+        "Bởi vì nó chỉ áp dụng cho vùng nhớ xếp, không áp dụng cho stack",
+        "Bởi vì người thăm dò có khoảng không phải bằng không, vì vậy một process có thể tăng đột biến trên giới hạn giữa các cuộc thăm dò và người chạy chỉ hành động trong lần quan sát tiếp theo",
+        "Bởi vì hệ điều hành luôn ghi đè nó",
+        "Bởi vì numpy bỏ qua giới hạn"
+      ],
+      "correct": 1,
+      "explanation": "Giới hạn được thực thi bằng cách thăm dò ý kiến, không phải bằng giới hạn trong nhân. Khoảng thời gian thăm dò là độ phân giải của giới hạn và các gai ngắn có thể vượt quá giới hạn trong thời gian ngắn trước lần quan sát tiếp theo."
+    },
+    {
+      "stage": "check",
+      "question": "Người chạy trả về nhãn thiết bị đầu cuối nào khi stdout có các chỉ số nhưng mã thoát không phải là không?",
+      "options": [
+        "Được rồi",
+        "timeout",
+        "oom",
+        "Sự cố"
+      ],
+      "correct": 3,
+      "explanation": "Thiết bị đầu cuối chỉ ổn khi mã thoát bằng không và các chỉ số được phân tích cú pháp. Mã thoát không phải bằng không bị treo ngay cả khi một số chỉ số đã được ghi lại trước khi xảy ra lỗi."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để người chạy xác định đốm màu số liệu cuối cùng bên trong stdout?",
+      "options": [
+        "Nó đọc dòng json đầu tiên",
+        "Nó đọc dòng json cuối cùng có các khóa bao gồm metric_keys cần thiết; các dòng bao phủ trước đó trở thành số liệu trung gian",
+        "Nó quét stderr để tìm json",
+        "Nó mong đợi chính xác một dòng đầu ra"
+      ],
+      "correct": 1,
+      "explanation": "Số liệu cuối cùng là dòng cuối cùng phân tích cú pháp dưới dạng json và bao gồm mọi khóa bắt buộc. Các dòng bao gồm trước đó được giữ làm số liệu trung gian cho đường cong học tập."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bộ trợ giúp cắt bỏ quét từng núm một, thay vì một giai thừa đầy đủ?",
+      "options": [
+        "Bởi vì người chạy không thể khởi chạy nhiều hơn một quy trình con",
+        "Bởi vì một núm tại một thời điểm tạo ra một trục sạch, người đánh giá có thể vẽ biểu đồ, trong khi giai thừa đầy đủ thổi bay theo cấp số nhân và gây nhầm lẫn cho việc giải thích",
+        "Bởi vì numpy không hỗ trợ sản phẩm Descartes",
+        "Bởi vì hạt giống chỉ thay đổi dọc theo một núm"
+      ],
+      "correct": 1,
+      "explanation": "Quét một núm giữ cho kết quả có thể giải thích được. Chi phí giai thừa đầy đủ theo cấp số nhân với số lượng núm và bảng kết quả rất khó đọc."
+    },
+    {
+      "stage": "check",
+      "question": "Việc chuyển tiếp spec.seed vào config['__seed'] đảm bảo gì cho người đánh giá?",
+      "options": [
+        "Thời gian tường nhanh hơn",
+        "Tiêu thụ bộ nhớ thấp hơn",
+        "Quyết định, vì vậy việc chạy lại với cùng một hạt giống sẽ tạo ra các số liệu giống hệt nhau và người đánh giá có thể phát hiện những thay đổi thực sự từ nhiễu ngẫu nhiên",
+        "Một bài kiểm tra ý nghĩa miễn phí"
+      ],
+      "correct": 2,
+      "explanation": "Các chốt hạt giống khởi tạo ngẫu nhiên trong thử nghiệm. Hai lần chạy với cùng một hạt giống tạo ra các số liệu giống hệt nhau, đó là điều cho phép người đánh giá phân biệt một hồi quy thực sự với một lần rút khác."
+    }
+  ]
+}
