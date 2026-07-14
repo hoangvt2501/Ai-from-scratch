@@ -1,0 +1,102 @@
+{
+  "lesson": "05-sentiment-analysis",
+  "title": "Phân tích cảm xúc",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao 'Thức ăn không tuyệt vời' lại là một trường hợp khó khăn đối với những người phân loại BoW ngây thơ?",
+      "options": [
+        "Nó không có dấu câu",
+        "Nó kết hợp tiếng Anh và tiếng Pháp",
+        "Phủ định lật ngược ý nghĩa, nhưng túi từ loại bỏ mối liên hệ giữa 'không' và 'tuyệt vời'",
+        "Nó chứa quá ít tokens"
+      ],
+      "correct": 2,
+      "explanation": "BoW không thể ràng buộc 'không' với từ mà nó phủ nhận, vì vậy bộ phân loại bỏ lỡ việc lật cực."
+    },
+    {
+      "stage": "pre",
+      "question": "Hai bước nào tạo nên phân tích cảm xúc cổ điển?",
+      "options": [
+        "Dịch, sau đó phân loại",
+        "Nhúng, sau đó phân cụm",
+        "Đại diện (vector hóa văn bản) và phân loại (model tuyến tính trên vector)",
+        "Tìm kiếm, sau đó xếp hạng"
+      ],
+      "correct": 2,
+      "explanation": "Tình cảm cổ điển là feature trích xuất theo sau là một bộ phân loại tuyến tính."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao Naive Bayes hoạt động bất chấp giả định độc lập 'ngây thơ' của nó?",
+      "options": [
+        "Với văn bản thưa thớt features và dữ liệu vừa phải, bộ phân loại chủ yếu quan tâm đến bên nào của mỗi từ, chứ không phải xác suất chung chính xác",
+        "Naive Bayes bí mật tìm hiểu các tương tác",
+        "Giả định này thực sự đúng đối với văn bản",
+        "Làm mịn Laplace khắc phục sự phụ thuộc"
+      ],
+      "correct": 0,
+      "explanation": "Ngay cả với sự độc lập sai, thông tin hướng nghiêng trên mỗi từ là đủ để phân loại tốt."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bao gồm tokens tiền tố 'NOT_' trong quá trình tiền xử lý?",
+      "options": [
+        "Để chuẩn hóa trường hợp",
+        "Để tạo ra các từ",
+        "Để biến 'tốt' so với 'NOT_good' thành features riêng biệt mà bộ phân loại có thể có trọng số ngược lại",
+        "Để thu nhỏ vốn từ vựng"
+      ],
+      "correct": 2,
+      "explanation": "Phạm vi phủ định chia các hình thức phủ định thành các features riêng biệt để bộ phân loại BoW có thể model lật."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao việc loại bỏ các từ dừng lại rủi ro đối với phân tích tâm lý?",
+      "options": [
+        "Các từ phủ định ('không', 'không', 'không bao giờ') thường được coi là từ dừng nhưng mang tín hiệu tình cảm",
+        "Danh sách từ dừng quá dài",
+        "Nó làm tăng độ thưa thớt",
+        "Loại bỏ từ dừng tokenization"
+      ],
+      "correct": 0,
+      "explanation": "Danh sách từ dừng mặc định bỏ phủ định và các phương tiện mang cảm xúc tương tự."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn nên báo cáo số liệu nào khi classes tâm lý bị mất cân bằng?",
+      "options": [
+        "Macro-F1 (trung bình của mỗi class F1, trọng số bằng nhau)",
+        "Accuracy một mình",
+        "Sai số bình phương trung bình",
+        "Chỉ F1 vi mô"
+      ],
+      "correct": 0,
+      "explanation": "F1 vĩ mô buộc thiểu số class phải đếm; accuracy hoặc micro-F1 ẩn nó."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn nên bỏ qua models cổ điển và tìm kiếm một transformer cho cảm xúc?",
+      "options": [
+        "Khi bạn có dưới 100 ví dụ",
+        "Khi độ trễ là quan trọng",
+        "Khi bạn cần giải thích",
+        "Phát hiện mỉa mai, tài liệu thay đổi lâu, cảm xúc dựa trên khía cạnh hoặc ngôn ngữ tài nguyên thấp"
+      ],
+      "correct": 3,
+      "explanation": "Sự mỉa mai, dựa trên khía cạnh và tình cảm đa ngôn ngữ vượt quá tầm với của Bo models W cổ điển."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao chính quy hóa L2 lại quan trọng đối với hồi quy logistic trên văn bản?",
+      "options": [
+        "Bắt buộc để tính toán gradients",
+        "Tránh ReLU đơn vị chết",
+        "Tăng tốc độ đảo ngược ma trận",
+        "Văn bản high-dimensional thưa thớt features để model ghi nhớ training ví dụ"
+      ],
+      "correct": 3,
+      "explanation": "L2 ngăn chặn overfitting trong chế độ feature thưa thớt, high-dimensional của văn bản."
+    }
+  ]
+}
