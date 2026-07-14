@@ -1,0 +1,102 @@
+{
+  "lesson": "27-llm-evaluation-frameworks",
+  "title": "Đánh giá LLM - RAGAS, DeepEval, G-Eval",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao Đối sánh chính xác và F1 token không đủ để đánh giá đầu ra LLM hiện đại?",
+      "options": [
+        "Chúng quá chậm",
+        "Chúng không thể phân biệt được",
+        "Họ yêu cầu GPUs",
+        "Họ bỏ lỡ sự tương đương về ngữ nghĩa; 'Ngày 29 tháng 6 năm 2007' so với 'ngày 29 tháng 6 năm 2007' đạt 0 điểm EM mặc dù đúng"
+      ],
+      "correct": 3,
+      "explanation": "Exact-match/F1 không thể nhận ra các diễn giải hoặc sự khác biệt về định dạng mà con người sẽ đánh dấu đúng."
+    },
+    {
+      "stage": "pre",
+      "question": "Chỉ số độ trung thực của RAGAS đo lường điều gì?",
+      "options": [
+        "Truy xuất recall",
+        "Liệu mỗi tuyên bố trong câu trả lời có được yêu cầu bởi ngữ cảnh được truy xuất hay không, thông qua NLI",
+        "Độ trễ",
+        "Tokens mỗi giây"
+      ],
+      "correct": 1,
+      "explanation": "Faithfulness kiểm tra từng tuyên bố câu trả lời so với ngữ cảnh được truy xuất bằng cách sử dụng NLI entailment."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao cần phải hiệu chuẩn model giám khảo so với nhãn của con người trước khi tin cậy điểm số?",
+      "options": [
+        "Yêu cầu của GDPR",
+        "Nếu mối tương quan của Spearman giữa nhãn thẩm phán và con người quá thấp (ví dụ: dưới 0,7), điểm số là nhiễu chứ không phải tín hiệu",
+        "Hiệu chuẩn tăng tốc độ thẩm phán",
+        "Hiệu chuẩn là một vấn đề tokenization"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có hiệu chuẩn, bạn không thể biết điểm của giám khảo phản ánh chất lượng hay model bias."
+    },
+    {
+      "stage": "check",
+      "question": "bias tự đánh giá trong thiết lập LLM với tư cách là giám khảo là gì?",
+      "options": [
+        "Sử dụng cùng một gia đình LLM để tạo và đánh giá sẽ thổi phồng điểm số lên 10-20% so với một giám khảo độc lập",
+        "Độ trễ thấp hơn",
+        "Thẩm phán chạy nhanh hơn trên đầu ra được lưu trong bộ nhớ cache",
+        "Thẩm phán bỏ qua prompts hệ thống"
+      ],
+      "correct": 0,
+      "explanation": "Trình tạo cùng một gia đình + thành kiến của giám khảo điểm tăng lên; Sử dụng một họ model khác để đánh giá."
+    },
+    {
+      "stage": "check",
+      "question": "G-Eval cụ thể bổ sung điều gì cho một prompt 'tỷ số 0-1' ngây thơ?",
+      "options": [
+        "Bối cảnh lớn hơn",
+        "Chi phí thấp hơn",
+        "Chấm điểm đa ngôn ngữ",
+        "Một bảng đánh giá chain-of-thought rõ ràng với các bước đánh giá được đặt tên, mang lại điểm số ổn định hơn"
+      ],
+      "correct": 3,
+      "explanation": "Các bước đánh giá có cấu trúc của G-Eval tạo ra điểm số đáng tin cậy hơn so với prompts 'đánh giá' dạng tự do."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao chỉ báo cáo tổng điểm trung bình lại nguy hiểm?",
+      "options": [
+        "Cốt liệu quá lớn",
+        "Các uẩn bỏ qua thẩm phán",
+        "Cốt liệu cần GPU",
+        "Giá trị trung bình 0,85 có thể che giấu 5% lỗi thảm khốc; Luôn kiểm tra lượng tử dưới cùng"
+      ],
+      "correct": 3,
+      "explanation": "Có nghĩa là che giấu các lỗi đuôi; bề mặt đáy-10% để phát hiện các vấn đề có mức độ nghiêm trọng cao."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao ghim phiên bản model + của thẩm phán vào CI?",
+      "options": [
+        "Yêu cầu của Anthropic",
+        "Chi phí thấp hơn",
+        "Tokenizer trôi dạt",
+        "Nâng cấp giám khảo thay đổi mọi chỉ số; So sánh theo chiều dọc bị ngắt mà không có thẩm phán bị đóng băng"
+      ],
+      "correct": 3,
+      "explanation": "Nâng cấp thẩm phán âm thầm thay đổi đường cơ sở số liệu; Ghim duy trì khả năng so sánh chéo."
+    },
+    {
+      "stage": "post",
+      "question": "DeepEval phù hợp với RAGAS ở đâu?",
+      "options": [
+        "DeepEval là pytest-for-LLMs (cổng CI, G-Eval, số liệu ảo giác); RAGAS chuyên giám sát RAG không cần tham chiếu",
+        "DeepEval chỉ được lưu trữ",
+        "DeepEval là một tokenizer",
+        "Thay thế hoàn toàn RAGAS"
+      ],
+      "correct": 0,
+      "explanation": "DeepEval neo CI/CD kiểm tra hồi quy; RAGAS xử lý giám sát RAG không cần tham khảo."
+    }
+  ]
+}
