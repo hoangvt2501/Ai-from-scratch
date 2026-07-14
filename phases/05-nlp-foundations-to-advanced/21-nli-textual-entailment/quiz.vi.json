@@ -1,0 +1,102 @@
+{
+  "lesson": "21-nli-textual-entailment",
+  "title": "Ngôn ngữ tự nhiên Inference - Textual Entailment",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "NLI gán ba nhãn nào cho một cặp (tiền đề, giả thuyết)?",
+      "options": [
+        "Tích cực / tiêu cực / trung tính",
+        "Đúng / sai / không xác định",
+        "Kéo theo / mâu thuẫn / trung lập",
+        "Nguyên nhân / kết quả / không liên quan"
+      ],
+      "correct": 2,
+      "explanation": "NLI là sự phân loại 3 chiều về sự bao gồm, mâu thuẫn và trung lập."
+    },
+    {
+      "stage": "pre",
+      "question": "NLI được sử dụng như một bộ phân loại văn bản zero-shot như thế nào?",
+      "options": [
+        "Diễn đạt từng nhãn ứng cử viên như một giả thuyết (ví dụ: 'Văn bản này nói về thể thao') và chọn nhãn có điểm liên quan cao nhất",
+        "Bằng cách tính trung bình embeddings",
+        "Bằng cách tính toán TF-IDF",
+        "Bằng cách prompting một LLM"
+      ],
+      "correct": 0,
+      "explanation": "NLI-as-classifier biến nhãn thành giả thuyết; model chọn nhãn max-entailment."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao NLI là một kiểm tra độ trung thực cho các đầu ra RAG?",
+      "options": [
+        "Nó sử dụng tokenizers",
+        "Kiểm tra xem ngữ cảnh được truy xuất có bao gồm mỗi tuyên bố câu trả lời hay không chính xác là công thức mà NLI đã được huấn luyện",
+        "Nó rẻ",
+        "Nó đa ngôn ngữ"
+      ],
+      "correct": 1,
+      "explanation": "Ảo giác = các tuyên bố trả lời không được truy xuất bởi ngữ cảnh được truy xuất; NLI trực tiếp đo lường sự liên quan."
+    },
+    {
+      "stage": "check",
+      "question": "Đường cơ sở chỉ giả thuyết tiết lộ điều gì?",
+      "options": [
+        "Khoảng cách đa ngôn ngữ",
+        "inference chậm",
+        "Datasets khi chỉ có giả thuyết (không có tiền đề) là dự đoán nhãn, báo hiệu rò rỉ nhãn",
+        "Tokenizer trôi dạt"
+      ],
+      "correct": 2,
+      "explanation": "Điểm chỉ giả thuyết cao trên SNLI cho thấy chú thích artifacts; hữu ích để gỡ lỗi dữ liệu của bạn."
+    },
+    {
+      "stage": "check",
+      "question": "Gia đình NLI model nào đứng đầu bảng xếp hạng năm 2026 với tư cách là con ngựa làm việc tiêu chuẩn?",
+      "options": [
+        "fastText",
+        "Word2Vec đơn giản",
+        "Các biến thể DeBERTa-v3 fine-tuned trên MNLI/FEVER/ANLI",
+        "GPT-2"
+      ],
+      "correct": 2,
+      "explanation": "DeBERTa-v3 fine-tuned trên MNLI và kho dữ liệu liên quan là con ngựa NLI mở vào năm 2026."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao NLI cấp câu models bỏ accuracy trên cơ sở có độ dài tài liệu?",
+      "options": [
+        "Họ được huấn luyện trên cơ sở ngắn và thất bại ở inference nhiều câu và nhiều nhảy; models điều chỉnh DocNLI xử lý đầu vào dài hơn",
+        "Đầu vào lớn hơn chạy chậm hơn",
+        "Tài liệu trigger tokenizer trôi dạt",
+        "Sự tương đồng cosin phân rã"
+      ],
+      "correct": 0,
+      "explanation": "Phân phối Training không khớp: NLI một câu models mất 20+ F1 trên đầu vào có độ dài tài liệu."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao zero-shot accuracy có thể xoay 10+ điểm dựa trên mẫu giả thuyết?",
+      "options": [
+        "Models nhạy cảm với cụm từ; ví dụ: 'Văn bản này là về {label}' so với '{label}' một mình đã thay đổi xác suất kéo theo",
+        "Mẫu thay đổi hành vi tokenizer",
+        "Mẫu ảnh hưởng đến trọng số model",
+        "Mẫu thay đổi bộ nhãn"
+      ],
+      "correct": 0,
+      "explanation": "Từ ngữ mẫu thay đổi đáng kể điểm số liên quan; điều chỉnh nó trên một bộ nhỏ."
+    },
+    {
+      "stage": "post",
+      "question": "Giới hạn an toàn để tuyên bố về NLI để phát hiện ảo giác là gì?",
+      "options": [
+        "Nó chỉ hoạt động trên tiếng Anh",
+        "Nó làm giảm ảo giác như một tín hiệu trung thành nhưng không loại bỏ nó; Kết hợp với recall truy xuất và đánh giá của con người",
+        "Nó loại bỏ ảo giác",
+        "Nó yêu cầu LLMs"
+      ],
+      "correct": 1,
+      "explanation": "NLI là một tín hiệu hữu ích nhưng không phải là một giải pháp hoàn chỉnh; Kết hợp với các chỉ số truy xuất và kiểm tra tại chỗ của con người."
+    }
+  ]
+}
