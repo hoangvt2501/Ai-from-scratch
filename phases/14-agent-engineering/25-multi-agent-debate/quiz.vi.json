@@ -1,0 +1,90 @@
+{
+  "lesson": "25-multi-agent-debate",
+  "title": "Tranh luận và cộng tác đa Agent",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Giao thức Society of Minds có N model thực thể làm gì?",
+      "options": [
+        "Mỗi người chạy một benchmark khác nhau",
+        "Đề xuất câu trả lời một cách độc lập, sau đó qua các vòng R đọc và phê bình các đề xuất của nhau cho đến khi chúng hội tụ",
+        "Huấn luyện trên dataset chung",
+        "Thương lượng giá cả"
+      ],
+      "correct": 1,
+      "explanation": "N người đề xuất, vòng R, phê bình chéo, hội tụ là cuộc tranh luận kinh điển của Du et al."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao tranh luận chéo model (ví dụ: ChatGPT + Bard) vượt trội hơn cuộc tranh luận một model?",
+      "options": [
+        "Các nhà cung cấp khác nhau thương lượng giá cả",
+        "Tính không đồng nhất làm giảm các điểm mù được chia sẻ để phê bình chéo bắt được nhiều lỗi hơn",
+        "Nó rẻ hơn",
+        "Các nhà cung cấp chia sẻ trọng lượng"
+      ],
+      "correct": 1,
+      "explanation": "Trộn models mang lại sự phân phối lỗi độc lập, điều này làm tăng trần tranh luận."
+    },
+    {
+      "stage": "check",
+      "question": "Chiến thắng token chi phí chính của cấu trúc liên kết thưa thớt trên lưới đầy đủ là gì?",
+      "options": [
+        "Cấu trúc liên kết thưa thớt không cần models",
+        "Mỗi người tranh luận chỉ đọc một tập hợp con của các đồng nghiệp, vì vậy số lượng phê bình giảm trong khi accuracy thường khớp",
+        "Cấu trúc liên kết thưa thớt tăng gấp đôi các vòng",
+        "Nó loại bỏ LLM"
+      ],
+      "correct": 1,
+      "explanation": "Thưa thớt (ngôi sao, vòng, trung tâm và nan hoa) làm giảm hoạt động phê bình mà không làm mất accuracy trong nhiều nhiệm vụ."
+    },
+    {
+      "stage": "check",
+      "question": "Trường hợp nào liệt kê bài học là nơi tranh luận gây tổn thương?",
+      "options": [
+        "Lý luận mở",
+        "Một tra cứu thực tế đơn giản, bởi vì một tra cứu rẻ hơn năm cuộc tranh luận",
+        "Hiệu lực của nước đi cờ vua",
+        "Tạo tiểu sử"
+      ],
+      "correct": 1,
+      "explanation": "Các tra cứu tầm thường nhạy cảm với độ trễ và chi phí không được hưởng lợi từ cuộc tranh luận N x R."
+    },
+    {
+      "stage": "check",
+      "question": "Sự sụp đổ hội tụ là gì?",
+      "options": [
+        "Mất mạng",
+        "Tất cả agents hội tụ vào câu trả lời sai đầu tiên; Giảm thiểu với các vòng bất đồng bắt buộc",
+        "Process sự cố",
+        "Lỗi bắt tay TLS"
+      ],
+      "correct": 1,
+      "explanation": "Thỏa thuận sớm về một câu trả lời sai được giảm thiểu bằng cách buộc các đề xuất vòng 1 riêng biệt."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao prompt đồng nhất hóa làm suy yếu cuộc tranh luận?",
+      "options": [
+        "Nó vi phạm Apache 2.0",
+        "Giống hệt nhau prompts tạo ra câu trả lời gần như giống hệt nhau, loại bỏ tín hiệu phê bình chéo",
+        "Nó sử dụng quá nhiều tokens",
+        "Nó bỏ qua người giám sát"
+      ],
+      "correct": 1,
+      "explanation": "Các prompts đa dạng (và lý tưởng nhất là đa dạng models) giữ cho việc phân phối đề xuất rộng rãi."
+    },
+    {
+      "stage": "post",
+      "question": "Mô hình production nào là biến thể tranh luận cho mỗi bài học?",
+      "options": [
+        "Anthropic workers điều phối với một bước tổng hợp",
+        "RAG bắn một lần thuần túy",
+        "Lịch trình chỉ dành cho Cron",
+        "Lập chỉ mục Vector"
+      ],
+      "correct": 0,
+      "explanation": "Orchestrator-workers với tổng hợp là một mô hình hình tranh luận trong production."
+    }
+  ]
+}
