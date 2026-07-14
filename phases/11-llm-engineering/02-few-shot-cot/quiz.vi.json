@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Sự khác biệt chính giữa zero-shot và few-shot prompting là gì?",
+    "options": [
+      "Zero-shot nhanh hơn",
+      "Zero-shot chỉ đưa ra hướng dẫn; few-shot bao gồm các minh họa đầu vào-đầu ra ví dụ trước truy vấn thực tế",
+      "Few-shot sử dụng một model khác",
+      "Zero-shot không sử dụng system prompt"
+    ],
+    "correct": 1,
+    "explanation": "Few-shot prompting bao gồm các ví dụ đã làm việc (minh họa) cho thấy model mô hình dự kiến. Điều này giống như chỉ cho ai đó cách điền vào biểu mẫu trước khi yêu cầu họ điền vào biểu mẫu của riêng họ.",
+    "stage": "pre"
+  },
+  {
+    "question": "'Chuỗi tư tưởng' prompting làm gì?",
+    "options": [
+      "Nó xâu chuỗi nhiều cuộc gọi API với nhau",
+      "Nó hướng dẫn model thể hiện các bước suy luận trung gian trước khi đưa ra câu trả lời cuối cùng, cải thiện accuracy về các vấn đề nhiều bước",
+      "Nó kết nối nhiều models theo trình tự",
+      "Nó tạo ra các phản hồi dài hơn"
+    ],
+    "correct": 1,
+    "explanation": "CoT prompting (ví dụ: 'Hãy suy nghĩ từng bước') cung cấp cho model 'giấy nháp' để giải quyết các vấn đề. Đối với các bài toán GSM8K, chỉ riêng điều này đã cải thiện GPT-4o accuracy từ 78% lên 91%.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tree-of-Thought khác với Chain-of-Thought như thế nào?",
+    "options": [
+      "Nó sử dụng cấu trúc dữ liệu cây để lưu trữ",
+      "Nó khám phá song song nhiều con đường suy luận và đánh giá con đường nào dẫn đến câu trả lời tốt nhất",
+      "Nó chỉ là một chuỗi suy nghĩ dài hơn",
+      "Nó sử dụng một model khác"
+    ],
+    "correct": 1,
+    "explanation": "CoT tuân theo một con đường lý luận duy nhất. Tree-of-Thought tạo ra nhiều con đường ứng viên, đánh giá chúng (có thể với chính LLM) và chọn con đường tốt nhất. Điều này giúp giải quyết các vấn đề mà con đường suy luận đầu tiên có thể sai.",
+    "stage": "post"
+  },
+  {
+    "question": "Khi chọn few-shot ví dụ, điều gì quan trọng nhất?",
+    "options": [
+      "Sử dụng càng nhiều ví dụ càng tốt",
+      "Chọn các ví dụ đa dạng bao gồm các trường hợp khác nhau và thể hiện định dạng và mẫu suy luận chính xác mà bạn muốn",
+      "Sử dụng các ví dụ ngắn nhất",
+      "Sử dụng ví dụ từ tập thử nghiệm"
+    ],
+    "correct": 1,
+    "explanation": "Ví dụ về chất lượng vượt trội hơn số lượng. 3-5 ví dụ đa dạng, được định dạng tốt bao gồm các trường hợp cạnh khác nhau dạy model mẫu tốt hơn 20 ví dụ lặp đi lặp lại lãng phí context window tokens.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao CoT prompting cải thiện accuracy mặc dù model có cùng kiến thức có hoặc không?",
+    "options": [
+      "Nó kích hoạt các khả năng ẩn model",
+      "Tạo ra tokens trung gian tạo ra một bối cảnh hiệu quả lớn hơn cho câu trả lời cuối cùng, cho phép model điều kiện dựa trên lý luận của riêng mình",
+      "Nó sử dụng nhiều điện toán hơn",
+      "Nó thay đổi trọng lượng model"
+    ],
+    "correct": 1,
+    "explanation": "Nếu không có CoT, model phải nhảy thẳng đến câu trả lời trong một token. Với CoT, mỗi bước trung gian là một token các điều kiện model cho bước tiếp theo. Về cơ bản, model 'suy nghĩ thành tiếng', xây dựng câu trả lời.",
+    "stage": "post"
+  }
+]
