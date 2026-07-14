@@ -1,0 +1,78 @@
+{
+  "lesson": "05-eagle3-speculative-decoding",
+  "title": "Giải mã suy đoán EAGLE-3 trong Production",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao giải mã suy đoán khai thác lỗ hổng tồn tại trong giải mã đơn giản?",
+      "options": [
+        "Giải mã là ràng buộc điện toán, vì vậy việc thêm nhiều điện toán hơn là miễn phí",
+        "Giải mã không được hưởng lợi từ việc phân lô",
+        "Giải mã yêu cầu nhiều băng thông mạng hơn điền trước",
+        "Giải mã bị ràng buộc với bộ nhớ, vì vậy GPU chủ yếu là nhàn rỗi chờ HBM đọc trọng số"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tỷ lệ chấp nhận alpha đo lường điều gì?",
+      "options": [
+        "Phần bộ nhớ GPU được sử dụng trong quá trình giải mã",
+        "Phần tokens dự thảo được chấp nhận bởi model mục tiêu",
+        "Chi phí độ trễ của model nháp",
+        "Tỷ lệ trúng bộ nhớ cache của KV cache"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Những thay đổi nào trong EAGLE-3 so với EAGLE-2 đẩy alpha lên khoảng 0,6-0,8 trong trò chuyện chung?",
+      "options": [
+        "Nó sử dụng một model dự thảo kích thước đầy đủ của cùng một họ",
+        "Nó chạy trên CPU thay vì GPU",
+        "Nó loại bỏ hoàn toàn bước xác minh",
+        "Đầu nháp được huấn luyện trên nhiều lớp mục tiêu thay vì chỉ lớp cuối cùng"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Dưới đây là bài học nói rằng giải mã đầu cơ trở thành âm ròng ở mức đồng thời cao trên hầu hết phần cứng năm 2026?",
+      "options": [
+        "0.95",
+        "0.05",
+        "0.55",
+        "0.85"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bạn nên theo dõi số liệu nào chặt chẽ nhất sau khi bật EAGLE-3, ngay cả khi ITL trung bình giảm?",
+      "options": [
+        "Thời gian khởi động nguội",
+        "Sử dụng bộ nhớ GPU",
+        "P99 ITL, bởi vì các bản nháp hai lần bị từ chối có thể được nối tiếp dưới batch đầy đủ",
+        "Độ trễ E2E trung bình"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao chọn tham gia giải mã suy đoán (không phải mặc định) trong vLLM 2026 theo bài học?",
+      "options": [
+        "Tỷ lệ chấp nhận phụ thuộc vào khối lượng công việc và bật nó lên mà không đo alpha là một phản mẫu production",
+        "Nó chỉ hoạt động trên Blackwell GPUs",
+        "Nó không tương thích với PagedAttention",
+        "Nó yêu cầu một giấy phép riêng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
