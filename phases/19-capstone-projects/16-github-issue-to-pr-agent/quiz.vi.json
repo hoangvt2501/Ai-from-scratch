@@ -1,0 +1,90 @@
+{
+  "lesson": "16-github-issue-to-pr-agent",
+  "title": "Capstone 16 — GitHub Agent tự trị phát hành đến PR",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Mã hóa cloud không đồng bộ agent được kích hoạt như thế nào trong production?",
+      "options": [
+        "SSH tồn tại lâu dài session vào máy ảo",
+        "Một GitHub webhook bị sa thải bởi nhãn vấn đề hoặc nhận xét PR, được gửi đến một sandbox worker",
+        "Một công việc cron đã lên lịch vào repo",
+        "Tải lên tệp thủ công"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao agent phải chạy với token cài đặt Ứng dụng GitHub tồn tại trong thời gian ngắn thay vì token truy cập cá nhân?",
+      "options": [
+        "Ứng dụng tránh hoàn toàn GitHub rate limits",
+        "Ứng dụng tokens cấp thông tin đăng nhập chi tiết, có phạm vi, tồn tại ngắn phù hợp với workers cho mỗi tác vụ",
+        "Quyền truy cập cá nhân tokens không thể mở PR",
+        "Ứng dụng yêu cầu ít mã hơn PAT"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hai biện pháp bảo vệ nào ngăn agent làm hỏng chính?",
+      "options": [
+        "Yêu cầu captcha mỗi lần nhấn",
+        "Branch bảo vệ thực thi không đẩy trực tiếp hoặc đẩy mạnh vào chính, với ứng dụng không có trong danh sách bỏ qua",
+        "Mã hóa repo trước khi sao chép",
+        "Vô hiệu hóa git trên worker"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bảo vệ trong phạm vi đường dẫn cho .github/workflows được thực thi tại worker thay vì dưới dạng quyền GitHub App?",
+      "options": [
+        "Quy trình làm việc được lưu trữ bên ngoài repo",
+        "Không thể xác định phạm vi đường dẫn dưới bất kỳ hình thức nào",
+        "GitHub Quyền của ứng dụng không nằm trong phạm vi đường dẫn, vì vậy việc kiểm tra danh sách cho phép của worker đối với sự khác biệt được đề xuất là nơi thích hợp để thực thi",
+        ".github/workflows là một con đường ảo"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì xảy ra sau khi vòng lặp agent kết thúc, trước khi mở PR?",
+      "options": [
+        "Người đánh giá model viết lại diff",
+        "CI đầy đủ chạy trong sandbox; delta bao phủ được tính toán; PR có hồi quy vượt quá ngưỡng được gắn nhãn nhu cầu-xem xét",
+        "PR mở ngay lập tức mà không cần kiểm tra",
+        "repo được đẩy mạnh đến chính"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Điều phối viên thực thi những nút ngân sách nào cho mỗi repo mỗi ngày?",
+      "options": [
+        "Chỉ có nắp đồng hồ treo tường",
+        "PR không giới hạn và chi phí không giới hạn",
+        "Trần đô la mỗi PR cộng với số lượng PR tối đa mỗi repo mỗi ngày",
+        "Chỉ có một nắp lượt"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Những gì đi vào phần thân PR mà agent đăng?",
+      "options": [
+        "Chỉ có sự khác biệt",
+        "Lý do, tóm tắt khác biệt, URL trace, chi phí và số lượt để người đánh giá có thể kiểm tra và theo dõi",
+        "Chỉ một nhật ký thay đổi được tạo",
+        "Không có gì; PR có một cơ thể trống rỗng"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
