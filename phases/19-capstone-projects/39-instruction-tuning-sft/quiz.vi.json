@@ -1,0 +1,78 @@
+{
+  "lesson": "phase-19/39-instruction-tuning-sft",
+  "title": "Hướng dẫn điều chỉnh bằng Fine-Tuning giám sát",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Trước khi đọc: bạn đưa ra một cơ sở vani model prompt 'Thủ đô của Pháp là gì?'. Nó xuất ra 'Và còn Ý và Tây Ban Nha thì sao?'. Cái nào chẩn đoán tốt nhất khoảng cách?",
+      "options": [
+        "model đang thiếu sự thật về Paris.",
+        "model có ngôn ngữ model hành vi nhưng không có hợp đồng định dạng theo hướng dẫn.",
+        "Người model cần một vốn từ vựng lớn hơn.",
+        "model cơ sở phải được đặt lại và pretrained lại."
+      ],
+      "correct": 1,
+      "explanation": "model cơ sở có thể mở rộng văn bản nhưng chưa bao giờ được chứng minh rằng một lệnh mong đợi một phản hồi tương ứng. SFT dạy hợp đồng định dạng: xem lệnh, phát ra phản hồi."
+    },
+    {
+      "stage": "check",
+      "question": "Hàm đối chiếu đặt nhãn [i] = -100 trên các vị trí lệnh và trên các vị trí đệm. Tại sao entropy chéo PyTorch xử lý các vị trí này một cách chính xác?",
+      "options": [
+        "Entropy chéo âm thầm đánh rơi bất kỳ mục tiêu tiêu âm nào.",
+        "ignore_index=-100 được vinh danh bởi F.cross_entropy: những vị trí đó đóng góp không loss và không gradient.",
+        "Đầu ra model tại các vị trí đó được đặt thành NaN tự động.",
+        "PyTorch chuẩn hóa theo độ dài trình tự để các vị trí được che sẽ hủy bỏ."
+      ],
+      "correct": 1,
+      "explanation": "ignore_index là một đối số được lập thành văn bản của F.cross_entropy. Các mục tiêu bằng nó đóng góp từ không cho loss và không trên gradients. -100 là giá trị mặc định thông thường."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao `shifted_loss` cắt `logits[:, :-1, :]` và `labels[:, 1:]` thay vì sử dụng chúng ở cùng một vị trí?",
+      "options": [
+        "Để làm cho tensors có cùng kích thước sau bước đối chiếu.",
+        "Bởi vì model tại vị trí i dự đoán token ở vị trí i + 1 theo mục tiêu nhân quả token tiếp theo.",
+        "Để tự động loại trừ vị trí đệm cuối cùng.",
+        "Đây là một tối ưu hóa tùy chọn; sử dụng nhãn cùng vị trí cũng hoạt động."
+      ],
+      "correct": 1,
+      "explanation": "LM nhân quả huấn luyện vị trí i để dự đoán token i + 1. Lát cắt căn chỉnh dự đoán ở vị trí i với nhãn vàng ở vị trí i + 1, là mục tiêu tiêu chuẩn token tiếp theo."
+    },
+    {
+      "stage": "check",
+      "question": "Bạn huấn luyện mà không có mặt nạ: nhãn bằng input_ids không có -100. Huấn luyện model nhưng khớp chính xác trên phản hồi kém hơn so với mặt nạ. Nguyên nhân có khả năng xảy ra nhất?",
+      "options": [
+        "Trình tối ưu hóa quá phù hợp với tokens phản hồi.",
+        "Hầu hết các tín hiệu gradient đi để dự đoán lệnh (vùng được che chắn lớn nhất đã kìm hãm nó).",
+        "Entropy chéo không ổn định khi loss bao gồm các đặc biệt.",
+        "Người model không thể học ranh giới token nếu không có mặt nạ."
+      ],
+      "correct": 1,
+      "explanation": "Khi các vị trí hướng dẫn được tính vào loss, chúng chiếm ưu thế trong gradient vì thường có nhiều hơn tokens phản hồi. Sự learning rate hiệu quả của phần bạn quan tâm (phản hồi) giảm xuống và model dành công suất để xây dựng lại đầu vào mà người dùng luôn cung cấp."
+    },
+    {
+      "stage": "post",
+      "question": "Đối sánh chính xác là 0,85 trên tập hợp được giữ lại. Một người đánh giá nói rằng model diễn giải câu trả lời đúng và đối sánh chính xác bỏ lỡ những câu trả lời đó. Bạn thêm số liệu nào để nắm bắt điều này?",
+      "options": [
+        "Loss trên phim trường bị giữ lại.",
+        "F1 cấp độ Token so với tham chiếu, các khoản tín dụng chồng chéo ngay cả khi không giống với nhân vật.",
+        "Độ dài trình tự trung bình.",
+        "Entropy chéo của tham chiếu dưới model."
+      ],
+      "correct": 1,
+      "explanation": "F1 cấp độ Token (được tính giữa tokens dự đoán và tham chiếu sau khi chuẩn hóa) ghi nhận model vì đã trả lời đúng hầu hết câu trả lời ngay cả khi hình thức bề mặt khác nhau. Đây là công việc của bài 41."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn muốn sử dụng model SFT trong chatbot hỗ trợ đối thoại nhiều lượt. Thay đổi tối thiểu cần thiết đối với dữ liệu và mặt nạ là bao nhiêu?",
+      "options": [
+        "Không có: SFT models luôn xử lý nhiều lượt ra khỏi hộp.",
+        "Thêm điểm đánh dấu USER và ASSISTANT mỗi lượt, nối các lượt và che mọi thứ ngoại trừ lượt trợ lý hiện đang được huấn luyện.",
+        "Chuyển loss sang lỗi bình phương trung bình.",
+        "Tăng vốn từ vựng."
+      ],
+      "correct": 1,
+      "explanation": "SFT nhiều lượt khái quát hóa mẫu một lượt. Mỗi lượt nhận được một điểm đánh dấu vai trò. Mặt nạ là sự kết hợp của tất cả các vị trí không phải trợ lý cộng với phần đệm. Mục tiêu training không thay đổi."
+    }
+  ]
+}
