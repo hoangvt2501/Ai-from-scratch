@@ -1,0 +1,102 @@
+{
+  "lesson": "29-dialogue-state-tracking",
+  "title": "Theo dõi trạng thái đối thoại",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Theo dõi trạng thái đối thoại duy trì điều gì qua các lượt?",
+      "options": [
+        "Chỉ lịch sử văn bản tự do",
+        "Từ điển giá trị vị trí đại diện cho mục tiêu hiện tại của người dùng, được cập nhật sau mỗi lượt",
+        "Một embedding của cuộc trò chuyện",
+        "Bản chép lời được gắn thẻ POS"
+      ],
+      "correct": 1,
+      "explanation": "DST giữ một bản đồ giá trị vị trí có cấu trúc mà backend có thể hành động."
+    },
+    {
+      "stage": "pre",
+      "question": "Joint Goal Accuracy (JGA) đo lường những gì?",
+      "options": [
+        "Phân số lượt mà mọi vị trí đều chính xác (tất cả hoặc không có gì)",
+        "Vị trí trung bình accuracy",
+        "Độ trễ mỗi lượt",
+        "Sự tương đồng cosin"
+      ],
+      "correct": 0,
+      "explanation": "JGA là trận đấu nghiêm ngặt trên mỗi lượt trên tất cả các vị trí; accuracy cho mỗi vị trí khoan dung hơn."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao việc tạo lại toàn bộ trạng thái từ lịch sử mỗi lượt xử lý các chỉnh sửa của người dùng một cách tự nhiên?",
+      "options": [
+        "Nó sử dụng ít tokens hơn",
+        "Nó chạy trên GPU",
+        "Nó tránh embeddings",
+        "Đọc toàn bộ lịch sử cho phép model rút lại trạng thái cuối cùng bao gồm 'thực sự...' chỉnh sửa mà không có logic rollback rõ ràng"
+      ],
+      "correct": 3,
+      "explanation": "Tái tạo toàn bộ lịch sử hấp thụ các chỉnh sửa bằng cách tính toán lại trạng thái cuối cùng từ toàn bộ cuộc trò chuyện."
+    },
+    {
+      "stage": "check",
+      "question": "Mẫu 2026 nào cung cấp một vị trí hợp lệ được đảm bảo trong 5 dòng mã?",
+      "options": [
+        "Biểu thức chính quy viết tay",
+        "Truy xuất BM25",
+        "LLM + Người hướng dẫn + schema Pydantic với đầu ra bị hạn chế hoặc xác thực",
+        "Bộ phân loại TF-IDF"
+      ],
+      "correct": 2,
+      "explanation": "Pydantic schema + Instructor tự động xác thực đầu ra trạng thái của LLM so với bản thể vị trí."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao lại là phiên bản schema DST của bạn?",
+      "options": [
+        "Việc thêm các vị trí mới sau khi hoc sẽ làm mất hiệu lực dữ liệu training cũ hơn và phá vỡ đánh giá theo chiều dọc",
+        "Yêu cầu của JSON",
+        "Giảm số lượng token",
+        "Tăng tốc độ"
+      ],
+      "correct": 0,
+      "explanation": "Các thay đổi schema không có phiên bản âm thầm phá vỡ training alignment dữ liệu và khả năng so sánh đánh giá."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao DST cho các miền nhạy cảm với tuân thủ phải bao gồm kiểm tra dựa trên quy tắc cùng với trích xuất LLM?",
+      "options": [
+        "Quy tắc tránh embeddings",
+        "DST chỉ LLM có thể trích xuất sai parameters phá hoại (số tiền, tài khoản, ngày); Lớp quy tắc thực thi các ràng buộc xác định",
+        "LLMs chậm hơn",
+        "Quy tắc đa ngôn ngữ"
+      ],
+      "correct": 1,
+      "explanation": "Các lĩnh vực tuân thủ yêu cầu thực thi xác định; Quy tắc bắt các lỗi vị trí mà LLMs đưa vào."
+    },
+    {
+      "stage": "post",
+      "question": "Mối quan tâm về chi phí với việc tái tạo trạng thái trên mỗi lượt thông qua LLM là gì?",
+      "options": [
+        "Đọc lại toàn bộ lịch sử mỗi lượt sẽ mang lại tổng token sử dụng O (n ^ 2); giới hạn hoặc tóm tắt các lượt cũ hơn",
+        "Xem thêm embeddings",
+        "Chi phí cosine",
+        "Embedding trôi dạt"
+      ],
+      "correct": 0,
+      "explanation": "Tái sinh toàn bộ lịch sử lần lượt là bậc hai; hoặc sử dụng tóm tắt luân phiên."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao cần có quy trình xác nhận rõ ràng trước các hành động phụ trợ phá hoại?",
+      "options": [
+        "Độ trễ",
+        "Xác nhận tăng JGA",
+        "Yêu cầu của tokenizers",
+        "Ngay cả DST tốt cũng có tỷ lệ lỗi khe cắm không phải bằng không; Xác nhận xác định ngăn chặn các hành động sai tài khoản hoặc số tiền sai"
+      ],
+      "correct": 3,
+      "explanation": "Các hành động phá hoại cần xác nhận của người dùng vì DST không bao giờ không có lỗi."
+    }
+  ]
+}
