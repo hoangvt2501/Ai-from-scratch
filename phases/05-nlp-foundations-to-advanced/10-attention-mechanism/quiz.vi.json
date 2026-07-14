@@ -1,0 +1,102 @@
+{
+  "lesson": "10-attention-mechanism",
+  "title": "Cơ chế Attention - Bước đột phá",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bahdanau attention giải quyết vấn đề gì trong seq2seq?",
+      "options": [
+        "Tokenization không khớp",
+        "Nút thắt cổ chai vector ngữ cảnh kích thước cố định trong đó decoder chỉ nhìn thấy trạng thái cuối cùng của encoder",
+        "Biến mất gradients trong encoders",
+        "Độ trễ Beam search"
+      ],
+      "correct": 1,
+      "explanation": "Attention cho phép decoder tham khảo ý kiến của mọi tiểu bang encoder, không chỉ tiểu bang cuối cùng."
+    },
+    {
+      "stage": "pre",
+      "question": "Bối cảnh attention vector ở bước t decoder là gì?",
+      "options": [
+        "Đầu vào của decoder embedding",
+        "Trung bình có trọng số của encoder trạng thái ẩn trong đó trọng số đến từ điểm khóa truy vấn",
+        "Trạng thái ẩn cuối cùng của encoder",
+        "Một phép chiếu ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Context = tổng của alpha_i * h_i, trung bình gia quyền phụ thuộc vào bước của encoder trạng thái."
+    },
+    {
+      "stage": "check",
+      "question": "Trong attention Bahdanau (phụ gia), vector v_a đóng vai trò gì?",
+      "options": [
+        "Nó kiểm soát dropout",
+        "Đó là phép chiếu biến tổ hợp ẩn attention-mờ thành điểm vô hướng trên mỗi vị trí encoder",
+        "Nó mã hóa các vị trí",
+        "Nó thiên vị softmax"
+      ],
+      "correct": 1,
+      "explanation": "v_a tích chấm với tanh(W_a s + U_a h) để thu gọn một d_attn vector thành điểm vô hướng."
+    },
+    {
+      "stage": "check",
+      "question": "Trong biến thể 'chấm' attention của Luong, ràng buộc nào phải nắm giữ?",
+      "options": [
+        "Decoder trạng thái và trạng thái encoder phải có cùng chiều (d_s == d_h)",
+        "Các encoder phải là hai chiều",
+        "Softmax phải là log-space",
+        "Beam search là bắt buộc"
+      ],
+      "correct": 0,
+      "explanation": "dấu chấm sử dụng s^T h không có phép chiếu, vì vậy các kích thước phải khớp chính xác."
+    },
+    {
+      "stage": "check",
+      "question": "Ánh xạ Q/K/V nào mô tả attention cổ điển (Bahdanau/Luong)?",
+      "options": [
+        "Q, K, V là ba phép chiếu học độc lập của nguồn",
+        "Q là ngẫu nhiên, K và V được học",
+        "Q từ encoder, K và V từ decoder",
+        "Q = trạng thái decoder; K và V = encoder trạng thái (cùng tensor)"
+      ],
+      "correct": 3,
+      "explanation": "Trong attention cổ điển, khóa và giá trị đều là trạng thái encoder; transformers phân chia K và V thông qua các phép chiếu đã học."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao báo cáo trọng lượng attention thô như 'lời giải thích' được coi là mong manh?",
+      "options": [
+        "Attention quả cân bị rò rỉ nhãn",
+        "Chúng quá nhỏ để lên kế hoạch",
+        "Nghiên cứu (ví dụ: Jain và Wallace, 2019) cho thấy attention phân phối có thể được hoán vị mà không thay đổi dự đoán về một số nhiệm vụ",
+        "Trọng lượng Attention không thể phân biệt được"
+      ],
+      "correct": 2,
+      "explanation": "Attention trọng số tương quan với dự đoán nhưng không phải giải thích trung thực nếu không có kiểm tra ablation/counterfactual."
+    },
+    {
+      "stage": "post",
+      "question": "Bước nào kết nối Bahdanau attention với transformer self-attention?",
+      "options": [
+        "Thả beam search",
+        "Thêm nhiều lớp RNN hơn",
+        "Thay thế softmax bằng sigmoid",
+        "Truy vấn một trình tự chống lại chính nó với các phép chiếu Q, K và V được học riêng biệt, chạy trong các đầu song song"
+      ],
+      "correct": 3,
+      "explanation": "Self-attention truy vấn cùng một trình tự, với các phép chiếu K và V được phân chia, song song trên các đầu."
+    },
+    {
+      "stage": "post",
+      "question": "Một trường hợp sử dụng thực tế cho mặt nạ trong attention là gì?",
+      "options": [
+        "Thay thế dropout",
+        "Đặt trọng số attention cho tokens đệm bằng không để chúng không đóng góp vào ngữ cảnh vector",
+        "Vị trí mã hóa",
+        "Giảm kích thước model"
+      ],
+      "correct": 1,
+      "explanation": "Mặt nạ đệm (hoặc tokens trong tương lai trong decoder) ngăn softmax phân tán trọng lượng lên các vị trí không hợp lệ."
+    }
+  ]
+}
