@@ -1,0 +1,102 @@
+{
+  "lesson": "26-relation-extraction-kg",
+  "title": "Trích xuất quan hệ & Xây dựng đồ thị tri thức",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Đơn vị nguyên tử của đồ thị tri thức là gì?",
+      "options": [
+        "Thẻ POS",
+        "A (chủ ngữ, quan hệ, đối tượng) ba",
+        "Một token",
+        "Một câu"
+      ],
+      "correct": 1,
+      "explanation": "KG lưu trữ thông tin dưới dạng (s, r, o) gấp ba; Bộ ba tổng hợp tạo thành biểu đồ."
+    },
+    {
+      "stage": "pre",
+      "question": "AEVS là viết tắt của gì trong khai thác quan hệ năm 2026?",
+      "options": [
+        "Anchor-Extraction-Verification-Supplement: neo spans, trích xuất ba, xác minh so với nguồn, bổ sung độ bao phủ",
+        "Tìm kiếm tự động Encoder Vector",
+        "Dịch vụ xác thực thực thể không đồng bộ",
+        "Giá trị thực thể tổng hợp Schema"
+      ],
+      "correct": 0,
+      "explanation": "AEVS là framework giảm thiểu ảo giác năm 2026 cho RE có cơ sở."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao mỗi bộ ba phải mang nguồn gốc (id tài liệu + span)?",
+      "options": [
+        "Nguồn gốc cho phép bạn kiểm tra bộ ba và loại bỏ ảo giác có spans không khớp với văn bản nguồn",
+        "Nó tăng tốc độ khai thác",
+        "Nguồn gốc thay đổi bản thể",
+        "Xuất xứ được yêu cầu bởi SPARQL"
+      ],
+      "correct": 0,
+      "explanation": "Nguồn gốc cho phép kiểm tra và là cốt lõi của phát hiện ảo giác kiểu AEVS."
+    },
+    {
+      "stage": "check",
+      "question": "Chuẩn hóa các mối quan hệ làm gì?",
+      "options": [
+        "Ánh xạ các cụm động từ (ví dụ: 'được sinh ra trong', 'là bản địa của') vào một id thuộc tính cố định để biểu đồ có thể truy vấn được",
+        "Loại bỏ bộ ba",
+        "Thêm embeddings",
+        "Dịch tài liệu"
+      ],
+      "correct": 0,
+      "explanation": "Chuẩn hóa thu gọn các diễn giải thành mã thuộc tính KG chính tắc."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao trích xuất quan hệ thường cần độ phân giải đồng tham chiếu trước?",
+      "options": [
+        "Các đại từ như 'anh ấy đã thành lập Apple' phải được giải quyết thành một thực thể được đặt tên trước khi trích xuất ba lần",
+        "Coref bổ sung embeddings",
+        "Coref cung cấp các vị trí",
+        "Coref chuẩn hóa trường hợp"
+      ],
+      "correct": 0,
+      "explanation": "Nếu không có coref, RE đính kèm các mối quan hệ với đại từ thay vì thực thể được đặt tên cơ bản."
+    },
+    {
+      "stage": "post",
+      "question": "Lựa chọn nào mở recall IE cho khả năng truy vấn đồ thị?",
+      "options": [
+        "Bỏ qua NER",
+        "sampling ngẫu nhiên của bộ ba",
+        "Biểu đồ chỉ Embedding",
+        "Ánh xạ các mối quan hệ IE mở vào một bản thể đóng (ví dụ: thuộc tính Wikidata) trước khi hợp nhất vào KG"
+      ],
+      "correct": 3,
+      "explanation": "Bản thể đóng làm cho đồ thị có thể truy vấn được; bước chuẩn hóa tự trả tiền cho chính nó ở hạ nguồn."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao nhiều production KG sử dụng bộ hạn định thời gian (thời gian start/end)?",
+      "options": [
+        "SPARQL nhanh hơn",
+        "Yêu cầu của RDF",
+        "Nhiều mối quan hệ có giới hạn thời gian (người sử dụng lao động, vợ/chồng, vai trò); Bộ hạn định ngăn chặn các tuyên bố 'mãi mãi đúng' trở nên cũ",
+        "Để xóa các thực thể NIL"
+      ],
+      "correct": 2,
+      "explanation": "Các mối quan hệ có giới hạn thời gian cần từ hạn định (ví dụ: Wikidata P580/P582) hoặc các sự kiện sẽ âm thầm cũ kỹ."
+    },
+    {
+      "stage": "post",
+      "question": "REBEL là gì?",
+      "options": [
+        "Cơ sở dữ liệu vector",
+        "Một trình trích xuất quan hệ seq2seq xuất ra bộ ba đã có trong id thuộc tính Wikidata",
+        "Một tokenizer",
+        "Một đồng tham chiếu model"
+      ],
+      "correct": 1,
+      "explanation": "REBEL (Babelscape) là một seq2seq RE model được huấn luyện trên bộ ba Wikidata được giám sát từ xa."
+    }
+  ]
+}
