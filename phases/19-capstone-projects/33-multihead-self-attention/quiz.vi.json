@@ -1,0 +1,78 @@
+{
+  "lesson": "33-multihead-self-attention",
+  "title": "Self-Attention nhiều đầu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao một khối self-attention hiệu quả sử dụng một lớp tuyến tính duy nhất xuất ra features 3 * D?",
+      "options": [
+        "Nó thực thi chia sẻ trọng lượng giữa Q, K và V",
+        "Về mặt toán học, nó tương đương với ba lớp Tuyến tính (D, D) và chạy như một matmul",
+        "Nó tránh được sự cần thiết của một mặt nạ nhân quả",
+        "Nó làm giảm số lượng model parameter"
+      ],
+      "correct": 1,
+      "explanation": "Xếp chồng ba ma trận chiếu (D, D) thành một ma trận (3D, D) tạo ra cùng một đầu ra, nhưng forward pass là một matmul thân thiện với máy gia tốc duy nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Mối quan hệ giữa d_model, n_heads và d_head là gì?",
+      "options": [
+        "d_head = d_model * n_heads",
+        "d_head = d_model + n_heads",
+        "d_head = d_model // n_heads và d_model phải chia hết cho n_heads",
+        "d_head độc lập với d_model"
+      ],
+      "correct": 2,
+      "explanation": "Khối chia đều d_model trên các đầu. Ràng buộc d_model % n_heads == 0 được thực thi khi xây dựng."
+    },
+    {
+      "stage": "check",
+      "question": "Giá trị nào đi vào hệ số tỷ lệ của attention tích chấm theo tỷ lệ?",
+      "options": [
+        "sqrt(d_model)",
+        "sqrt(d_head)",
+        "sqrt(n_heads)",
+        "sqrt(seq_len)"
+      ],
+      "correct": 1,
+      "explanation": "Điểm số được chia cho sqrt (d_head), kích thước đầu mà matmul thu hẹp. Điều này giữ cho variance của điểm số bị giới hạn khi d_head phát triển."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để mặt nạ nhân quả thực thi vị trí t không thể tham gia vào vị trí t + 1?",
+      "options": [
+        "Bằng cách nhân các khóa ở các vị trí trong tương lai với số không",
+        "Bằng cách đặt các mục điểm trên đường chéo đến vô cực âm trước softmax",
+        "Bằng cách xóa tokens trong tương lai khỏi đầu vào",
+        "Bằng cách sử dụng một đầu attention khác cho tương lai"
+      ],
+      "correct": 1,
+      "explanation": "Đặt các mục nhập trong tương lai thành -inf forces softmax cung cấp cho chúng trọng số bằng không. Các vị trí trong quá khứ và hiện tại giữ lại một phân phối trọng số hợp lệ."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao khối kết thúc bằng phép chiếu đầu ra tuyến tính (D, D) sau khi hợp nhất các đầu?",
+      "options": [
+        "Để cho phép model trộn thông tin giữa các đầu",
+        "Để phù hợp với kích thước từ vựng của model",
+        "Để chuẩn hóa các kích hoạt có nghĩa là không",
+        "Nó là bắt buộc để autograd theo dõi gradients"
+      ],
+      "correct": 0,
+      "explanation": "Nếu không có phép chiếu đầu ra, đầu ra sẽ chỉ kết hợp trong các lớp sau. Phép chiếu cung cấp cho khối một nơi để trộn các đầu trong cùng một bước."
+    },
+    {
+      "stage": "post",
+      "question": "Ma trận hình dạng attention trọng lượng (B, H, T, T) cho bạn biết điều gì?",
+      "options": [
+        "Mỗi đầu có bao nhiêu parameters",
+        "Vị trí chính nào mà mỗi vị trí truy vấn tham gia, mỗi đầu, mỗi phần tử batch",
+        "Sự tương đồng cosin giữa truy vấn và giá trị vectors",
+        "Đầu ra logits cho token tiếp theo"
+      ],
+      "correct": 1,
+      "explanation": "Hàng t của ma trận mỗi đầu là sự phân phối trên các vị trí chính được sử dụng bởi vị trí truy vấn t. Kiểm tra nó cho thấy vị trí của mỗi đầu."
+    }
+  ]
+}
