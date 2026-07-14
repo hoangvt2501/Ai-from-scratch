@@ -1,0 +1,78 @@
+{
+  "lesson": "13-llm-observability",
+  "title": "LLM Observability Stack Lựa chọn",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài học phân chia thị trường LLM observability 2026 như thế nào?",
+      "options": [
+        "Nền tảng phát triển (đi kèm với evals/prompts/sessions) so với các công cụ gateway/telemetry",
+        "Tại chỗ so với cloud",
+        "Nhà cung cấp so với mã nguồn mở",
+        "Python so với TypeScript"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Công cụ nào được bài học định vị là cốt lõi được MIT cấp phép với câu chuyện tự lưu trữ mạnh mẽ và cấp cloud miễn phí 50K events/month?",
+      "options": [
+        "Thợ rèn LangSmith",
+        "Phượng hoàng",
+        "Arize AX",
+        "Cầu chì"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tuyên bố quy mô chính của Arize AX so với observability stacks nguyên khối như Datadog là gì?",
+      "options": [
+        "Luôn đắt hơn",
+        "Rẻ hơn khoảng 100 lần trên quy mô lớn thông qua tích hợp Iceberg/Parquet không sao chép",
+        "Miễn phí dưới 1 triệu events/day",
+        "Rẻ hơn 10%"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học gọi lớp thiết bị đo lường sai cho tính di động là gì?",
+      "options": [
+        "Nhạc cụ bên trong agent framework của bạn, vì nó kết hợp bạn với framework đó",
+        "Sampling ở mức 5% khi thành công",
+        "Sử dụng quy ước ngữ nghĩa OpenTelemetry GenAI",
+        "Thiết bị đo lường ở lớp HTTP/OpenAI-SDK"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học xác định quy ước OpenTelemetry nào là lớp tương tác năm 2026 giữa các công cụ observability?",
+      "options": [
+        "Quy ước ngữ nghĩa nhắn tin OTel",
+        "Quy ước ngữ nghĩa cơ sở dữ liệu OTel",
+        "Quy ước ngữ nghĩa GenAI (gen_ai.system, gen_ai.request.model, gen_ai.usage.input_tokens)",
+        "Quy ước ngữ nghĩa HTTP OTel"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học cho rằng việc giữ chân toàn trace không vượt quá 1 triệu requests/day?",
+      "options": [
+        "Lưu trữ lưu trữ có chi phí cao hơn so với chính các cuộc gọi LLM; Các nhóm phải lấy mẫu (ví dụ: 100% lỗi, 100% chi phí cao, 5% thành công)",
+        "Giới hạn OpenTelemetry trace volume",
+        "Nhà cung cấp chặn nó",
+        "Phoenix chỉ hỗ trợ 1M traces"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
