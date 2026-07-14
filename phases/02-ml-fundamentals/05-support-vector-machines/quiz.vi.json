@@ -1,0 +1,67 @@
+[
+  {
+    "id": "svm-pre-1",
+    "stage": "pre",
+    "question": "vectors hỗ trợ trong SVM là gì?",
+    "options": [
+      "Tất cả các điểm dữ liệu trong tập training",
+      "Các điểm training gần nhất với ranh giới quyết định xác định siêu mặt phẳng",
+      "Các feature vectors sau khi chuyển đổi hạt nhân",
+      "Trọng lượng vectors học được trong training"
+    ],
+    "correct": 1,
+    "explanation": "vectors hỗ trợ là các điểm training nằm chính xác trên ranh giới ký quỹ. Chúng là những điểm duy nhất quyết định siêu mặt phẳng quyết định. Loại bỏ các điểm không hỗ trợ vector không thay đổi ranh giới."
+  },
+  {
+    "id": "svm-pre-2",
+    "stage": "pre",
+    "question": "SVM tối đa hóa điều gì khi tìm ranh giới quyết định?",
+    "options": [
+      "Số điểm training được phân loại chính xác",
+      "Margin -- khoảng cách giữa ranh giới quyết định và các điểm gần nhất của mỗi class",
+      "Tổng khoảng cách từ tất cả các điểm đến ranh giới",
+      "Sự phức tạp của ranh giới quyết định"
+    ],
+    "correct": 1,
+    "explanation": "SVM tìm siêu mặt phẳng tối đa hóa biên độ giữa hai classes. Biên độ rộng hơn dẫn đến khái quát hóa tốt hơn trên dữ liệu không nhìn thấy."
+  },
+  {
+    "id": "svm-post-1",
+    "stage": "post",
+    "question": "Điều gì xảy ra khi bạn tăng C parameter trong SVM?",
+    "options": [
+      "Biên độ trở nên rộng hơn và cho phép phân loại sai nhiều hơn",
+      "Biên độ trở nên hẹp hơn, ít phân loại sai hơn và model có thể quá khớp",
+      "Hàm hạt nhân thay đổi từ tuyến tính sang RBF",
+      "Số lượng hỗ trợ vectors luôn tăng lên"
+    ],
+    "correct": 1,
+    "explanation": "Large C phạt nặng nề việc phân loại sai, tạo ra một biên hẹp phù hợp với dữ liệu training. Điều này có thể dẫn đến overfitting. C nhỏ cho phép nhiều vi phạm hơn để có tỷ suất lợi nhuận rộng hơn, chính thức hơn."
+  },
+  {
+    "id": "svm-post-2",
+    "stage": "post",
+    "question": "Làm thế nào để thủ thuật hạt nhân cho phép SVM học các ranh giới phi tuyến?",
+    "options": [
+      "Nó thay thế SVM bằng mạng nơ-ron",
+      "Nó tính toán các tích chấm trong một không gian high-dimensional mà không ánh xạ dữ liệu rõ ràng đến không gian đó",
+      "Nó loại bỏ các ngoại lệ khỏi dataset trước khi training",
+      "Nó thêm features đa thức vào dữ liệu đầu vào trực tiếp"
+    ],
+    "correct": 1,
+    "explanation": "Thủ thuật hạt nhân thay thế mọi sản phẩm chấm x_i . x_j với K(x_i, x_j), tính tích chấm trong một không gian feature high-dimensional (thậm chí vô hạn chiều đối với RBF) mà không bao giờ xây dựng nó."
+  },
+  {
+    "id": "svm-post-3",
+    "stage": "post",
+    "question": "Bản lề loss bằng không khi y * f (x) > = 1. Điều này có nghĩa là gì về mặt phân loại?",
+    "options": [
+      "Điểm bị phân loại sai",
+      "Điểm được phân loại chính xác và nằm ngoài lề",
+      "Vấn đề chính xác nằm ở ranh giới quyết định",
+      "Vấn đề là một mẫu nhiễu nên bỏ qua"
+    ],
+    "correct": 1,
+    "explanation": "Khi y * f(x) >= 1, điểm được phân loại chính xác VÀ nằm trên hoặc vượt ra ngoài ranh giới lề. Chỉ các điểm bên trong lề hoặc phân loại sai (y * f (x) < 1) mới góp phần vào loss bản lề."
+  }
+]
