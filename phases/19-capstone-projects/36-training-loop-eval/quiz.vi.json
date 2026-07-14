@@ -1,0 +1,78 @@
+{
+  "lesson": "36-training-loop-eval",
+  "title": "Training Vòng lặp và đánh giá",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao mục tiêu tensor phải là đầu vào tensor dịch chuyển một vị trí?",
+      "options": [
+        "Entropy chéo cần tensors giống hệt nhau",
+        "Dự đoán token tiếp theo là mục tiêu training: ở mọi vị trí, model dự đoán token tiếp theo; quên đi sự thay đổi sẽ huấn luyện model tự dự đoán, điều này không học được gì hữu ích",
+        "Nó tăng tốc độ optimizer",
+        "Nó được yêu cầu bởi AdamW"
+      ],
+      "correct": 1,
+      "explanation": "Đầu vào là tokens 0..T-1; mục tiêu là tokens 1..T; loss được tính trên các hình dạng phẳng (batch * seq, vocab) và (batch * seq,)."
+    },
+    {
+      "stage": "pre",
+      "question": "evaluate_model làm gì mà bước training không làm?",
+      "options": [
+        "Nó chạy optimizer",
+        "Nó chạy một số batches xác thực cố định dưới no_grad và với dropout bị vô hiệu hóa, trả về giá trị trung bình có thể tái tạo loss",
+        "Nó thay đổi trọng lượng model",
+        "Nó tính toán gradients hai lần"
+      ],
+      "correct": 1,
+      "explanation": "Đánh giá không cần gradients, không cần dropout và một phần dữ liệu xác thực cố định để có thể tái tạo qua các lần chạy."
+    },
+    {
+      "stage": "check",
+      "question": "AdamW parameters nào bị giảm cân?",
+      "options": [
+        "Mọi parameter đều như nhau",
+        "tensors hình ma trận (trọng lượng tuyến tính, bảng embedding) nhận được sự phân rã trọng lượng; tỷ lệ, dịch chuyển và bias tensors nhận được sự phân rã bằng không",
+        "Chỉ đầu LM",
+        "Chỉ LayerNorm thang đo"
+      ],
+      "correct": 1,
+      "explanation": "Đặt phân rã trên thang đo LayerNorm sẽ đẩy thang đo về không và phá vỡ chuẩn hóa; sự phân tách là một mô hình production tiêu chuẩn."
+    },
+    {
+      "stage": "check",
+      "question": "Lịch trình khởi động cộng với cosin trace hình dạng nào từ bước 0 đến bước cuối cùng?",
+      "options": [
+        "Hằng số",
+        "Đường dốc tuyến tính từ không đến tối đa trong warmup_steps, sau đó phân rã cosin từ tối đa đến min_lr trên các bước còn lại",
+        "Tăng trưởng theo cấp số nhân",
+        "Chức năng bước"
+      ],
+      "correct": 1,
+      "explanation": "Khởi động điền vào trạng thái optimizer; phân rã cosin làm giảm kích thước bước để giai đoạn cuối cùng tinh chỉnh trọng lượng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao phải cắt gradient chuẩn trước optimizer.step()?",
+      "options": [
+        "Nó tăng tốc matmul",
+        "Một batch kém có thể tạo ra một gradient khổng lồ xóa sạch hàng giờ training; cắt xuống max_norm = 1.0 giữ optimizer trong phạm vi an toàn mà không làm sai lệch các bản cập nhật bình thường",
+        "Nó làm giảm việc sử dụng bộ nhớ",
+        "Nó loại bỏ yêu cầu khởi động"
+      ],
+      "correct": 1,
+      "explanation": "Gradient cắt là bảo hiểm rẻ nhất chống lại sự phân kỳ; một là mặc định tồn tại trong hầu hết các thiết lập."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao ghi nhật ký mỗi bước là JSONL thay vì trạng thái ngâm?",
+      "options": [
+        "JSONL được yêu cầu bởi optimizer",
+        "JSONL bản ghi bền trên các tái cấu trúc, có thể greppable, có thể vẽ trong ba mươi dòng và tồn tại sau các sự cố; trạng thái ngâm ràng buộc bạn với bố cục mô-đun đã tạo ra nó",
+        "JSONL huấn luyện nhanh hơn",
+        "JSONL sử dụng ít bộ nhớ GPU hơn"
+      ],
+      "correct": 1,
+      "explanation": "Bất kỳ sự cố nào cũng để lại một artifact có thể đọc được; sơ yếu lý lịch đọc bước cuối cùng; công cụ trên đầu là tầm thường."
+    }
+  ]
+}
