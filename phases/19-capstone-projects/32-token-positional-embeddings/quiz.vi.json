@@ -1,0 +1,78 @@
+{
+  "lesson": "32-token-positional-embeddings",
+  "title": "Token và Embeddings vị trí",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Giai đoạn embedding tạo ra hình dạng nào từ id (B, T)?",
+      "options": [
+        "(B, T)",
+        "(B, V)",
+        "(B, T, D) trong đó D là kích thước model",
+        "(B, T, V) trong đó V là kích thước từ vựng"
+      ],
+      "correct": 2,
+      "explanation": "Mỗi id được ánh xạ đến một vector chiều D. batch giữ B và T và đạt được một chiều feature D mới."
+    },
+    {
+      "stage": "check",
+      "question": "token và vị trí embeddings được soạn như thế nào trong bài học này?",
+      "options": [
+        "Bằng cách nối dọc theo trục feature",
+        "Bằng tổng theo nguyên tố, phát vị trí vector trên batch",
+        "Bằng một phép chiếu tuyến tính bổ sung",
+        "Bằng cách lấy phần tử tối đa"
+      ],
+      "correct": 1,
+      "explanation": "Hai tensors hình dạng (B, T, D) và (T, D) được tổng hợp. Phát sóng sao chép bảng vị trí trên trục batch."
+    },
+    {
+      "stage": "check",
+      "question": "SinusoidalPositionalEmbedding đóng góp bao nhiêu parameters có thể học được?",
+      "options": [
+        "max_context_length",
+        "max_context_length * d_model",
+        "d_model",
+        "Không"
+      ],
+      "correct": 3,
+      "explanation": "Bảng hình sin được tính toán từ một công thức và được lưu trữ dưới dạng bộ đệm. Nó không đóng góp parameters."
+    },
+    {
+      "stage": "check",
+      "question": "Mã hóa vị trí nào không thể chấp nhận một trình tự dài hơn giới hạn xây dựng của nó?",
+      "options": [
+        "embedding vị trí hình sin",
+        "Học embedding vị trí",
+        "Cả hai",
+        "Không"
+      ],
+      "correct": 2,
+      "explanation": "Trong cách triển khai bài học này, cả hai classes đều thực thi max_context_length tại thời điểm chuyển tiếp. Đã học vốn có giới hạn bảng; hình sin ở đây cũng bị giới hạn vì nó sử dụng một bảng dựng sẵn."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao sơ đồ hình sin sử dụng cả sin và cos trên các cặp feature liền kề?",
+      "options": [
+        "Bởi vì chỉ có tội lỗi không phải là chu kỳ",
+        "Bởi vì bản thân cos không thể được truyền ngược thông qua",
+        "Vì vậy, vector tại vị trí p + k là một hàm tuyến tính của vector tại vị trí p",
+        "Bởi vì nó tăng gấp đôi số lượng parameter"
+      ],
+      "correct": 2,
+      "explanation": "Ghép nối sin và cos ở cùng bước sóng có nghĩa là dịch chuyển vị trí k là một vòng quay, là một bản đồ tuyến tính. Sau đó, Attention có thể học độ lệch tương đối thông qua các phép chiếu tuyến tính."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao embedding backward pass chỉ cập nhật các hàng của bảng token xuất hiện trong batch?",
+      "options": [
+        "PyTorch chỉ lưu trữ gradients cho các mục nhập không phải bằng không",
+        "Các hàng không được chạm vào trong forward pass tạo ra gradient bằng không theo quy tắc chuỗi",
+        "optimizer bỏ qua các hàng mà nó chưa thấy",
+        "Token id được lưu trữ trong một cấu trúc dữ liệu thưa thớt"
+      ],
+      "correct": 1,
+      "explanation": "Một hàng không đóng góp vào bất kỳ đầu ra nào có đạo hàm bằng không cho loss, vì vậy gradient của nó bằng không cho bước đó."
+    }
+  ]
+}
