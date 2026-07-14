@@ -1,0 +1,78 @@
+{
+  "lesson": "48-distributed-fsdp-ddp",
+  "title": "Dữ liệu phân tán song song và FSDP từ đầu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Hai hoạt động tập thể nào là cốt lõi của trình bao bọc DDP từ đầu?",
+      "options": [
+        "Gửi và thu hồi",
+        "phát sóng khi xây dựng để mọi cấp bậc bắt đầu từ cùng một parameters và all_reduce sau lùi để mọi cấp bậc kết thúc với gradient trung bình",
+        "Chỉ reduce_scatter",
+        "Rào cản và rào cản"
+      ],
+      "correct": 1,
+      "explanation": "Phát sóng khi bắt đầu giữ cho thứ hạng đồng bộ ở bước không. Giảm tất cả sau khi lùi giữ cho chúng đồng bộ ở mọi bước tiếp theo."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao bài học này có tác dụng trên CPU mà không cần CUDA?",
+      "options": [
+        "Nó là một sơ khai",
+        "torch.distributed ships một phần phụ trợ gloo chạy các tập thể trên các ổ cắm thông thường, vì vậy torch.multiprocessing workers trên CPU tạo thành một nhóm process thực sự; chỉ có thẻ thiết bị thay đổi trên hộp GPU",
+        "Nó sử dụng tensors mô phỏng",
+        "Nó hoàn toàn không sử dụng torch.distributed"
+      ],
+      "correct": 1,
+      "explanation": "Gloo là phần phụ trợ tập thể CPU. Các trang web cuộc gọi tương tự hoạt động trên nccl trên GPU; bề mặt API giống hệt nhau."
+    },
+    {
+      "stage": "check",
+      "question": "Bài kiểm tra manual_all_reduce_matches_single_process chứng minh điều gì?",
+      "options": [
+        "Không có gì",
+        "Việc tổng gradients trên mỗi xếp hạng và chia cho world_size sẽ thu hồi gradient một process sẽ tính toán trên đầu vào được nối, trong nhiễu dấu phẩy động",
+        "Rằng optimizer hội tụ",
+        "CUDA đó là không cần thiết"
+      ],
+      "correct": 1,
+      "explanation": "Mức giảm trung bình entropy chéo trên batch đầy đủ bằng mức trung bình của mỗi giá trị trung bình trên mỗi bậc Tổng và chia là phép toán đúng; bài kiểm tra làm cho điều đó có thể nhìn thấy được."
+    },
+    {
+      "stage": "check",
+      "question": "Bản phác thảo FSDP trong bài học này làm gì cho mỗi parameter trên mỗi forward pass?",
+      "options": [
+        "Không có gì",
+        "Đệm parameter phẳng thành bội số của world_size, lát cắt all_gathers lát cắt trên mỗi cấp bậc, thả miếng đệm và xác minh việc tái tạo khớp với bản gốc",
+        "Khởi tạo lại parameter",
+        "Tính toán hàm băm"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi thứ hạng sở hữu 1/world_size của mỗi parameter. Tập hợp xây dựng lại toàn bộ tensor để tính toán; production FSDP chồng lên tập hợp với công việc của lớp trước."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao gloo all_gather có kích thước world_size các mảnh có kích thước bằng nhau ngay cả khi chiều dài parameter không chia hết cho world_size?",
+      "options": [
+        "all_gather của Gloo yêu cầu đầu ra tensor kích thước bằng nhau cho mỗi cấp bậc, vì vậy parameter phẳng được đệm bên phải với bội số của world_size trước khi cắt và phần đệm được thả ra sau khi thu thập",
+        "Đó là một lỗi",
+        "Nó tăng tốc mạng",
+        "Lựa chọn ngẫu nhiên"
+      ],
+      "correct": 0,
+      "explanation": "Gloo (và nccl) all_gather mong đợi đầu ra có cùng kích thước. Đệm là bản sửa lỗi rẻ nhất; bản phác thảo cắt kết quả trở lại độ dài ban đầu."
+    },
+    {
+      "stage": "post",
+      "question": "Đọc kết quả demo, param_sum_spread gần bằng không trên các cấp bậc cho bạn biết điều gì?",
+      "options": [
+        "Rằng loss thấp",
+        "Rằng mọi cấp bậc kết thúc cuộc chạy ở cùng một giá trị parameter, có nghĩa là phát sóng khi xây dựng và giảm tất cả sau mỗi lần lùi đều hoạt động; nếu một trong hai gặp lỗi, mức chênh lệch sẽ tăng lên theo các bước",
+        "Rằng mạng nhanh",
+        "Không có gì ý nghĩa"
+      ],
+      "correct": 1,
+      "explanation": "Bất biến của DDP là parameter sự ngang bằng giữa các cấp bậc. Chênh lệch là kiểm toán; bản demo khẳng định nó nằm dưới 1e-3."
+    }
+  ]
+}
