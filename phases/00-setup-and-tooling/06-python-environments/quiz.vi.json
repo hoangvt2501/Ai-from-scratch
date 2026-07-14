@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Môi trường ảo giải quyết vấn đề gì?",
+      "options": [
+        "Chúng làm cho mã Python chạy nhanh hơn bằng cách tối ưu hóa trình thông dịch",
+        "Chúng cô lập các phần phụ thuộc của dự án để các dự án khác nhau có thể sử dụng các phiên bản gói khác nhau",
+        "Chúng cung cấp giao diện đồ họa để quản lý Python scripts",
+        "Chúng tự động cập nhật các gói lên phiên bản mới nhất"
+      ],
+      "correct": 1,
+      "explanation": "Môi trường ảo cung cấp cho mỗi dự án một bộ gói riêng biệt. Nếu không có chúng, việc cài đặt PyTorch 2.4 cho một dự án sẽ ghi đè lên PyTorch 2.1 mà một dự án khác cần."
+    },
+    {
+      "stage": "pre",
+      "question": "lockfile trong bối cảnh quản lý phụ thuộc Python là gì?",
+      "options": [
+        "Tệp ngăn người dùng khác chỉnh sửa mã của bạn",
+        "Một tệp ghim mọi gói vào một phiên bản chính xác để cài đặt có thể lặp lại",
+        "Một tệp khóa phiên bản thông dịch Python",
+        "Một tệp mã hóa các phần phụ thuộc dự án của bạn"
+      ],
+      "correct": 1,
+      "explanation": "Một lockfile ghi lại phiên bản chính xác của mọi gói (bao gồm cả các phụ thuộc chuyển tiếp) để bất kỳ ai cài đặt từ nó đều nhận được các gói giống hệt nhau, đảm bảo khả năng tái tạo."
+    },
+    {
+      "stage": "post",
+      "question": "Làm thế nào bạn có thể xác minh rằng các lệnh pip và python của bạn đang sử dụng môi trường ảo chứ không phải Python hệ thống?",
+      "options": [
+        "Chạy 'pip --version' và kiểm tra số phiên bản",
+        "Chạy 'which python' và xác nhận nó hiển thị .venv/bin/python, không phải /usr/bin/python",
+        "Kiểm tra xem màu nền của thiết bị đầu cuối có thay đổi không",
+        "Chạy 'python --check-env' để xác minh"
+      ],
+      "correct": 1,
+      "explanation": "'Which python' (hoặc 'where python' trên Windows) hiển thị đường dẫn đầy đủ đến trình thông dịch. Nếu nó chỉ đến .venv/bin/python, bạn đang ở trong môi trường ảo."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao việc trộn pip và conda trong cùng một môi trường lại có vấn đề?",
+      "options": [
+        "Các gói Pip không tương thích với trình thông dịch Python của Conda",
+        "Pip lượt cài đặt có thể phá vỡ tính năng theo dõi phần phụ thuộc của conda, gây ra xung đột khó gỡ lỗi",
+        "Conda không thể cài đặt các gói mà pip đã cài đặt",
+        "Nó tăng gấp đôi dung lượng đĩa được sử dụng bởi mọi gói"
+      ],
+      "correct": 1,
+      "explanation": "Conda duy trì trình giải phụ thuộc của riêng mình. Pip cài đặt bỏ qua nó, vì vậy conda không còn biết trạng thái thực sự của môi trường. Điều này dẫn đến xung đột phụ thuộc rất khó giải quyết."
+    },
+    {
+      "stage": "post",
+      "question": "Mã PyTorch của bạn báo cáo 'CUDA không khả dụng' mặc dù có NVIDIA GPU. Nguyên nhân có thể xảy ra nhất là gì?",
+      "options": [
+        "GPU của bạn không hỗ trợ CUDA",
+        "PyTorch đã được cài đặt với phiên bản CUDA không tương thích với trình điều khiển GPU của bạn",
+        "Bạn quên import ngọn đuốc. Mô-đun cuda",
+        "Môi trường ảo không thể truy cập phần cứng GPU"
+      ],
+      "correct": 1,
+      "explanation": "PyTorch ships CUDA ràng buộc được biên dịch cho các phiên bản CUDA cụ thể. Nếu phiên bản PyTorch CUDA vượt quá phiên bản CUDA của trình điều khiển, CUDA sẽ không khả dụng. Kiểm tra với nvidia-smi và torch.version.cuda."
+    }
+  ]
+}
