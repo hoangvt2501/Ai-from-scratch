@@ -1,0 +1,78 @@
+{
+  "lesson": "06-mesa-optimization-deceptive-alignment",
+  "title": "Tối ưu hóa Mesa và Alignment lừa đảo",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Cặp nào nắm bắt tốt nhất sự khác biệt alignment bên trong / bên ngoài?",
+      "options": [
+        "Bên ngoài = model có chạy trên phần cứng không; bên trong = thấp loss",
+        "Bên ngoài = mục tiêu cơ bản có khớp với những gì chúng ta muốn không; bên trong = mục tiêu mesa có khớp với mục tiêu cơ sở không",
+        "Bên ngoài = là ổn định policy; inner = là temperature thấp",
+        "Bên ngoài = dữ liệu sạch sẽ; inner = là optimizer ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Điều nào sau đây KHÔNG phải là một trong bốn classes của Hubinger et al. về alignment mục tiêu mesa?",
+      "options": [
+        "Xấp xỉ căn chỉnh",
+        "Căn chỉnh chắc chắn",
+        "Proxy căn chỉnh",
+        "Sắp xếp xác suất"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Trong những điều kiện nào là lừa dối alignment chiến lược tối đa hóa phần thưởng cho một mesa-optimizer?",
+      "options": [
+        "Nó được huấn luyện với PPO chứ không phải DPO",
+        "Nó có mục tiêu cuối cùng liên tục, có nhận thức tình huống về training so với triển khai và cơ sở optimizer sửa đổi nó nếu nó bị lỗi trong training",
+        "Dung lượng của nó vượt quá 100 tỷ parameters",
+        "Nó có bất kỳ đại diện nội bộ nào"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao training đối thủ tiêu chuẩn có thể thất bại (hoặc tồi tệ hơn) alignment lừa đảo?",
+      "options": [
+        "Nó yêu cầu nhiều điện toán hơn RLHF",
+        "Nó dạy cho mesa-optimizer một yếu tố phân biệt rõ ràng hơn giữa thử nghiệm và triển khai, không phải là một mục tiêu mesa liên kết",
+        "Nó sử dụng sai chức năng loss",
+        "Nó không thể chạy trên GPUs"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Hack gradient là gì, như được giới thiệu trong Hubinger et al. (2019)?",
+      "options": [
+        "Một bệnh lý suy đoán trong đó một mesa-optimizer có khả năng tạo ra các kết quả đầu ra định hình các bản cập nhật gradient của riêng nó để duy trì mục tiêu mesa của nó",
+        "Một phương pháp bẻ khóa cho models điều chỉnh hướng dẫn",
+        "Một lỗi trong autograd",
+        "Một kỹ thuật để training nhanh hơn"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Cái nào trong số này là thất bại alignment bên ngoài, không phải thất bại bên trong?",
+      "options": [
+        "Phần thưởng hack và lừa đảo xuất hiện vì mục tiêu cơ bản tự nó là một proxy thiếu sót cho ý định của con người",
+        "Mesa-optimizer tối ưu hóa mục tiêu proxy phân kỳ ngoài phân phối",
+        "Cửa sau còn sót lại SFT",
+        "Mesa-optimizer ẩn mục tiêu của mình trong quá trình đánh giá"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
