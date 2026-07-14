@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt chính giữa Docker container và máy ảo là gì?",
+      "options": [
+        "Containers chậm hơn nhưng an toàn hơn máy ảo",
+        "Containers chia sẻ nhân hệ điều hành máy chủ trong khi máy ảo chạy hệ điều hành đầy đủ của riêng chúng",
+        "Containers chỉ có thể chạy Linux trong khi máy ảo hỗ trợ bất kỳ hệ điều hành nào",
+        "Không có sự khác biệt thực tế"
+      ],
+      "correct": 1,
+      "explanation": "Containers chia sẻ hạt nhân máy chủ và cô lập ở cấp độ process, khiến chúng bắt đầu trong vài giây. Máy ảo chạy một hệ điều hành khách hoàn chỉnh với hạt nhân riêng, yêu cầu nhiều tài nguyên hơn và khởi động chậm hơn."
+    },
+    {
+      "stage": "pre",
+      "question": "Dockerfile là gì?",
+      "options": [
+        "Một tệp configuration cho Docker daemon",
+        "Một tập hợp các hướng dẫn để xây dựng một Docker image từng lớp",
+        "Tệp nhật ký ghi lại hoạt động container",
+        "Một tệp liệt kê các containers đang chạy"
+      ],
+      "correct": 1,
+      "explanation": "Dockerfile chứa các hướng dẫn tuần tự (FROM, RUN, COPY, v.v.) mà Docker thực thi để xây dựng hình ảnh. Mỗi lệnh tạo ra một lớp được lưu trong bộ nhớ cache."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao giá đỡ volume lại quan trọng đối với sự phát triển AI với Docker?",
+      "options": [
+        "Volumes làm cho containers chạy nhanh hơn bằng cách sử dụng tốc độ đĩa máy chủ",
+        "Volumes duy trì dữ liệu (models, datasets, mã) trong các lần xây dựng lại container để bạn không tải xuống lại hàng gigabyte mỗi lần",
+        "Volumes cần thiết để các gói Python cài đặt chính xác",
+        "Volumes cho phép nhiều containers chia sẻ cùng một GPU"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có volumes, mọi thứ bên trong một container sẽ mất đi khi nó dừng lại. Volume gắn các thư mục máy chủ bản đồ vào container, vì vậy trọng lượng model (14+ GB) và datasets tồn tại sau khi xây dựng lại."
+    },
+    {
+      "stage": "post",
+      "question": "Bộ công cụ NVIDIA Container hỗ trợ những gì?",
+      "options": [
+        "Cài đặt trình điều khiển CUDA bên trong container",
+        "Hiển thị GPUs máy chủ cho Docker containers thông qua cờ --gpus",
+        "Chạy NVIDIA GPU containers trên phần cứng AMD",
+        "Biên dịch mã CUDA trong quá trình xây dựng Docker process"
+      ],
+      "correct": 1,
+      "explanation": "Bộ công cụ NVIDIA Container là một runtime hook hiển thị GPUs máy chủ với containers. Bộ công cụ CUDA nằm bên trong container, nhưng trình điều khiển GPU được chia sẻ từ máy chủ."
+    },
+    {
+      "stage": "post",
+      "question": "Trong tệp Docker Compose dành cho AI, dịch vụ \"ai-dev\" đến cơ sở dữ liệu vector \"qdrant\" như thế nào?",
+      "options": [
+        "Bằng cách sử dụng địa chỉ IP và cổng của máy chủ",
+        "Bằng cách sử dụng tên dịch vụ \"qdrant\" làm tên máy chủ, vì Compose tạo ra một mạng dùng chung",
+        "Bằng cách gắn một volume chung giữa hai containers",
+        "Bằng cách cấu hình VPN giữa containers"
+      ],
+      "correct": 1,
+      "explanation": "Docker Compose tự động tạo một mạng dùng chung để các dịch vụ có thể liên hệ với nhau theo tên. container ai-dev kết nối với 'http://qdrant:6333' bằng cách sử dụng tên dịch vụ làm tên máy chủ."
+    }
+  ]
+}
