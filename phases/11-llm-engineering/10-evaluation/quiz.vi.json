@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Tại sao đọc thủ công một vài kết quả LLM không phải là một phương pháp đánh giá đáng tin cậy?",
+    "options": [
+      "Mất quá nhiều thời gian",
+      "Các mẫu nhỏ bỏ lỡ các chế độ thất bại chỉ xuất hiện trên quy mô lớn và phán đoán của con người không nhất quán giữa những người đánh giá và sessions",
+      "Đánh giá thủ công quá tốn kém",
+      "LLM đầu ra luôn chính xác"
+    ],
+    "correct": 1,
+    "explanation": "Đọc 10 đầu ra cho bạn thấy 10 điểm trong một phân phối. Một thay đổi prompt có thể cải thiện 90% đầu ra nhưng phá vỡ 10% các trường hợp biên. Nếu không đánh giá có hệ thống, bạn sẽ bỏ lỡ hồi quy cho đến khi người dùng báo cáo.",
+    "stage": "pre"
+  },
+  {
+    "question": "Kiểm thử hồi quy trong bối cảnh ứng dụng LLM là gì?",
+    "options": [
+      "Kiểm tra hồi quy tuyến tính models",
+      "Chạy một tập hợp các trường hợp thử nghiệm cố định sau mỗi thay đổi (prompt, model, parameters) để đảm bảo chất lượng không bị giảm",
+      "Thử nghiệm trên dữ liệu training",
+      "Đo model loss trong quá trình training"
+    ],
+    "correct": 1,
+    "explanation": "Mỗi prompt thay đổi, hoán đổi model hoặc temperature tinh chỉnh sẽ thay đổi phân phối đầu ra. Kiểm tra hồi quy bắt các trường hợp trong đó một thay đổi cải thiện một lĩnh vực âm thầm làm suy giảm khu vực khác.",
+    "stage": "pre"
+  },
+  {
+    "question": "Phương pháp đánh giá LLM với tư cách là thẩm phán là gì?",
+    "options": [
+      "Yêu cầu model đánh giá training loss của chính mình",
+      "Sử dụng LLM mạnh mẽ để chấm điểm đầu ra dựa trên các tiêu chí, thay thế đánh giá tốn kém của con người trong khi mở rộng quy mô lên hàng nghìn trường hợp thử nghiệm",
+      "Sử dụng điểm tin cậy của model",
+      "So sánh số lượng parameter của hai models"
+    ],
+    "correct": 1,
+    "explanation": "LLM-as-judge gửi (đầu vào, đầu ra, bảng đánh giá) đến một model mạnh (ví dụ: GPT-4) để chấm điểm đầu ra. Nó rẻ hơn và nhanh hơn so với đánh giá của con người, mặc dù nó có những thành kiến đã biết (ví dụ: thích phản hồi dài dòng).",
+    "stage": "post"
+  },
+  {
+    "question": "Điều gì tạo nên một dataset đánh giá tốt cho một ứng dụng LLM?",
+    "options": [
+      "Càng nhiều ví dụ càng tốt",
+      "Đầu vào đa dạng bao gồm các trường hợp phổ biến, trường hợp biên, đầu vào đối nghịch và đầu ra dự kiến với bảng đánh giá rõ ràng",
+      "Chỉ những ví dụ khó nhất",
+      "Mẫu ngẫu nhiên từ internet"
+    ],
+    "correct": 1,
+    "explanation": "Một tập hợp đánh giá tốt bao gồm phân phối: các trường hợp đường dẫn phù hợp, trường hợp cạnh (đầu vào trống, đầu vào rất dài), đầu vào đối nghịch (chèn prompt) và truy vấn mơ hồ. Mỗi ví dụ có một kết quả dự kiến hoặc tiêu chí chấm điểm rõ ràng.",
+    "stage": "post"
+  },
+  {
+    "question": "Bạn nên xử lý đầu ra LLM không xác định như thế nào trong đánh giá?",
+    "options": [
+      "Đặt temperature thành 0 cho tất cả các đánh giá",
+      "Chạy mỗi trường hợp thử nghiệm nhiều lần và sử dụng các chỉ số tổng hợp (tỷ lệ đạt, điểm trung bình) để tính đến variance đầu ra",
+      "Thuyết không quyết định không ảnh hưởng đến đánh giá",
+      "Chỉ đánh giá đầu ra đầu tiên"
+    ],
+    "correct": 1,
+    "explanation": "Ngay cả ở temperature 0, một số nhà cung cấp giới thiệu sampling biến thể. Chạy mỗi bài kiểm tra 3-5 lần và đo tỷ lệ đậu hoặc điểm trung bình cho một bức tranh đáng tin cậy hơn so với một lần chạy có thể chạm vào mẫu lucky/unlucky.",
+    "stage": "post"
+  }
+]
