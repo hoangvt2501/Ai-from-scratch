@@ -1,0 +1,90 @@
+{
+  "lesson": "17-claude-agent-sdk",
+  "title": "Claude Agent SDK: Cửa hàng Subagents và Session",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt giữa Anthropic Client SDK và Claude Agent SDK là gì?",
+      "options": [
+        "Client SDK là Tin nhắn thô API; Agent SDK là Claude Code harness hình dạng với các công cụ tích hợp, MCP, hooks, subagents và session store",
+        "SDK khách hàng được thanh toán; Agent SDK miễn phí",
+        "SDK khách hàng chỉ dành cho Python",
+        "Không có sự khác biệt"
+      ],
+      "correct": 0,
+      "explanation": "Client SDK cung cấp cho bạn vòng lặp; Agent SDK ships vòng lặp được tạo sẵn."
+    },
+    {
+      "stage": "pre",
+      "question": "Hai mục đích được ghi lại của subagents là gì?",
+      "options": [
+        "Song song hóa và cô lập ngữ cảnh",
+        "Bộ nhớ đệm và giới hạn tốc độ",
+        "Ghi nhật ký và chỉ số",
+        "Authn và authz"
+      ],
+      "correct": 0,
+      "explanation": "Subagents chạy công việc độc lập đồng thời và bảo toàn ngân sách ngữ cảnh của người điều phối bằng cách cô lập ngữ cảnh."
+    },
+    {
+      "stage": "check",
+      "question": "Phương pháp nào KHÔNG phải là một phần của bề mặt cửa hàng session?",
+      "options": [
+        "Thêm",
+        "Tải",
+        "list_subkeys",
+        "compile_prompt"
+      ],
+      "correct": 3,
+      "explanation": "Session lưu trữ ships thêm, tải, list_sessions, xóa list_subkeys; compile_prompt không phải là một session API."
+    },
+    {
+      "stage": "check",
+      "question": "Cái nào KHÔNG phải là hook vòng đời Claude Agent SDK?",
+      "options": [
+        "Sử dụng trước công cụ",
+        "PostToolSử dụng",
+        "Nhỏ gọn trước",
+        "Nhúng trước"
+      ],
+      "correct": 3,
+      "explanation": "Hooks bao gồm PreToolUse, PostToolUse, SessionStart/End, UserPromptSubmit, PreCompact, Stop, Notification. PreEmbedding không phải là một hook."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để ngữ cảnh trace lan truyền trên agent và quy trình con CLI?",
+      "options": [
+        "Thông qua hệ thống tệp",
+        "Thông qua W3C trace tiêu đề ngữ cảnh được chuyển vào quy trình con CLI",
+        "Chỉ thông qua bảng điều khiển của nhà cung cấp",
+        "Chỉ thông qua các biến môi trường"
+      ],
+      "correct": 1,
+      "explanation": "OTel spans trên người gọi lan truyền vào quá trình con CLI thông qua ngữ cảnh trace W3C, vì vậy toàn bộ quá trình chạy nhiều process là một trace."
+    },
+    {
+      "stage": "post",
+      "question": "Sinh sản quá mức subagent là gì và nó xảy ra khi nào?",
+      "options": [
+        "Sinh ra 100 subagents cho 100 nhiệm vụ nhỏ trong đó chi phí chiếm ưu thế; batch thay thế",
+        "Quên đóng subagents",
+        "Sinh sản trước SessionStart",
+        "Sinh ra nhiều subagents hơn CPU lõi"
+      ],
+      "correct": 0,
+      "explanation": "Subagents có chi phí; batch nhiệm vụ nhỏ thay vì sinh ra mỗi nhiệm vụ một."
+    },
+    {
+      "stage": "post",
+      "question": "Claude Managed Agents đánh đổi điều gì so với SDK tự lưu trữ?",
+      "options": [
+        "Kiểm soát cơ sở hạ tầng được quản lý (không đồng bộ chạy dài, bộ nhớ đệm prompt tích hợp, nén tích hợp)",
+        "Độ trễ cho chi phí",
+        "Công cụ cho bộ nhớ",
+        "Truy tìm streaming"
+      ],
+      "correct": 0,
+      "explanation": "Agents được quản lý là giải pháp thay thế được lưu trữ cho công việc không đồng bộ chạy trong thời gian dài; ít kiểm soát hơn, bề mặt hoạt động ít hơn."
+    }
+  ]
+}
