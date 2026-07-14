@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao thị giác production pipelines sử dụng models Pydantic (hoặc tương đương) ở mọi ranh giới giai đoạn?",
+      "options": [
+        "Pydantic nhanh hơn truy cập dict",
+        "Giao diện gõ schemas bắt không khớp ở ranh giới; Một máy dò trả về (CX, CY, W, H) khi hạ lưu dự kiến (x1, y1, x2, y2) bị lỗi lớn với lỗi xác thực thay vì âm thầm tạo ra các loại cây trồng trống",
+        "Pydantic là yêu cầu của FastAPI",
+        "Nó giúp phân bổ GPU"
+      ],
+      "correct": 1,
+      "explanation": "Lỗi giao diện im lặng là nỗi đau xác định của ML pipelines. Mỗi ranh giới đều có hệ tọa độ, thứ tự kênh, phạm vi giá trị và hình dạng. Xác thực tại ranh giới với Pydantic biến mọi sự không khớp thành lỗi ngay lập tức. Chi phí là vài micro giây; Tiết kiệm được là hàng giờ gỡ lỗi."
+    },
+    {
+      "stage": "pre",
+      "question": "Trên pipeline thị lực chỉ dành cho CPU, giai đoạn nào thường là khối độ trễ lớn nhất?",
+      "options": [
+        "NMS cuối cùng của máy dò",
+        "Tiền xử lý hình ảnh (giải mã JPEG, chuyển đổi màu, thay đổi kích thước); Nó bị ràng buộc CPU và thường chiếm ưu thế khi không có GPU liên quan hoặc khi GPU model nhỏ",
+        "Viết câu trả lời JSON",
+        "Đọc nội dung yêu cầu HTTP"
+      ],
+      "correct": 1,
+      "explanation": "Trên CPU, tiền xử lý thường là chi phí đơn lẻ lớn nhất. Giải mã JPEG có thể mất vài mili giây, chuyển đổi màu nhiều hơn, thay đổi kích thước thành model nhập một đoạn khác. Quy tắc rất đơn giản: lập hồ sơ trước khi tối ưu hóa. Trên GPU máy dò thường chiếm ưu thế, nhưng đừng giả định điều đó trên CPU."
+    },
+    {
+      "stage": "post",
+      "question": "Bộ phân loại pipeline gặp sự cố khi phát hiện có kích thước hộp 3x4 pixel. Bản sửa lỗi chính xác là gì?",
+      "options": [
+        "Thêm try/except chung và trả về phân loại trống",
+        "Đặt ngưỡng min_crop (ví dụ: 16 hoặc 32 pixel) và bỏ qua việc phân loại đối với các phát hiện nhỏ hơn ngưỡng đó; Ghi nhật ký bỏ qua và bao gồm phát hiện trong phản hồi mà không có trường phân loại",
+        "Huấn luyện lại trình phân loại trên các hình ảnh nhỏ hơn",
+        "Tăng kích thước batch"
+      ],
+      "correct": 1,
+      "explanation": "Cây trồng nhỏ là một chế độ lỗi hợp pháp: bộ phân loại được huấn luyện trên đầu vào 224x224 và không thể phân loại các bản vá 3 pixel một cách đáng tin cậy. Ngưỡng (min_crop) bỏ qua các ngưỡng đó, duy trì việc phát hiện và tạo ra phản hồi đầy đủ, trung thực. try/except chung che giấu tình trạng; trả về không phân loại nào che giấu những thất bại thực sự; Nước đi bên phải là một bước bỏ qua được đặt tên, được ghi lại."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn thêm batching vào bộ phân loại (đợi tối đa 10 ms, batch tất cả các crop đang chờ xử lý, một GPU chuyển tiếp). Hiệu quả mong đợi là gì?",
+      "options": [
+        "Độ trễ giảm đáng kể",
+        "Thông lượng tăng đáng kể, độ trễ trên mỗi yêu cầu tăng lên đến khoảng thời gian phân lô (~10ms) cộng với một lượng nhỏ hơn từ các hoạt động tensor lớn hơn; Câu trả lời đúng phụ thuộc vào việc dịch vụ bị ràng buộc thông lượng hay giới hạn độ trễ",
+        "Thông lượng giảm do chờ đợi",
+        "Không có tác dụng"
+      ],
+      "correct": 1,
+      "explanation": "Batching là một giao dịch có độ trễ thông lượng. Mỗi yêu cầu sẽ chờ đến cửa sổ, điều này làm tăng thêm độ trễ. forward pass hàng loạt hiệu quả hơn trên mỗi hình ảnh, vì vậy thông lượng chia tỷ lệ với kích thước batch. Sử dụng hàng loạt khi QPS cao và độ trễ riêng lẻ bị chùng xuống; tránh nó khi SLA có độ trễ dưới 50ms."
+    },
+    {
+      "stage": "post",
+      "question": "Phản hồi pipeline của bạn là lỗi 500 khi người dùng tải lên JPEG bị hỏng. Bạn nên khắc phục nó như thế nào?",
+      "options": [
+        "Bỏ qua nó; Người dùng sẽ thử lại",
+        "Phát hiện lỗi giải mã hình ảnh sớm trong quá trình tiền xử lý, trả về 400 với mã lỗi cụ thể như 'image_decode_failed' để máy khách có thể thử lại với một tệp khác thay vì 500 ngụ ý lỗi server",
+        "Luôn trả về 200 với kết quả trống",
+        "Di chuyển giải mã sang bộ phân loại"
+      ],
+      "correct": 1,
+      "explanation": "500 từ đầu vào của người dùng bị hỏng là lỗi hợp đồng API. Đầu vào xấu sẽ trả về 4xx để khách hàng biết đó là vấn đề của họ; Phản hồi 5xx báo hiệu sự cố server và trigger logic thử lại của máy khách với cùng một đầu vào xấu, khuếch đại tải. Mã lỗi được đặt tên (image_decode_failed, image_too_large, unsupported_content_type) cho phép khách hàng phản ứng chính xác."
+    }
+  ]
+}
