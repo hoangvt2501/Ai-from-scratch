@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Cái nhìn sâu sắc cốt lõi đằng sau LoRA (Thích ứng cấp thấp) là gì?",
+    "options": [
+      "Hầu hết các trọng lượng không quan trọng",
+      "Cập nhật trọng lượng trong fine-tuning có thứ hạng nội tại thấp, vì vậy chúng có thể được xấp xỉ bằng hai ma trận nhỏ thay vì cập nhật ma trận trọng lượng đầy đủ",
+      "Fine-tuning chỉ cần lớp cuối cùng",
+      "models nhỏ hơn luôn tốt hơn"
+    ],
+    "correct": 1,
+    "explanation": "Aghajanyan và cộng sự đã chỉ ra rằng các bản cập nhật fine-tuning chiếm một không gian con có chiều thấp. LoRA khai thác điều này bằng cách biểu diễn bản cập nhật là W + BA trong đó B (d x r) và A (r x d) có hạng r nhỏ, thường là 8-64.",
+    "stage": "pre"
+  },
+  {
+    "question": "LoRA tiết kiệm được bao nhiêu bộ nhớ so với fine-tuning đầy đủ của model 8B?",
+    "options": [
+      "Không tiết kiệm",
+      "Từ ~ 56GB xuống ~ 6GB bằng training <1% parameters trong khi vẫn giữ trọng lượng cơ bản bị đóng băng",
+      "Giảm 50%",
+      "Chỉ tiết kiệm dung lượng ổ đĩa"
+    ],
+    "correct": 1,
+    "explanation": "Full fine-tuning cần gradients và trạng thái optimizer cho tất cả 8B parameters (~56GB). LoRA đóng băng trọng lượng cơ bản và chỉ huấn luyện ma trận bộ chuyển đổi (~80M parameters ở hạng 16), cần tổng cộng ~6GB.",
+    "stage": "pre"
+  },
+  {
+    "question": "QLoRA là gì?",
+    "options": [
+      "LoRA lượng tử: model cơ sở được tải ở precision 4 bit trong khi bộ điều hợp LoRA huấn luyện ở 16 bit, kết hợp tiết kiệm bộ nhớ từ cả hai kỹ thuật",
+      "Phiên bản nhanh hơn của LoRA",
+      "LoRA áp dụng cho các hoạt động lượng tử hóa",
+      "Một thuật toán fine-tuning khác"
+    ],
+    "correct": 0,
+    "explanation": "QLoRA (Dettmers và cộng sự) tải model cơ sở đóng băng ở 4-bit (NF4 quantization) trong khi training LoRA bộ điều hợp ở FP16/BF16. Điều này cho phép fine-tuning model 7B trên một GPU tiêu dùng duy nhất với VRAM 6GB.",
+    "stage": "post"
+  },
+  {
+    "question": "'Cấp bậc' parameter (r) trong LoRA kiểm soát điều gì?",
+    "options": [
+      "Số lượng training epochs",
+      "Dung lượng của bộ chuyển đổi: thứ hạng cao hơn nắm bắt các điều chỉnh phức tạp hơn nhưng sử dụng nhiều parameters và bộ nhớ hơn",
+      "Các learning rate",
+      "Số lớp cần fine-tune"
+    ],
+    "correct": 1,
+    "explanation": "Xếp hạng r xác định kích thước của ma trận bộ điều hợp A (r x d) và B (d x r). Hạng 4 tàu rất ít parameters (nhanh, rẻ). Xếp hạng 64 huấn luyện nhiều parameters hơn (biểu cảm hơn). Hầu hết các nhiệm vụ đều hoạt động tốt với hạng 8-32.",
+    "stage": "post"
+  },
+  {
+    "question": "Điều gì xảy ra khi bạn merge LoRA tạ trở lại model cơ sở?",
+    "options": [
+      "model trở nên lớn hơn",
+      "Ma trận bộ chuyển đổi được thêm vào trọng lượng cơ bản (W_merged = W_base + B * A), tạo ra một model tiêu chuẩn không có inference chi phí",
+      "Các model cần được huấn luyện lại",
+      "Không thể hợp nhất"
+    ],
+    "correct": 1,
+    "explanation": "Vì LoRA thêm W_base + B*A, you can compute B*A một lần và thêm nó vào W_base vĩnh viễn. merged model có cùng kiến trúc và tốc độ inference như bản gốc, không có bộ chuyển đổi trên cao.",
+    "stage": "post"
+  }
+]
