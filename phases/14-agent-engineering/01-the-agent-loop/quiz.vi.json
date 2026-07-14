@@ -1,0 +1,90 @@
+{
+  "lesson": "01-the-agent-loop",
+  "title": "Vòng lặp Agent: Quan sát, Suy nghĩ, Hành động",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao một LLM tự nó hoạt động giống như một tự động hoàn thành chứ không phải một agent?",
+      "options": [
+        "Nó không thể đọc tệp, chạy truy vấn hoặc xác minh các tuyên bố chống lại thế giới bên ngoài",
+        "context window của nó quá nhỏ để chứa một câu hỏi",
+        "Nó từ chối trả lời mà không có system prompt",
+        "Nó chỉ phát ra một token tại một thời điểm"
+      ],
+      "correct": 0,
+      "explanation": "Một LLM không có vòng lặp và không có công cụ chỉ có thể tạo văn bản từ trọng lượng của nó; nó không thể quan sát trạng thái hoặc hành động trên nó."
+    },
+    {
+      "stage": "pre",
+      "question": "Ba nhãn nào xuất hiện trong trace ReAct chuẩn từ Yao et al. 2022?",
+      "options": [
+        "Prompt, Phản hồi, Phần thưởng",
+        "Tư tưởng, Hành động, Quan sát",
+        "Lập kế hoạch, thực hiện, phản ánh",
+        "Hệ thống, Người dùng, Trợ lý"
+      ],
+      "correct": 1,
+      "explanation": "ReAct xen kẽ các dòng Suy nghĩ, Hành động và Quan sát trong một luồng duy nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Mục nào KHÔNG phải là một trong năm thành phần mà bài học liệt kê cho một vòng lặp agent?",
+      "options": [
+        "Bộ đệm tin nhắn",
+        "Công cụ registry",
+        "Trình định dạng quan sát",
+        "Gradient optimizer"
+      ],
+      "correct": 3,
+      "explanation": "Năm thành phần là bộ đệm tin nhắn, registry công cụ, điều kiện dừng, ngân sách lượt và định dạng quan sát. Gradient optimizers thuộc về training, không phải vòng lặp inference."
+    },
+    {
+      "stage": "check",
+      "question": "Vai trò của ngân sách lượt trong vòng lặp là gì?",
+      "options": [
+        "Nó giới hạn số lượng tokens cho mỗi phản hồi",
+        "Nó có nắp cứng lặp lại vòng lặp để ngăn chặn agents chạy trốn",
+        "Nó kiểm soát số lượng công cụ mà registry tiếp xúc",
+        "Nó giới hạn tỷ lệ nhà cung cấp LLM"
+      ],
+      "correct": 1,
+      "explanation": "Ngân sách lượt là giới hạn cho các lần lặp lại vòng lặp; 2026 agents thường chạy 40-400 bước và cần giới hạn phù hợp với nhiệm vụ."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì đã thay đổi trong sự thay đổi lý luận bản địa 2025-2026 so với tokens tư duy dựa trên prompt?",
+      "options": [
+        "Luồng điều khiển vòng lặp đã được thay thế bằng DAG",
+        "Suy nghĩ tokens bây giờ được phát ra trên một kênh lý luận riêng biệt đi qua các ngã rẽ",
+        "Models ngừng sử dụng các cuộc gọi công cụ và chỉ dựa vào chain-of-thought",
+        "Các quan sát được xóa hoàn toàn khỏi prompt"
+      ],
+      "correct": 1,
+      "explanation": "Nội dung suy luận chuyển sang một kênh chuyên dụng (thường được mã hóa giữa các nhà cung cấp), nhưng luồng kiểm soát quan sát-suy nghĩ-hành động không thay đổi."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học nói rằng đầu ra của công cụ là đầu vào không đáng tin cậy?",
+      "options": [
+        "runtimes dụng cụ chậm và không đáng tin cậy",
+        "Nội dung được truy xuất có thể mang theo các hướng dẫn ẩn như xóa repo và chỉ đầu vào trực tiếp của người dùng mới được tính là quyền",
+        "Kết quả công cụ luôn lớn hơn context window của model",
+        "Nhà cung cấp loại bỏ byte đầu ra của công cụ theo mặc định"
+      ],
+      "correct": 1,
+      "explanation": "OpenAI tài liệu CUA tuyên bố rõ ràng rằng chỉ hướng dẫn người dùng trực tiếp mới được tính là quyền; Đầu ra của công cụ có thể mang các hướng dẫn đối nghịch và phải được coi là không đáng tin cậy."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bài học tuyên bố mỗi năm 2026 framework vẫn chạy ReAct dưới mui xe?",
+      "options": [
+        "Bởi vì các nhà cung cấp yêu cầu từ khóa ReAct trong prompt",
+        "Bởi vì luồng kiểm soát quan sát-suy nghĩ-hành động là bất biến; frameworks khác nhau về điểm kiểm tra, diễn viên, mẫu vai trò và truy tìm xung quanh nó",
+        "Bởi vì Yao và cộng sự sở hữu bằng sáng chế về vòng lặp",
+        "Bởi vì LangGraph buộc tất cả các frameworks khác phải kế thừa từ nó"
+      ],
+      "correct": 1,
+      "explanation": "Sự khác biệt giữa Claude Agent SDK, OpenAI Agents SDK, LangGraph, AutoGen, CrewAI, Agno và Mastra là về những gì bao bọc vòng lặp, không phải bản thân vòng lặp."
+    }
+  ]
+}
