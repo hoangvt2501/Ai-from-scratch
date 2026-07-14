@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Tại sao một learning rate hằng số thường không tối ưu đối với training mạng nơ-ron?",
+    "options": [
+      "Nó sử dụng quá nhiều bộ nhớ",
+      "Nó quá cao đối với training muộn (gây ra dao động) hoặc quá thấp đối với training sớm (tính toán lãng phí)",
+      "Tốc độ học tập liên tục gây ra overfitting",
+      "Chúng chỉ hoạt động với SGD"
+    ],
+    "correct": 1,
+    "explanation": "Kích thước bước tối ưu thay đổi trong quá trình training. Ngay từ đầu, các bậc thang lớn bao phủ mặt đất nhanh chóng. Cuối training, cần có các bước nhỏ để ổn định ở mức tối thiểu. Một tỷ lệ không đổi không thể phục vụ cả hai nhu cầu.",
+    "stage": "pre"
+  },
+  {
+    "question": "Mục đích của learning rate khởi động là gì?",
+    "options": [
+      "Để ngăn chặn overfitting",
+      "Để số liệu thống kê optimizer thích ứng (động lượng, variance) ổn định trước khi thực hiện các bước lớn",
+      "Để tăng dần kích thước batch",
+      "Để khởi tạo trọng số đúng cách"
+    ],
+    "correct": 1,
+    "explanation": "Ước tính mômen của Adam được khởi tạo về không. Các bản cập nhật gradient ban đầu dựa trên số liệu thống kê không đáng tin cậy. Khởi động bắt đầu với một LR nhỏ và tăng lên, cho Adam thời gian để tích lũy các ước tính có ý nghĩa.",
+    "stage": "pre"
+  },
+  {
+    "question": "Llama 3, GPT-3 và LLMs hiện đại nhất sử dụng lịch trình learning rate nào?",
+    "options": [
+      "learning rate liên tục",
+      "Phân rã bước sau mỗi 30 epochs",
+      "Khởi động tuyến tính sau đó là phân rã cosin",
+      "Phân rã theo cấp số nhân"
+    ],
+    "correct": 2,
+    "explanation": "Khởi động tuyến tính + phân rã cosin là tiêu chuẩn cho transformer training. Llama 3 đã sử dụng 2000 bước khởi động với phân rã cosin từ 3e-4 đến 3e-5. Lịch trình này không yêu cầu điều chỉnh cột mốc.",
+    "stage": "post"
+  },
+  {
+    "question": "Điều gì làm cho policy 1cycle khác với các lịch trình khác?",
+    "options": [
+      "Nó sử dụng một learning rate không đổi",
+      "Nó tăng learning rate trong nửa đầu năm training, sau đó giảm trở lại - giai đoạn LR cao hoạt động như chính quy hóa",
+      "Nó chỉ hoạt động với SGD",
+      "Nó không yêu cầu điều chỉnh hyperparameter"
+    ],
+    "correct": 1,
+    "explanation": "1 chu kỳ của Leslie Smith tăng LR từ thấp lên cao (nửa đầu) sau đó cao đến rất thấp (nửa sau). Giai đoạn LR cao giúp model khám phá thêm cảnh quan loss trước khi ổn định trong lưu vực tốt nhất.",
+    "stage": "post"
+  },
+  {
+    "question": "Nếu training loss đột ngột tăng đột biến và phân kỳ, vấn đề learning rate có khả năng xảy ra nhất là gì?",
+    "options": [
+      "Learning rate quá thấp",
+      "Learning rate quá cao, khiến optimizer vượt mức tối thiểu",
+      "Thời gian khởi động quá dài",
+      "Lịch trình suy giảm quá chậm"
+    ],
+    "correct": 1,
+    "explanation": "learning rate quá cao khiến optimizer đi các bước lớn hơn lưu vực loss, vượt quá mức tối thiểu và khiến loss tăng lên. Điều này biểu hiện dưới dạng sự phân kỳ đột ngột.",
+    "stage": "post"
+  }
+]
