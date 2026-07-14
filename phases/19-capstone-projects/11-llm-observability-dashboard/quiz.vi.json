@@ -1,0 +1,90 @@
+{
+  "lesson": "11-llm-observability-dashboard",
+  "title": "Capstone 11 — Bảng điều khiển LLM Observability & Eval",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Langfuse, Phoenix và OpenLLMetry hội tụ vào schema nhập nào?",
+      "options": [
+        "JSON độc quyền cho mỗi nhà cung cấp",
+        "Định dạng triển lãm Prometheus",
+        "Quy ước ngữ nghĩa OpenTelemetry GenAI trên OTLP HTTP",
+        "Tệp nhật ký CSV thuần túy"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao tách ClickHouse và Postgres trong cấp lưu trữ?",
+      "options": [
+        "Chúng có thể hoán đổi cho nhau và một được chọn ngẫu nhiên",
+        "Postgres nhanh hơn khi nhập span",
+        "ClickHouse không thể lưu trữ chuỗi",
+        "ClickHouse xử lý phân tích cột trong spans trong khi Postgres giữ siêu dữ liệu người dùng, sessions và ứng dụng"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bộ xử lý sampling đuôi trong OpenTelemetry Collector làm gì?",
+      "options": [
+        "Quyết định có giữ trace sau khi hoàn tất hay không, sử dụng các quy tắc như lỗi lưu giữ cộng với thành công mẫu",
+        "Phát lại traces cũ vào Postgres",
+        "Phát trực tuyến mọi byte vô điều kiện",
+        "Cắt bớt spans dưới 100ms"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để bảng điều khiển phát hiện sự trôi qua các tuần?",
+      "options": [
+        "Tính toán phân kỳ PSI hoặc KL trên prompt embeddings gộp và theo dõi xu hướng đánh giá điểm số",
+        "Nhãn cầu thủ công của bảng điều khiển",
+        "Đọc dấu thời gian triển khai mới nhất",
+        "Đếm ID trace duy nhất"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Mục tiêu MTTR của sản phẩm trên hồi quy rò rỉ PII được tiêm là gì?",
+      "options": [
+        "Dưới 1 giờ",
+        "Trong vòng 24 giờ",
+        "Trong ca trực tiếp theo",
+        "Dưới 5 phút kể từ khi lỗi được triển khai đến cảnh báo Slack"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Những gia đình SDK nào phải sản xuất spans GenAI chính tắc để đáp ứng tiêu chí bao phủ trace?",
+      "options": [
+        "Chỉ vLLM",
+        "Ít nhất sáu: OpenAI, Anthropic, Google GenAI, LangChain, LlamaIndex và vLLM",
+        "Bất kỳ SDK nào cũng đủ",
+        "OpenAI và chỉ Anthropic"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Kết quả đánh giá được liên kết trở lại cuộc gọi LLM ban đầu như thế nào?",
+      "options": [
+        "Dưới dạng CSV được gửi qua email hàng đêm",
+        "Chỉ dưới dạng tin nhắn Slack",
+        "Là một bảng Postgres riêng biệt không có ID trace",
+        "Như eval spans viết như con của cha mẹ trace trong ClickHouse"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
