@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tích chấm của hai vectors đo lường điều gì?",
+      "options": [
+        "Khoảng cách giữa hai vectors",
+        "Hai vectors giống nhau hoặc thẳng hàng như thế nào",
+        "Góc giữa vectors tính bằng độ",
+        "Số lượng thứ nguyên mà vectors chia sẻ"
+      ],
+      "correct": 1,
+      "explanation": "Tích chấm đo alignment: dương có nghĩa là cùng hướng (tương tự), không có nghĩa là vuông góc (không liên quan), âm có nghĩa là hướng ngược lại (không giống nhau). Đây là cơ sở của tìm kiếm sự tương đồng trong AI."
+    },
+    {
+      "stage": "pre",
+      "question": "Trong AI, 'embedding' đề cập đến điều gì?",
+      "options": [
+        "Chèn một model vào bên trong một  khác",
+        "Một biểu diễn vector nắm bắt ý nghĩa của một cái gì đó (từ, hình ảnh, người dùng)",
+        "Kỹ thuật nén tạ model",
+        "Các process chuyển đổi mã thành hướng dẫn máy"
+      ],
+      "correct": 1,
+      "explanation": "Một embedding ánh xạ các đối tượng rời rạc (từ, hình ảnh, người dùng) với các vectors liên tục trong một không gian high-dimensional nơi các mục tương tự gần nhau. Nó là cầu nối giữa các khái niệm trong thế giới thực và các phép toán học."
+    },
+    {
+      "stage": "post",
+      "question": "Ba vectors v1 = [1,0,0], v2 = [0,1,0], v3 = [2,1,0] được đưa ra. Chúng có độc lập tuyến tính không?",
+      "options": [
+        "Có, bởi vì có ba vectors trong không gian 3D",
+        "Không, bởi vì v3 = 2 * v1 + v2, vì vậy v3 là sự kết hợp tuyến tính của các cái khác",
+        "Có, bởi vì không có vectors nào giống hệt nhau",
+        "Không, bởi vì tất cả chúng đều có một thành phần không"
+      ],
+      "correct": 1,
+      "explanation": "v3 = 2*v1 + v2, làm cho tập hợp phụ thuộc tuyến tính. Cả ba vectors đều nằm trong mặt phẳng xy và không thể đạt tới [0,0,1]. Mặc dù có 3 vectors trong 3D, chúng chỉ span một không gian con 2D."
+    },
+    {
+      "stage": "post",
+      "question": "Thứ hạng của ma trận cho bạn biết điều gì trong bối cảnh học máy?",
+      "options": [
+        "Ma trận có thể được nhân nhanh như thế nào",
+        "Số lượng cột độc lập tuyến tính, cho biết nó chứa bao nhiêu chiều thông tin hữu ích",
+        "Giá trị lớn nhất trong ma trận",
+        "Số lượng mục nhập không phải bằng không trong ma trận"
+      ],
+      "correct": 1,
+      "explanation": "Xếp hạng bằng số cột độc lập tuyến tính. Trong ML, ma trận feature thiếu thứ hạng có nghĩa là features dư thừa, vô số giải pháp trọng số và nhu cầu chính quy hóa."
+    },
+    {
+      "stage": "post",
+      "question": "Làm thế nào để LoRA (Thích ứng cấp thấp) sử dụng đại số tuyến tính để fine-tune hiệu quả models ngôn ngữ lớn?",
+      "options": [
+        "Nó loại bỏ các hàng không sử dụng khỏi ma trận trọng lượng để thu nhỏ model",
+        "Nó phân tách các bản cập nhật trọng lượng thành hai ma trận cấp thấp nhỏ thay vì cập nhật ma trận trọng lượng đầy đủ",
+        "Nó chuyển đổi tất cả các trọng số từ float32 sang int8",
+        "Nó đóng băng lớp embedding và chỉ huấn luyện đầu ra"
+      ],
+      "correct": 1,
+      "explanation": "LoRA phân tách bản cập nhật trọng lượng 4096x4096 thành hai ma trận có kích thước 4096x16 và 16x4096 (xếp hạng-16), giảm parameters có thể huấn luyện từ 16M xuống 131K bằng cách giả định các bản cập nhật tồn tại trong không gian con chiều thấp."
+    }
+  ]
+}
