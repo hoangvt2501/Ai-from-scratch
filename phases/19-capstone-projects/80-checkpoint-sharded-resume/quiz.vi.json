@@ -1,0 +1,78 @@
+{
+  "lesson": "80-checkpoint-sharded-resume",
+  "title": "Sharded Checkpoint và Atomic Resume",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao thu thập sau đó viết lại sai mẫu checkpoint trên quy mô lớn?",
+      "options": [
+        "Nó trông xấu xí",
+        "Tất cả trạng thái đều đi qua hạng 0; băng thông ghi là liên kết đơn chậm nhất, không phải tổng hợp, vì vậy việc ghi ở quy mô TB mất hàng giờ",
+        "Nó sử dụng quá nhiều CPU",
+        "Nó cần phần cứng đặc biệt"
+      ],
+      "correct": 1,
+      "explanation": "Thang đo viết phân mảnh với kích thước cụm: 64 cấp độ viết song song kết thúc trong 1/64 thời điểm một cấp bậc viết trạng thái tập hợp."
+    },
+    {
+      "stage": "pre",
+      "question": "Bản kê khai ghi lại điều gì mà các tệp phân đoạn không thể?",
+      "options": [
+        "Số ngẫu nhiên",
+        "world_size, phiên bản schema, SHA256 trên mỗi phân đoạn và quyền sở hữu phân đoạn; cung cấp cho trình tải một hợp đồng để xác thực trước khi chạm vào trạng thái",
+        "Tên hệ thống tệp",
+        "Tên máy chủ"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có tệp kê khai, trình tải phải đoán phân đoạn nào thuộc hạng nào và tin cậy số lượng tệp là đúng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao phải viết cho <name>.tmp và đổi tên thay vì viết trực tiếp?",
+      "options": [
+        "Nhanh hơn",
+        "Đổi tên POSIX trong một hệ thống tệp là nguyên tử: sự cố giữa quá trình ghi sẽ giữ nguyên tệp trước đó. Ghi trực tiếp có thể để lại checkpoints hoàn thành một nửa đầu độc cho sơ yếu lý lịch tiếp theo",
+        "Yêu cầu của ngọn đuốc",
+        "Tiết kiệm bộ nhớ"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không ghi nguyên tử, một bản lưu một phần cộng với một tệp kê khai được cập nhật trỏ vào trạng thái đó sẽ làm hỏng trạng thái trong lần tải tiếp theo."
+    },
+    {
+      "stage": "check",
+      "question": "sha256 mỗi mảnh bảo vệ chống lại điều gì?",
+      "options": [
+        "Tấn công mạng",
+        "Ghi một phần hoặc bị hỏng; xác minh hàm băm khi tải sẽ bắt các phân đoạn bị cắt ngắn trước khi chúng chạm vào trạng thái model",
+        "Làm chậm",
+        "Rò rỉ bộ nhớ"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có xác minh sha256, một phân đoạn bị cắt ngắn sẽ tải âm thầm và làm hỏng trình tối ưu hóa, xuất hiện sau đó là NaN loss."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao đường dẫn tải từ chối world_size không khớp lớn?",
+      "options": [
+        "Mỹ phẩm",
+        "Tiếp tục bố cục phân đoạn 4 cấp trên 8 cấp sẽ âm thầm gán sai phân đoạn; từ chối lớn buộc người điều hành phải sử dụng đường dẫn tái cân bằng kích thước xuyên thế giới",
+        "Dễ viết mã hơn",
+        "Phần cứng cần nó"
+      ],
+      "correct": 1,
+      "explanation": "Tái cân bằng kích thước xuyên thế giới là một hoạt động riêng biệt; âm thầm nối các mảnh vỡ có kích thước sai sẽ làm hỏng trạng thái."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao production xoay checkpoints (giữ K cuối cùng)?",
+      "options": [
+        "Thẩm mỹ",
+        "Nếu không xoay, đĩa sẽ lấp đầy giữa chừng và checkpoint tiếp theo không thành công; xoay sẽ xóa cái cũ nhất trước khi ghi cái mới, giới hạn việc sử dụng đĩa",
+        "Nén",
+        "Nó không"
+      ],
+      "correct": 1,
+      "explanation": "Chạy thực giữ 3-5 checkpoints gần đây; lần cũ nhất bị loại bỏ trước mỗi lần lưu mới để ngân sách đĩa được cố định."
+    }
+  ]
+}
