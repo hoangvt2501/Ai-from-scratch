@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Tại sao các công ty khởi nghiệp AI thường thất bại vì vấn đề chi phí hơn là chất lượng model?",
+    "options": [
+      "Models luôn đủ tốt",
+      "Chi phí cho mỗi cuộc gọi tăng lên nhanh chóng: 10 nghìn người dùng tạo ra 10 calls/day Chi phí $250/day trong tokens trước khi tính phí một đô la",
+      "Tối ưu chi phí dễ dàng",
+      "Các nhà cung cấp API cung cấp bậc miễn phí không giới hạn"
+    ],
+    "correct": 1,
+    "explanation": "LLM API chi phí mở rộng tuyến tính với mức sử dụng. A feature chi phí đó $0.003 per call seems cheap until it's called 100K times/day ($ 300/day, $9K/month). Nếu không tối ưu hóa chi phí, nhiều AI sản phẩm không có lợi nhuận trên quy mô lớn.",
+    "stage": "pre"
+  },
+  {
+    "question": "Bộ nhớ đệm ngữ nghĩa cho các ứng dụng LLM là gì?",
+    "options": [
+      "Bộ nhớ đệm model trọng số",
+      "Lưu trữ phản hồi cho các truy vấn trước đó và phân phát phản hồi được lưu trong bộ nhớ đệm khi một truy vấn mới tương tự về mặt ngữ nghĩa (không chỉ khớp chính xác)",
+      "Chỉ embeddings bộ nhớ đệm",
+      "Tạo trước tất cả các phản hồi có thể có"
+    ],
+    "correct": 1,
+    "explanation": "Bộ nhớ đệm đối sánh chính xác chỉ giúp với các truy vấn giống hệt nhau. Bộ nhớ đệm ngữ nghĩa nhúng các truy vấn và phục vụ các phản hồi được lưu trong bộ nhớ cache khi sự tương đồng của cosin vượt quá ngưỡng. 'Thời tiết ở NYC như thế nào?' khớp với 'Thời tiết NYC hôm nay?'.",
+    "stage": "pre"
+  },
+  {
+    "question": "Định tuyến model như một chiến lược tối ưu hóa chi phí là gì?",
+    "options": [
+      "Cân bằng tải trên servers",
+      "Gửi các truy vấn đơn giản đến các truy vấn cheap/fast models và phức tạp đến expensive/powerful models dựa trên phân loại truy vấn",
+      "Định tuyến giữa các nhà cung cấp API khác nhau",
+      "Phản hồi vào bộ nhớ đệm từ nhiều models"
+    ],
+    "correct": 1,
+    "explanation": "Không phải mọi truy vấn đều cần GPT-4. Một bộ phân loại định tuyến các câu hỏi đơn giản (FAQ, lời chào) đến một model rẻ tiền (GPT-3.5, Haiku) và các câu hỏi phức tạp (lý luận, phân tích) đến một model đắt tiền. Điều này có thể cắt giảm chi phí 50-80%.",
+    "stage": "post"
+  },
+  {
+    "question": "Nén prompt là gì và nó giảm chi phí như thế nào?",
+    "options": [
+      "Làm cho prompts ngắn hơn bằng cách xóa các từ",
+      "Loại bỏ các tokens thừa, tóm tắt ngữ cảnh dài và loại bỏ nguyên mẫu để giảm số lượng token đầu vào trong khi vẫn giữ nguyên thông tin cần thiết",
+      "Nén prompts bằng gzip",
+      "Sử dụng tên biến ngắn hơn"
+    ],
+    "correct": 1,
+    "explanation": "Đầu vào tokens chi phối chi phí trong các ứng dụng RAG (ngữ cảnh được truy xuất lớn). Tính năng nén Prompt loại bỏ các từ phụ, tóm tắt các đoạn văn dài dòng và cắt bớt các đoạn có liên quan thấp để giảm số lượng token mà không làm mất thông tin chính.",
+    "stage": "post"
+  },
+  {
+    "question": "Bộ nhớ đệm tiền tố là gì và nhà cung cấp nào feature kích hoạt tính năng này?",
+    "options": [
+      "Bộ nhớ đệm từ đầu tiên của mỗi phản hồi",
+      "Sử dụng lại tính toán bộ nhớ đệm KV cho tiền tố prompt dùng chung (system prompt + định nghĩa công cụ), giảm độ trễ và chi phí cho các mẫu lặp lại",
+      "Tra cứu DNS vào bộ nhớ đệm",
+      "Bộ nhớ đệm của trình duyệt của phản hồi API"
+    ],
+    "correct": 1,
+    "explanation": "Nếu định nghĩa công cụ system prompt + của bạn là 5000 tokens và giống hệt nhau trên các yêu cầu, thì bộ nhớ đệm tiền tố sẽ tính toán bộ nhớ đệm KV một lần và sử dụng lại. Anthropic bộ nhớ đệm prompt và bộ nhớ đệm của OpenAI tokens đều hỗ trợ điều này.",
+    "stage": "post"
+  }
+]
