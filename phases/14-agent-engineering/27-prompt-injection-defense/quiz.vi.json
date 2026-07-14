@@ -1,0 +1,90 @@
+{
+  "lesson": "27-prompt-injection-defense",
+  "title": "Tiêm Prompt và phòng thủ PVE",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tiêm prompt gián tiếp là gì?",
+      "options": [
+        "Người dùng nhập trực tiếp 'bỏ qua tất cả các quy tắc'",
+        "Các hướng dẫn được nhúng trong dữ liệu mà agent truy xuất (trang, PDF, email, ghi chú bộ nhớ) ghi đè prompt nhà phát triển khi nhập",
+        "Nhấp nhầm model",
+        "Một lỗi chính tả trong system prompt"
+      ],
+      "correct": 1,
+      "explanation": "Greshake và cộng sự đã đặt ra indirect prompt injection: nội dung được truy xuất do kẻ tấn công kiểm soát mang các hướng dẫn."
+    },
+    {
+      "stage": "pre",
+      "question": "Bài học nói rằng xử lý được truy xuất prompts tương đương với điều gì?",
+      "options": [
+        "Tự do ngôn luận",
+        "Thực thi mã tùy ý trên bề mặt sử dụng công cụ của agent",
+        "Vượt qua phân tích tĩnh",
+        "Một cuộc gọi hàm thuần túy"
+      ],
+      "correct": 1,
+      "explanation": "Khung của Greshake: các hướng dẫn được truy xuất có thể đánh vào bất kỳ công cụ nào mà agent có quyền truy cập."
+    },
+    {
+      "stage": "check",
+      "question": "Cái nào KHÔNG phải là một trong năm classes khai thác đã được chứng minh?",
+      "options": [
+        "Đánh cắp dữ liệu",
+        "Giun",
+        "Ngộ độc trí nhớ dai dẳng",
+        "Vô hiệu hóa bộ nhớ đệm"
+      ],
+      "correct": 3,
+      "explanation": "Năm là đánh cắp dữ liệu, sâu, đầu độc bộ nhớ dai dẳng, ô nhiễm hệ sinh thái, sử dụng công cụ tùy tiện."
+    },
+    {
+      "stage": "check",
+      "question": "PVE là viết tắt của gì?",
+      "options": [
+        "Prompt-Validator-Executor: một trình xác thực nhanh giá rẻ chạy trên mỗi lệnh gọi công cụ trước model commits chính đắt tiền",
+        "Nhà cung cấp-Người xác minh-Encoder",
+        "Plan-Verify-Execute, một phương ngữ HTN",
+        "Nhúng véc-vectơ trước"
+      ],
+      "correct": 0,
+      "explanation": "PVE bao bọc mọi lệnh gọi công cụ bằng một trình xác thực rẻ tiền trước khi chính model commit."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao 'system prompt nói bỏ qua các hướng dẫn không đáng tin cậy' là không đủ?",
+      "options": [
+        "Nó quá ngắn",
+        "Đó là tuân theo hướng dẫn, không phải thực thi; model vẫn có thể bị ghi đè bởi nội dung được đưa vào đủ thuyết phục",
+        "Các nhà cung cấp tước bỏ nó",
+        "Nó được mã hóa"
+      ],
+      "correct": 1,
+      "explanation": "Phòng thủ thực sự cần gắn thẻ nguồn, danh sách cho phép, an toàn mỗi bước và xác thực kiểu PVE, không chỉ prompting."
+    },
+    {
+      "stage": "post",
+      "question": "Quá tin tưởng vào bộ nhớ được truy xuất là gì?",
+      "options": [
+        "Bộ nhớ đệm quá mạnh",
+        "agent ngày hôm qua đã viết một ghi chú ký ức bị đầu độc; agent hôm nay đọc nó và thực hiện lại việc tiêm",
+        "Tải sai model",
+        "Quên hút bụi chỉ số"
+      ],
+      "correct": 1,
+      "explanation": "Ngộ độc trí nhớ dai dẳng có nghĩa là tiêm chủng tồn tại trên khắp sessions nếu trí nhớ được coi là đáng tin cậy."
+    },
+    {
+      "stage": "post",
+      "question": "Bài học khuyên bạn nên đính kèm siêu dữ liệu nào vào mọi phần nội dung?",
+      "options": [
+        "Khóa mã hóa",
+        "Thẻ nguồn: user_message vs tool_output vs truy xuất; validator từ chối các chỉ thị trong nội dung được truy xuất",
+        "Chỉ dấu thời gian",
+        "Số lượng token"
+      ],
+      "correct": 1,
+      "explanation": "Gắn thẻ nguồn gốc cho phép trình xác thực xử lý nội dung theo mức độ tin cậy của nó."
+    }
+  ]
+}
