@@ -1,0 +1,62 @@
+[
+  {
+    "question": "overfitting trong mạng nơ-ron là gì?",
+    "options": [
+      "model quá nhỏ để tìm hiểu dữ liệu",
+      "model ghi nhớ dữ liệu training thay vì học các mẫu có thể khái quát hóa, cho thấy khoảng cách lớn giữa huấn luyện và kiểm tra accuracy",
+      "model huấn luyện quá chậm",
+      "Chức năng loss bị sai"
+    ],
+    "correct": 1,
+    "explanation": "Overfitting xảy ra khi một model đạt được training accuracy cao nhưng accuracy kiểm tra kém. Nó đã ghi nhớ nhiễu của dữ liệu training hơn là học các mẫu cơ bản.",
+    "stage": "pre"
+  },
+  {
+    "question": "Làm thế nào để dropout chính thức hóa mạng nơ-ron?",
+    "options": [
+      "Nó loại bỏ vĩnh viễn các tế bào thần kinh hoạt động kém nhất",
+      "Nó ngẫu nhiên không các tế bào thần kinh trong quá trình training, buộc mạng phải học các biểu diễn dư thừa",
+      "Nó làm giảm learning rate",
+      "Nó loại bỏ các ngoại lệ khỏi dữ liệu training"
+    ],
+    "correct": 1,
+    "explanation": "Trong mỗi forward pass, dropout đặt ngẫu nhiên đầu ra tế bào thần kinh về không với xác suất p. Điều này ngăn chặn sự đồng thích nghi (các tế bào thần kinh dựa vào những tế bào khác cụ thể) và tương đương với việc training một tập hợp các mạng con 2 ^ N.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao transformers sử dụng LayerNorm thay vì BatchNorm?",
+    "options": [
+      "LayerNorm tính toán nhanh hơn",
+      "LayerNorm chuẩn hóa trên features trên mỗi mẫu (không phụ thuộc vào batch), hoạt động với độ dài trình tự thay đổi và kích thước batch nhỏ",
+      "BatchNorm nguyên nhân gradient cháy nổ",
+      "LayerNorm được phát minh gần đây hơn"
+    ],
+    "correct": 1,
+    "explanation": "BatchNorm phụ thuộc vào batch thống kê, ồn ào với batches nhỏ và vô nghĩa với batch size 1 (phổ biến trong thế hệ). LayerNorm chuẩn hóa trên các features trong mỗi mẫu, không phụ thuộc vào kích thước batch.",
+    "stage": "post"
+  },
+  {
+    "question": "Sự khác biệt chính giữa RMSNorm và LayerNorm là gì?",
+    "options": [
+      "RMSNorm sử dụng thống kê batch",
+      "RMSNorm bỏ qua phép trừ trung bình, chỉ chia cho bình phương trung bình gốc, cho ~ 10% tăng tốc với accuracy bằng nhau",
+      "RMSNorm thêm parameters có thể học được",
+      "RMSNorm chỉ hoạt động trên CNN"
+    ],
+    "correct": 1,
+    "explanation": "RMSNorm loại bỏ bước trừ trung bình khỏi LayerNorm, điều này đóng góp ít vào accuracy nhưng thêm tính toán. LLaMA, Mistral và hầu hết các LLMs hiện đại sử dụng RMSNorm để tăng hiệu quả này.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao điều quan trọng là phải gọi model.eval() trước khi chạy inference trong PyTorch?",
+    "options": [
+      "Nó tăng tốc độ tính toán",
+      "Nó vô hiệu hóa dropout và chuyển BatchNorm để sử dụng thống kê đang chạy thay vì thống kê batch, đưa ra kết quả xác định",
+      "Nó giải phóng bộ nhớ GPU",
+      "Nó cho phép tính toán gradient"
+    ],
+    "correct": 1,
+    "explanation": "Nếu không có model.eval(), dropout ngẫu nhiên không các tế bào thần kinh trong quá trình inference (gây ra sự thay đổi đầu ra ngẫu nhiên) và BatchNorm sử dụng thống kê batch hiện tại thay vì mức trung bình hoạt động ổn định được tích lũy trong training.",
+    "stage": "post"
+  }
+]
