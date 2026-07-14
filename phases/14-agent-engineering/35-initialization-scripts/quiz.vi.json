@@ -1,0 +1,90 @@
+{
+  "lesson": "35-initialization-scripts",
+  "title": "Khởi tạo Scripts cho Agents",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Init script loại bỏ những gì?",
+      "options": [
+        "Độ trễ từ inference",
+        "Thuế thiết lập theo session: thăm dò runtime, liệt kê repo, thử lại các kiểm tra tương tự mỗi session mới",
+        "Nhà cung cấp rate limits",
+        "Authn tokens"
+      ],
+      "correct": 1,
+      "explanation": "Người script nộp thuế một lần và viết câu trả lời vào init_report. json agent đọc."
+    },
+    {
+      "stage": "pre",
+      "question": "Hợp đồng chế độ thất bại của init script là gì?",
+      "options": [
+        "Thất bại nhẹ nhàng và tiếp tục",
+        "Thất bại lớn, thất bại nhanh, thất bại ở một nơi; Từ chối khởi động khi bàn làm việc bị hỏng",
+        "Luôn thành công",
+        "Thử lại mãi mãi"
+      ],
+      "correct": 1,
+      "explanation": "Toàn bộ vấn đề là từ chối khởi động khi bàn làm việc bị hỏng; Dự phòng im lặng đánh bại mục đích."
+    },
+    {
+      "stage": "check",
+      "question": "Cái nào KHÔNG phải là một trong những cuộc thăm dò trong danh sách bài học?",
+      "options": [
+        "Runtime phiên bản",
+        "Tính khả dụng của phần phụ thuộc",
+        "Kiểm tra khả năng phân giải lệnh",
+        "Token từng token sampling temperature"
+      ],
+      "correct": 3,
+      "explanation": "Các đầu dò bao gồm các phiên bản runtime, deps, lệnh kiểm tra, đường dẫn, môi trường vars, độ mới của trạng thái, commit tốt cuối cùng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bài học nói init phải là idempotent?",
+      "options": [
+        "Nó đáp ứng SOC 2",
+        "Chạy nó hai lần sẽ không hoạt động ngoại trừ dấu thời gian mới, vì vậy nó có thể được kết nối vào lệnh gạch chéo CI, hooks hoặc trước tác vụ",
+        "Idempotence tiết kiệm tiền",
+        "Nó được yêu cầu bởi JSON Schema"
+      ],
+      "correct": 1,
+      "explanation": "Idempotence giúp init an toàn khi gọi từ nhiều điểm vào (lệnh hooks, CI, gạch chéo)."
+    },
+    {
+      "stage": "check",
+      "question": "Neo commit tốt cuối cùng được biết đến là gì?",
+      "options": [
+        "commit gần đây nhất của trưởng nhóm",
+        "Thăm dò commit hiện tại so với tệp LKG; Từ chối bắt đầu nếu chênh lệch vượt quá ngân sách mà không có sự phê chuẩn của con người",
+        "Các commit sớm nhất trong repo",
+        "Cơ sở merge của HEAD và chính"
+      ],
+      "correct": 1,
+      "explanation": "Đánh giá mã AI của Cloudflare phạm vi người đánh giá chống lại LKG để ngăn chặn sự hỗn hợp trôi dạt trên sessions."
+    },
+    {
+      "stage": "post",
+      "question": "Tệp khóa với mẫu TTL làm gì?",
+      "options": [
+        "Khóa repo khỏi các chỉnh sửa",
+        "Ghi prereqs.lock sau khi vượt qua thăm dò thành công; Các lần chạy tiếp theo tin tưởng khóa trong 24h và bỏ qua các đầu dò đắt tiền nếu hàm băm kê khai khớp",
+        "Chặn tất cả các lần ghi trong 24 giờ",
+        "Vô hiệu hóa CI"
+      ],
+      "correct": 1,
+      "explanation": "Hình dạng tương tự như bộ nhớ đệm Docker lớp: đầu dò idempotent + hàm băm nội dung = bỏ qua."
+    },
+    {
+      "stage": "post",
+      "question": "Điều gì KHÔNG BAO GIỜ nên xuất hiện trong đường dẫn nóng init?",
+      "options": [
+        "Đọc hệ thống tệp cục bộ",
+        "Cuộc gọi mạng, cuộc gọi LLM, kiểm tra giấy phép bên ngoài; Đầu dò là hệ thống ống nước xác định dưới ba giây",
+        "Đọc môi trường",
+        "Đọc lockfile"
+      ],
+      "correct": 1,
+      "explanation": "Một đầu dò gọi một LLM là một quy trình làm việc, không phải một đầu dò; giữ init xác định."
+    }
+  ]
+}
