@@ -1,0 +1,78 @@
+{
+  "lesson": "73-perplexity-calibration",
+  "title": "Perplexity và hiệu chuẩn",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "perplexity 1.0 ngụ ý gì về một ngôn ngữ model trong kho dữ liệu thử nghiệm?",
+      "options": [
+        "model gán xác suất 1 cho mọi token thực tế; nó là một model hoàn hảo",
+        "model đồng nhất về từ vựng",
+        "Kho dữ liệu trống rỗng",
+        "model bị hỏng"
+      ],
+      "correct": 0,
+      "explanation": "Perplexity bằng exp (log-likelihood âm trung bình). Khi mỗi token có xác suất 1, NLL bằng không và exp (0) là 1."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao harness yêu cầu xác suất log không âm từ bộ điều hợp?",
+      "options": [
+        "Perplexity không xác định cho các giá trị âm",
+        "Xác suất log âm không âm theo định nghĩa; nhận được giá trị âm có nghĩa là bộ điều hợp đã gửi log p, không phải -log p",
+        "Numpy sự cố trên âm bản",
+        "Các cạnh thùng trong ECE giả định dương tính"
+      ],
+      "correct": 1,
+      "explanation": "-log p của xác suất không âm. Giá trị âm là vi phạm hợp đồng sẽ âm thầm cho perplexity < 1, điều này là không thể."
+    },
+    {
+      "stage": "check",
+      "question": "Lỗi hiệu chuẩn dự kiến đo lường điều gì?",
+      "options": [
+        "Khoảng cách tuyệt đối trung bình giữa nhãn dự đoán và nhãn thực",
+        "Khoảng cách trung bình giữa độ tin cậy cấp bin và accuracy cấp bin, được tính theo kích thước thùng",
+        "Sự variance của đầu ra softmax",
+        "Entropy chéo của các dự đoán"
+      ],
+      "correct": 1,
+      "explanation": "Dự đoán thùng ECE theo độ tin cậy, đo khoảng cách giữa độ tin cậy trung bình và accuracy trung bình trên mỗi thùng, trọng số theo kích thước thùng."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao việc triển khai cũng trả về populated_bins cùng với giá trị ECE?",
+      "options": [
+        "Nó là bắt buộc đối với sơ đồ độ tin cậy",
+        "Nó báo hiệu khi có quá ít thùng được điền để một số duy nhất đáng tin cậy",
+        "Nó là mẫu số của điểm Brier",
+        "Nó là cần thiết bởi numpy"
+      ],
+      "correct": 1,
+      "explanation": "Với ít thùng rác, ECE bị chi phối bởi nhiễu. Báo cáo số lượng được điền cho phép người chạy từ chối công bố một số duy nhất gây hiểu lầm."
+    },
+    {
+      "stage": "check",
+      "question": "Điểm Brier nắm bắt được điều gì mà ECE không có?",
+      "options": [
+        "Tính toán nhanh hơn",
+        "Nó phạt trực tiếp hiệu chỉnh sai cục bộ, vì đó là sai số bình phương cho mỗi dự đoán",
+        "Nó không cần nhãn sự thật cơ bản",
+        "Nó chỉ hoạt động trên các kết quả nhị phân"
+      ],
+      "correct": 1,
+      "explanation": "ECE chỉ xem xét mức trung bình trên mỗi thùng. Brier bình phương sai số cho mỗi dự đoán, vì vậy nó bắt được trường hợp các thùng bị hủy bỏ trung bình nhưng bị hiệu chỉnh sai riêng lẻ."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao hiệu chuẩn là báo cáo trên mỗi model chứ không phải là chỉ số cho mỗi nhiệm vụ?",
+      "options": [
+        "Nhiệm vụ không có xác suất",
+        "Các tác vụ đơn lẻ có quá ít dự đoán để ước tính số liệu thống kê thùng; báo cáo tổng hợp trên toàn bộ đánh giá",
+        "Hiệu chuẩn quá chậm để tính toán cho mỗi tác vụ",
+        "ECE yêu cầu người chạy phải biết kiến trúc model"
+      ],
+      "correct": 1,
+      "explanation": "Hiệu chuẩn cho mỗi nhiệm vụ bị chi phối bởi nhiễu. Người chạy gộp confidence/correctness cặp trên tất cả các tác vụ trước khi tính toán ECE, Brier và sơ đồ độ tin cậy."
+    }
+  ]
+}
