@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Một tệp trên đĩa được giải mã thành một mảng NumPy với hình dạng (224, 224, 3) và dtype uint8. Mỗi con số đại diện cho điều gì?",
+      "options": [
+        "Xác suất pixel là màu đó, từ 0 đến 1",
+        "Một số lượng photon trên mỗi máy dò, được chuẩn hóa thành dải động đầy đủ của cảm biến",
+        "Một mẫu cường độ ánh sáng ở một vị trí lưới, được lượng tử hóa thành một trong 256 mức trên mỗi kênh",
+        "Giá trị độ sáng dấu phẩy động sẵn sàng cung cấp cho mạng tích chập"
+      ],
+      "correct": 2,
+      "explanation": "Hình ảnh uint8 lưu trữ các số nguyên 8 bit trong [0, 255]. Mỗi số nguyên là một mẫu lượng tử hóa có cường độ ánh sáng ở một vị trí (hàng, cột, kênh). Nó không phải là xác suất cũng không phải là phao; Bạn phải chia cho 255 và chuẩn hóa trước khi cho pretrained model ăn."
+    },
+    {
+      "stage": "pre",
+      "question": "Bạn tải một hình ảnh bằng Pillow và có được một mảng hình dạng (480, 640, 3). Bạn chuyển nó dưới dạng tensor hàng loạt (1, 480, 640, 3) đến Conv2d PyTorch với in_channels=3. Điều gì xảy ra?",
+      "options": [
+        "Không có gì — PyTorch tự động phát hiện bố cục",
+        "Lớp conv đầu tiên coi chiều cao là trục kênh, tạo ra bản đồ feature vô nghĩa",
+        "PyTorch gây ra RuntimeError: Conv2d mong đợi NCHW, thấy 480 kênh trong đó trọng số dự kiến là 3 và từ chối chạy",
+        "Accuracy giảm vài phần trăm nhưng inference vẫn hoạt động"
+      ],
+      "correct": 2,
+      "explanation": "PyTorch Conv2d thực thi kiểm tra số lượng kênh nghiêm ngặt so với tensor trọng lượng. Đầu vào HWC theo lô (1, 480, 640, 3) được hiểu là NCHW với C=480, không khớp với 3 kênh dự kiến của trọng số và PyTorch tăng RuntimeError trước khi tính toán. Lỗi lớn là một feature - nó buộc bạn phải sửa bố cục. Bạn phải hoán vị sang NCHW (`.permute(0, 3, 1, 2)`) trước khi cho PyTorch ăn."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao ImageNet pretrained models mong đợi đầu vào được chuẩn hóa với mean=[0.485, 0.456, 0.406] và std=[0.229, 0.224, 0.225]?",
+      "options": [
+        "Đó là các giá trị RGB của một cảnh tự nhiên trung bình",
+        "Đó là giá trị trung bình trên mỗi kênh và độ lệch chuẩn của training ImageNet được đặt trong không gian [0, 1], vì vậy việc trừ chúng vào giữa phân phối mà model đã được huấn luyện",
+        "Chúng làm cho đầu vào hoàn toàn không trung bình đơn vị variance cho bất kỳ hình ảnh nào",
+        "Chúng được yêu cầu bởi chức năng kích hoạt ReLU"
+      ],
+      "correct": 1,
+      "explanation": "Các con số là số liệu thống kê của kho dữ liệu training ImageNet được tính toán sau khi chia các pixel cho 255. Sử dụng chúng sẽ căn chỉnh phân phối đầu vào của bạn với phân phối mà mạng đã thấy trong quá trình training. Đối với một model được huấn luyện trên một dataset khác, bạn sẽ tính toán lại số liệu thống kê trên dataset đó."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn thay đổi kích thước mặt nạ phân đoạn (số nguyên class ID 0..20) từ 500x500 thành 224x224. Phương pháp nội suy nào là đúng?",
+      "options": [
+        "Bilinear - nó làm mịn ranh giới class",
+        "Bicubic - nó duy trì độ sắc nét",
+        "Lanczos — chất lượng cao nhất",
+        "Hàng xóm gần nhất - nó bảo toàn các ID class số nguyên hợp lệ thay vì phát minh ra các ID phân số"
+      ],
+      "correct": 3,
+      "explanation": "Hai tuyến, bicubic và lanczos trung bình các giá trị lân cận. Trên mặt nạ class-ID tạo ra các giá trị không phải số nguyên như 4,7 giữa class 4 và class 5, không phải là classes thực. Người hàng xóm gần nhất chọn pixel gốc gần nhất và giữ nguyên không gian nhãn. Quy tắc này cũng áp dụng cho bất kỳ kênh nào mã hóa mã nhận dạng hoặc chỉ mục."
+    },
+    {
+      "stage": "post",
+      "question": "Chuyển đổi thang độ xám RGB sử dụng trọng số 0.299 R + 0.587 G + 0.114 B thay vì 0.333 R + 0.333 G + 0.333 B. Tại sao?",
+      "options": [
+        "Để bù artifacts nén JPEG trong mỗi kênh",
+        "Bởi vì các photon màu xanh lá cây mang nhiều năng lượng hơn các photon màu đỏ hoặc xanh lam",
+        "Bởi vì thị giác của con người nhạy cảm nhất với màu xanh lá cây và ít nhạy cảm nhất với màu xanh lam, vì vậy tổng trọng số phù hợp với độ chói cảm nhận",
+        "Để phù hợp với hoạt động của bộ lọc Bayer trên cảm biến máy ảnh"
+      ],
+      "correct": 2,
+      "explanation": "Quả cân ITU-R BT.601 0.299/0.587/0.114 đến từ hiệu suất phát sáng của mắt người. Trọng lượng trung bình bằng nhau sẽ làm cho hình ảnh màu xanh lá cây trông quá tối và hình ảnh màu đỏ quá sáng đối với người quan sát. Hầu hết các mã thang độ xám thị giác máy tính cổ điển sử dụng các trọng số này; BT.709 (0.2126/0.7152/0.0722) là biến thể HDTV hiện đại cho đầu vào ánh sáng tuyến tính."
+    }
+  ]
+}
