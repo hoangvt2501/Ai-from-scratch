@@ -1,0 +1,78 @@
+{
+  "lesson": "11-scalable-oversight-weak-to-strong",
+  "title": "Giám sát có thể mở rộng và khái quát hóa từ yếu đến mạnh",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Câu hỏi cốt lõi mà chương trình nghị sự Superalignment đặt ra là gì?",
+      "options": [
+        "RLHF có thể mở rộng quy mô vượt quá 1 tỷ parameters không?",
+        "training đối thủ có thể loại bỏ tất cả các cửa hậu không?",
+        "Một giám thị yếu hơn có thể giám sát một model mạnh mẽ và liên kết hơn một cách đáng tin cậy không?",
+        "Con người có chính xác hơn phần thưởng models không?"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Trong Burns et al. (2023) khái quát hóa yếu đến mạnh, thiết lập là gì?",
+      "options": [
+        "Phần thưởng model chỉ được huấn luyện dựa trên dữ liệu tổng hợp",
+        "Hai cuộc tranh luận models mạnh mẽ; một con người phán xét",
+        "GPT-2 được fine-tuned trên nhãn GPT-4",
+        "model mạnh (GPT-4 class) được fine-tuned trên nhãn được tạo ra bởi model yếu (GPT-2 class) và khả năng của nó được đo dựa trên trần được giám sát mạnh"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Khoảng cách hiệu suất được phục hồi (PGR) được định nghĩa như thế nào?",
+      "options": [
+        "(trần - fine-tuned) / yếu",
+        "(fine-tuned - yếu) / (trần - yếu)",
+        "fine-tuned / trần",
+        "(yếu - trần) / trần"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Điều nào sau đây KHÔNG phải là cơ chế giám sát có thể mở rộng được liệt kê trong bài học?",
+      "options": [
+        "Phân tách nhiệm vụ",
+        "Tokenizer Distillation",
+        "Mô hình phần thưởng đệ quy",
+        "Tranh luận"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Giám sát có thể mở rộng và W2SG bổ sung cho nhau như thế nào?",
+      "options": [
+        "Giám sát có thể mở rộng cải thiện chất lượng tín hiệu hiệu quả của người giám sát; W2SG thu hẹp khoảng cách từ bất kỳ tín hiệu không hoàn hảo nào mà người giám sát cung cấp",
+        "Cả hai đều nhắm mục tiêu cùng một chỉ số",
+        "Chúng loại trừ lẫn nhau",
+        "Cả hai đều yêu cầu quyền truy cập hộp trắng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Giả định trung tâm của cơ chế AI-an toàn-thông qua-tranh luận là gì?",
+      "options": [
+        "Bảng điểm tranh luận luôn ngắn hơn câu trả lời trực tiếp",
+        "Tìm câu trả lời đúng thuyết phục dễ dàng hơn tìm câu trả lời sai thuyết phục",
+        "Thẩm phán có khả năng hơn những người tranh luận",
+        "Cả hai người tranh luận luôn nói sự thật"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
