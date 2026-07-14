@@ -1,0 +1,90 @@
+{
+  "lesson": "12-video-understanding-pipeline",
+  "title": "Capstone 12 — Video Understanding Pipeline (Cảnh, QA, Tìm kiếm)",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao chỉ mục cấp cảnh vẫn cần thiết ngay cả khi VLM ngữ cảnh dài có thể đọc video dài 2 giờ nguyên bản?",
+      "options": [
+        "VLMs ngữ cảnh dài không thể phát trực tuyến đầu ra",
+        "Vector chỉ mục không hỗ trợ tệp video",
+        "Nhập 100 giờ video vào một kho dữ liệu có thể truy vấn cần truy xuất ở cấp độ cảnh, ngay cả khi các video riêng lẻ có thể được đọc toàn bộ",
+        "Cắt cảnh là điều duy nhất mà VLM hiểu"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Mỗi cảnh có ba loại vector nào trong chỉ mục nhiều vector?",
+      "options": [
+        "embedding phụ đề, embedding khung hình chính và embedding bản chép lời",
+        "Dạng sóng âm thanh, mel-spectrogram và MFCC",
+        "Hàm băm, gzip và CRC",
+        "Tư thế, độ sâu và luồng quang học"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Kết quả từ ba luồng truy xuất được merged như thế nào tại thời điểm truy vấn?",
+      "options": [
+        "Bằng cách chỉ chọn chú thích",
+        "Bằng cách tính trung bình các điểm tương đồng cosine",
+        "Thông qua sự kết hợp xếp hạng đối ứng trên ba danh sách được xếp hạng",
+        "Bằng cách lấy liên minh mà không ghi bàn"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bước grounding thời gian tinh chỉnh điều gì bên trong cảnh trên cùng?",
+      "options": [
+        "Dấu thời gian từ bản ghi từ Whisper",
+        "Số lượng vectors được lưu trữ trong Qdrant",
+        "Cửa sổ dấu thời gian (bắt đầu, kết thúc) chứa câu trả lời",
+        "Khung hình chính embedding kích thước"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Câu hỏi nào class được báo cáo riêng vì nó là một điểm nóng ảo giác đã biết?",
+      "options": [
+        "Câu hỏi mô tả về phong cảnh",
+        "Câu hỏi nhận dạng người nói",
+        "Câu hỏi dịch thuật",
+        "Câu hỏi đếm và loại hành động, trong đó VLMs tính sai hoặc sắp xếp sai sự kiện"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bảng đánh giá đo lường chỉ số grounding nào trên một tập hợp bị giữ lại?",
+      "options": [
+        "Giao lộ grounding thời gian trên liên kết (IoU)",
+        "Tỷ lệ chấp nhận",
+        "Perplexity",
+        "MRR@10"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao pipeline yêu cầu dấu thời gian được trích dẫn trong câu trả lời?",
+      "options": [
+        "Chúng làm giảm kích thước embedding",
+        "Dấu thời gian được yêu cầu bởi đầu ra Whisper",
+        "Dấu thời gian được yêu cầu bởi Qdrant payloads",
+        "Chúng cho phép người xem chuyển đến chính xác (video_id, bắt đầu, kết thúc) để người dùng có thể xác minh thông báo xác nhận quyền sở hữu"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
