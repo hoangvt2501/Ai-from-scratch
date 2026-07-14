@@ -1,0 +1,102 @@
+{
+  "lesson": "19-subword-tokenization",
+  "title": "Tokenization từ phụ — BPE, WordPiece, Unigram, SentencePiece",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Subword tokenization mua cho bạn điều gì so với từ vựng cấp độ từ?",
+      "options": [
+        "Các từ hiếm phân hủy thành các phần từ phụ đã biết, loại bỏ OOV trong khi vẫn giữ vốn từ vựng bị giới hạn",
+        "models nhỏ hơn",
+        "training nhanh hơn",
+        "Tốt hơn embeddings"
+      ],
+      "correct": 0,
+      "explanation": "Subword tokens bao gồm bất kỳ đầu vào nào bằng cách phân tách, loại bỏ vấn đề OOV của từ vựng cấp từ."
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao GPT-2 sử dụng BPE cấp byte thay vì BPE cấp ký tự?",
+      "options": [
+        "Yêu cầu của transformers",
+        "Byte BPE bỏ qua merges",
+        "Từ vựng cơ bản 256 byte bao gồm bất kỳ đầu vào UTF-8 nào, đảm bảo không có tokens [UNK]",
+        "Byte nhỏ hơn"
+      ],
+      "correct": 2,
+      "explanation": "BPE cấp độ byte bắt đầu từ 256 byte nên mọi đầu vào đều được mã hóa; không có gì là OOV."
+    },
+    {
+      "stage": "check",
+      "question": "Unigram tokenizer xây dựng vốn từ vựng của mình như thế nào?",
+      "options": [
+        "Trọng số IDF tham lam",
+        "Bắt đầu từ một tập hợp ứng cử viên lớn, lặp đi lặp lại cắt tỉa tokens mà việc loại bỏ ít ảnh hưởng nhất đến log-likelihood",
+        "Hợp nhất cặp thường xuyên tham lam",
+        "sampling ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Unigram phù hợp với một LM unigram và lặp đi lặp lại loại bỏ các tokens ít hữu ích nhất để đạt được kích thước từ vựng mục tiêu."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì phân biệt tiêu chí merge của WordPiece với tiêu chí BPE?",
+      "options": [
+        "WordPiece sử dụng byte",
+        "WordPiece không được giám sát",
+        "WordPiece merges cặp tối đa hóa likelihood kho dữ liệu training, trong khi BPE merges cặp thường xuyên nhất",
+        "WordPiece bỏ qua merges"
+      ],
+      "correct": 2,
+      "explanation": "WordPiece chọn merges theo likelihood; BPE chọn theo tần suất thô."
+    },
+    {
+      "stage": "check",
+      "question": "Công cụ nào huấn luyện tokenizer trực tiếp trên văn bản Unicode đa ngôn ngữ thô?",
+      "options": [
+        "SpaCy",
+        "tiktoken",
+        "tokenizers-lite",
+        "SentencePiece (mã hóa khoảng trắng làm điểm đánh dấu đặc biệt và huấn luyện BPE hoặc Unigram)"
+      ],
+      "correct": 3,
+      "explanation": "SentencePiece huấn luyện BPE/Unigram trên văn bản thô mà không cần tokenization trước; TikToken chỉ mã hóa."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao phải kiểm tra băm production CI tokenizer đã triển khai. json?",
+      "options": [
+        "Tokenizer trôi tạo ra các ID token khác với những ID mà model đã được huấn luyện, âm thầm làm hỏng đầu ra",
+        "Yêu cầu của Hugging Face",
+        "Để nén bộ nhớ",
+        "Nó làm giảm kích thước từ vựng"
+      ],
+      "correct": 0,
+      "explanation": "Ngay cả những thay đổi nhỏ tokenizer cũng thay đổi ID ca trào; Kiểm tra băm sẽ phát hiện trôi trước khi đến tay người dùng."
+    },
+    {
+      "stage": "post",
+      "question": "Lý do phổ biến khiến một biểu tượng cảm xúc mất nhiều tokens là gì?",
+      "options": [
+        "Biểu tượng cảm xúc được đặt trước",
+        "Biểu tượng cảm xúc đa điểm mã mã hóa thành nhiều byte UTF-8; Nếu không có tokens chuyên dụng, mỗi byte là từ phụ riêng của nó",
+        "Biểu tượng cảm xúc được lưu trữ dưới dạng phao",
+        "Biểu tượng cảm xúc là ký tự dừng"
+      ],
+      "correct": 1,
+      "explanation": "Biểu tượng cảm xúc tổng hợp mã hóa dưới dạng vài byte; tokenizers cấp byte có thể sử dụng nhiều tokens cho mỗi glyph."
+    },
+    {
+      "stage": "post",
+      "question": "Phương pháp heuristic nào hướng dẫn kích thước từ vựng cho một transformer đơn ngữ mới?",
+      "options": [
+        "Luôn luôn 8000",
+        "Luôn luôn 1 triệu",
+        "Khoảng 32k cho models dưới 1B parameters; 50-100k cho 1-10B; 200k+ cho models đa ngôn ngữ hoặc biên giới",
+        "Khớp training kích thước kho dữ liệu"
+      ],
+      "correct": 2,
+      "explanation": "Thang đo kích thước từ vựng với model và phạm vi ngôn ngữ; đây là những mặc định thô của cộng đồng."
+    }
+  ]
+}
