@@ -1,0 +1,102 @@
+{
+  "lesson": "18-multilingual-nlp",
+  "title": "NLP đa ngôn ngữ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Chuyển zero-shot ngôn ngữ chéo có nghĩa là gì?",
+      "options": [
+        "Fine-tune model đa ngôn ngữ trên một ngôn ngữ nguồn và đánh giá trên một ngôn ngữ khác mà không có nhãn ngôn ngữ đích",
+        "Dịch thuật mà không cần dịch model",
+        "Mã hóa không merges",
+        "Training không có ví dụ"
+      ],
+      "correct": 0,
+      "explanation": "Zero-shot chuyển: huấn luyện về ngôn ngữ nguồn, chạy trên mục tiêu mà không có sự giám sát của ngôn ngữ đích."
+    },
+    {
+      "stage": "pre",
+      "question": "Họ model nào ships làm đường cơ sở đa ngôn ngữ 100 ngôn ngữ tiêu chuẩn?",
+      "options": [
+        "GloVe",
+        "GPT-2",
+        "XLM-R (ví dụ: XLM-RoBERTa-base, 270M)",
+        "Máy chưng cấtBERT"
+      ],
+      "correct": 2,
+      "explanation": "XLM-R là đường cơ sở pretrained 100 ngôn ngữ chuẩn để phân loại đa ngôn ngữ."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao tiếng Anh như nguồn không phải lúc nào cũng mang lại sự chuyển tiếp tốt nhất cho một mục tiêu không phải tiếng Anh?",
+      "options": [
+        "Tiếng Anh có quá ít dữ liệu",
+        "Sự tương đồng ngôn ngữ (kiểu loại, script, hình thái) dự đoán chất lượng truyền tải; một nguồn tài nguyên cao gần hơn có thể vượt trội hơn tiếng Anh",
+        "Tiếng Anh sử dụng BPE",
+        "Tiếng Anh quá ngắn"
+      ],
+      "correct": 1,
+      "explanation": "Các nguồn liên quan đến kiểu chữ (ví dụ: tiếng Hindi cho các mục tiêu Ấn Độ) thường vượt trội hơn tiếng Anh với tư cách là nguồn fine-tune."
+    },
+    {
+      "stage": "check",
+      "question": "'Thuế sinh sản' đối với các ngôn ngữ có tài nguyên thấp là gì?",
+      "options": [
+        "BPE từ chối huấn luyện",
+        "Văn bản có tài nguyên thấp mã hóa thành nhiều từ phụ trên mỗi từ hơn tiếng Anh, tiêu tốn context window, độ trễ và dung lượng",
+        "Nhỏ hơn models huấn luyện chậm hơn",
+        "Tokenizers không thể xử lý Unicode"
+      ],
+      "correct": 1,
+      "explanation": "Các ngôn ngữ đuôi dài mã hóa ở khả năng sinh sản, bối cảnh ăn uống và hiệu quả training cao hơn nhiều."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao đánh giá theo từng ngôn ngữ là bắt buộc, không phải accuracy tổng hợp?",
+      "options": [
+        "Cốt liệu bỏ qua tokenization",
+        "Các số tổng hợp ẩn các ngôn ngữ đuôi dài, nơi model đa ngôn ngữ có thể tệ hơn nhiều so với giá trị trung bình của nó",
+        "Cốt liệu chỉ hoạt động trên phân loại",
+        "Tổng hợp chạy nhanh hơn"
+      ],
+      "correct": 1,
+      "explanation": "Tổng hợp accuracy che giấu hiệu suất kém trên các ngôn ngữ có tài nguyên thấp; điểm cho mỗi ngôn ngữ tiết lộ nó."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao fine-tuning learning rate lại quan trọng khi điều chỉnh model đa ngôn ngữ với dữ liệu few-shot?",
+      "options": [
+        "Giảm chất thải LR GPU",
+        "Yêu cầu của tokenizers",
+        "Nó thay đổi từ vựng",
+        "LR cao có thể thu gọn alignment đa ngôn ngữ và giảm model thành chỉ tiếng Anh một cách hiệu quả"
+      ],
+      "correct": 3,
+      "explanation": "LR quá mức làm trôi dạt sự đại diện được chia sẻ; LR bảo thủ (~2e-5) bảo tồn cấu trúc đa ngôn ngữ."
+    },
+    {
+      "stage": "post",
+      "question": "Biện pháp giảm thiểu nào trực tiếp giải quyết tokenizer khả năng sinh sản đối với scripts đuôi dài?",
+      "options": [
+        "Bỏ qua từ dừng",
+        "Kích thước batch thấp hơn",
+        "Sử dụng byte-fallback (SentencePiece byte_fallback=True) hoặc tokenizer có phạm vi script rộng hơn (ví dụ: XLM-V)",
+        "Xem thêm training epochs"
+      ],
+      "correct": 2,
+      "explanation": "Dự phòng byte và từ vựng rộng hơn tokenizers làm giảm khả năng sinh sản và OOV đối với scripts tài nguyên thấp."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào một model đơn ngữ từ đầu đáng để thử thay vì một  đa ngôn ngữ?",
+      "options": [
+        "Luôn dành cho tiếng Anh",
+        "Khi ngôn ngữ đích có đủ dữ liệu để huấn luyện model đơn ngữ đánh bại đường cơ sở đa ngôn ngữ; kiểm tra trước khi giả định",
+        "Chỉ dành cho bản dịch",
+        "Bất cứ khi nào tokenizer được BPE"
+      ],
+      "correct": 1,
+      "explanation": "Đôi khi training đơn ngữ đánh bại đa ngôn ngữ đối với các mục tiêu có nguồn lực cao; so sánh thực nghiệm quyết định."
+    }
+  ]
+}
