@@ -1,0 +1,78 @@
+{
+  "lesson": "01-instruction-following-alignment-signal",
+  "title": "Làm theo hướng dẫn như tín hiệu Alignment",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao một ngôn ngữ thô được huấn luyện trước model thường phản hồi 'viết hàm Python đảo ngược danh sách' bằng một prompt khác thay vì mã?",
+      "options": [
+        "Từ vựng của nó thiếu Python tokens",
+        "Nó không thể biểu diễn chữ ký hàm mà không có fine-tuning",
+        "temperature của nó mặc định bằng không",
+        "Nó được huấn luyện để hoàn thành văn bản kiểu web, nơi prompts tiếp tục với nhiều prompts hơn"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Phần thưởng InstructGPT model sử dụng loss nào thay vì nhãn tùy chọn theo cặp?",
+      "options": [
+        "Sai số bình phương trung bình trên điểm của người gắn nhãn",
+        "Bradley-Terry: -log sigmoid(r(x, y_w) - r(x, y_l))",
+        "Bản lề loss với lề cố định",
+        "Entropy chéo giữa phần thưởng dự đoán và phần thưởng thực"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hình phạt KL trong giai đoạn 3 của InstructGPT chủ yếu bảo vệ chống lại là gì?",
+      "options": [
+        "Quên số liệu thống kê tokenizer thảm khốc",
+        "Số không ổn định trong các bản cập nhật PPO gradient",
+        "Ngữ cảnh tràn windows trong quá trình sampling",
+        "Các optimizer tìm ra các chuỗi phần thưởng cao đối nghịch khai thác phần thưởng model"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Vấn đề gì mà PPO-ptx trộn lẫn vào mục tiêu RL để giảm thiểu?",
+      "options": [
+        "Phần thưởng model trôi dạt trong PPO",
+        "Thuật ngữ KL trở nên tiêu cực",
+        "Thuế alignment: hồi quy trên benchmarks RLHF không được nhắm mục tiêu",
+        "Tokenizer không khớp giữa SFT và RM"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "InstructGPT 1.3B được ưa chuộng hơn cơ sở 175B GPT-3 khoảng 70% thời gian. Điều này nói gì về alignment và khả năng?",
+      "options": [
+        "Alignment là một trục khác với khả năng và cơ sở model thiết lập sàn khả năng",
+        "Tỷ lệ ưu đãi trên 50% chứng minh phần thưởng proxy bằng giá trị con người",
+        "Khả năng và alignment là cùng một trục trên quy mô",
+        "Cơ sở lớn hơn models luôn thua models căn chỉnh nhỏ"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Phần thưởng model trong InstructGPT được khởi tạo từ mục nào sau đây?",
+      "options": [
+        "Một hồi quy vô hướng ngẫu nhiên không có pretraining",
+        "Một transformer chỉ dành cho encoder riêng biệt",
+        "Cơ sở được huấn luyện trước model với đầu LM còn nguyên vẹn",
+        "SFT model với đầu LM được thay thế bằng đầu vô hướng"
+      ],
+      "correct": 3,
+      "explanation": ""
+    }
+  ]
+}
