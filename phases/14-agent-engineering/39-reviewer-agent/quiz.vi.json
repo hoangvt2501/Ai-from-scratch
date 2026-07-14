@@ -1,0 +1,90 @@
+{
+  "lesson": "39-reviewer-agent",
+  "title": "Người đánh giá Agent: Trình tạo tách khỏi Điểm đánh dấu",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao người xây dựng không thể phân loại công việc của mình một cách đáng tin cậy?",
+      "options": [
+        "Nó hết tokens",
+        "Chấp nhận là cần thiết nhưng không đủ; Phù hợp với vấn đề, kỷ luật phạm vi, giả định được lập thành văn bản và sẵn sàng bàn giao cần một vai trò khác với các đầu vào khác nhau",
+        "Nó mất xác thực",
+        "model từ chối tự chấm điểm"
+      ],
+      "correct": 1,
+      "explanation": "Khoảng cách giữa người xây dựng và người đánh giá là nơi tồn tại độ tin cậy; chấp nhận chỉ chứng minh một phiên bản yếu hơn."
+    },
+    {
+      "stage": "pre",
+      "question": "Cái nào KHÔNG phải là một trong năm chiều đánh giá?",
+      "options": [
+        "Vấn đề phù hợp",
+        "Phạm vi kỷ luật",
+        "Chất lượng xác minh",
+        "Độ trễ Inference"
+      ],
+      "correct": 3,
+      "explanation": "Năm là phù hợp với vấn đề, kỷ luật phạm vi, giả định, chất lượng xác minh, sẵn sàng bàn giao."
+    },
+    {
+      "stage": "check",
+      "question": "Tách vai trò đòi hỏi những gì?",
+      "options": [
+        "Một model khác",
+        "Một system prompt khác và đầu vào khác nhau; Cùng một model có thể đóng cả hai vai trò nếu tư thế thay đổi và người đánh giá không có quyền ghi vào diff",
+        "Phần cứng vật lý khác nhau",
+        "Tài khoản mới"
+      ],
+      "correct": 1,
+      "explanation": "Kỷ luật nằm trong tư thế và đầu vào, không phải trong bản sắc model."
+    },
+    {
+      "stage": "check",
+      "question": "Kiến trúc đánh giá năm 2026 của Cloudflare trông như thế nào?",
+      "options": [
+        "Một người đánh giá lớn",
+        "Tối đa bảy chuyên gia đánh giá song song dưới sự điều phối viên đánh giá loại bỏ trùng lặp các phát hiện; model cấp cao nhất chỉ dành cho điều phối viên, cấp rẻ hơn cho chuyên gia",
+        "Hai người đánh giá vòng tròn",
+        "LLM tuần tự đơn"
+      ],
+      "correct": 1,
+      "explanation": "Cloudflare đã chạy 131.246 lần đánh giá trong 30 ngày bằng cách sử dụng kiến trúc chuyên gia + điều phối viên."
+    },
+    {
+      "stage": "check",
+      "question": "Cái nào trong số này KHÔNG phải là một trong bốn LLM-judge thiên vị danh sách bài học?",
+      "options": [
+        "Vị trí bias (A, B vs B, A không nhất quán về thứ tự)",
+        "Độ chi tiết bias (đầu ra dài hơn đạt điểm cao hơn)",
+        "Sở thích bản thân (cùng một gia đình model)",
+        "Vector địa phương"
+      ],
+      "correct": 3,
+      "explanation": "Bốn là vị trí, dài dòng, sở thích bản thân, quyền lực; vector địa phương không phải là một trong số đó."
+    },
+    {
+      "stage": "post",
+      "question": "Bộ hiệu chuẩn là gì?",
+      "options": [
+        "Một kho dữ liệu training mới",
+        "10-20 kết thúc nhiệm vụ lịch sử với các phán quyết chính xác đã biết; chạy lại mỗi lần thay đổi prompt; Nếu thỏa thuận của người đánh giá giảm xuống dưới 80%, hãy sửa bảng đánh giá trước khi shipping",
+        "Một thiết bị kiểm tra A/B",
+        "Chỉ số vector"
+      ],
+      "correct": 1,
+      "explanation": "Bộ hiệu chuẩn giữ cho người đánh giá trung thực; Nếu thỏa thuận trôi dạt, bạn sửa bảng đánh giá chứ không phải dữ liệu."
+    },
+    {
+      "stage": "post",
+      "question": "Báo cáo của người phản biện tích hợp với rest của bàn làm việc ở đâu?",
+      "options": [
+        "Nó thay thế xác minh",
+        "Nó đóng gói vào gói bàn giao (Bài học 40); Đánh giá của con người bắt đầu từ báo cáo, không phải từ trang trống",
+        "Nó ghi đè lên cổng",
+        "Nó chỉ thuộc về người quản lý"
+      ],
+      "correct": 1,
+      "explanation": "Báo cáo đánh giá cung cấp cho việc bàn giao để session tiếp theo và người đánh giá bắt đầu từ một phán quyết bằng văn bản."
+    }
+  ]
+}
