@@ -1,0 +1,62 @@
+[
+  {
+    "question": "parameter model 70B trong FP16 yêu cầu bao nhiêu VRAM chỉ cho trọng lượng?",
+    "options": [
+      "35 GB",
+      "70 GB",
+      "140 GB",
+      "280 GB"
+    ],
+    "correct": 2,
+    "explanation": "70 tỷ parameters * 2 byte trên mỗi FP16 parameter = 140 tỷ byte = 140 GB. Con số này vượt quá một A100 (80GB), yêu cầu ít nhất hai GPUs chỉ để tải trọng lượng.",
+    "stage": "pre"
+  },
+  {
+    "question": "quantization là gì trong ngữ cảnh của LLMs?",
+    "options": [
+      "Loại bỏ các lớp model không sử dụng",
+      "Giảm precision số của trọng số (ví dụ: FP16 đến INT4) để giảm mức sử dụng bộ nhớ và tăng tốc độ inference",
+      "Nén dữ liệu training",
+      "Giảm kích thước từ vựng"
+    ],
+    "correct": 1,
+    "explanation": "Quantization ánh xạ trọng số dấu phẩy động precision cao với các số nguyên precision thấp hơn. INT4 quantization lưu trữ mỗi trọng lượng trong 4 bit thay vì 16, giảm bộ nhớ gấp 4 lần với mức accuracy loss tối thiểu.",
+    "stage": "pre"
+  },
+  {
+    "question": "Sự khác biệt chính giữa training sau training quantization (PTQ) và nhận thức quantization (QAT) là gì?",
+    "options": [
+      "PTQ chính xác hơn",
+      "PTQ định lượng sau training mà không cần huấn luyện lại; QAT mô phỏng quantization trong quá trình training nên model học cách chịu đựng precision giảm",
+      "QAT không sử dụng gradients",
+      "PTQ yêu cầu nhiều dữ liệu hơn"
+    ],
+    "correct": 1,
+    "explanation": "PTQ nhanh (chỉ cần hiệu chỉnh và lượng tử hóa) nhưng có thể mất accuracy. QAT bao gồm các quantization giả trong quá trình training, cho phép model điều chỉnh trọng lượng của mình để mạnh mẽ hơn để precision loss. QAT thường cho accuracy tốt hơn.",
+    "stage": "post"
+  },
+  {
+    "question": "'mỗi kênh' quantization nghĩa là gì và tại sao nó tốt hơn 'mỗi tensor'?",
+    "options": [
+      "Nó lượng tử hóa từng kênh đầu ra riêng biệt, sử dụng các scale/zero-point khác nhau cho từng kênh, giảm lỗi quantization",
+      "Nó processes một kênh màu tại một thời điểm",
+      "Nó sử dụng GPUs riêng biệt trên mỗi kênh",
+      "Đó là một loại song song dữ liệu"
+    ],
+    "correct": 0,
+    "explanation": "Mỗi tensor sử dụng một hệ số tỷ lệ cho toàn bộ ma trận trọng lượng. Mỗi kênh sử dụng thang đo riêng cho từng kênh đầu ra (hàng). Vì các kênh khác nhau có phạm vi giá trị khác nhau nên mỗi kênh sẽ nắm bắt chúng chính xác hơn.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao 95% trọng số trong Llama 3 70B nằm trong khoảng từ -0.1 đến +0.1?",
+    "options": [
+      "Người model được huấn luyện kém",
+      "Sự phân rã trọng lượng và chuẩn hóa trong quá trình training đẩy trọng lượng về các giá trị nhỏ, khiến toàn bộ phạm vi FP16 trở nên lãng phí",
+      "Các trọng lượng vẫn chưa hội tụ",
+      "Điều này dành riêng cho kiến trúc Llama"
+    ],
+    "correct": 1,
+    "explanation": "Chính quy hóa phân rã trọng lượng thu nhỏ trọng lượng về không. Chuẩn hóa lớp giữ cho các kích hoạt ở giữa. Kết hợp, chúng tạo ra sự phân bố trọng lượng tập trung gần bằng không, làm cho precision quantization thấp hiệu quả.",
+    "stage": "post"
+  }
+]
