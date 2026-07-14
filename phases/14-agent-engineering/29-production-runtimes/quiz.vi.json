@@ -1,0 +1,90 @@
+{
+  "lesson": "29-production-runtimes",
+  "title": "Production Runtimes: Hàng đợi, Sự kiện, Cron",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sáu runtime định hình danh sách bài học là gì?",
+      "options": [
+        "Phản hồi yêu cầu, streaming, thực thi bền bỉ, dựa trên hàng đợi, theo sự kiện, theo lịch trình",
+        "Đọc, viết, điều hành, fork, thoát, chờ đợi",
+        "REST, gRPC, GraphQL, WebSocket, SSE, MQTT",
+        "Lập bản đồ, lọc, giảm, gấp, quét, nhóm"
+      ],
+      "correct": 0,
+      "explanation": "Đây là sáu hình dạng runtime; Chọn một hình dạng trước khi chọn một framework."
+    },
+    {
+      "stage": "pre",
+      "question": "Khi nào thì yêu cầu-phản hồi không phù hợp?",
+      "options": [
+        "Trên phân loại 1 giây",
+        "Khi tác vụ mất hơn khoảng 30 giây và người dùng gác máy trong khi workers chất đống",
+        "Trên REST APIs",
+        "Về dịch vụ nội bộ"
+      ],
+      "correct": 1,
+      "explanation": "HTTP đồng bộ chỉ khả thi đối với các tác vụ ngắn; Nhiệm vụ dài cần queue/durable/event hình dạng."
+    },
+    {
+      "stage": "check",
+      "question": "Đặc tính cốt lõi của khớp lệnh bền bỉ là gì?",
+      "options": [
+        "inference nhanh hơn",
+        "Trạng thái được kiểm tra sau mỗi bước để runtime có thể tiếp tục từ bước thành công cuối cùng khi thất bại",
+        "Chi phí token thấp hơn",
+        "Hỗ trợ giọng nói gốc"
+      ],
+      "correct": 1,
+      "explanation": "Checkpoint-and-resume là yếu tố khác biệt; LangGraph là tài liệu tham khảo của bài học."
+    },
+    {
+      "stage": "check",
+      "question": "Quan sát Anthropic nào biện minh cho runtimes dựa trên hàng đợi cho agents đường chân trời dài?",
+      "options": [
+        "Nhiệm vụ luôn hoàn thành trong 5 giây",
+        "Thông báo sử dụng máy tính: hàng chục đến hàng trăm bước cho mỗi tác vụ là bình thường",
+        "Tác vụ phải chạy đồng bộ",
+        "Cron giải quyết mọi thứ"
+      ],
+      "correct": 1,
+      "explanation": "Anthropic gắn cờ hàng chục đến hàng trăm bước cho mỗi tác vụ như bình thường; khối lượng công việc đó cần xếp hàng hoặc runtimes bền."
+    },
+    {
+      "stage": "check",
+      "question": "Bài học 'observability chịu lực' có nghĩa là gì?",
+      "options": [
+        "Nhật ký rất đẹp",
+        "Nếu không có OTel GenAI spans và phần phụ trợ Langfuse/Phoenix/Opik, bạn không thể gỡ lỗi agent nhiều bước không thành công ở bước 40",
+        "Ổ đĩa đầy",
+        "Các nhà cung cấp yêu cầu nó để thanh toán"
+      ],
+      "correct": 1,
+      "explanation": "Observability không phải là tùy chọn cho agents nhiều bước; Đó là sự khác biệt giữa gỡ lỗi và phát lại từ đầu."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao hàng đợi workers phải có hàng đợi thư chết (DLQ)?",
+      "options": [
+        "Nếu không có DLQ, những công việc thất bại sẽ lặng lẽ biến mất",
+        "AWS yêu cầu DLQ",
+        "DLQ giúp công việc nhanh hơn",
+        "DLQ được mã hóa"
+      ],
+      "correct": 0,
+      "explanation": "Các công việc không thành công mà không có DLQ sẽ biến mất; DLQ là bãi đậu xe cho các công việc thất bại."
+    },
+    {
+      "stage": "post",
+      "question": "Bài học khuyên bạn nên ghép agents hình chữ cái với gì?",
+      "options": [
+        "GPU tự động chia tỷ lệ",
+        "Thực thi bền bỉ để một lần chạy hàng đêm không thành công sẽ tiếp tục tick tiếp theo",
+        "Streaming SSE",
+        "WebRTC"
+      ],
+      "correct": 1,
+      "explanation": "Cron + thực thi bền bỉ phục hồi rõ ràng sau các lần chạy theo lịch trình không thành công."
+    }
+  ]
+}
