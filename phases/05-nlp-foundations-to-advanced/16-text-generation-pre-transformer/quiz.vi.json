@@ -1,0 +1,102 @@
+{
+  "lesson": "16-text-generation-pre-transformer",
+  "title": "Tạo văn bản trước Transformers - Ngôn ngữ N-gram Models",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Ngôn ngữ n-gram model ước tính gì?",
+      "options": [
+        "Chỉnh sửa khoảng cách giữa các từ",
+        "P (nhãn | tài liệu)",
+        "embeddings tài liệu",
+        "P (từ tiếp theo | n-1 từ trước) từ thống kê đếm"
+      ],
+      "correct": 3,
+      "explanation": "Một n-gram LM models P(w | n-1 từ cuối) thông qua các lần xuất hiện được đếm."
+    },
+    {
+      "stage": "pre",
+      "question": "Làm mịn giải quyết vấn đề gì trong models n-gram?",
+      "options": [
+        "precision số",
+        "Sử dụng bộ nhớ",
+        "Gán xác suất bằng không cho n-gram không nhìn thấy trong training, điều này thu gọn câu likelihoods về không",
+        "Tokenization không khớp"
+      ],
+      "correct": 2,
+      "explanation": "Làm mịn phân bổ lại khối lượng xác suất để n-gram không nhìn thấy có xác suất không bằng không."
+    },
+    {
+      "stage": "check",
+      "question": "Cái nhìn sâu sắc nào làm cho Kneser-Ney làm mịn tốt hơn so với chiết khấu tuyệt đối ngây thơ?",
+      "options": [
+        "Nó ước tính phân phối bậc thấp hơn với xác suất tiếp tục (số ngữ cảnh riêng biệt mà một từ xuất hiện) thay vì tần suất thô",
+        "Nó sử dụng TF-IDF",
+        "Nó sử dụng n lớn hơn",
+        "Nó sử dụng gradient descent"
+      ],
+      "correct": 0,
+      "explanation": "Xác suất tiếp tục cung cấp tín dụng cho sự đa dạng trong bối cảnh, không chỉ là số lượng thô."
+    },
+    {
+      "stage": "check",
+      "question": "perplexity đo lường những gì?",
+      "options": [
+        "exp của log-likelihood âm tính trung bình trên mỗi token trên một bộ thử nghiệm được giữ lại; Thấp hơn là tốt hơn",
+        "Số n-gam riêng biệt",
+        "Entropy chéo của nhãn",
+        "Thông lượng phát điện"
+      ],
+      "correct": 0,
+      "explanation": "Perplexity = exp(- trung bình log P); thấp hơn có nghĩa là model ít ngạc nhiên hơn bởi văn bản kiểm tra."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao các bộ huấn luyện và bộ kiểm tra phải sử dụng tokenization giống hệt nhau khi so sánh các con số perplexity?",
+      "options": [
+        "Yêu cầu của gradient descent",
+        "Để tránh OOV",
+        "Perplexity phụ thuộc vào sơ đồ tokenization; không khớp tokenizers tạo ra điểm số không thể so sánh",
+        "Để kiểm soát kích thước batch"
+      ],
+      "correct": 2,
+      "explanation": "Các token hóa khác nhau thay đổi số lượng và likelihood token, làm cho giá trị perplexity không thể so sánh được."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao các câu tam giác-LM được tạo lại cảm thấy trôi chảy cục bộ nhưng không mạch lạc trên toàn cầu?",
+      "options": [
+        "Họ bỏ dấu câu",
+        "Beam search không thành công",
+        "Ngữ cảnh tam giác cục bộ hướng dẫn từng từ tiếp theo nhưng model không có bộ nhớ tầm xa vượt quá n-1 tokens",
+        "Họ sử dụng làm mịn Laplace"
+      ],
+      "correct": 2,
+      "explanation": "Chỉ điều hòa trên n-1 cuối cùng tokens làm cho sự kết hợp tầm xa trở nên ngẫu nhiên."
+    },
+    {
+      "stage": "post",
+      "question": "models n-gram vẫn ship ở đâu trong production vào năm 2026?",
+      "options": [
+        "Dịch thuật đa ngôn ngữ",
+        "Chatbot miền mở",
+        "Các đường dẫn quan trọng về độ trễ như nhận dạng lại giọng nói và tự động hoàn thành trên thiết bị thông qua các thư viện như KenLM",
+        "Tóm tắt"
+      ],
+      "correct": 2,
+      "explanation": "models n-gram kiểu KenLM vẫn đóng vai trò là các thành phần nhanh chóng trên thiết bị hoặc ghi lại điểm."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao tính toán đường cơ sở n-gram trước khi tuyên bố LM thần kinh 'tốt' vẫn được khuyến khích?",
+      "options": [
+        "Nó tăng tốc độ training",
+        "Yêu cầu của ROUGE",
+        "Nó loại bỏ OOV",
+        "Nếu một transformer LM không đánh bại đường cơ sở Kneser-Ney đã được điều chỉnh bằng một khoảng cách lớn trên cùng một tokenization, thì có điều gì đó không ổn trong training pipeline"
+      ],
+      "correct": 3,
+      "explanation": "Đường cơ sở KN mạnh mẽ một cách đáng ngạc nhiên; một LM thần kinh sẽ thắng với tỷ lệ chênh lệch lớn hoặc bạn có lỗi."
+    }
+  ]
+}
