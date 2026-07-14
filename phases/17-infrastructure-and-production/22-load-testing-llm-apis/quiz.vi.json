@@ -1,0 +1,78 @@
+{
+  "lesson": "22-load-testing-llm-apis",
+  "title": "Load Testing LLM APIs - Tại sao k6 và Locust Lie",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bẫy GIL trong thử nghiệm tải LLM dựa trên Locust là gì?",
+      "options": [
+        "Locust chỉ hoạt động trên Windows",
+        "Locust không hỗ trợ HTTP",
+        "tokenization phía máy khách chạy theo Python GIL và hàng đợi đằng sau việc tạo yêu cầu, làm tăng độ trễ giữa các token được báo cáo",
+        "Châu chấu yêu cầu CUDA"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bẫy đồng nhất prompt là gì?",
+      "options": [
+        "Đồng phục prompts luôn làm chậm server",
+        "Sampling từ một phân phối thực đại diện cho prompts dài",
+        "Đồng phục prompts yêu cầu streaming",
+        "Lặp lại cùng một prompt làm cho bộ nhớ đệm tiền tố trông giống như giải mã đồng thời đầy đủ, làm tăng thông lượng được báo cáo"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học đề xuất bốn kiểu tải nào?",
+      "options": [
+        "Không đổi 1 RPS trong 10 ngày",
+        "Kiểm tra nhấp chuột thủ công",
+        "Trạng thái ổn định, đường dốc, tăng đột biến, ngâm",
+        "Chỉ chụp liên tục"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học đề nghị xây dựng một bản phân phối prompt thực tế như thế nào?",
+      "options": [
+        "Lấy mẫu từ một phân phối thực bằng cách sử dụng mean và stddev (ví dụ: --mean-input-tokens / --stddev-input-tokens) của LLMPerf hoặc phát lại lưu lượng thực",
+        "Các ký tự ngẫu nhiên cho mỗi yêu cầu",
+        "Viết tay 5 prompts và xáo trộn",
+        "Luôn sử dụng cùng một prompt để tối đa hóa số lần truy cập vào bộ nhớ cache"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Kết hợp công cụ 2026 nào được định vị là tốt nhất cho cổng SLA CI/CD và chạy phân tán gốc Kubernetes?",
+      "options": [
+        "k6 v2026.1.0 với k6 Operator 1.0 GA (TestRun / PrivateLoadZone CRDs)",
+        "Chỉ hướng dẫn",
+        "Chỉ Vegeta",
+        "Locust 2.43.3 cổ phiếu"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Mô hình tải ngâm bắt được chế độ lỗi nào?",
+      "options": [
+        "Rò rỉ bộ nhớ, trôi bể kết nối và tràn observability trong nhiều giờ",
+        "Đuôi khởi động nguội",
+        "Tokenizer Tranh chấp GIL",
+        "Bão trục xuất bộ nhớ đệm"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
