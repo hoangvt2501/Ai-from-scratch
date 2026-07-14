@@ -1,0 +1,78 @@
+{
+  "lesson": "20-bias-representational-harm",
+  "title": "Bias và tác hại đại diện trong LLMs",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Bài học phân biệt tác hại đại diện với tác hại phân bổ như thế nào?",
+      "options": [
+        "Tác hại đại diện chỉ quan trọng đối với thị lực models",
+        "Tác hại đại diện là mô tả rập khuôn / xóa / hạ thấp phẩm giá; tác hại phân bổ là kết quả vật chất không bình đẳng cho một nhóm",
+        "Đại diện là tính toán; phân bổ là thống kê",
+        "Tác hại phân bổ chỉ xảy ra ngoại tuyến"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Ba loại chỉ số đánh giá nào trong số này từ Gallegos et al. 2024?",
+      "options": [
+        "Trước RLHF, giữa RLHF, sau RLHF",
+        "Thị giác, âm thanh, văn bản",
+        "WEAT, BLEU, ĐỎ",
+        "Dựa trên Embedding, dựa trên xác suất, dựa trên văn bản được tạo"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao đánh giá công bằng giao thoa lại cần thiết ngoài đánh giá một trục?",
+      "options": [
+        "Tính giao thoa cũng giống như xác nhận chéo",
+        "Các biện pháp một trục rẻ hơn về mặt tính toán",
+        "Một trục là cách tiếp cận duy nhất được phép hợp pháp",
+        "Bias chỉ xuất hiện ở các giao điểm (ví dụ: giới tính x chủng tộc) bị bỏ qua bởi các đánh giá xem xét từng trục một."
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "WinoIdentity (COLM 2025) giới thiệu điều gì?",
+      "options": [
+        "Một cuộc tấn công đối nghịch vào các bộ phân loại nhân khẩu học",
+        "Một tokenizer mới cho các thuật ngữ nhận dạng",
+        "Một sự thay thế cho WEAT trong không gian embedding",
+        "Đánh giá tính công bằng giao điểm dựa trên sự không chắc chắn so sánh sự không chắc chắn của model đối với kết quả trên các bộ nhận dạng giao nhau, không chỉ dự đoán điểm"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Cái nào trong số này là cách tiếp cận khả năng diễn giải cơ học đối với bias?",
+      "options": [
+        "Chuyển sang DPO từ PPO",
+        "Xác định các tế bào thần kinh giới tính trong các lớp MLP, sử dụng SAE để làm nổi bật các features tương quan chủng tộc hoặc thao tác với các đầu attention cụ thể (UniBias)",
+        "Thêm nhiều quy tắc hóa KL",
+        "Dán nhãn lại bộ training"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Phê bình tổng hợp 10 năm (arXiv: 2508.11067) lập luận gì về tài liệu bias?",
+      "options": [
+        "Nó tập trung không cân xứng vào bias giới tính nhị phân, bỏ qua các trục khác (khuyết tật, tôn giáo, tình trạng di cư, bản sắc đa ngôn ngữ) có thể gây hại cho các nhóm bị thiệt thòi do bỏ bê",
+        "Nó tránh các phương pháp định lượng",
+        "Nó nhấn mạnh quá mức tính giao thoa",
+        "Nó được cân bằng trên tất cả các trục nhận dạng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
