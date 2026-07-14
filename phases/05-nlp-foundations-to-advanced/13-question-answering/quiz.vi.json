@@ -1,0 +1,102 @@
+{
+  "lesson": "13-question-answering",
+  "title": "Hệ thống trả lời câu hỏi",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "QA khai thác dự đoán điều gì?",
+      "options": [
+        "Câu trả lời bằng ngôn ngữ tự nhiên được tạo ra",
+        "Chỉ điểm tin cậy",
+        "Bắt đầu và kết thúc token chỉ số của câu trả lời span trong một đoạn văn nhất định",
+        "Mã đoạn văn đã truy xuất"
+      ],
+      "correct": 2,
+      "explanation": "Extractive QA xuất ra span của đoạn văn có chứa câu trả lời."
+    },
+    {
+      "stage": "pre",
+      "question": "Hai thành phần nào xác định một RAG pipeline cơ bản?",
+      "options": [
+        "Một encoder và một decoder được huấn luyện cùng nhau",
+        "Một người xếp hạng lại và một dịch giả",
+        "Trình gắn thẻ Tokenizer và POS",
+        "Một người truy xuất (tìm các đoạn văn có liên quan) và một người đọc (trích xuất hoặc tạo câu trả lời)"
+      ],
+      "correct": 3,
+      "explanation": "RAG = retriever (tìm ngữ cảnh có liên quan) cộng với người đọc (câu trả lời từ nó)."
+    },
+    {
+      "stage": "check",
+      "question": "Trên SQuAD, Exact Match (EM) đo lường điều gì?",
+      "options": [
+        "Chỉnh sửa khoảng cách",
+        "Chồng lên nhau trên mỗi từ",
+        "Liệu dự đoán có khớp chính xác với tham chiếu sau khi chuẩn hóa hay không (chữ thường, dấu câu, xóa bài viết)",
+        "F1 cấp Token"
+      ],
+      "correct": 2,
+      "explanation": "EM là sự bình đẳng nghiêm ngặt sau một bước chuẩn hóa xác định; các trận đấu một phần không ghi điểm."
+    },
+    {
+      "stage": "check",
+      "question": "deepset/roberta-base-squad2 thêm gì so với model SQuAD 1.1?",
+      "options": [
+        "Hỗ trợ đa ngôn ngữ",
+        "Training các câu hỏi không thể trả lời để model có thể dự đoán câu trả lời rỗng",
+        "context window lớn hơn",
+        "Truy xuất đa ngôn ngữ"
+      ],
+      "correct": 1,
+      "explanation": "SQuAD 2.0 bao gồm các mục không thể trả lời; models được huấn luyện về nó có thể dự đoán 'không có câu trả lời'."
+    },
+    {
+      "stage": "check",
+      "question": "Chiều RAGAS nào nhắm mục tiêu cụ thể đến ảo giác?",
+      "options": [
+        "Mức độ liên quan của câu trả lời",
+        "Bối cảnh recall",
+        "Độ trung thực, được đo lường bằng NLI giữa các yêu cầu trả lời và ngữ cảnh được truy xuất",
+        "Bối cảnh precision"
+      ],
+      "correct": 2,
+      "explanation": "Faithfulness kiểm tra từng tuyên bố câu trả lời so với ngữ cảnh được truy xuất thông qua NLI entailment."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao bạn nên đo lường recall truy xuất trước khi đánh giá accuracy của người đọc?",
+      "options": [
+        "Yêu cầu của transformers",
+        "Recall xác định ROUGE",
+        "Độ trễ của đầu đọc phụ thuộc vào nó",
+        "Nếu đoạn văn chính xác không có trong top-k, người đọc không thể thành công cho dù nó tốt đến đâu"
+      ],
+      "correct": 3,
+      "explanation": "Người đọc không thể trả lời khi thiếu đoạn văn đúng; Truy xuất recall giới hạn hiệu suất của người đọc."
+    },
+    {
+      "stage": "post",
+      "question": "Mô hình prompt nào làm giảm ảo giác trong thế hệ RAG?",
+      "options": [
+        "Yêu cầu model chỉ trả lời từ ngữ cảnh được cung cấp và trả lời 'Tôi không biết' khi ngữ cảnh không đủ",
+        "Bao gồm nhiều đoạn văn hơn",
+        "Yêu cầu model sáng tạo",
+        "Xóa câu hỏi"
+      ],
+      "correct": 0,
+      "explanation": "Grounding + hướng dẫn từ chối rõ ràng làm giảm đáng kể tỷ lệ ảo giác."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào QA trích xuất vẫn được ưa chuộng hơn RAG tổng quát vào năm 2026?",
+      "options": [
+        "QA đàm thoại",
+        "Các lĩnh vực được quy định (pháp lý, y tế, kiểm toán) trong đó yêu cầu trích dẫn theo nghĩa đen từ các nguồn có thẩm quyền",
+        "Hỗ trợ đa ngôn ngữ",
+        "Câu đố về miền mở"
+      ],
+      "correct": 1,
+      "explanation": "Extractive QA đưa ra các trích dẫn nguyên văn từ một kho dữ liệu có thẩm quyền, mà bối cảnh tuân thủ yêu cầu."
+    }
+  ]
+}
