@@ -1,0 +1,78 @@
+{
+  "lesson": "56-iteration-scheduler",
+  "title": "Bộ lập lịch lặp lại",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao người lập lịch sử dụng tính điểm UCB thay vì luôn chọn branch tốt nhất hiện tại?",
+      "options": [
+        "Bởi vì UCB tính toán nhanh hơn",
+        "Bởi vì những lựa chọn tham lam không bao giờ khám phá; UCB cân bằng khai thác với khám phá",
+        "Bởi vì asyncio yêu cầu UCB",
+        "Bởi vì hàng đợi không thể được sắp xếp theo cách khác"
+      ],
+      "correct": 1,
+      "explanation": "Greedy khóa vào khách hàng tiềm năng đầu tiên. Đồng phục không bao giờ khai thác. UCB chọn người dẫn đầu trong khi dành khả năng cho các branches ít được khám phá thông qua thuật ngữ sqrt (ln N / n)."
+    },
+    {
+      "stage": "pre",
+      "question": "Một branch không có lần chạy hoàn thành nhận được điểm nào theo UCB1?",
+      "options": [
+        "Không",
+        "Hằng số thăm dò c",
+        "Vô cực dương, vì vậy branches chưa thử luôn được chọn đầu tiên",
+        "Phần thưởng trung bình của tất cả các branches khác"
+      ],
+      "correct": 2,
+      "explanation": "Bài học chỉ định +inf cho số lần chạy = 0. Điều này đảm bảo mỗi branch được thử ít nhất một lần trước khi xem lại bất kỳ branch nào."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để bộ lập lịch giữ cho nhiều vị trí bận rộn?",
+      "options": [
+        "Nó chạy người chạy trong một hồ bơi thread",
+        "Nó sử dụng asyncio.create_task cho mỗi giả thuyết được gửi đi và chờ FIRST_COMPLETED trên bộ trên chuyến bay",
+        "Nó sử dụng đa xử lý",
+        "Nó chặn vòng lặp sự kiện khi ngủ"
+      ],
+      "correct": 1,
+      "explanation": "Mỗi giả thuyết được gửi đi trở thành một nhiệm vụ. Vòng lặp chính chờ FIRST_COMPLETED vì vậy một vị trí đã hoàn thành được giải phóng ngay lập tức và một giả thuyết khác được gửi đi."
+    },
+    {
+      "stage": "check",
+      "question": "Khi nào bộ lập lịch phát ra giấy. trigger cho một branch?",
+      "options": [
+        "Mỗi khi có kết quả branch",
+        "Trên kết quả đầu tiên có giá trị trung bình branch đáp ứng hoặc vượt quá ngưỡng giấy, và chỉ một lần mỗi branch",
+        "Chỉ khi kết thúc cuộc chạy",
+        "Khi sàn cắt tỉa bị va đập"
+      ],
+      "correct": 1,
+      "explanation": "trigger bắn một lần mỗi branch, lần đầu tiên giá trị trung bình của branch vượt qua ngưỡng. Cờ paper_triggered trên BranchStats ngăn lặp lại."
+    },
+    {
+      "stage": "post",
+      "question": "Điều gì xảy ra với một branch có phần thưởng trung bình nằm dưới sàn cắt tỉa sau ngưỡng chạy tối thiểu?",
+      "options": [
+        "Không có gì; UCB cuối cùng sẽ chọn một branch khác",
+        "Các branch được đánh dấu là đã cắt tỉa và các giả thuyết còn lại về branch đó sẽ bị xóa khỏi hàng đợi",
+        "Bộ lập lịch đưa ra một ngoại lệ",
+        "Sàn phần thưởng được tự động hạ xuống"
+      ],
+      "correct": 1,
+      "explanation": "Cắt tỉa loại bỏ branch khỏi lịch trình trong tương lai. Cắt tỉa tách biệt với người hái: xếp hạng UCB, cắt tỉa loại bỏ."
+    },
+    {
+      "stage": "post",
+      "question": "Hai ngân sách nào mà người lập lịch thực thi là giới hạn cứng?",
+      "options": [
+        "Bộ nhớ và CPU",
+        "max_experiments (tổng số lần chạy) và max_seconds (đồng hồ treo tường)",
+        "khe cắm và độ sâu hàng đợi",
+        "triggers giấy và số lượng mận khô"
+      ],
+      "correct": 1,
+      "explanation": "Cả hai đều cháy như lý do dừng lại. max_experiments giới hạn tổng công việc. max_seconds giới hạn thời gian tường. Các trace ghi lại người nào đã dừng chạy."
+    }
+  ]
+}
