@@ -1,0 +1,78 @@
+{
+  "lesson": "14-ascii-art-visual-jailbreaks",
+  "title": "Nghệ thuật ASCII và bẻ khóa trực quan",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao các bộ lọc an toàn cấp token và cấp ngữ nghĩa bỏ lỡ các cuộc tấn công kiểu ArtPrompt?",
+      "options": [
+        "ArtPrompt yêu cầu fine-tuning model",
+        "ArtPrompt chỉ có hiệu quả trên models đa phương thức",
+        "ArtPrompt luôn sử dụng mã hóa base64",
+        "ArtPrompt hoạt động ở cấp độ nhận dạng trực quan: bộ lọc nhìn thấy dấu câu vô hại trong khi bộ lọc model đọc các chữ cái được hiển thị dưới dạng một từ"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hai bước của ArtPrompt như được mô tả trong Jiang et al. (ACL 2024) là gì?",
+      "options": [
+        "Dịch sang tiếng Pháp, sau đó dịch ngược",
+        "Nhận dạng từ của tokens liên quan đến an toàn, sau đó thay thế nghệ thuật ASCII và tạo prompt che giấu",
+        "Tìm kiếm ngẫu nhiên, sau đó tăng perplexity",
+        "Tokenizer không khớp, sau đó cắt ngắn ngữ cảnh"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bảo vệ bộ lọc perplexity (PPL) không thành công trên ArtPrompt?",
+      "options": [
+        "Perplexity luôn bằng không trên đầu vào được che giấu",
+        "Perplexity không thể đo lường được trên nghệ thuật ASCII",
+        "Perplexity bộ lọc bị tắt theo mặc định",
+        "Nghệ thuật ASCII có perplexity cao, nhưng bất kỳ đầu vào có cấu trúc hợp pháp nào cũng vậy; Ngưỡng chặn cuộc tấn công cũng chặn nội dung hợp pháp"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "ViTC benchmark đo lường những gì?",
+      "options": [
+        "accuracy gọi công cụ của model",
+        "Độc tính dữ liệu training của model",
+        "Khả năng đọc prompts hình ảnh phi ngữ nghĩa của model (nghệ thuật ASCII, wingdings, văn bản được mã hóa tương tự)",
+        "Khả năng nén dữ liệu thị giác của model"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "StructuralSleight khái quát hóa ArtPrompt thành gì?",
+      "options": [
+        "Cấu trúc mã hóa văn bản không phổ biến (UTES): cây, đồ thị, JSON lồng nhau, CSV-in-JSON, mã kiểu diff, v.v.",
+        "Hậu tố token đối nghịch thông qua tìm kiếm gradient",
+        "Nhồi nhét cảnh quay dài",
+        "Chỉ đầu vào hình ảnh"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Sự đánh đổi khả năng-an toàn được ngụ ý bởi kết quả ViTC là gì?",
+      "options": [
+        "models nhỏ hơn luôn an toàn hơn",
+        "Nhận dạng hình ảnh không liên quan đến thành công của ArtPrompt",
+        "model đọc văn bản trực quan phi ngữ nghĩa càng tốt, các cuộc tấn công kiểu ArtPrompt càng hiệu quả hơn",
+        "Ngữ cảnh lớn hơn windows giảm thành công của ArtPrompt"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
