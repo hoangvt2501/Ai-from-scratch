@@ -1,0 +1,102 @@
+{
+  "lesson": "01-text-processing",
+  "title": "Xử lý văn bản - Tokenization, gốc, từ ngữ hóa",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao một ngôn ngữ model cần xử lý trước khi training?",
+      "options": [
+        "Tiền xử lý cải thiện việc sử dụng GPU",
+        "Models sử dụng tokens số nguyên rời rạc, không phải văn bản thô",
+        "Models đọc chuỗi trực tiếp",
+        "Chỉ cần xử lý trước đối với các ngôn ngữ không có khoảng trắng"
+      ],
+      "correct": 1,
+      "explanation": "Models hoạt động trên ID token số nguyên; Tiền xử lý kết nối ngôn ngữ liên tục với các đầu vào rời rạc."
+    },
+    {
+      "stage": "pre",
+      "question": "Thao tác tiền xử lý nào là loại bỏ hậu tố dựa trên quy tắc?",
+      "options": [
+        "Gốc",
+        "Gắn thẻ POS",
+        "Lemmatization",
+        "Tokenization"
+      ],
+      "correct": 0,
+      "explanation": "Stemming chops hậu tố với các quy tắc; nó nhanh nhưng có thể sai."
+    },
+    {
+      "stage": "check",
+      "question": "Porter stemmer bước 1a trả lại điều gì cho từ 'ngựa con'?",
+      "options": [
+        "ngựa con",
+        "ngựa con",
+        "ngựa con",
+        "Cá ngựa"
+      ],
+      "correct": 3,
+      "explanation": "Quy tắc 'ies' thay thế hậu tố bằng 'i', tạo ra 'poni'; Bước 1b trong Real Porter dọn dẹp nó."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao lemmatization thường cần thẻ POS?",
+      "options": [
+        "Xử lý Unicode",
+        "Tốc độ",
+        "Ngữ cảnh ngữ pháp phân biệt các dạng như 'tốt hơn' (ADJ) so với 'tốt hơn' (VERB)",
+        "Để giảm mức sử dụng bộ nhớ"
+      ],
+      "correct": 2,
+      "explanation": "Lemmas phụ thuộc vào vai trò ngữ pháp; Nếu không có thẻ, tra cứu sẽ không rõ ràng."
+    },
+    {
+      "stage": "check",
+      "question": "Khi dịch thẻ POS NLTK Penn Treebank sang thẻ WordNet, thẻ bắt đầu bằng 'V' ánh xạ đến điều gì?",
+      "options": [
+        "'n' (danh từ)",
+        "'v' (động từ)",
+        "'r' (trạng từ)",
+        "'a' (tính từ)"
+      ],
+      "correct": 1,
+      "explanation": "Thẻ Penn Treebank có tiền tố động từ ánh xạ đến WordNet 'v'."
+    },
+    {
+      "stage": "post",
+      "question": "'training/inference không khớp' trong quá trình tiền xử lý NLP là gì?",
+      "options": [
+        "Kích thước batch khác nhau giữa huấn luyện và thử nghiệm",
+        "Training và phục vụ áp dụng tiền xử lý khác nhau, vì vậy model thấy sự phân bố không quen thuộc ở inference",
+        "Sự cố bộ nhớ GPU",
+        "Trộn tokenizer thư viện trong sổ ghi chép"
+      ],
+      "correct": 1,
+      "explanation": "Tiền xử lý khác nhau ở training so với inference là lỗi production NLP phổ biến nhất."
+    },
+    {
+      "stage": "post",
+      "question": "Bạn sẽ tiếp cận công cụ nào trong một transformer pipeline thay vì tiền xử lý cổ điển?",
+      "options": [
+        "word_tokenize NLTK",
+        "tokenizer riêng của model (ví dụ: qua tokenizers / transformers)",
+        "Một tokenizer biểu thức chính quy",
+        "en_core_web_sm spaCy"
+      ],
+      "correct": 1,
+      "explanation": "Transformer models ship một tokenizer cặp; tiền xử lý cổ điển bị bỏ qua."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao phải ghim các phiên bản NLTK và spaCy trong yêu cầu?",
+      "options": [
+        "Khả năng tương thích với giấy phép",
+        "Hành vi Tokenizer và lemmatizer thay đổi giữa các bản phát hành nhỏ, âm thầm thay đổi phân phối training",
+        "Các phiên bản cũ hơn hỗ trợ nhiều ngôn ngữ hơn",
+        "Phiên bản mới hơn chậm hơn"
+      ],
+      "correct": 1,
+      "explanation": "Nâng cấp thư viện có thể thay đổi đầu ra tokenization, trôi dạt khỏi bản phân phối training."
+    }
+  ]
+}
