@@ -1,0 +1,62 @@
+[
+  {
+    "question": "RAG là viết tắt của gì và nó giải quyết vấn đề gì?",
+    "options": [
+      "Random Augmented Generation - tạo ra đầu ra ngẫu nhiên",
+      "Retrieval-Augmented Generation -- cho phép LLMs truy cập vào kiến thức bên ngoài mà họ không được huấn luyện",
+      "Tạo Attention lặp lại - cải thiện cơ chế attention",
+      "Giảm tạo kiến trúc - làm cho models nhỏ hơn"
+    ],
+    "correct": 1,
+    "explanation": "RAG truy xuất các tài liệu liên quan từ cơ sở kiến thức bên ngoài và thêm chúng vào prompt. Điều này cho phép LLM truy cập vào thông tin cập nhật, dành riêng cho lĩnh vực mà không cần huấn luyện lại.",
+    "stage": "pre"
+  },
+  {
+    "question": "Tại sao RAG được ưa chuộng hơn fine-tuning cho hầu hết các ứng dụng dựa trên tri thức?",
+    "options": [
+      "RAG tạo ra models tốt hơn",
+      "RAG rẻ hơn, có thể cập nhật ngay lập tức khi tài liệu thay đổi và cung cấp phân bổ nguồn -- fine-tuning đắt tiền và trở nên cũ",
+      "Fine-tuning không hoạt động",
+      "RAG sử dụng ít bộ nhớ hơn"
+    ],
+    "correct": 1,
+    "explanation": "Fine-tuning có giá hàng nghìn đô la, tạo ra một model tĩnh trở nên cũ khi tài liệu thay đổi và không cung cấp ghi công nguồn. RAG cập nhật ngay lập tức (chỉ cần cập nhật kho tài liệu), chỉ tốn embedding + dung lượng lưu trữ và có thể trích dẫn nguồn của nó.",
+    "stage": "pre"
+  },
+  {
+    "question": "Thứ tự chính xác của các bước trong một RAG pipeline cơ bản là gì?",
+    "options": [
+      "Tạo, truy xuất, nhúng, phân đoạn",
+      "Phân đoạn tài liệu, nhúng các chunk, lưu trữ trong vector DB, nhúng truy vấn, truy xuất các đoạn tương tự, tạo câu trả lời với ngữ cảnh",
+      "Nhúng truy vấn, tạo câu trả lời, truy xuất tài liệu",
+      "Lưu trữ tài liệu, truy vấn LLM, thêm tài liệu để phản hồi"
+    ],
+    "correct": 1,
+    "explanation": "Nhập: khối tài liệu -> nhúng các đoạn -> lưu trữ trong vector dữ liệu. Thời gian truy vấn: nhúng truy vấn của người dùng -> truy xuất top-K các đoạn tương tự -> thêm các đoạn vào prompt -> tạo câu trả lời dựa trên ngữ cảnh đã truy xuất.",
+    "stage": "post"
+  },
+  {
+    "question": "Chế độ lỗi phổ biến trong các hệ thống RAG cơ bản là gì?",
+    "options": [
+      "Người LLM từ chối trả lời",
+      "Các đoạn được truy xuất tương tự về mặt ngữ nghĩa với truy vấn nhưng không chứa câu trả lời thực tế (ví dụ: trả về 'chiến lược doanh thu' khi được yêu cầu 'số doanh thu quý 3')",
+      "Cơ sở dữ liệu vector gặp sự cố",
+      "Các embeddings quá lớn"
+    ],
+    "correct": 1,
+    "explanation": "Tìm kiếm ngữ nghĩa tìm văn bản 'nghe giống như' truy vấn, không nhất thiết phải là văn bản 'trả lời' truy vấn đó. Một truy vấn về doanh thu có thể truy xuất các đoạn thảo luận về chiến lược doanh thu thay vì phần chứa con số thực tế.",
+    "stage": "post"
+  },
+  {
+    "question": "Bạn đánh giá chất lượng RAG như thế nào?",
+    "options": [
+      "Bằng cách kiểm tra xem LLM có tạo ra bất kỳ đầu ra nào không",
+      "Sử dụng cả số liệu truy xuất (chúng tôi đã tìm thấy đúng phần chưa?) và số liệu thế hệ (câu trả lời có trung thành với ngữ cảnh được truy xuất không?)",
+      "Chỉ bằng cách đo thời gian phản hồi",
+      "Bằng cách đếm số lượng tài liệu được truy xuất"
+    ],
+    "correct": 1,
+    "explanation": "Đánh giá RAG có hai phần: chất lượng truy xuất (precision/recall các đoạn được truy xuất so với ground truth) và chất lượng thế hệ (trung thực với ngữ cảnh, mức độ liên quan đến truy vấn, không có ảo giác ngoài thông tin được truy xuất).",
+    "stage": "post"
+  }
+]
