@@ -1,0 +1,90 @@
+{
+  "lesson": "01-terminal-native-coding-agent",
+  "title": "Capstone 01 — Agent mã hóa gốc đầu cuối",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Mã hóa thiết bị đầu cuối năm 2026 agents chia sẻ hình dạng vòng lặp nào?",
+      "options": [
+        "Lập kế hoạch, hành động, quan sát, phục hồi",
+        "Mã hóa, giải mã, lấy mẫu, phát trực tiếp",
+        "Huấn luyện, đánh giá, triển khai, giám sát",
+        "Tìm nạp, nhúng, xếp hạng, tổng hợp"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Tại sao harness chạy từng tác vụ bên trong sandbox E2B hoặc Daytona?",
+      "options": [
+        "Để tách hệ thống tệp và công cụ thực thi khỏi máy chủ để cây làm việc có thể bị xé bỏ khi hoàn thành",
+        "Để bỏ qua rate limits của nhà cung cấp model",
+        "Để benchmark token thông lượng trên bộ nhớ đệm lạnh",
+        "Để bật quyền truy cập GPU cho vòng lặp agent"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "hook tích hợp nào là nơi tự nhiên để chặn các lệnh shell phá hủy trước khi chúng thực thi?",
+      "options": [
+        "Sử dụng trước công cụ",
+        "Phiên bắt đầu",
+        "Dừng lại",
+        "PostToolSử dụng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Capstone giới hạn mỗi kết quả công cụ ở khoảng 4k tokens. Điều đó chủ yếu ngăn chặn chế độ thất bại nào?",
+      "options": [
+        "Sandbox trốn thoát thông qua siêu nhân vật vỏ độc hại",
+        "Nhiễm độc ngữ cảnh và chi phí chạy trốn khi một công cụ trả về một kết xuất lớn",
+        "Trạng thái kế hoạch cũ trên sessions tiếp tục",
+        "Model overfitting để gọi công cụ traces"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "PreCompact hook làm gì ở mốc 150k-token?",
+      "options": [
+        "Hủy chạy và hoàn lại ngân sách người dùng",
+        "Tóm tắt các biến cũ thành một khối prior trạng thái để kế hoạch và các quan sát mới vẫn phù hợp",
+        "Đẩy lực branch hiện tại để sao lưu tiến độ",
+        "Chuyển model nền sang model nháp nhỏ hơn"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Capstone so sánh harness của nó với một tập hợp con SWE-bench Pro gồm 30 số cơ sở nào?",
+      "options": [
+        "Mã mở",
+        "agent Mini-SW",
+        "Trực tiếp-SWE-agent",
+        "Người trợ giúp"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bộ chỉ số nào được phân phối đo lường?",
+      "options": [
+        "WER, MOS và đầu ra âm thanh đầu tiên",
+        "Perplexity, BLEU và ROUGE",
+        "pass@1, lượt mỗi nhiệm vụ và đô la cho mỗi nhiệm vụ",
+        "MRR@10 và nDCG@10"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
