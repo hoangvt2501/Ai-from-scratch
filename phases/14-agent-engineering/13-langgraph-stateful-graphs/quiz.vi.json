@@ -1,0 +1,90 @@
+{
+  "lesson": "13-langgraph-stateful-graphs",
+  "title": "LangGraph: Biểu đồ trạng thái và thực thi bền bỉ",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "LangGraph coi gì là đơn vị cốt lõi của agent?",
+      "options": [
+        "Cuộc gọi LLM dạng tự do",
+        "Một máy trạng thái có trạng thái được nhập, các nút chức năng và các cạnh có điều kiện",
+        "Một công cụ duy nhất registry",
+        "Chỉ số vector"
+      ],
+      "correct": 1,
+      "explanation": "LangGraph models agent dưới dạng biểu đồ trạng thái: các nút là hàm thuần túy, các cạnh là chuyển tiếp, trạng thái được gõ và bất biến."
+    },
+    {
+      "stage": "pre",
+      "question": "Thực thi bền bỉ giải quyết được vấn đề nào?",
+      "options": [
+        "Giảm chi phí inference",
+        "Tiếp tục chạy 40 bước từ bước 38 khi không thành công, với trạng thái chính xác, thay vì bắt đầu lại",
+        "Tạo embeddings nhanh hơn",
+        "Dịch thuật giữa các nhà cung cấp"
+      ],
+      "correct": 1,
+      "explanation": "Checkpoints sau mỗi nút, hãy để runtime tiếp tục từ bước thành công cuối cùng."
+    },
+    {
+      "stage": "check",
+      "question": "Cấu trúc liên kết nào KHÔNG phải là một trong ba cấu trúc liên kết mà LangGraph hỗ trợ?",
+      "options": [
+        "Giám sát viên",
+        "Swarm (ngang hàng)",
+        "Phân cấp (đồ thị con lồng nhau)",
+        "Gradient nhẫn"
+      ],
+      "correct": 3,
+      "explanation": "Cấu trúc liên kết là giám sát, swarm và phân cấp. Gradient vòng không phải là cấu trúc liên kết LangGraph."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao các nút phải xác định để sơ yếu lý lịch hoạt động rõ ràng?",
+      "options": [
+        "Các nhà cung cấp yêu cầu quyết định luận",
+        "Resume giả định các đầu vào giống nhau tạo ra cùng một cập nhật trạng thái; Hạt giống ngẫu nhiên, đồng hồ treo tường và APIs bên ngoài phải được bắt",
+        "Quyết định luận làm giảm chi phí token",
+        "Nó được yêu cầu bởi GIL"
+      ],
+      "correct": 1,
+      "explanation": "Nếu một nút phụ thuộc vào tính không xác định chưa được nắm bắt, resume không thể tái tạo trạng thái sau bước."
+    },
+    {
+      "stage": "check",
+      "question": "Cạnh có điều kiện là gì?",
+      "options": [
+        "Một cạnh có trọng số training loss",
+        "Một cạnh được chọn bởi một hàm của trạng thái, được sử dụng để branch đồ thị",
+        "Một lợi thế chỉ chạy trên GPUs",
+        "Lợi thế với TTL"
+      ],
+      "correct": 1,
+      "explanation": "Các cạnh có điều kiện branch dựa trên trạng thái; lạm dụng chúng làm cho biểu đồ khó suy luận."
+    },
+    {
+      "stage": "post",
+      "question": "Điều gì xảy ra khi checkpoints quá nhỏ?",
+      "options": [
+        "Trạng thái công cụ và ghi bộ nhớ không thể khôi phục được; trạng thái đầy đủ phải tuần tự hóa",
+        "Đĩa đầy",
+        "Biểu đồ không thể đạt đến END",
+        "model tạo ra câu trả lời ngắn hơn"
+      ],
+      "correct": 0,
+      "explanation": "Chỉ những lượt hội thoại kiểm tra mới rời khỏi trạng thái công cụ và bộ nhớ ghi ngoài tầm với của sơ yếu lý lịch."
+    },
+    {
+      "stage": "post",
+      "question": "Con người trong vòng lặp phù hợp với thiết kế của LangGraph ở đâu?",
+      "options": [
+        "Nó yêu cầu một ngã ba của runtime",
+        "Tạm dừng trước một nút quan trọng, hiển thị trạng thái tuần tự hóa cho con người, chấp nhận sửa đổi, tiếp tục; con trỏ kiểm tra làm cho điều này rẻ",
+        "Chỉ ở BẮT ĐẦU và KẾT THÚC",
+        "Thông qua một nhà cung cấp riêng API"
+      ],
+      "correct": 1,
+      "explanation": "Vì trạng thái đã được tuần tự hóa giữa các nút, nên việc xem xét và chỉnh sửa của con người là một mẫu tạm dừng và tiếp tục tự nhiên."
+    }
+  ]
+}
