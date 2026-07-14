@@ -1,0 +1,78 @@
+{
+  "lesson": "43-hdf5-tokenized-corpus",
+  "title": "HDF5 Tokenized Corpus",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao lưu trữ kho dữ liệu được mã hóa trong một dataset HDF5 có thể thay đổi kích thước, phân đoạn thay vì JSONL?",
+      "options": [
+        "HDF5 có logo nhỏ hơn",
+        "HDF5 cung cấp các lần đọc được ánh xạ bộ nhớ, chỉ theo số nguyên, với quyền truy cập ngẫu nhiên O (1); JSONL buộc trình phân tích cú pháp vào mọi lần đọc đường dẫn nóng",
+        "JSONL không còn được dùng nữa",
+        "Lý do ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "dataloader muốn một luồng token phẳng với các lát cắt có thể định địa chỉ; HDF5 cung cấp điều đó một cách nguyên bản."
+    },
+    {
+      "stage": "check",
+      "question": "Quy tắc phù hợp để xác định kích thước khối HDF5 so với window_size của huấn luyện viên là gì?",
+      "options": [
+        "Luôn chọn chunk=1",
+        "Đặt chunk thành bội số của window_size để mỗi mẫu nằm bên trong một hoặc hai đoạn và đọc vẫn được căn chỉnh bộ nhớ đệm trang",
+        "Chọn đoạn bằng với độ dài tài liệu",
+        "Chọn phần lớn nhất phù hợp với RAM"
+      ],
+      "correct": 1,
+      "explanation": "Các khối không khớp làm giảm một nửa thông lượng vì mỗi mẫu nằm giữa hai khối thay vì một."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao token_count được lưu trữ dưới dạng thuộc tính HDF5 và không ngụ ý từ hình dạng dataset?",
+      "options": [
+        "Thuộc tính khá",
+        "Phần đuôi có thể đầy một phần; nếu không có thuộc tính rõ ràng, người đọc đi qua phần cuối thực sự vào tokens có đệm bằng không và model học cách dự đoán bằng không",
+        "Hình dạng đọc chậm",
+        "Thuộc tính là bắt buộc"
+      ],
+      "correct": 1,
+      "explanation": "Bố cục được chia đôi khi để lại các khe đuôi; thuộc tính mang sự thật."
+    },
+    {
+      "stage": "check",
+      "question": "Người viết đạt được điều gì bằng cách đệm tokens chunk_size trước mỗi lần thay đổi kích thước?",
+      "options": [
+        "Tiết kiệm một vài chu kỳ CPU",
+        "Ghi liền kề và căn chỉnh theo từng khối, tránh được sự phân mảnh sau khi thay đổi kích thước từng token một lần",
+        "Giảm kích thước từ vựng",
+        "Tăng tốc sha256"
+      ],
+      "correct": 1,
+      "explanation": "Buffer-then-extend ở kích thước chunk là cách duy nhất để giữ cho các chunk HDF5 liền kề trên đĩa."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao swmr=True được mở ở phía người đọc, không phải ở phía người viết?",
+      "options": [
+        "Tùy chọn ngẫu nhiên",
+        "Chế độ Single-Writer-Multiple-Reader cho phép dataloader workers chia sẻ tệp một cách an toàn; người viết không cần chế độ đặc biệt vì nó ghi một phân đoạn mỗi process",
+        "Hiệu suất bay",
+        "Bảo mật"
+      ],
+      "correct": 1,
+      "explanation": "Kết hợp hai chế độ là nguyên nhân phổ biến nhất gây ra lỗi 'tệp bị khóa'."
+    },
+    {
+      "stage": "post",
+      "question": "Ranh giới token id tồn tại để làm rõ điều gì?",
+      "options": [
+        "Giới hạn kích thước từ vựng",
+        "Ranh giới tài liệu trong một cửa sổ đóng gói để model không bị huấn luyện âm thầm về việc nối nhiều tài liệu",
+        "Nén",
+        "Dữ liệu ngẫu nhiên"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có ranh giới rõ ràng, người huấn luyện học ranh giới dưới dạng nhiễu; với nó, ranh giới trở thành một dải phân cách có thể sử dụng được."
+    }
+  ]
+}
