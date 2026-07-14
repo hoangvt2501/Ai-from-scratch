@@ -1,0 +1,78 @@
+{
+  "lesson": "23-watermarking-synthid-stable-signature-c2pa",
+  "title": "Watermarking - SynthID, Chữ ký ổn định, C2PA",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Làm thế nào để kiểu Kirchenbauer (SynthID-text) token hình mờ nhúng tín hiệu?",
+      "options": [
+        "Bằng cách sửa đổi mẫu prompt",
+        "Bằng cách mã hóa đầu ra bằng khóa công khai",
+        "Ở mỗi bước giải mã, băm K tokens trước đó để phân chia từ vựng thành green/red bộ và bias sampling về phía màu xanh lá cây; phát hiện đếm tokens màu xanh lá cây thông qua điểm z",
+        "Bằng cách chèn một nhận xét HTML ẩn"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Hạn chế chính của hình mờ văn bản đối với diễn giải là gì?",
+      "options": [
+        "Diễn đạt lại hoặc diễn giải văn bản sẽ phá hủy tín hiệu thống kê token xanh",
+        "Diễn giải chỉ ảnh hưởng đến hình mờ hình ảnh",
+        "Diễn giải củng cố hình mờ",
+        "Chúng thực sự tồn tại sau khi diễn giải"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Chữ ký ổn định (Fernandez và cộng sự, ICCV 2023) làm gì?",
+      "options": [
+        "Sử dụng C2PA để ký hình ảnh khi tải lên",
+        "Thêm hình mờ có thể nhìn thấy ở góc của hình ảnh",
+        "Tinh chỉnh decoder khuếch tán tiềm ẩn để mọi hình ảnh được tạo đều mang một thông điệp nhúng cố định có thể phát hiện được từ tiềm ẩn",
+        "Ký siêu dữ liệu bằng khóa riêng tư"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Kết quả 'Chữ ký ổn định không ổn định' tháng 5 năm 2024 cho thấy điều gì?",
+      "options": [
+        "Hình mờ có thể chứng minh là không thể giả mạo",
+        "Hình mờ yêu cầu C2PA để hoạt động",
+        "Hình mờ chỉ không thành công khi nén JPEG",
+        "fine-tuning sau thế hệ của decoder có thể xóa hình mờ trong khi vẫn giữ được chất lượng hình ảnh, làm suy yếu độ bền của đối thủ"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Siêu dữ liệu C2PA và hình mờ bổ sung cho nhau như thế nào?",
+      "options": [
+        "Chúng có thể hoán đổi cho nhau",
+        "Hình mờ được ký bằng các phím tương tự như C2PA",
+        "Siêu dữ liệu có thể bị tước bỏ nhưng mang chuỗi nguồn gốc phong phú; hình mờ tồn tại thông qua chuyển mã nhưng mang ít bit; nhiều lớp, chúng cung cấp một câu chuyện xuất xứ có thể sử dụng được",
+        "C2PA thay thế hoàn toàn hình mờ"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao 'không có tín hiệu SynthID' KHÔNG phải là bằng chứng xác thực (nguồn gốc con người)?",
+      "options": [
+        "Bởi vì SynthID chỉ tạo hình mờ các thế hệ từ models hỗ trợ SynthID; nội dung từ bất kỳ model nào không có SynthID không được đánh dấu theo mặc định",
+        "Bởi vì SynthID là mã nguồn đóng",
+        "Bởi vì SynthID luôn tạo ra kết quả dương tính giả trên văn bản của con người",
+        "Bởi vì SynthID chỉ hoạt động trên đầu ra Gemini"
+      ],
+      "correct": 0,
+      "explanation": ""
+    }
+  ]
+}
