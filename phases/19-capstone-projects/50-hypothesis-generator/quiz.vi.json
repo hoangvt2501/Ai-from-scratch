@@ -1,0 +1,78 @@
+{
+  "lesson": "50-hypothesis-generator",
+  "title": "Trình tạo giả thuyết",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao trình tạo tạo ra một hàng đợi được xếp hạng thay vì một giả thuyết duy nhất?",
+      "options": [
+        "Bởi vì trình phân tích cú pháp không thể đọc một khối duy nhất",
+        "Bởi vì người chạy cần chiều sâu để nó có thể đưa ra giả thuyết tiếp theo khi giả thuyết đầu tiên thất bại",
+        "Bởi vì model giả chỉ phát ra danh sách",
+        "Bởi vì embedding yêu cầu nhiều hơn một đầu vào"
+      ],
+      "correct": 1,
+      "explanation": "Mục đích của việc tạo hàng đợi là khấu hao chi phí sampling trên vòng lặp. Khi giả thuyết đầu tiên thất bại, người chạy sẽ bật giả thuyết tiếp theo mà không có sampling mới."
+    },
+    {
+      "stage": "pre",
+      "question": "Đường dốc temperature đạt được điều gì trên mỗi đường chuyền?",
+      "options": [
+        "Nó làm tăng dung sai của trình phân tích cú pháp",
+        "Nó mở rộng sự phân bố sampling để các bản nháp sau này có thể hạ cánh xa hạt giống hơn",
+        "Nó làm tăng kích thước embedding",
+        "Nó tăng gấp ba lần giá trị hạt giống"
+      ],
+      "correct": 1,
+      "explanation": "Độ temperature cao hơn sẽ mở rộng sự phân bố sampling. Đường dốc khuyến khích mỗi đường chuyền trôi xa hơn để bộ lọc mới có việc phải làm."
+    },
+    {
+      "stage": "check",
+      "question": "Khi nào bộ lọc mới từ chối bản nháp?",
+      "options": [
+        "Khi điểm xếp hạng của nó dưới ngưỡng",
+        "Khi khoảng cách cosin tối thiểu của nó đến bất kỳ prior nào sống sót giảm xuống dưới ngưỡng mới",
+        "Khi trình phân tích cú pháp của nó vượt qua nhưng số lượng thẻ của nó bị sai",
+        "Khi thẻ nháp của nó lớn hơn độ dài hàng đợi"
+      ],
+      "correct": 1,
+      "explanation": "Tính mới là khoảng cách tối thiểu đến prior người sống sót. Nếu khoảng cách đó dưới ngưỡng, bản nháp gần như trùng lặp và bị loại bỏ."
+    },
+    {
+      "stage": "check",
+      "question": "Ba thành phần nào kết hợp trong điểm xếp hạng?",
+      "options": [
+        "Độ trễ, thông lượng, chi phí",
+        "Tính mới, đặc hiệu, khả năng kiểm tra",
+        "Temperature, hạt giống, chỉ số vượt qua",
+        "Biến, số liệu, độ dài đường cơ sở"
+      ],
+      "correct": 1,
+      "explanation": "Điểm xếp hạng là tổng trọng số của tính mới lạ, tính cụ thể và khả năng kiểm tra. Mỗi điểm phụ nằm trong khoảng từ không đến một."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao ngôn ngữ giả model được khóa trên xô temperature thay vì phao thô?",
+      "options": [
+        "Bởi vì float không thể băm được",
+        "Bởi vì nhóm làm cho lịch trình rời rạc, vì vậy một thay đổi nhỏ temperature có thể chọn một bản nháp có kịch bản khác",
+        "Bởi vì trình phân tích cú pháp cần một số nguyên",
+        "Bởi vì embedding yêu cầu nó"
+      ],
+      "correct": 1,
+      "explanation": "Các nhóm rời rạc lịch trình liên tục. Hai nhiệt độ liền kề có thể ánh xạ đến các nhóm khác nhau và kéo các bản nháp khác nhau từ ngân hàng theo kịch bản, đó là cách mô phỏng các sampling khác nhau."
+    },
+    {
+      "stage": "check",
+      "question": "Điều gì xảy ra nếu mọi bản nháp từ model giả không đạt trình phân tích cú pháp?",
+      "options": [
+        "Máy phát điện gây ra lỗi cứng",
+        "Hàng đợi trống và mỗi lần vượt qua ghi lại một từ chối phân tích cú pháp để chế độ lỗi có thể kiểm tra được",
+        "Người chạy thử lại với một prompt mới",
+        "Ngưỡng mới được tự động hạ xuống"
+      ],
+      "correct": 1,
+      "explanation": "Lỗi trình phân tích cú pháp được ghi lại dưới dạng nhật ký với lý do từ chối phân tích cú pháp. Hàng đợi có thể trở lại trống mà không làm hỏng vòng lặp và nhật ký giải thích lý do."
+    }
+  ]
+}
