@@ -1,0 +1,78 @@
+{
+  "lesson": "71-classical-metrics",
+  "title": "Số liệu cổ điển",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao tokenizer được chọn ở lớp hệ mét thay vì lớp chạy?",
+      "options": [
+        "Triển khai số liệu là O (n) bất kể lựa chọn tokenizer",
+        "tokenizer xác định những gì được tính là kết quả trùng khớp token; hoán đổi nó sẽ thay đổi benchmark",
+        "Numpy yêu cầu tokenizer vào thời điểm import",
+        "Tokenizers dành riêng cho model và người chạy không thể nhìn thấy model"
+      ],
+      "correct": 1,
+      "explanation": "BLEU và F1 nhạy cảm với mã hóa. Việc liên kết tokenizer với số liệu làm cho điểm số có thể tái tạo và cho phép bạn chỉ vào quy tắc."
+    },
+    {
+      "stage": "pre",
+      "question": "N-gram sửa đổi precision làm gì mà n-gram đơn giản precision không làm được?",
+      "options": [
+        "Nó sử dụng một cơ sở nhật ký khác",
+        "Nó cắt số lượng n-gram của mỗi ứng cử viên theo số lượng tối đa được thấy trong bất kỳ tài liệu tham khảo nào",
+        "Nó chạy nhanh hơn precision thông thường",
+        "Nó trả về một giá trị từ 0 đến 100 thay vì 0 đến 1"
+      ],
+      "correct": 1,
+      "explanation": "Việc cắt theo giới hạn tham chiếu ngăn một ứng viên thổi phồng điểm số của mình bằng cách lặp đi lặp lại một từ có precision cao."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao BLEU sử dụng hình phạt ngắn gọn?",
+      "options": [
+        "Nếu không có nó, một ứng cử viên rất ngắn khớp với một vài từ sẽ nhận được precision cao và BLEU cao không công bằng",
+        "Các ứng cử viên dài làm cho giá trị trung bình hình học không ổn định về mặt số",
+        "Hình phạt ngắn gọn thay thế giới hạn số lượng n gam",
+        "Nó bù đắp cho việc làm mịn phụ gia"
+      ],
+      "correct": 0,
+      "explanation": "Chỉ riêng Precision thưởng cho các kết quả ngắn. BP giảm trọng số các ứng viên thấp hơn tham chiếu bằng cách sử dụng exp(1 - r/c)."
+    },
+    {
+      "stage": "check",
+      "question": "ROUGE-L so sánh điều gì?",
+      "options": [
+        "precision 4 gam so với bất kỳ 4 gam tham chiếu nào",
+        "Dãy con chung dài nhất của dãy ứng cử viên và dãy token tham chiếu",
+        "Khoảng cách Levenshtein giữa chuỗi ứng cử viên và chuỗi tham chiếu",
+        "Chỉ mục Jaccard cấp nhân vật"
+      ],
+      "correct": 1,
+      "explanation": "ROUGE-L sử dụng độ dài LCS, sau đó tính toán precision (LCS/cand-len) và recall (LCS/ref-len) kết hợp với F-beta."
+    },
+    {
+      "stage": "check",
+      "question": "F1 cấp Token trả về 1.0 cho trường hợp nào?",
+      "options": [
+        "Khi dự đoán trống và mục tiêu không trống",
+        "Khi dự đoán và mục tiêu đều trống",
+        "Khi dự đoán là một siêu tập hợp của mục tiêu có thêm nhiễu",
+        "Khi dự đoán và mục tiêu chia sẻ chính xác một token"
+      ],
+      "correct": 1,
+      "explanation": "Theo quy ước, trống-trống là một kết hợp hoàn hảo. Bất kỳ mục tiêu không trống nào có dự đoán trống là 0,0."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao phải gửi trên metric_name thay vì danh mục trong hàm điểm?",
+      "options": [
+        "Nó cho phép cùng một danh mục sử dụng các chỉ số khác nhau trên các tác vụ và giữ cho người điều phối không phụ thuộc vào chỉ số",
+        "Danh mục khó xác thực hơn metric_name",
+        "metric_name ngắn hơn danh mục",
+        "Người chạy không có quyền truy cập vào trường danh mục"
+      ],
+      "correct": 0,
+      "explanation": "metric_name là hợp đồng. Một nhiệm vụ tóm tắt có thể sử dụng rouge_l trên một bản ghi và bleu_4 trên một bản ghi khác; người điều phối không cần quan tâm."
+    }
+  ]
+}
