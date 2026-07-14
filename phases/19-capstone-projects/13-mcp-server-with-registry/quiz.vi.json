@@ -1,0 +1,90 @@
+{
+  "lesson": "13-mcp-server-with-registry",
+  "title": "Capstone 13 — MCP Server với Registry và Quản trị",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao bản sửa đổi MCP 2026 lại ủng hộ StreamableHTTP cho production servers?",
+      "options": [
+        "Nó loại bỏ nhu cầu xác thực",
+        "Đây là transport duy nhất hỗ trợ các cuộc gọi công cụ",
+        "Nó mã hóa payloads tự động",
+        "Nó không có trạng thái theo mặc định, vì vậy một endpoint duy nhất phía sau load balancer có thể mở rộng theo chiều ngang"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "pre",
+      "question": "Công cụ cổng authorization model nào gọi trong capstone này?",
+      "options": [
+        "OAuth 2.1 tokens mang ống ngắm cho mỗi công cụ, được kiểm tra tại thời điểm gọi công cụ",
+        "Mật khẩu quản trị viên được chia sẻ",
+        "API khóa cho mỗi địa chỉ IP",
+        "TLS lẫn nhau không có phạm vi"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Vai trò của tài liệu .well-known/mcp-capabilities là gì?",
+      "options": [
+        "Lưu trữ nhật ký kiểm tra cho server",
+        "Liệt kê các dải IP đi",
+        "Giữ gói OPA policy",
+        "Hiển thị các yêu cầu về tệp kê khai, URL transport và xác thực của công cụ để registry có thể xác thực và lập chỉ mục server"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao các công cụ phá hoại lại tồn tại trên một MCP server riêng biệt trong thiết kế này?",
+      "options": [
+        "Chúng không thể được hiển thị qua StreamableHTTP",
+        "Chúng chạy trên phần cứng chậm hơn",
+        "Chúng được kiểm soát đằng sau một phê duyệt token nâng cao thông qua thẻ Slack trong một cửa sổ ngắn",
+        "Chúng yêu cầu một ngôn ngữ lập trình khác"
+      ],
+      "correct": 2,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "OPA / Rego quyết định điều gì cho mọi lệnh gọi công cụ?",
+      "options": [
+        "Gọi model nào",
+        "Nơi ghi nhật ký kiểm tra",
+        "Cách server nên xếp hạng lại câu trả lời",
+        "Phạm vi của người gọi có cho phép gọi hay không, cộng với biên tập PII và giới hạn payload"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bằng chứng nào chứng minh tỷ lệ ngang StreamableHTTP trong thử nghiệm tải?",
+      "options": [
+        "Giảm tính đồng thời cho một khách hàng",
+        "Chuyển sang stdio transport",
+        "Chạy mọi thứ trong một process",
+        "Thêm bản sao thứ hai và hiển thị load balancer phân phối lại mà không bị dính session"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao nhật ký kiểm tra xóa PII qua Presidio trước khi được duy trì theo tenant?",
+      "options": [
+        "Để làm cho nhật ký ngắn hơn",
+        "Để đáp ứng các yêu cầu bảo mật của doanh nghiệp trong khi vẫn giữ cho dòng dõi mỗi cuộc gọi có thể truy vấn được",
+        "Presidio giảm khuếch đại ghi ClickHouse",
+        "PII cải thiện hiệu suất tìm kiếm"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
