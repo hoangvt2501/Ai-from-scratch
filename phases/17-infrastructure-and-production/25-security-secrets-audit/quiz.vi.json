@@ -1,0 +1,78 @@
+{
+  "lesson": "25-security-secrets-audit",
+  "title": "Bảo mật — Bí mật, Xoay vòng khóa API, Nhật ký kiểm tra Guardrails",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Mẫu tiêu chuẩn năm 2026 cho thông tin đăng nhập dịch vụ LLM là gì?",
+      "options": [
+        "Khóa lưu trữ trong kênh Slack",
+        "Vault tập trung được kéo bởi một AI gateway tại runtime thông qua vai trò IAM; Xoay vòng trong Vault và tất cả các ứng dụng sẽ bắt đầu trong vài phút",
+        "Gửi chìa khóa qua email cho từng kỹ sư",
+        "Mã hóa cứng API khóa trong các tệp config để tăng tốc độ"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học đề xuất nhịp xoay nào cho các khóa API, tokens gốc kho tiền và thông tin đăng nhập CI/CD?",
+      "options": [
+        "Trong vòng 90 ngày, tự động nếu có thể, được ghi lại và theo dõi khi thủ công",
+        "5 năm một lần",
+        "Chỉ khi bị rò rỉ",
+        "Không bao giờ"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao tokenization nhất quán (phương pháp tiếp cận lưới) được sử dụng để chà PII?",
+      "options": [
+        "Nó sử dụng ít bộ nhớ hơn regex",
+        "Nó mã hóa prompt đến model",
+        "Nó được yêu cầu bởi ISO 27001",
+        "Cùng một giá trị nguồn ánh xạ đến cùng một trình giữ chỗ, vì vậy LLM giữ nguyên ngữ nghĩa mã và mối quan hệ trên prompt"
+      ],
+      "correct": 3,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Bài học đề xuất tư thế đầu ra nào cho các mạng con dịch vụ LLM?",
+      "options": [
+        "Đưa vào danh sách trắng một tập hợp nhỏ các miền (api.openai.com, api.anthropic.com, vector DB, vault) và loại bỏ mọi thứ khác, với trình phân giải DNS chỉ trong danh sách cho phép",
+        "Chặn tất cả lối ra bao gồm cả nhà cung cấp",
+        "Cho phép DNS nhưng chặn HTTP",
+        "Cho phép tất cả lưu lượng truy cập ra ngoài"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Sự cố chuỗi cung ứng Vercel năm 2026 dạy gì về thông tin đăng nhập CI/CD?",
+      "options": [
+        "CI/CD thông tin đăng nhập tương đương với sản phẩm - lưu trữ trong kho tiền, phạm vi hẹp, xoay vòng tích cực",
+        "CI/CD bí mật không thể bị đánh cắp",
+        "CI/CD thông tin đăng nhập có rủi ro thấp và có thể nằm trong tệp env",
+        "Vercel không bị ảnh hưởng"
+      ],
+      "correct": 0,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Bài học khuyên bạn nên lưu giữ những trường nhật ký kiểm tra nào cho mỗi cuộc gọi LLM?",
+      "options": [
+        "Chỉ là prompt thô",
+        "Chỉ có phản hồi",
+        "Dấu thời gian, user/tenant, hàm băm prompt (không thô), phiên bản model +, số lượng token, chi phí, hàm băm phản hồi, bất kỳ chuyến đi guardrail nào",
+        "Chỉ chi phí"
+      ],
+      "correct": 2,
+      "explanation": ""
+    }
+  ]
+}
