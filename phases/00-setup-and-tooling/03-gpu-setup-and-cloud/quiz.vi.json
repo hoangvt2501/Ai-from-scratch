@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Tại sao GPU nhanh hơn CPU cho mạng nơ-ron training?",
+      "options": [
+        "GPUs có tốc độ xung nhịp cao hơn CPUs",
+        "GPUs có thể thực hiện hàng nghìn phép toán ma trận song song đồng thời",
+        "GPUs có nhiều RAM hơn CPUs",
+        "GPUs sử dụng ngôn ngữ lập trình hiệu quả hơn"
+      ],
+      "correct": 1,
+      "explanation": "GPUs có hàng nghìn lõi được tối ưu hóa cho tính toán song song, khiến chúng trở nên lý tưởng cho phép nhân ma trận thống trị training mạng nơ-ron."
+    },
+    {
+      "stage": "pre",
+      "question": "VRAM đề cập đến điều gì?",
+      "options": [
+        "RAM ảo được hệ điều hành sử dụng cho không gian hoán đổi",
+        "Video RAM trên GPU, tách biệt với hệ thống RAM",
+        "Tổng số RAM có sẵn trên tất cả các thiết bị",
+        "Một loại bộ nhớ đệm CPU"
+      ],
+      "correct": 1,
+      "explanation": "VRAM (Video RAM) là bộ nhớ chuyên dụng trên GPU. Nó giới hạn kích thước của models và kích thước batch bạn có thể sử dụng trong quá trình training, tách biệt với RAM chính của hệ thống."
+    },
+    {
+      "stage": "post",
+      "question": "Lệnh nào xác minh rằng NVIDIA GPU của bạn đã được phát hiện và hiển thị trạng thái hiện tại của nó?",
+      "options": [
+        "gpu --trạng thái",
+        "nvidia-smi",
+        "ngọn đuốc. cuda.list_devices()",
+        "LSPCI | gpu grep"
+      ],
+      "correct": 1,
+      "explanation": "nvidia-smi (Giao diện quản lý hệ thống NVIDIA) hiển thị mức sử dụng GPU, mức sử dụng bộ nhớ, temperature và processes đang chạy. Nó là công cụ tiêu chuẩn để xác minh tính khả dụng của GPU."
+    },
+    {
+      "stage": "post",
+      "question": "Khi so sánh phép nhân GPU so với ma trận CPU, tại sao bạn phải gọi là ngọn đuốc. cuda.synchronize() trước khi đo thời gian GPU?",
+      "options": [
+        "Để chuyển dữ liệu từ CPU sang bộ nhớ GPU",
+        "Để đảm bảo tất cả các thao tác GPU đã hoàn thành trước khi dừng hẹn giờ",
+        "Để đặt lại tốc độ xung nhịp GPU về tần số cơ bản của nó",
+        "Để giải phóng bộ nhớ GPU không sử dụng"
+      ],
+      "correct": 1,
+      "explanation": "GPU hoạt động không đồng bộ -- Python trả về ngay lập tức trong khi GPU vẫn đang tính toán. synchronize() cho đến khi tất cả các thao tác GPU kết thúc, đưa ra thời gian chính xác."
+    },
+    {
+      "stage": "post",
+      "question": "Sử dụng quy tắc ngón tay cái fp16, khoảng bao nhiêu parameters có thể chứa trong 24 GB VRAM?",
+      "options": [
+        "24 tỷ parameters",
+        "12 tỷ parameters",
+        "6 tỷ parameters",
+        "48 tỷ parameters"
+      ],
+      "correct": 1,
+      "explanation": "Trong fp16, mỗi parameter sử dụng 2 byte. 24 GB / 2 byte = 12 tỷ parameters. Đây là một ước tính sơ bộ; Mức sử dụng thực tế bao gồm trạng thái kích hoạt, gradients và optimizer."
+    }
+  ]
+}
