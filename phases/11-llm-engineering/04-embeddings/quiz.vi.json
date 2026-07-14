@@ -1,0 +1,62 @@
+[
+  {
+    "question": "embeddings giải quyết vấn đề gì mà tìm kiếm từ khóa không thể giải quyết?",
+    "options": [
+      "Embeddings nhanh hơn",
+      "Embeddings nắm bắt được ý nghĩa ngữ nghĩa, hãy khớp \"thanh toán không được thực hiện\" với \"phí bị từ chối\" mặc dù chúng không chia sẻ từ",
+      "Embeddings sử dụng ít dung lượng lưu trữ hơn",
+      "Embeddings làm việc ngoại tuyến"
+    ],
+    "correct": 1,
+    "explanation": "Tìm kiếm từ khóa coi các từ là ký hiệu độc lập. Embeddings ánh xạ văn bản đến high-dimensional vectors trong đó sự tương đồng về ngữ nghĩa = khoảng cách hình học. Các văn bản có cùng ý nghĩa tập hợp lại với nhau bất kể lựa chọn từ.",
+    "stage": "pre"
+  },
+  {
+    "question": "Sự tương đồng cosin đo lường gì giữa hai embedding vectors?",
+    "options": [
+      "Khoảng cách Euclid",
+      "Góc giữa các vectors, cho biết hướng của chúng giống nhau như thế nào bất kể độ lớn",
+      "Tổng các thành phần của chúng",
+      "Số lượng thứ nguyên phù hợp"
+    ],
+    "correct": 1,
+    "explanation": "Độ tương đồng cosin = chấm (A, B) / (|Trả lời|*|B|). Nó nằm trong khoảng từ -1 (ngược lại) đến 1 (cùng hướng). Hai văn bản có cùng ý nghĩa sẽ có vectors chỉ gần như cùng một hướng, cho sự tương đồng cosin gần 1.",
+    "stage": "pre"
+  },
+  {
+    "question": "Kích thước điển hình của văn bản hiện đại embedding models là gì?",
+    "options": [
+      "2-10 kích thước",
+      "50-100 kích thước",
+      "768-3072 kích thước",
+      "100.000+ kích thước"
+    ],
+    "correct": 2,
+    "explanation": "embedding models hiện đại (OpenAI text-embedding-3, BGE, E5) tạo ra vectors với kích thước từ 768 đến 3072. Kích thước cao hơn nắm bắt được nhiều sắc thái hơn nhưng chi phí lưu trữ và tìm kiếm cao hơn.",
+    "stage": "post"
+  },
+  {
+    "question": "Tại sao bạn nên đánh giá chất lượng embedding bằng cách sử dụng benchmarks truy xuất thay vì chỉ kiểm tra điểm tương đồng?",
+    "options": [
+      "Điểm tương đồng luôn sai",
+      "Giá trị tương tự tuyệt đối thay đổi theo model; Điều quan trọng là liệu các tài liệu liên quan có xếp hạng cao hơn các tài liệu không liên quan hay không (precision@k, recall)",
+      "Truy xuất benchmarks nhanh hơn",
+      "Điểm tương tự không sử dụng khoảng cách cosin"
+    ],
+    "correct": 1,
+    "explanation": "Sự tương đồng cosin là 0,85 có thể có nghĩa là 'rất giống nhau' đối với một model và 'hơi giống nhau' đối với một  khác. Các chỉ số truy xuất (precision@k, recall) đo lường những gì thực sự quan trọng: liệu tài liệu phù hợp có quay trở lại không?",
+    "stage": "post"
+  },
+  {
+    "question": "Khi nào bạn sẽ sử dụng local/open-source embedding model thay vì API?",
+    "options": [
+      "models địa phương luôn tốt hơn",
+      "Khi bạn cần quyền riêng tư dữ liệu, hoạt động ngoại tuyến, chi phí thấp hơn trên quy mô lớn hoặc fine-tuning dành riêng cho miền",
+      "models địa phương sản xuất embeddings chất lượng cao hơn",
+      "API models không hỗ trợ hàng loạt"
+    ],
+    "correct": 1,
+    "explanation": "API embeddings (OpenAI, Cohere) rất dễ dàng nhưng gửi dữ liệu của bạn ra bên ngoài. models cục bộ (BGE, E5, Nomic) giữ dữ liệu riêng tư, loại bỏ chi phí cho mỗi cuộc gọi trên quy mô lớn và có thể fine-tuned trên dữ liệu dành riêng cho miền.",
+    "stage": "post"
+  }
+]
