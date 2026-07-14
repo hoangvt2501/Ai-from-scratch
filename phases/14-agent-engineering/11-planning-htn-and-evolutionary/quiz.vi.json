@@ -1,0 +1,90 @@
+{
+  "lesson": "11-planning-htn-and-evolutionary",
+  "title": "Lập kế hoạch với HTN và Evolutionary Search",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "HTN bổ sung gì so với gói LLM dạng tự do?",
+      "options": [
+        "Tính đúng đắn có thể chứng minh được khi các điều kiện tiên quyết và hiệu ứng của người vận hành được thực thi",
+        "inference rẻ hơn",
+        "prompts ngắn hơn",
+        "Tốt hơn embeddings"
+      ],
+      "correct": 0,
+      "explanation": "Các nhà khai thác biểu tượng của HTN với các điều kiện tiên quyết và hiệu ứng đảm bảo tính vững chắc bằng cách xây dựng."
+    },
+    {
+      "stage": "pre",
+      "question": "AlphaEvolve được xây dựng cho class vấn đề nào?",
+      "options": [
+        "Tạo văn xuôi dạng tự do",
+        "Tối ưu hóa với chức năng thể dục xác định, có thể kiểm tra bằng máy",
+        "Bộ nhớ trò chuyện nhiều lượt",
+        "Vector xếp hạng tìm kiếm"
+      ],
+      "correct": 1,
+      "explanation": "Tìm kiếm tiến hóa cần một người đánh giá xác định; AlphaEvolve nhắm mục tiêu đến các miền tồn tại."
+    },
+    {
+      "stage": "check",
+      "question": "ChatHTN duy trì tính hợp lý của kế hoạch khi sử dụng LLM như thế nào?",
+      "options": [
+        "Nó không; Lành mạnh là nỗ lực tốt nhất",
+        "LLM đề xuất chỉ nhập dưới dạng phân tách ứng viên, được xác thực dựa trên toán tử schema; Lớp biểu tượng sở hữu tính đúng đắn",
+        "Nó tinh chỉnh LLM trên HTN traces",
+        "Nó sử dụng cơ sở dữ liệu vector"
+      ],
+      "correct": 1,
+      "explanation": "LLM mở rộng thư viện phương thức nhưng không thể bỏ qua các điều kiện tiên quyết và hiệu ứng của toán tử."
+    },
+    {
+      "stage": "check",
+      "question": "Bài học trích dẫn kết quả AlphaEvolve nào?",
+      "options": [
+        "Cải tiến đầu tiên so với Strassen cho phép nhân ma trận phức 4x4 trong 56 năm",
+        "Tăng tốc gấp 10 lần inference trên Gemini",
+        "Đánh bại GPT-4 trên HumanEval",
+        "Chứng minh đầu tiên của P = NP"
+      ],
+      "correct": 0,
+      "explanation": "AlphaEvolve đã tìm thấy 48 phép nhân vô hướng cho matmul phức 4x4, cải tiến đầu tiên trên Strassen trong 56 năm."
+    },
+    {
+      "stage": "check",
+      "question": "Yếu tố nào của HTN là hành động primitive có thể thực thi trực tiếp với các điều kiện tiên quyết và hiệu ứng?",
+      "options": [
+        "Nhiệm vụ",
+        "Phương pháp",
+        "Nhà điều hành",
+        "Tiểu bang"
+      ],
+      "correct": 2,
+      "explanation": "Các nhà khai thác là primitives; phương pháp phân hủy các nhiệm vụ phức hợp; nhà nước là một tập hợp các sự kiện."
+    },
+    {
+      "stage": "post",
+      "question": "Lời cảnh báo của bài học về AlphaEvolve mà không có người đánh giá thực sự là gì?",
+      "options": [
+        "Nó chậm",
+        "Hỏi LLM liệu mã có tốt hơn không phải là một chức năng thể dục; Người đánh giá phải xác định và nhanh chóng",
+        "Nó vi phạm Apache 2.0",
+        "Nó không thể chạy trên GPUs"
+      ],
+      "correct": 1,
+      "explanation": "Nếu không có người đánh giá xác định, tìm kiếm không có tín hiệu để hội tụ."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn nên sử dụng ReAct hoặc ReWOO thay vì HTN hoặc AlphaEvolve?",
+      "options": [
+        "Không bao giờ; HTN hoàn toàn tốt hơn",
+        "Khi bạn không cần sự lành mạnh chính thức hoặc thể lực có thể kiểm tra bằng máy; Hầu hết các nhiệm vụ agent đều hạ cánh tại đây",
+        "Khi bạn có sẵn cụm GPU",
+        "Khi độ trễ dưới 100 ms"
+      ],
+      "correct": 1,
+      "explanation": "Bài học cảnh báo rõ ràng chống lại kỹ thuật quá mức: hầu hết các nhiệm vụ không cần lập kế hoạch chính thức hoặc tìm kiếm tiến hóa."
+    }
+  ]
+}
