@@ -1,0 +1,102 @@
+{
+  "lesson": "12-text-summarization",
+  "title": "Tóm tắt văn bản",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "Sự khác biệt hành vi chính giữa tóm tắt trích xuất và trừu tượng là gì?",
+      "options": [
+        "Khai thác sử dụng TF-IDF; trừu tượng sử dụng Word2Vec",
+        "Extractive trả về các câu nguyên văn từ nguồn; trừu tượng tạo ra văn bản mới và có thể gây ảo giác",
+        "Trích xuất chỉ đa ngôn ngữ",
+        "Extractive chậm hơn trừu tượng"
+      ],
+      "correct": 1,
+      "explanation": "Trích xuất nâng nguyên văn câu; viết lại trừu tượng và có nguy cơ bị ảo giác."
+    },
+    {
+      "stage": "pre",
+      "question": "ROUGE đo lường điều gì?",
+      "options": [
+        "Embedding giống nhau",
+        "N-gram và dãy con chung dài nhất chồng chéo giữa hệ thống và tóm tắt tham chiếu",
+        "Thời gian đọc",
+        "perplexity cấp Token"
+      ],
+      "correct": 1,
+      "explanation": "ROUGE-1/2/L đo lường unigram, bigram và LCS trùng lặp với các tham chiếu."
+    },
+    {
+      "stage": "check",
+      "question": "Làm thế nào để TextRank chấm điểm các câu trong tóm tắt trích xuất?",
+      "options": [
+        "Theo số lượng từ thô",
+        "Bằng cách so sánh với một bản tóm tắt tài liệu tham khảo",
+        "Bằng cách chạy một lần lặp kiểu PageRank trên một biểu đồ trong đó các cạnh là trọng số tương tự câu",
+        "Bằng cách embedding cosin cho câu hỏi"
+      ],
+      "correct": 2,
+      "explanation": "TextRank sử dụng PageRank trên biểu đồ tương tự câu; Các câu có liên quan cao đạt điểm cao nhất."
+    },
+    {
+      "stage": "check",
+      "question": "Tại sao bật stemming khi tính toán ROUGE?",
+      "options": [
+        "Nếu không có gốc, 'chạy' và 'chạy' được tính là tokens khác nhau và ROUGE đếm thấp sự chồng chéo thực sự",
+        "Để tăng tốc ROUGE",
+        "Gốc bình thường hóa trường hợp",
+        "Bắt nguồn được yêu cầu bởi gói rouge-score"
+      ],
+      "correct": 0,
+      "explanation": "Bắt nguồn merges các biến thể hình thái nên ROUGE ghi nhận các dạng tương đương về mặt ngữ nghĩa."
+    },
+    {
+      "stage": "check",
+      "question": "Chỉ số năm 2026 nào được xây dựng nhằm mục đích phát hiện ảo giác tóm tắt thông qua NLI?",
+      "options": [
+        "BLEU",
+        "ĐỎ-L",
+        "Kiểm tra tính trung thực (ví dụ: tính trung thực của FactCC hoặc RAGAS) bằng cách sử dụng NLI giữa các tuyên bố nguồn và tóm tắt",
+        "chrF"
+      ],
+      "correct": 2,
+      "explanation": "Chấm điểm trung thành dựa trên NLI đánh dấu các tuyên bố trong bản tóm tắt không được nguồn đưa ra."
+    },
+    {
+      "stage": "post",
+      "question": "Tại sao tóm tắt trích xuất được ưu tiên cho nội dung liền kề tuân thủ?",
+      "options": [
+        "Đầu ra được nâng nguyên văn từ nguồn, loại bỏ ảo giác trừu tượng class",
+        "Nó nhanh hơn",
+        "Extractive hỗ trợ đầu ra dài hơn",
+        "Điểm ROUGE cao hơn"
+      ],
+      "correct": 0,
+      "explanation": "Trích xuất nguyên văn không thể phát minh ra nội dung, điều này quan trọng khi tính thực tế được quy định."
+    },
+    {
+      "stage": "post",
+      "question": "Loại nào trong số này là loại ảo giác trừu tượng để theo dõi?",
+      "options": [
+        "Trôi dấu câu",
+        "Loại bỏ từ dừng",
+        "Câu dài",
+        "Hoán đổi thực thể (ví dụ: 'John Smith' được dịch là 'John Brown'), trôi số, lật cực hoặc phát minh thực tế"
+      ],
+      "correct": 3,
+      "explanation": "Hoán đổi thực thể, trôi dạt số, lật cực và các dữ kiện được phát minh là các chế độ thất bại trừu tượng chính tắc."
+    },
+    {
+      "stage": "post",
+      "question": "Khi nào bạn sẽ tìm kiếm checkpoint Pegasus qua BART-large-CNN?",
+      "options": [
+        "Khi đánh giá BLEU",
+        "Khi đầu vào ngắn",
+        "Khi bạn cần đầu ra trích xuất",
+        "Đối với các lĩnh vực như tóm tắt khoa học mà câu khoảng trống của Pegasus pretraining mục tiêu là phù hợp hơn"
+      ],
+      "correct": 3,
+      "explanation": "Mục tiêu câu khoảng trống của Pegasus vượt trội trong việc tóm tắt miền dạng dài (ví dụ: pubmed)."
+    }
+  ]
+}
