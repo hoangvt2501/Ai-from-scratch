@@ -1894,9 +1894,10 @@
         // edits instead of always pulling main. Falls back to main.
         var ref = (typeof window !== 'undefined' && window.__AIFS_REF) ? window.__AIFS_REF : 'main';
         var isLocalPreview = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        var repo = (typeof window !== 'undefined' && window.__AIFS_REPO) ? window.__AIFS_REPO : 'rohitg00/ai-engineering-from-scratch';
         var base = isLocalPreview
           ? '../'
-          : 'https://raw.githubusercontent.com/rohitg00/ai-engineering-from-scratch/' + ref + '/';
+          : 'https://raw.githubusercontent.com/' + repo + '/' + ref + '/';
         var docFile = lessonLang === 'vi' ? 'vi.md' : 'en.md';
         var quizFile = lessonLang === 'vi' ? 'quiz.vi.json' : 'quiz.json';
         var rawUrl = base + path + '/docs/' + docFile;
@@ -3068,7 +3069,8 @@
           cb(null, ghApiCache[apiPath]);
           return;
         }
-        fetch('https://api.github.com/repos/rohitg00/ai-engineering-from-scratch/contents/' + apiPath, {
+        var apiRepo = (typeof window !== 'undefined' && window.__AIFS_REPO) ? window.__AIFS_REPO : 'rohitg00/ai-engineering-from-scratch';
+        fetch('https://api.github.com/repos/' + apiRepo + '/contents/' + apiPath, {
           headers: { 'Accept': 'application/vnd.github.v3+json' }
         }).then(function (res) {
           if (!res.ok) throw new Error(res.status);
